@@ -1,7 +1,17 @@
+import {
+  BrowserRouter, 
+  Routes,
+  Route
+} from "reacter-router-dom"
+
 function App() {
   return (
     <div className="App">
-      Heyyyy
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element=""/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

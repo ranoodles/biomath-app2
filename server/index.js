@@ -1,5 +1,6 @@
 const express = require('express');
 const {createConnection} = require('mysql');
+const cors = require('cors');
 
 const app = express();
 const db = createConnection({
@@ -10,6 +11,7 @@ const db = createConnection({
 })
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send("Hello World!");
