@@ -7,6 +7,7 @@ import {
 import Landing from "./pages/Landing"
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
+import React from "react"
 
 function App() {
   return (
