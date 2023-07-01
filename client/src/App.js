@@ -2,14 +2,20 @@ import {
   BrowserRouter, 
   Routes,
   Route
-} from "reacter-router-dom"
+} from "react-router-dom"
+
+import Landing from "./pages/Landing"
+import Signup from "./pages/Signup"
+import Login from "./pages/Login"
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element=""/>
+          <Route path="/" element={<Landing/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/login" element={<Login/>}/>
         </Routes>
       </BrowserRouter>
     </div>
