@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from './website-constants/NavBar'
+import Nav from './website-constants/NavBarLoggedOut'
 
 export default function Landing() {
   return (
