@@ -8,9 +8,25 @@ import Landing from "./pages/Landing"
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import React from "react"
+import { createTheme, ThemeProvider} from '@mui/material/styles';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'Avenir',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
+});
+
 
 function App() {
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
       <BrowserRouter>
         <Routes>
@@ -20,6 +36,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </ThemeProvider>
   );
 }
 
