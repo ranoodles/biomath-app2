@@ -4,7 +4,7 @@ import Nav from './website-constants/NavBarLoggedOut'
 export default function Landing() {
   return (
     <>
-    <Nav page="Landing"/>
+    <Nav/>
     </>
   )
 }
