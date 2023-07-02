@@ -1,9 +1,7 @@
 import React from 'react';
-import Nav from './website-constants/NavBar';
+import Nav from './website-constants/NavBarLoggedOut'
 import { Box, Button, Typography, Container, Stack, Divider } from '@mui/material';
 import styled from 'styled-components';
-
-
 
 const BiomathText = styled(Typography)`
   && {
@@ -67,6 +65,7 @@ const LearnMoreButton = styled(Button)`
     font-size: 25px;
   }
 `;
+
 
 export default function Landing() {
   return (
