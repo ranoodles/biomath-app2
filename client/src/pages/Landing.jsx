@@ -1,8 +1,15 @@
 import React from 'react'
 
-const Landing = () => {
+// const Landing = () => {
+// return (
+//    <div>Landed</div>
+//  )
+// }
+// import React from 'react'
+
+function Landing() {
   return (
-    <div>Landed</div>
+    <div>Landing</div>
   )
 }
 
