@@ -1,8 +1,11 @@
 import React from 'react'
+import Nav from './website-constants/NavBar'
 
 function Login() {
   return (
-    <div>Login</div>
+    <>
+    <Nav />
+    </>
   )
 }
 
