@@ -1,9 +1,12 @@
 import React from 'react'
+import Nav from './website-constants/NavBar'
 
-function Landing() {
+export default function Landing() {
   return (
-    <div>Landing</div>
+    <>
+    <div>
+      <Nav />
+    </div>
+    </>
   )
 }
-
-export default Landing
