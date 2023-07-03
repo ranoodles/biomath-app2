@@ -4,6 +4,9 @@ import { Box, Button, Typography, Container, Stack, Divider, Grid } from '@mui/m
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx"
 import { FormControl, TextField } from '@mui/material';
+import {
+  Link
+} from "react-router-dom"
 
 const SplitBoxesGrid = styled(Grid)`
   && {
@@ -54,7 +57,9 @@ function Login() {
             <FormControl>
               <TextFieldStyled type="email" label="Email" />
               <TextFieldStyled type="password" label="Password" />
+              <Typography sx={{textAlign:"left", margin:"0 1rem 1rem 1rem", fontWeight:200, fontSize:15}}><Link to="/forgotmypassword">Forgot my Password</Link></Typography>
               <Button variant="contained" type="submit" sx={{margin:"1rem", width:"80px"}}>Login</Button>
+              <Typography sx={{textAlign:"left", margin:"0 1rem 1rem 1rem", fontWeight:200, fontSize:15}}>Don't have an account? <Link to="/signup">Click Here</Link></Typography>
             </FormControl>
           </VertStack>
         </LayoutGrid>
