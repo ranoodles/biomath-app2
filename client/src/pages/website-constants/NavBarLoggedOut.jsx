@@ -41,7 +41,7 @@ function NavBar(props) {
   // };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor:"black", boxShadow:'none' }}>
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
           <BiotechIcon fontSize="large" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -72,7 +72,7 @@ function NavBar(props) {
               color="inherit"
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> 
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}

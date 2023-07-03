@@ -36,7 +36,7 @@ function NavBar(props) {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ background: 'transparent' }}>
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
           <BiotechIcon fontSize="large" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

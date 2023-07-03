@@ -4,6 +4,7 @@ import { Box, Button, Typography, Container, Stack, Divider, Grid } from '@mui/m
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx"
 import { FormControl, TextField } from '@mui/material';
+import NavBar from './website-constants/NavBarLoggedOut.jsx';
 
 const SplitBoxesGrid = styled(Grid)`
   && {
@@ -47,6 +48,7 @@ const TextFieldStyled = styled(TextField)`
 function Login() {
   return (
     <>
+    <NavBar></NavBar>
     <SplitBoxesGrid container divider={<Divider orientation="vertical" flexItem />}>
         <LayoutGrid item xs={12} sm={7.5} sx={{backgroundColor:"white"}}>
           <VertStack>
