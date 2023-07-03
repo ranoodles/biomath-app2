@@ -12,6 +12,9 @@ import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import BiotechIcon from '@mui/icons-material/Biotech';
+import {
+  useNavigate
+} from "react-router-dom"
 
 const pages = ['Biotechnology', 'Applied Math', 'About Us', 'Log In', 'Sign Up'];
 // const settings = ['Profile', 'Logout'];
@@ -19,6 +22,7 @@ const pages = ['Biotechnology', 'Applied Math', 'About Us', 'Log In', 'Sign Up']
 function NavBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   // const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -27,8 +31,9 @@ function NavBar(props) {
   //   setAnchorElUser(event.currentTarget);
   // };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (event) => {
     setAnchorElNav(null);
+    navigate("/" + event.currentTarget.role)
   };
 
   // const handleCloseUserMenu = () => {
@@ -58,7 +63,7 @@ function NavBar(props) {
             BIOMATH
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box bgcolor="danger" sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
             <IconButton
               size="large"
               aria-controls="menu-appbar"
@@ -87,8 +92,8 @@ function NavBar(props) {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page} onClick={handleCloseNavMenu} role={(page.replaceAll(' ', '')).toLowerCase()}>
+                  <Typography textAlign="center" >{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -120,6 +125,7 @@ function NavBar(props) {
                 sx={{ my: 2, color: 'white', display: 'flex', fontWeight: 700}}
                 size="large"
                 variant="outlined"
+                role={(page.replaceAll(' ', '')).toLowerCase()}
               >
                 {page}
               </Button>
