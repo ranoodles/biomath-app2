@@ -7,7 +7,7 @@ import { FormControl, TextField } from '@mui/material';
 import {
   Link
 } from "react-router-dom"
-
+import NavBar from './website-constants/NavBarLoggedOut.jsx';
 const SplitBoxesGrid = styled(Grid)`
   && {
     display: flex;

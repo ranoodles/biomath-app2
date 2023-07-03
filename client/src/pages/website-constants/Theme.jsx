@@ -2,7 +2,9 @@ import {
     createTheme,
     responsiveFontSizes,
     ThemeProvider,
+    CssBaseline
   } from '@mui/material';
+
 
 var theme = createTheme({
     typography: {
@@ -15,6 +17,10 @@ var theme = createTheme({
         '"Segoe UI Symbol"',
       ].join(','),
     },
+    palette: {
+      background: {
+        default: "#000000"
+      }}
   });
   
 theme = responsiveFontSizes(theme);
