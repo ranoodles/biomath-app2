@@ -15,49 +15,14 @@ import { FormControl, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 
-const SplitBoxesGrid = styled(Grid)`
-  && {
-    display: flex;
-    align-items: center;
-    font-size: 25px;
-    height: 100vh;
-    background-image: url("https://images.unsplash.com/photo-1644325349124-d1756b79dd42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2950&q=80");
-    background-size: contain;
-    background-size: cover;
-  }
-`;
-
-const LayoutGrid = styled(Grid)`
+const HolderGrid = styled(Grid)`
   && {
     display: flex;
     justify-content: left;
     align-items: left;
     font-size: 25px;
     ${"" /* padding-bottom: 5rem; */}
-    height: 100vh;
     padding: 1rem 2rem 1rem 2rem;
-  }
-`;
-
-const TextFieldStyled = styled(TextField)`
-  && {
-    margin: 1rem;
-    width: 50vw;
-    inputcolor: "#A0BFE0";
-    .MuiInputLabel-root {
-      border-color: #7895cb; /* Replace 'blue' with your desired color when focused */
-    }
-    & .MuiOutlinedInput-root {
-      & fieldset {
-        border-color: #7895cb; /* Replace 'red' with your desired color */
-      }
-      &:hover fieldset {
-        border-color: #7895cb; /* Replace 'green' with your desired color on hover */
-      }
-      &.Mui-focused fieldset {
-        border-color: #7895cb; /* Replace 'blue' with your desired color when focused */
-      }
-    }
   }
 `;
 
@@ -68,18 +33,27 @@ const UnitsBar = styled(Grid)`
     align-items: left;
     font-size: 25px;
     ${"" /* padding-bottom: 5rem; */}
-    height: 100vh;
     padding: 1rem 2rem 1rem 2rem;
   }
 `;
 
+const CardHolder = styled(Grid)`
+  && {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    font-size: 25px;
+    ${"" /* padding-bottom: 5rem; */}
+    padding: 1rem 2rem 1rem 2rem;
+  }
+`;
 const ColoredLink = styled(Link)`
   &:visited {
     color: #068fff; /* Same color as the initial color */
   }
 `;
 
-const VertStack = styled(Stack)`
+const UnitStack = styled(Stack)`
   && {
     display: flex;
     justify-content: center;
@@ -87,13 +61,72 @@ const VertStack = styled(Stack)`
   }
 `;
 
+const UnitCircle = styled(Container)`
+  && {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2vw 0vw 0vw 0vw;
+  }
+`;
+
+const UnitCircleText = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 4vw;
+    text-align: center;
+    color: "#C5DFF8";
+  }
+`;
+
+const Units = [
+  { unit: "1" },
+  { unit: "2" },
+  { unit: "3" },
+  { unit: "4" },
+  { unit: "5" },
+  { unit: "6" },
+  { unit: "7" },
+  { unit: "8" },
+];
+
 function BiotechnologyPage() {
   return (
     <>
+      <NavBar />
       <ThemeProvider theme={theme}>
-        <NavBar />
-
-        <UnitsBar></UnitsBar>
+        <HolderGrid container>
+          <UnitsBar
+            item
+            sm={2}
+            xs={2}
+            sx={{
+              // maxWidth: "110rem",
+              overflow: "auto",
+              "&::-webkit-scrollbar": { display: "none" },
+              scrollbarWidth: "none",
+            }}
+          >
+            <UnitStack>
+              {Units.map((IndivUnit) => (
+                <UnitCircle
+                  sx={{
+                    bgcolor: "#4A55A2",
+                    borderRadius: "15%",
+                  }}
+                >
+                  <UnitCircleText sx={{ color: "#C5DFF8" }}>
+                    {IndivUnit.unit}
+                  </UnitCircleText>
+                </UnitCircle>
+              ))}
+            </UnitStack>
+          </UnitsBar>
+          <CardHolder item sm={10} xs={10}></CardHolder>
+        </HolderGrid>
       </ThemeProvider>
     </>
   );
