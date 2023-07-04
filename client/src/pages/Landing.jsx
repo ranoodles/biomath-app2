@@ -260,6 +260,7 @@ const CourseDescriptionText = [
     ),
     color: "#C5DFF8",
     color2: "#7895CB",
+    linksite: "/biotechnology",
   },
   {
     courseName: "Applied Math",
@@ -273,6 +274,7 @@ const CourseDescriptionText = [
     ),
     color: "#C5DFF8",
     color2: "#7895CB",
+    linksite: "/appliedmath",
   },
 ];
 
@@ -359,7 +361,7 @@ export default function Landing() {
                 <LearnMoreButton
                   variant="contained"
                   onClick={() => {
-                    navigate("/biotechnology");
+                    navigate(CourseCard.linksite);
                   }}
                 >
                   Learn More
