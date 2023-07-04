@@ -4,6 +4,7 @@ import Landing from "./pages/Landing";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import BiotechnologyPage from "./pages/biotechnology";
+import DisplayInfo from "./pages/website-constants/DisplayInfo";
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import theme from "./pages/website-constants/Theme.jsx";
@@ -33,6 +34,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/biotechnology" element={<BiotechnologyPage />} />
+            <Route path="/display" element={<DisplayInfo />} />
           </Routes>
         </BrowserRouter>
       </div>
