@@ -58,11 +58,33 @@ const ListButtons = styled(Button)`
   }
 `;
 
-const buttons = [
-    <ListButtons key="one">• One</ListButtons>,
-    <ListButtons key="two">• Two</ListButtons>,
-    <ListButtons key="three">• Three</ListButtons>,
-];
+// const units = {
+//     unit1: {
+//         id: 1,
+//         lessons:[
+//             "rammywammy",
+//             "sweetie cupcake",
+//             "aditya ladoo"
+//         ]
+//     },
+//     unit2: {
+//         id: 2,
+//         lessons:[
+//             "hellooooo",
+//             "fadisfios",
+//             "heyyyyyyyy"
+//         ]
+//     }
+// };
+
+const unit1 = {
+    id: 1,
+    lessons:[
+        "rammywammy",
+        "sweetie cupcake",
+        "aditya ladoo"
+    ]
+}
 
 function DisplayInfo(props) {
   return (
@@ -75,7 +97,9 @@ function DisplayInfo(props) {
                 aria-label="vertical contained button group"
                 variant="text"
             >
-                {buttons}
+                {unit1.lessons.map((lesson) => (
+                    <ListButtons key={lesson.toLowerCase()}>• {lesson}</ListButtons>
+                ))}
             </ButtonGroup>
         </VertStack>
     </>
