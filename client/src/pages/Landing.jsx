@@ -408,10 +408,10 @@ export default function Landing() {
               sm={3.3}
               sx={{ backgroundColor: "skyblue", borderRadius: 10 }}
               component={motion.div}
-              initial={{ opacity: 0, scale: 1.5 }}
+              initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{
-                duration: 0.8,
+                duration: 1,
                 delay: 0,
                 ease: [0, 0.71, 0.2, 1.01],
               }}
