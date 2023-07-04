@@ -77,14 +77,14 @@ const ListButtons = styled(Button)`
 //     }
 // };
 
-const unit1 = {
-    id: 1,
-    lessons:[
-        "rammywammy",
-        "sweetie cupcake",
-        "aditya ladoo"
-    ]
-}
+// const unit1 = {
+//     id: 1,
+//     lessons:[
+//         "rammywammy",
+//         "sweetie cupcake",
+//         "aditya ladoo"
+//     ]
+// }
 
 function DisplayInfo(props) {
   return (
@@ -97,7 +97,7 @@ function DisplayInfo(props) {
                 aria-label="vertical contained button group"
                 variant="text"
             >
-                {unit1.lessons.map((lesson) => (
+                {props.unit.lessons.map((lesson) => (
                     <ListButtons key={lesson.toLowerCase()}>• {lesson}</ListButtons>
                 ))}
             </ButtonGroup>
