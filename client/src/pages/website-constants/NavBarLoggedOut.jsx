@@ -47,16 +47,14 @@ function NavBar(props) {
   return (
     <AppBar
       position="static"
-      sx={{ backgroundColor: "gray", boxShadow: "none" }}
+      sx={{ backgroundColor: "black", boxShadow: "none" }}
     >
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
-          {/* BIOTECH ICON =====================================================================================*/}
           <BiotechIcon
             fontSize="large"
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
-          {/* BIOMATH TEXT =====================================================================================*/}
           <Typography
             variant="h4"
             noWrap
@@ -74,7 +72,7 @@ function NavBar(props) {
           >
             BIOMATH
           </Typography>
-          {/*  =====================================================================================*/}
+
           <Box
             bgcolor="danger"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
@@ -86,7 +84,7 @@ function NavBar(props) {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              {/* <MenuIcon /> */}
+              <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -156,8 +154,7 @@ function NavBar(props) {
               </Button>
             ))}
           </Box>
-          {/* ============================================================================================================ */}
-          {/* Avatar + User Menu */}
+
           {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

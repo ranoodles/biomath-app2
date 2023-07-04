@@ -279,6 +279,18 @@ const CourseDescriptionText = [
   },
 ];
 
+const TitleBox = styled(Box)`
+  && {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://i.imgur.com/MJupkGx.png");
+    background-width: 100%;
+    background-size: cover;
+  }
+`;
+
 export default function Landing() {
   const navigate = useNavigate();
 
@@ -287,17 +299,7 @@ export default function Landing() {
       {/* Hero Section */}
       <ThemeProvider theme={theme} border="none">
         <Nav />
-        <Box
-          sx={{
-            height: "90vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          }}
-        >
+        <TitleBox>
           <TitleStack
             spacing={2}
             component={motion.div}
@@ -331,7 +333,7 @@ export default function Landing() {
               Sign Up
             </SignupButtonTop>
           </TitleStack>
-        </Box>
+        </TitleBox>
         {/* ========================================================================================================================================== */}
         {/* Our Courses */}
         <BiomathText
