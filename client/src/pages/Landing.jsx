@@ -16,8 +16,7 @@ import {
   useNavigate
 } from "react-router-dom"
 import theme from "./website-constants/Theme.jsx"
-
-
+import { motion as threeDMotion } from "framer-motion-3d"
 const slides = [
   "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg",
   "https://res.cloudinary.com/demo/basketball_shot.jpg",
@@ -54,6 +53,14 @@ const TitleText = styled(Typography)`
     ${'' /* font-size: 9vw; */}
     text-align: center;
     color: 'white';
+
+    final: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 2
+      }
+    }
   }
 `;
 
@@ -190,28 +197,50 @@ const AppBenefitsText = [
 
 const CourseDescriptionText = [
   {
-    courseName: "Synthetic Biology",
+    courseName: "Biotechnology",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    icon: <ScienceIcon style={{fontSize: "5rem"}} sx={{paddingBottom: "2rem"}}/>
+    icon: <ScienceIcon style={{fontSize: "5rem"}} sx={{paddingBottom: "2rem"}}/>,
+    color: "#C5DFF8",
+    color2: "#7895CB"
   },
   {
     courseName: "Applied Math",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
-    icon: <CalculateIcon style={{fontSize: "5rem"}} sx={{paddingBottom: "2rem"}}/>
+    icon: <CalculateIcon style={{fontSize: "5rem"}} sx={{paddingBottom: "2rem"}}/>,
+    color: "#C5DFF8",
+    color2: "#7895CB"
   }
 ];
 
+
 export default function Landing() {
   const navigate = useNavigate();
+
   return (
     <>
     {/* Hero Section */}
     <ThemeProvider theme={theme} border='none'>
       <Nav />
-      <Box sx={{ height: '90vh', display:"flex", alignItems:"center", justifyContent:"center", backgroundImage: "url('https://images.unsplash.com/photo-1632220894022-a83eacddae2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1548&q=80')", backgroundSize:'cover', backgroundPosition:'center', backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+      <Box sx={{ 
+        height: '90vh', 
+        display:"flex", 
+        alignItems:"center", 
+        justifyContent:"center", 
+        backgroundImage: "url('https://images.unsplash.com/photo-1632220894022-a83eacddae2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1548&q=80')", 
+        backgroundSize:'cover', 
+        backgroundPosition:'center', 
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
         <TitleStack spacing={2}>
-          <Box component="span" sx={{ p: 5 }}>
-            <TitleText variant="h1" sx={{color:'white'}}>BIOMATH</TitleText>
+          <Box component="span" sx={{ p: 5 }} >
+            <TitleText 
+            component={motion.div} 
+            variant="h1" 
+            color="white" 
+            initial={{opacity:0, scale:0.2}} 
+            animate={{ opacity:1, scale:1}} 
+            transition={{duration: 3, ease:"easeInOut"}}>
+            BIOMATH
+            </TitleText>
           </Box>
           <SubtitleText variant="h5" sx={{color:'white'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</SubtitleText>
           <SignupButtonTop variant="contained" onClick={() => {navigate('/signup')}}>Sign Up</SignupButtonTop>
@@ -225,15 +254,15 @@ export default function Landing() {
         component={motion.div} 
         initial={{ opacity: 0, scale: 0 }}
         whileInView=
-        {{ opacity: 1, scale: 1 }}
+        {{ opacity: 1, scale: 1, backgroundColor: CourseCard.color }}
         transition={{
         duration: 0.8,
         delay: 0,
-        ease: [0, 0.71, 0.2, 1.01]
+        ease: [0, 0.71, 0.2, 1.01],
       }}
-        whileHover={{
-        scale: 1.05,
-        }}>
+        whileHover=
+        {{ scale: 1.05, backgroundColor: CourseCard.color2 }}
+        >
           <TitleStack>
             <BiomathText variant="h3">{CourseCard.courseName}</BiomathText>
             {CourseCard.icon}
