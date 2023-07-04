@@ -230,19 +230,25 @@ export default function Landing() {
         backgroundSize:'cover', 
         backgroundPosition:'center', 
         backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
-        <TitleStack spacing={2}>
-          <Box component="span" sx={{ p: 5 }} >
-            <TitleText 
+        <TitleStack 
+            spacing={2} 
             component={motion.div} 
-            variant="h1" 
-            color="white" 
             initial={{opacity:0, scale:0.2}} 
             animate={{ opacity:1, scale:1}} 
             transition={{duration: 3, ease:"easeInOut"}}>
+          <Box component="span" sx={{ p: 5 }} >
+            <TitleText 
+            variant="h1" 
+            color="white" 
+            >
             BIOMATH
             </TitleText>
           </Box>
-          <SubtitleText variant="h5" sx={{color:'white'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</SubtitleText>
+          <SubtitleText 
+          variant="h5" 
+          sx={{color:'white'}}
+          >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</SubtitleText>
           <SignupButtonTop variant="contained" onClick={() => {navigate('/signup')}}>Sign Up</SignupButtonTop>
         </TitleStack>
       </Box>
