@@ -115,7 +115,7 @@ const SplitBoxesGrid = styled(Grid)`
     font-size: 25px;
     ${"" /* height: 70vh; */}
     gap: 4vw;
-    padding-top: 7rem;
+    padding-top: 3rem;
     padding-bottom: 0vw;
   }
 `;
@@ -127,6 +127,7 @@ const SubjectDescriptionGrid = styled(Grid)`
     align-items: center;
     font-size: 25px;
     border-radius: 30px;
+    margin-top: 0rem;
   }
 `;
 
@@ -222,7 +223,7 @@ const OurMissionText = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 100;
-    padding: 3rem;
+    padding: 3rem 3rem 3rem 3rem;
     text-align: center;
     color: white;
     text-align: left;
@@ -292,8 +293,6 @@ export default function Landing() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1632220894022-a83eacddae2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1548&q=80')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -311,11 +310,17 @@ export default function Landing() {
                 BIOMATH
               </TitleText>
             </Box>
-            <SubtitleText variant="h5" sx={{ color: "white" }}>
+            <SubtitleText
+              variant="h5"
+              xs={12}
+              sm={1}
+              sx={{
+                color: "white",
+              }}
+            >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              enim ad minim veniam.
             </SubtitleText>
             <SignupButtonTop
               variant="contained"
@@ -329,6 +334,14 @@ export default function Landing() {
         </Box>
         {/* ========================================================================================================================================== */}
         {/* Our Courses */}
+        <BiomathText
+          variant="h3"
+          color="white"
+          paddingTop="5rem"
+          marginBotton="0rem"
+        >
+          Our Courses
+        </BiomathText>
         <SplitBoxesGrid
           container
           divider={<Divider orientation="vertical" flexItem />}
@@ -380,7 +393,7 @@ export default function Landing() {
           <OurMissionImgGrid Item xs={11} sm={4}>
             <OurMissionImg
               src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-              alt="Scientist"
+              alt="Beakers with pipette"
             />
           </OurMissionImgGrid>
           <OurMissionTextGrid Item xs={11} sm={5}>

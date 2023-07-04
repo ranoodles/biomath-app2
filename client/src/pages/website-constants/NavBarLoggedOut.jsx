@@ -1,22 +1,26 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
 // import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 // import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import BiotechIcon from '@mui/icons-material/Biotech';
-import {
-  useNavigate
-} from "react-router-dom"
+import MenuItem from "@mui/material/MenuItem";
+import BiotechIcon from "@mui/icons-material/Biotech";
+import { useNavigate } from "react-router-dom";
 
-const pages = ['Biotechnology', 'Applied Math', 'About Us', 'Log In', 'Sign Up'];
+const pages = [
+  "Biotechnology",
+  "Applied Math",
+  "About Us",
+  "Log In",
+  "Sign Up",
+];
 // const settings = ['Profile', 'Logout'];
 
 function NavBar(props) {
@@ -33,7 +37,7 @@ function NavBar(props) {
 
   const handleCloseNavMenu = (event) => {
     setAnchorElNav(null);
-    navigate("/" + event.currentTarget.role)
+    navigate("/" + event.currentTarget.role);
   };
 
   // const handleCloseUserMenu = () => {
@@ -41,10 +45,18 @@ function NavBar(props) {
   // };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor:"black", boxShadow:'none' }}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "gray", boxShadow: "none" }}
+    >
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
-          <BiotechIcon fontSize="large" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* BIOTECH ICON =====================================================================================*/}
+          <BiotechIcon
+            fontSize="large"
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          />
+          {/* BIOMATH TEXT =====================================================================================*/}
           <Typography
             variant="h4"
             noWrap
@@ -52,18 +64,21 @@ function NavBar(props) {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'avenir',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "avenir",
               fontWeight: 700,
-              letterSpacing: '.1rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".1rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             BIOMATH
           </Typography>
-
-          <Box bgcolor="danger" sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
+          {/*  =====================================================================================*/}
+          <Box
+            bgcolor="danger"
+            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+          >
             <IconButton
               size="large"
               aria-controls="menu-appbar"
@@ -71,35 +86,39 @@ function NavBar(props) {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
-            </IconButton> 
+              {/* <MenuIcon /> */}
+            </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} role={(page.replaceAll(' ', '')).toLowerCase()}>
-                  <Typography textAlign="center" >{page}</Typography>
+                <MenuItem
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  role={page.replaceAll(" ", "").toLowerCase()}
+                >
+                  <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          
-          <BiotechIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
+          <BiotechIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -107,31 +126,38 @@ function NavBar(props) {
             href=""
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontWeight: 700,
-              letterSpacing: '.1rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".1rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             BIOMATH
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'flex', fontWeight: 700, border: 0}}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "flex",
+                  fontWeight: 700,
+                  border: 0,
+                }}
                 size="large"
                 variant="outlined"
-                role={(page.replaceAll(' ', '')).toLowerCase()}
+                role={page.replaceAll(" ", "").toLowerCase()}
               >
                 {page}
               </Button>
             ))}
           </Box>
-
+          {/* ============================================================================================================ */}
+          {/* Avatar + User Menu */}
           {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
