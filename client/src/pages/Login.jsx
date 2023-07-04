@@ -92,7 +92,7 @@ function Login() {
                   paddingBottom: "1rem",
                   fontWeight: 700,
                   margin: "1rem",
-                  color: "#4FC0D0",
+                  color: "#FFFFFF",
                 }}
               >
                 Log In

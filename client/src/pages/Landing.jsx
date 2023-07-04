@@ -14,7 +14,6 @@ import {
 import styled from "styled-components";
 import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
 import { motion, useScroll } from "framer-motion";
-import Carousel from "./website-constants/Carousel";
 import { red, blue, green } from "@mui/material/colors";
 import ScienceIcon from "@mui/icons-material/Science";
 import CalculateIcon from "@mui/icons-material/Calculate";
@@ -430,7 +429,7 @@ export default function Landing() {
         {/* Start Journey Today */}
         <Box
           sx={{
-            height: "40vh",
+            // height: "40vh",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

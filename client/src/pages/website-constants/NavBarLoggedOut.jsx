@@ -122,7 +122,7 @@ function NavBar(props) {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'flex', fontWeight: 700}}
+                sx={{ my: 2, color: 'white', display: 'flex', fontWeight: 700, border: 0}}
                 size="large"
                 variant="outlined"
                 role={(page.replaceAll(' ', '')).toLowerCase()}
