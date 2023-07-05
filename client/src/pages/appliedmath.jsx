@@ -169,7 +169,7 @@ const units = [
   },
 ];
 
-function BiotechnologyPage() {
+function AppliedMathPage() {
   const [selectedUnit, setSelectedUnit] = useState(units[0]);
   const prevValue = useRef(units[0]);
 
@@ -177,7 +177,7 @@ function BiotechnologyPage() {
     <ThemeProvider theme={theme}>
       <NavBar />
       <TitleText variant="h1" sx={{ color: "white" }}>
-        Biotechnology
+        Applied Math
       </TitleText>
       <HolderGrid container sm={12}>
         <UnitStack item sm={2} xs={2}>
@@ -212,4 +212,4 @@ function BiotechnologyPage() {
   );
 }
 
-export default BiotechnologyPage;
+export default AppliedMathPage;

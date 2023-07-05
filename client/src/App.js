@@ -8,6 +8,7 @@ import DisplayInfo from "./pages/website-constants/DisplayInfo";
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import theme from "./pages/website-constants/Theme.jsx";
+import AppliedMathPage from "./pages/appliedmath";
 
 // const theme = createTheme({
 //   typography: {
@@ -34,7 +35,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/biotechnology" element={<BiotechnologyPage />} />
-            <Route path="/display" element={<DisplayInfo />} />
+            <Route path="/appliedmath" element={<AppliedMathPage />} />
           </Routes>
         </BrowserRouter>
       </div>
