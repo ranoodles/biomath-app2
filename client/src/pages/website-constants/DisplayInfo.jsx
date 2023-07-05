@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -8,10 +8,10 @@ import {
   Stack,
   Divider,
   Grid,
-  ButtonGroup
+  ButtonGroup,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import theme from './Theme';
+import theme from "./Theme";
 
 const TitleText = styled(Typography)`
   && {
@@ -43,6 +43,8 @@ const VertStack = styled(Stack)`
     background-color: white;
     padding: 3rem;
     border-radius: 2rem;
+    background-color: #7895cb;
+    height: 80%;
   }
 `;
 
@@ -54,7 +56,7 @@ const ListButtons = styled(Button)`
     text-align: left;
     font-size: 1rem;
     padding-bottom: 1rem;
-    padding-top:1rem;
+    padding-top: 1rem;
   }
 `;
 
@@ -89,21 +91,21 @@ const ListButtons = styled(Button)`
 function DisplayInfo(props) {
   return (
     <>
-        <VertStack>
-            <TitleText variant="h2">Title</TitleText>
-            <DescriptionText variant="h4">Description</DescriptionText>
-            <ButtonGroup
-                orientation="vertical"
-                aria-label="vertical contained button group"
-                variant="text"
-            >
-                {props.unit.lessons.map((lesson) => (
-                    <ListButtons key={lesson.toLowerCase()}>• {lesson}</ListButtons>
-                ))}
-            </ButtonGroup>
-        </VertStack>
+      <VertStack>
+        <TitleText variant="h2">{props.unit.name}</TitleText>
+        <DescriptionText variant="h4">{props.unit.description}</DescriptionText>
+        <ButtonGroup
+          orientation="vertical"
+          aria-label="vertical contained button group"
+          variant="text"
+        >
+          {props.unit.lessons.map((lesson) => (
+            <ListButtons key={lesson.toLowerCase()}>• {lesson}</ListButtons>
+          ))}
+        </ButtonGroup>
+      </VertStack>
     </>
-  )
+  );
 }
 
-export default DisplayInfo
+export default DisplayInfo;
