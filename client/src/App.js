@@ -9,6 +9,8 @@ import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import theme from "./pages/website-constants/Theme.jsx";
 import AppliedMathPage from "./pages/appliedmath";
+import McqCard from "./pages/website-constants/mcq.jsx";
+import mcqtest from "./pages/mcqtesttemp.jsx";
 
 // const theme = createTheme({
 //   typography: {
@@ -36,6 +38,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/biotechnology" element={<BiotechnologyPage />} />
             <Route path="/appliedmath" element={<AppliedMathPage />} />
+            <Route path="/mcq" element={<McqCard />} />
           </Routes>
         </BrowserRouter>
       </div>

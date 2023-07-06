@@ -43,9 +43,8 @@ const VertStack = styled(Stack)`
     background-color: white;
     padding: 3rem;
     border-radius: 2rem;
-    background-color: #C5DFF8;
-    height: 80%;
-    width: 100%;
+    background-color: #7895cb;
+    height: 70vh;
   }
 `;
 
@@ -58,9 +57,6 @@ const ListButtons = styled(Button)`
     font-size: 1rem;
     padding-bottom: 1rem;
     padding-top: 1rem;
-    color:black;
-    border-color:black;
-    border-radius: 10px;
   }
 `;
 
@@ -96,13 +92,12 @@ function DisplayInfo(props) {
   return (
     <>
       <VertStack>
-        <TitleText variant="h2">{props.unit.id}. {props.unit.name}</TitleText>
+        <TitleText variant="h2">{props.unit.name}</TitleText>
         <DescriptionText variant="h4">{props.unit.description}</DescriptionText>
         <ButtonGroup
           orientation="vertical"
           aria-label="vertical contained button group"
-          variant="outlined"
-          sx={{marginTop:"1rem"}}
+          variant="text"
         >
           {props.unit.lessons.map((lesson) => (
             <ListButtons key={lesson.toLowerCase()}>• {lesson}</ListButtons>
