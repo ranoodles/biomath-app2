@@ -68,8 +68,9 @@ const TextFieldStyled = styled(TextField)`
 `;
 
 const ColoredLink = styled(Link)`
+  color: #FFFFFF;
   &:visited {
-    color: #068fff; /* Same color as the initial color */
+    color: #FFFFFF; /* Same color as the initial color */
   }
 `;
 

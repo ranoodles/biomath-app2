@@ -80,6 +80,7 @@ const VertStack = styled(Stack)`
 function ImageText(props) {
   return (
     <>
+    <ThemeProvider theme={theme} border="none">
       <SplitBoxesGrid container>
         <SubGrid item xs={12} sm={5}>
             <Img src={props.img} alt="potato faoidsfijoasjdofiiaoj"></Img>
@@ -91,6 +92,7 @@ function ImageText(props) {
             </VertStack>
         </SubGrid>
       </SplitBoxesGrid>
+    </ThemeProvider>
     </>
   );
 }

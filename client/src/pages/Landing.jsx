@@ -189,7 +189,7 @@ const OurMissionGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0rem 0rem 0rem 5rem;
+    padding: 0rem 0rem 0rem 0rem;
   }
 `;
 
@@ -392,13 +392,31 @@ export default function Landing() {
           Our Mission
         </BiomathText>
         <OurMissionGrid container>
-          <OurMissionImgGrid Item xs={11} sm={4}>
+          <OurMissionImgGrid Item xs={11} sm={4}
+            component={motion.div}
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 1,
+              delay: 0,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+          >
             <OurMissionImg
               src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
               alt="Beakers with pipette"
             />
           </OurMissionImgGrid>
-          <OurMissionTextGrid Item xs={11} sm={5}>
+          <OurMissionTextGrid Item xs={11} sm={5}
+            component={motion.div}
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 1,
+              delay: 0,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+          >
             <OurMissionText variant="h5">
               Deserunt reprehenderit aute amet Lorem laborum irure. Dolor eu
               pariatur incididunt dolore aute minim qui est et tempor velit
@@ -421,7 +439,7 @@ export default function Landing() {
               item
               xs={11}
               sm={3.3}
-              sx={{ backgroundColor: "skyblue", borderRadius: 10 }}
+              sx={{ backgroundColor: "#C5DFF8", borderRadius: 10 }}
               component={motion.div}
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}

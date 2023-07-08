@@ -43,8 +43,9 @@ const VertStack = styled(Stack)`
     background-color: white;
     padding: 3rem;
     border-radius: 2rem;
-    background-color: #7895cb;
+    background-color: #C5DFF8;
     height: 70vh;
+    width: 100%;
   }
 `;
 
