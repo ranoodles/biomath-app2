@@ -78,16 +78,25 @@ const AnswerChoices = styled(useRadioGroup)`
   }
 `;
 
+const questionRadio = styled(FormControlLabel)`
+  && {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+  }
+`;
+
 const mcqQuestion = [
   {
-    subtopicText: "aw09eurcawunrcoiawnucroiawncjroiewanrcu",
-    questionText:
-      "aioencroiawjncroiawncjfoianwcjoincjoawncjoiwancjoiwanfcjawoincjawoincfjaowincjaoincfjfaoinc",
+    question:
+      "Non deserunt esse aliquip quis occaecat ullamco ad. Sint occaecat velit enim aute sit in quis dolore esse. Nostrud ullamco nisi eu non minim qui eu exercitation ullamco tempor. Aliquip ad consectetur nisi exercitation eiusmod deserunt excepteur laborum deserunt ullamco anim culpa officia. Commodo sit cupidatat et laboris enim. Exercitation elit aliqua exercitation tempor nostrud eu adipisicing Lorem amet eiusmod.",
+    correctAnswer: 0,
     answerChoices: [
-      { correct: "true", answerTxt: "choice1" },
-      { correct: "true", answerTxt: "choice2" },
-      { correct: "false", answerTxt: "choice3" },
-      { correct: "false", answerTxt: "choice4" },
+      "Ea deserunt quis in deserunt sint aliqua consequat ut duis minim sunt ut.",
+      "Commodo officia quis magna esse nostrud minim occaecat elit minim ullamco consectetur culpa nostrud esse.",
+      "Pariatur voluptate proident labore excepteur velit cupidatat.",
+      "Ut velit aliquip elit est reprehenderit pariatur est nulla eiusmod fugiat tempor.",
     ],
   },
 ];
@@ -97,24 +106,21 @@ export default function McqCard(props) {
     <>
       <CardGrid>
         <VertStack>
-          <SubtopicText variant="h2">
-            {mcqQuestion[0].subtopicText}
-          </SubtopicText>
-          <QuestionText variant="h4">
-            {mcqQuestion[0].questionText}
-          </QuestionText>
+          <QuestionText variant="h4">{mcqQuestion[0].question}</QuestionText>
           <FormControl>
-            <AnswerChoices aria-labelledby="mcq-question">
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+            >
               {mcqQuestion[0].answerChoices &&
                 mcqQuestion[0].answerChoices.map((answerChoice) => (
-                  <FormControlLabel
-                    value={answerChoice.answerTxt}
+                  <questionRadio
+                    value={answerChoice}
                     control={<Radio />}
-                    label={answerChoice.answerTxt}
-                    correct={answerChoice.correct}
+                    label={answerChoice}
                   />
                 ))}
-            </AnswerChoices>
+            </RadioGroup>
           </FormControl>
         </VertStack>
       </CardGrid>

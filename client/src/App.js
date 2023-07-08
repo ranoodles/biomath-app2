@@ -11,7 +11,6 @@ import theme from "./pages/website-constants/Theme.jsx";
 import AppliedMathPage from "./pages/appliedmath";
 import ImgText from "./pages/website-constants/ImageText";
 import McqCard from "./pages/website-constants/mcq.jsx";
-import mcqtest from "./pages/mcqtesttemp.jsx";
 
 // const theme = createTheme({
 //   typography: {
