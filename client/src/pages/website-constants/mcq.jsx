@@ -8,8 +8,10 @@ import {
   Stack,
   Divider,
   Grid,
+  FormHelperText,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import CheckIcon from "@mui/icons-material/Check";
 import theme from "./Theme";
 import { useRadioGroup } from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
@@ -17,6 +19,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const CardGrid = styled(Grid)`
   && {
@@ -63,28 +66,10 @@ const QuestionText = styled(Typography)`
   }
 `;
 
-const AnswerChoices = styled(useRadioGroup)`
-  && {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    text-align: left;
-    font-size: 1rem;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-    color: black;
-    border-color: black;
-    border-radius: 10px;
-  }
-`;
+const CustomRadio = styled(FormControlLabel)``;
 
-const questionRadio = styled(FormControlLabel)`
-  && {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    text-align: left;
-  }
+const CheckmarkIcon = styled(CheckCircleIcon)`
+  color: green;
 `;
 
 const mcqQuestion = [
@@ -102,26 +87,86 @@ const mcqQuestion = [
 ];
 
 export default function McqCard(props) {
+  const [value, setValue] = React.useState(null);
+  const [error, setError] = React.useState(false);
+  const [helperText, setHelperText] = React.useState(null);
+  const [radioColor, setRadioColor] = React.useState("default");
+  const [disable, setDisable] = React.useState(false);
+
+  const handleRadioChange = (event) => {
+    setValue(event.target.value);
+    setError(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (value === mcqQuestion[0].answerChoices[mcqQuestion[0].correctAnswer]) {
+      setHelperText("You got it!");
+      setError(false);
+      setRadioColor("success");
+      setDisable(true);
+      document.getElementById(value).style.color = "green";
+    } else if (
+      value !== mcqQuestion[0].answerChoices[mcqQuestion[0].correctAnswer]
+    ) {
+      document.getElementById(value).style.color = "red";
+      setHelperText("Sorry, wrong answer!");
+      setError(true);
+    } else {
+      setHelperText("Please select an option.");
+      setError(true);
+    }
+  };
   return (
     <>
       <CardGrid>
         <VertStack>
           <QuestionText variant="h4">{mcqQuestion[0].question}</QuestionText>
-          <FormControl>
-            <RadioGroup
-              aria-labelledby="demo-controlled-radio-buttons-group"
-              name="controlled-radio-buttons-group"
-            >
-              {mcqQuestion[0].answerChoices &&
-                mcqQuestion[0].answerChoices.map((answerChoice) => (
-                  <questionRadio
-                    value={answerChoice}
-                    control={<Radio />}
-                    label={answerChoice}
-                  />
-                ))}
-            </RadioGroup>
-          </FormControl>
+          <form onSubmit={handleSubmit}>
+            <FormControl>
+              <RadioGroup
+                aria-labelledby="mcq-question"
+                name="mcq-question-radio-group"
+                onChange={handleRadioChange}
+              >
+                {mcqQuestion[0].answerChoices &&
+                  mcqQuestion[0].answerChoices.map((answerChoice) => (
+                    <>
+                      <CustomRadio
+                        value={answerChoice}
+                        control={
+                          <Radio
+                            color={radioColor}
+                            disabled={
+                              answerChoice !==
+                              mcqQuestion[0].answerChoices[
+                                mcqQuestion[0].correctAnswer
+                              ]
+                                ? disable
+                                : false
+                            }
+                          />
+                        }
+                        label={answerChoice}
+                        id={answerChoice}
+                      />
+                    </>
+                  ))}
+              </RadioGroup>
+              <FormHelperText>{helperText}</FormHelperText>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{
+                  margin: "1rem",
+                  width: "80px",
+                }}
+              >
+                Check
+              </Button>
+            </FormControl>
+          </form>
         </VertStack>
       </CardGrid>
     </>
