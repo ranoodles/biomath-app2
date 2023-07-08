@@ -101,6 +101,14 @@ const fillInQuestion = [
   },
 ]
 
+const lessonText = [
+  {
+    title:"Subheading",
+    img:"https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png",
+    text:"Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip. Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip. Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip.",
+  },
+]
+
 function LearningPath() {
 
   return (
@@ -111,12 +119,8 @@ function LearningPath() {
             alignItems: {xs: "flex-start", md: "center"}
         }}>
             <ChevronButton><LeftIcon style={{color: "black", fontSize: "3rem" }}></LeftIcon></ChevronButton>
-            {/* <ImgText
-                title="Subheading"
-                img="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png"
-                text="Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip. Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip. Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip."
-            /> */}
-            <McqCard mcqQuestion={mcqQuestion}></McqCard>
+            <ImgText lessonText={lessonText}/>
+            {/* <McqCard mcqQuestion={mcqQuestion}></McqCard> */}
             {/* <FillInBlank fillInQuestion={fillInQuestion}></FillInBlank> */}
             
             <ChevronButton><RightIcon style={{color: "black", fontSize: "3rem"}}></RightIcon></ChevronButton>

@@ -83,12 +83,12 @@ function ImageText(props) {
     <ThemeProvider theme={theme} border="none">
       <SplitBoxesGrid container>
         <SubGrid item xs={12} sm={5}>
-            <Img src={props.img} alt="potato faoidsfijoasjdofiiaoj"></Img>
+            <Img src={props.lessonText[0].img} alt=""></Img>
         </SubGrid>
         <SubGrid item xs={12} sm={6.5}>
             <VertStack>
-                <TitleText variant="h2">{props.title}</TitleText>
-                <DescriptionText variant="h4">{props.text}</DescriptionText>
+                <TitleText variant="h2">{props.lessonText[0].title}</TitleText>
+                <DescriptionText variant="h4">{props.lessonText[0].text}</DescriptionText>
             </VertStack>
         </SubGrid>
       </SplitBoxesGrid>
