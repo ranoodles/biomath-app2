@@ -43,6 +43,7 @@ const DescriptionText = styled(Typography)`
     font-size: 20px;
     padding-bottom: 1rem;
     text-align: left;
+    line-height: 175%;
   }
 `;
 

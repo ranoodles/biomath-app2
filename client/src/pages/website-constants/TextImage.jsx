@@ -41,6 +41,7 @@ const DescriptionText = styled(Typography)`
     justify-content: left;
     align-items: left;
     font-size: 20px;
+    line-height: 175%;
     padding-bottom: 1rem;
     text-align: left;
   }
