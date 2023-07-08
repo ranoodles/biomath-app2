@@ -1,0 +1,80 @@
+import { React, useState, useRef } from "react";
+import styled, { ThemeProvider } from "styled-components";
+import {
+  Box,
+  Button,
+  Typography,
+  Container,
+  Stack,
+  Divider,
+  Grid,
+} from "@mui/material";
+import { motion } from "framer-motion";
+import theme from "./website-constants/Theme.jsx";
+import { FormControl, TextField } from "@mui/material";
+import { Link } from "react-router-dom";
+import NavBar from "./website-constants/NavBarLoggedOut.jsx";
+import ImgText from "./website-constants/ImageText.jsx";
+import mcq from "./website-constants/mcq.jsx";
+import LeftIcon from "@mui/icons-material/ChevronLeft";
+import RightIcon from "@mui/icons-material/ChevronRight";
+
+const HolderGrid = styled(Grid)`
+  && {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+  }
+`;
+
+const CardHolder = styled(Grid)`
+  && {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: #C5DFF8;
+    border-radius: 2rem;
+  }
+`;
+
+const BigGrid = styled(Grid)`
+  && {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+`;
+
+const ChevronButton = styled(Button)`
+  && {
+    width: 1rem;
+    height: 3rem;
+  }
+`;
+
+function LearningPath() {
+
+  return (
+    <ThemeProvider theme={theme}>
+      <NavBar />
+      <BigGrid>
+        <CardHolder item sm={10} xs={10}>
+            <ChevronButton><LeftIcon style={{color: "black"}}></LeftIcon></ChevronButton>
+            <ImgText
+                title="Subheading"
+                img="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png"
+                text="Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip."
+            />
+            <ChevronButton><RightIcon style={{color: "black"}}></RightIcon></ChevronButton>
+        </CardHolder>
+      </BigGrid>
+    </ThemeProvider>
+  );
+}
+
+export default LearningPath;

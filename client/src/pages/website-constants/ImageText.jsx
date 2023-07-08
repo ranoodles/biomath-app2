@@ -52,11 +52,10 @@ const SplitBoxesGrid = styled(Grid)`
     ${'' /* justify-content: center; */}
     align-items: center;
     font-size: 25px;
-    ${"" /* height: 70vh; */}
+    height: 100%;
     gap: 3vw;
     padding: 2vw;
-    background-color: #C5DFF8;
-    border-radius: 2rem;
+    
   }
 `;
 
@@ -75,12 +74,10 @@ const VertStack = styled(Stack)`
     display: flex;
     justify-content: left;
     align-items: left;
-    padding: 3rem;
-    border-radius: 2rem;
   }
 `;
 
-function DisplayInfo(props) {
+function ImageText(props) {
   return (
     <>
       <SplitBoxesGrid container>
@@ -98,4 +95,4 @@ function DisplayInfo(props) {
   );
 }
 
-export default DisplayInfo;
+export default ImageText;
