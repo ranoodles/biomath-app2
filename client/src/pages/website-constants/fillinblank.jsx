@@ -9,6 +9,7 @@ import {
   Divider,
   Grid,
   FormHelperText,
+  TextField,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import CheckIcon from "@mui/icons-material/Check";
@@ -62,11 +63,11 @@ const QuestionText = styled(Typography)`
   }
 `;
 
-const CustomRadio = styled(FormControlLabel)``;
+// const CustomRadio = styled(FormControlLabel)``;
 
-const CheckmarkIcon = styled(CheckCircleIcon)`
-  color: green;
-`;
+// const CheckmarkIcon = styled(CheckCircleIcon)`
+//   color: green;
+// `;
 
 // const Root = styled("div")(({ theme }) => ({
 //       [theme.breakpoints.down("xs")]: {
@@ -74,43 +75,43 @@ const CheckmarkIcon = styled(CheckCircleIcon)`
 //       },
 //   }));
 
-const formControlLabelStyle = {
-    "& .MuiFormControlLabel-label": {
-      fontSize: "1.4rem"
-    }
-}
+// const formControlLabelStyle = {
+//     "& .MuiFormControlLabel-label": {
+//       fontSize: "1.4rem"
+//     }
+// }
 
-export default function McqCard(props) {
+const TextFieldStyled = styled(TextField)`
+  && {
+    margin: 1rem;
+    width: 50vw;
+    font-size: 2rem;
+  }
+`;
+
+export default function FillInBlank(props) {
   const [value, setValue] = React.useState(null);
-  const [error, setError] = React.useState(false);
   const [helperText, setHelperText] = React.useState(null);
-  const [radioColor, setRadioColor] = React.useState("default");
+  const [helperColor, setHelperColor] = React.useState("default");
   const [disable, setDisable] = React.useState(false);
 
-  const handleRadioChange = (event) => {
+  const handleFieldChange = (event) => {
     setValue(event.target.value);
-    setError(false);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (value === props.mcqQuestion[0].answerChoices[props.mcqQuestion[0].correctAnswer]) {
+    if (value === props.fillInQuestion[0].correctAnswer) {
       setHelperText("You got it!");
-      setError(false);
-      setRadioColor("success");
+      setHelperColor("green");
       setDisable(true);
-      document.getElementById(value).style.color = "green";
     } else if (
-      value !== props.mcqQuestion[0].answerChoices[props.mcqQuestion[0].correctAnswer]
+      value !== props.fillInQuestion[0].correctAnswer
     ) {
-      document.getElementById(value).style.color = "crimson";
       setHelperText("Sorry, wrong answer. Try again!");
-      setRadioColor("danger");
-      setError(true);
+      setHelperColor("crimson");
     } else {
       setHelperText("Please select an option.");
-      setError(true);
     }
   };
   return (
@@ -118,34 +119,23 @@ export default function McqCard(props) {
     <ThemeProvider theme={theme}>
       <CardGrid>
         <VertStack>
-          <QuestionText variant="h4">{props.mcqQuestion[0].question}</QuestionText>
+          <QuestionText variant="h4">{props.fillInQuestion[0].question}</QuestionText>
           <form onSubmit={handleSubmit}>
             <FormControl>
-              <RadioGroup
-                aria-labelledby="mcq-question"
-                name="mcq-question-radio-group"
-                onChange={handleRadioChange}
-              >
-                {props.mcqQuestion[0].answerChoices &&
-                  props.mcqQuestion[0].answerChoices.map((answerChoice) => (
-                    <>
-                      <CustomRadio
-                        value={answerChoice}
-                        control={
-                          <Radio
-                            color={radioColor !== "danger" ? radioColor : "default"}
-                            disabled={answerChoice !== props.mcqQuestion[0].answerChoices[props.mcqQuestion[0].correctAnswer] 
-                            ? disable : false}
-                          />
-                        }
-                        label={answerChoice}
-                        id={answerChoice}
-                        sx={{...formControlLabelStyle}}
-                      />
-                    </>
-                  ))}
-              </RadioGroup>
-              <FormHelperText variant="" sx={{color: radioColor === "success" ? "green" : radioColor === "danger" ? "crimson" : "default", fontSize:"1.5rem"}}>{helperText}</FormHelperText>
+              <TextFieldStyled
+                type={typeof props.fillInQuestion[0].correctAnswer === "number" ? "number" : "text"}
+                placeholder="Type answer here"
+                variant="standard"
+                sx={{
+                  input: { color: "#000000" },
+                  label: { color: "#000000" },
+                }}
+                onChange={handleFieldChange}
+                disabled={disable}
+                inputProps={{style: {fontSize: "1.5rem"}}} // font size of input text
+                InputLabelProps={{style: {fontSize: "1.5rem"}}} // font size of input label
+              />
+              <FormHelperText variant="" sx={{color: helperColor, fontSize:"1.5rem"}}>{helperText}</FormHelperText>
               <Button
                 variant="contained"
                 type="submit"

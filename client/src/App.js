@@ -12,6 +12,7 @@ import AppliedMathPage from "./pages/appliedmath";
 import ImgText from "./pages/website-constants/ImageText";
 import McqCard from "./pages/website-constants/mcq.jsx";
 import LearningPath from "./pages/learningpath";
+import FillInBlank from "./pages/website-constants/fillinblank";
 
 // const theme = createTheme({
 //   typography: {
@@ -40,7 +41,6 @@ function App() {
             <Route path="/biotechnology" element={<BiotechnologyPage />} />
             <Route path="/appliedmath" element={<AppliedMathPage />} />
             <Route path="/learningpath" element={<LearningPath />} />
-            <Route path="/mcq" element={<McqCard />} />
           </Routes>
         </BrowserRouter>
       </div>
