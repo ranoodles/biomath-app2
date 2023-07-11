@@ -89,7 +89,7 @@ function ImageText(props) {
         <SubGrid item xs={12} sm={6.5}>
             <VertStack>
                 <TitleText variant="h2">{props.lessonText[0].title}</TitleText>
-                <DescriptionText variant="h4">{props.lessonText[0].text}</DescriptionText>
+                <DescriptionText variant="h4">{props.lessonText[0].description}</DescriptionText>
             </VertStack>
         </SubGrid>
       </SplitBoxesGrid>
