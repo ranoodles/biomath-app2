@@ -179,7 +179,7 @@ function BiotechnologyPage() {
     const fetchAllUnits = async () => {
       try {
         const res = await axios.get("http://localhost:8800/biotechnology");
-        console.log("raman is skinny");
+        console.log(res.data[0]);
       } catch (err) {
         console.log("raman is fat");
       }
