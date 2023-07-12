@@ -178,8 +178,8 @@ function BiotechnologyPage() {
   useEffect(() => {
     const fetchAllUnits = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/biotechnology");
-        console.log(res);
+        const res = await axios.get("http://localhost:8800/biotechnology");
+        console.log("raman is skinny");
       } catch (err) {
         console.log("raman is fat");
       }
