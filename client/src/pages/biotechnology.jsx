@@ -1,4 +1,5 @@
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
+import axios from "axios";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -172,7 +173,19 @@ const units = [
 function BiotechnologyPage() {
   const [selectedUnit, setSelectedUnit] = useState(units[0]);
   const prevValue = useRef(units[0]);
+  const [unitDetails, setUnitDetails] = useState([]);
 
+  useEffect(() => {
+    const fetchAllUnits = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/biotechnology");
+        console.log(res);
+      } catch (err) {
+        console.log("raman is fat");
+      }
+    };
+    fetchAllUnits();
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
@@ -186,8 +199,8 @@ function BiotechnologyPage() {
               <UnitCircle
                 id={"circle" + unit.id}
                 sx={{ backgroundColor: "#4A55A2", borderRadius: "15%" }}
-                onClick={(e) => { 
-                  setSelectedUnit(unit)
+                onClick={(e) => {
+                  setSelectedUnit(unit);
                   prevValue.current = selectedUnit;
                 }}
                 onMouseOver={(e) => {
