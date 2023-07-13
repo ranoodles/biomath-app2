@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -43,7 +43,7 @@ const VertStack = styled(Stack)`
     background-color: white;
     padding: 3rem;
     border-radius: 2rem;
-    background-color: #C5DFF8;
+    background-color: #c5dff8;
     height: 70vh;
     width: 100%;
   }
@@ -90,8 +90,11 @@ const ListButtons = styled(Button)`
 // }
 
 function DisplayInfo(props) {
+  useEffect(console.log("yeeeeeeee"), []);
+
   return (
     <>
+      // Return null or a loading state while the data is being fetched
       <VertStack>
         <TitleText variant="h2">{props.unit.name}</TitleText>
         <DescriptionText variant="h4">{props.unit.description}</DescriptionText>

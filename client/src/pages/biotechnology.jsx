@@ -110,86 +110,40 @@ const UnitCircleText = styled(Typography)`
     color: "#C5DFF8";
   }
 `;
-
-const units = [
-  {
-    id: "1",
-    name: "otweun",
-    lessons: ["rammywammy", "sweetie cupcake", "aditya ladoo"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure deserunt eu reprehenderit officia irure deserunt eu reprehenderit officia irure deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "2",
-    name: "Fatty",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "3",
-    name: "Ramanannananan",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "4",
-    name: "Mathematicas",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "5",
-    name: "namaskar",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "6",
-    name: "AMRICA",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "7",
-    name: "hdfuiafdhiusdh",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "8",
-    name: "Oh YeAh",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-];
+var units = [];
 
 function BiotechnologyPage() {
-  const [selectedUnit, setSelectedUnit] = useState(units[0]);
-  const prevValue = useRef(units[0]);
-  /* const [unitDetails, setUnitDetails] = useState([]);
-  const [listIndex, setListIndex] = useRef(0); */
-
   useEffect(() => {
     const fetchAllUnits = async () => {
       try {
         const res = await axios.get("http://localhost:8800/biotechnology");
-        console.log(res.data);
+        const unitData = res.data;
+        var usedUnits = [];
+        for (var lesson = 0; lesson < unitData.length; lesson++) {
+          var curr_lesson = unitData[lesson];
+          if (usedUnits.includes(curr_lesson.unit_id)) {
+            units[parseInt(curr_lesson.unit_id) - 1].lessons.push(
+              curr_lesson.lesson_name
+            );
+          } else {
+            usedUnits.push(curr_lesson.unit_id);
+            units.push({
+              id: curr_lesson.unit_id.toString(),
+              name: curr_lesson.unit_name,
+              lessons: [curr_lesson.lesson_name],
+              description: curr_lesson.unit_description,
+            });
+            /* console.log(units[parseInt(curr_lesson.unit_id) - 1]); */
+          }
+        }
       } catch (err) {
-        console.log("raman is fat");
+        console.log("err");
       }
     };
     fetchAllUnits();
   }, []);
-  
-  console.log(units)
-
+  const [selectedUnit, setSelectedUnit] = useState(units[0]);
+  const prevValue = useRef(units[0]);
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
