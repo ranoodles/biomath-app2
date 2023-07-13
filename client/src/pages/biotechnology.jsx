@@ -173,19 +173,23 @@ const units = [
 function BiotechnologyPage() {
   const [selectedUnit, setSelectedUnit] = useState(units[0]);
   const prevValue = useRef(units[0]);
-  const [unitDetails, setUnitDetails] = useState([]);
+  /* const [unitDetails, setUnitDetails] = useState([]);
+  const [listIndex, setListIndex] = useRef(0); */
 
   useEffect(() => {
     const fetchAllUnits = async () => {
       try {
         const res = await axios.get("http://localhost:8800/biotechnology");
-        console.log(res.data[0]);
+        console.log(res.data);
       } catch (err) {
         console.log("raman is fat");
       }
     };
     fetchAllUnits();
   }, []);
+  
+  console.log(units)
+
   return (
     <ThemeProvider theme={theme}>
       <NavBar />

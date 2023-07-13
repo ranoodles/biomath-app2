@@ -27,8 +27,7 @@ app.get("/test", (req, res) => {
 });
 
 app.get("/biotechnology", (req, res) => {
-  const q = "Select * FROM users";
-  console.log("log: show table");
+  const q = "SELECT units.unit_id, units.unit_name, units.unit_description, lessons.lesson_number, lessons.lesson_name FROM bio_units AS units JOIN bio_lessons AS lessons ON units.unit_id = lessons.unit_id;"
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
