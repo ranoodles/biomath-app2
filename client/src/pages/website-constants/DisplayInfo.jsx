@@ -89,21 +89,21 @@ const ListButtons = styled(Button)`
 //     ]
 // }
 
-function DisplayInfo(props) {
-  useEffect(console.log("yeeeeeeee"), []);
-
+function DisplayInfo({ unit }) {
+  if (!unit) {
+    return null;
+  }
   return (
     <>
-      // Return null or a loading state while the data is being fetched
       <VertStack>
-        <TitleText variant="h2">{props.unit.name}</TitleText>
-        <DescriptionText variant="h4">{props.unit.description}</DescriptionText>
+        <TitleText variant="h2">{unit.name}</TitleText>
+        <DescriptionText variant="h4">{unit.description}</DescriptionText>
         <ButtonGroup
           orientation="vertical"
           aria-label="vertical contained button group"
           variant="text"
         >
-          {props.unit.lessons.map((lesson) => (
+          {unit.lessons.map((lesson) => (
             <ListButtons key={lesson.toLowerCase()}>• {lesson}</ListButtons>
           ))}
         </ButtonGroup>

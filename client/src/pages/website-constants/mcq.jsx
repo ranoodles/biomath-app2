@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -38,7 +38,6 @@ const VertStack = styled(Stack)`
     padding: 2rem;
     height: 80%;
     width: 100%;
-    
   }
 `;
 const SubtopicText = styled(Typography)`
@@ -75,18 +74,24 @@ const CheckmarkIcon = styled(CheckCircleIcon)`
 //   }));
 
 const formControlLabelStyle = {
-    "& .MuiFormControlLabel-label": {
-      fontSize: "1.4rem"
-    }
-}
+  "& .MuiFormControlLabel-label": {
+    fontSize: "1.4rem",
+  },
+};
 
-export default function McqCard(props) {
+export default function McqCard({ question }) {
   const [value, setValue] = React.useState(null);
   const [error, setError] = React.useState(false);
   const [helperText, setHelperText] = React.useState(null);
   const [radioColor, setRadioColor] = React.useState("default");
   const [disable, setDisable] = React.useState(false);
-
+  React.useEffect(() => {
+    setValue(null);
+    setError(false);
+    setHelperText(null);
+    setRadioColor("default");
+    setDisable(false);
+  }, [question]);
   const handleRadioChange = (event) => {
     setValue(event.target.value);
     setError(false);
@@ -95,15 +100,13 @@ export default function McqCard(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (value === props.mcqQuestion[0].answerChoices[props.mcqQuestion[0].correctAnswer]) {
+    if (value === question.answerChoices[question.correctAnswer - 1]) {
       setHelperText("You got it!");
       setError(false);
       setRadioColor("success");
       setDisable(true);
       document.getElementById(value).style.color = "green";
-    } else if (
-      value !== props.mcqQuestion[0].answerChoices[props.mcqQuestion[0].correctAnswer]
-    ) {
+    } else if (value !== question.answerChoices[question.correctAnswer - 1]) {
       document.getElementById(value).style.color = "crimson";
       setHelperText("Sorry, wrong answer. Try again!");
       setRadioColor("danger");
@@ -115,52 +118,73 @@ export default function McqCard(props) {
   };
   return (
     <>
-    <ThemeProvider theme={theme}>
-      <CardGrid>
-        <VertStack>
-          <QuestionText variant="h4">{props.mcqQuestion[0].question}</QuestionText>
-          <form onSubmit={handleSubmit}>
-            <FormControl>
-              <RadioGroup
-                aria-labelledby="mcq-question"
-                name="mcq-question-radio-group"
-                onChange={handleRadioChange}
-              >
-                {props.mcqQuestion[0].answerChoices &&
-                  props.mcqQuestion[0].answerChoices.map((answerChoice) => (
-                    <>
-                      <CustomRadio
-                        value={answerChoice}
-                        control={
-                          <Radio
-                            color={radioColor !== "danger" ? radioColor : "default"}
-                            disabled={answerChoice !== props.mcqQuestion[0].answerChoices[props.mcqQuestion[0].correctAnswer] 
-                            ? disable : false}
-                          />
-                        }
-                        label={answerChoice}
-                        id={answerChoice}
-                        sx={{...formControlLabelStyle}}
-                      />
-                    </>
-                  ))}
-              </RadioGroup>
-              <FormHelperText variant="" sx={{color: radioColor === "success" ? "green" : radioColor === "danger" ? "crimson" : "default", fontSize:"1.5rem"}}>{helperText}</FormHelperText>
-              <Button
-                variant="contained"
-                type="submit"
-                sx={{
-                  marginTop: "2rem",
-                  width: "80px",
-                }}
-              >
-                Check
-              </Button>
-            </FormControl>
-          </form>
-        </VertStack>
-      </CardGrid>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CardGrid>
+          <VertStack>
+            <QuestionText variant="h4">{question.questionText}</QuestionText>
+            <form onSubmit={handleSubmit}>
+              <FormControl>
+                <RadioGroup
+                  aria-labelledby="mcq-question"
+                  name="mcq-question-radio-group"
+                  onChange={handleRadioChange}
+                >
+                  {question.answerChoices &&
+                    question.answerChoices.map((answerChoice) => (
+                      <>
+                        <CustomRadio
+                          value={answerChoice}
+                          control={
+                            <Radio
+                              color={
+                                radioColor !== "danger" ? radioColor : "default"
+                              }
+                              disabled={
+                                answerChoice !==
+                                question.answerChoices[
+                                  question.correctAnswer - 1
+                                ]
+                                  ? disable
+                                  : false
+                              }
+                            />
+                          }
+                          label={answerChoice}
+                          id={answerChoice}
+                          sx={{ ...formControlLabelStyle }}
+                        />
+                      </>
+                    ))}
+                </RadioGroup>
+                <FormHelperText
+                  variant=""
+                  sx={{
+                    color:
+                      radioColor === "success"
+                        ? "green"
+                        : radioColor === "danger"
+                        ? "crimson"
+                        : "default",
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  {helperText}
+                </FormHelperText>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{
+                    marginTop: "2rem",
+                    width: "80px",
+                  }}
+                >
+                  Check
+                </Button>
+              </FormControl>
+            </form>
+          </VertStack>
+        </CardGrid>
+      </ThemeProvider>
     </>
   );
 }

@@ -110,15 +110,19 @@ const UnitCircleText = styled(Typography)`
     color: "#C5DFF8";
   }
 `;
-var units = [];
 
 function BiotechnologyPage() {
+  var units = [];
+  const [unitsList, setUnitsList] = useState([]);
+  const [selectedUnit, setSelectedUnit] = useState(null);
   useEffect(() => {
     const fetchAllUnits = async () => {
       try {
         const res = await axios.get("http://localhost:8800/biotechnology");
         const unitData = res.data;
+        console.log(unitData);
         var usedUnits = [];
+        var units = [];
         for (var lesson = 0; lesson < unitData.length; lesson++) {
           var curr_lesson = unitData[lesson];
           if (usedUnits.includes(curr_lesson.unit_id)) {
@@ -133,17 +137,17 @@ function BiotechnologyPage() {
               lessons: [curr_lesson.lesson_name],
               description: curr_lesson.unit_description,
             });
-            /* console.log(units[parseInt(curr_lesson.unit_id) - 1]); */
           }
         }
+        setUnitsList(units);
+        setSelectedUnit(units[0]);
       } catch (err) {
         console.log("err");
       }
     };
     fetchAllUnits();
   }, []);
-  const [selectedUnit, setSelectedUnit] = useState(units[0]);
-  const prevValue = useRef(units[0]);
+
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
@@ -152,20 +156,16 @@ function BiotechnologyPage() {
       </TitleText>
       <HolderGrid container sm={12}>
         <UnitStack item sm={2} xs={2}>
-          {units &&
-            units.map((unit) => (
+          {unitsList.length > 0 &&
+            unitsList.map((unit) => (
               <UnitCircle
                 id={"circle" + unit.id}
                 sx={{ backgroundColor: "#4A55A2", borderRadius: "15%" }}
                 onClick={(e) => {
                   setSelectedUnit(unit);
-                  prevValue.current = selectedUnit;
                 }}
                 onMouseOver={(e) => {
                   setSelectedUnit(unit);
-                }}
-                onMouseOut={(e) => {
-                  setSelectedUnit(prevValue.current);
                 }}
                 variant="outlined"
               >
@@ -176,7 +176,7 @@ function BiotechnologyPage() {
             ))}
         </UnitStack>
         <CardHolder item sm={9} xs={9}>
-          <DisplayCard unit={selectedUnit}></DisplayCard>
+          {selectedUnit && <DisplayCard unit={selectedUnit} />}{" "}
         </CardHolder>
       </HolderGrid>
     </ThemeProvider>

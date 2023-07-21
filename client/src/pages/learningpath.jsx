@@ -1,4 +1,4 @@
-import { React, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -37,17 +37,18 @@ const CardHolder = styled(Grid)`
   && {
     display: flex;
     justify-content: center;
-    ${'' /* align-items: center; */}
+    ${"" /* align-items: center; */}
     height: 90vh;
-    background-color: #C5DFF8;
+    width: 80vw;
+    background-color: #c5dff8;
     border-radius: 2rem;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
     &::-webkit-scrollbar {
       display: none;
-  }
-  &::-webkit-scrollbar-track {
+    }
+    &::-webkit-scrollbar-track {
       background-color: #f1f1f1;
     }
 
@@ -68,6 +69,7 @@ const BigGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     padding: 1rem 2rem;
+    width: 100%;
   }
 `;
 
@@ -97,33 +99,61 @@ const fillInQuestion = [
   {
     question:
       "Non deserunt esse aliquip quis occaecat ullamco ad. Sint occaecat velit enim aute sit in quis dolore esse. Nostrud ullamco nisi eu non minim qui eu exercitation ullamco tempor. Aliquip ad consectetur nisi exercitation eiusmod deserunt excepteur laborum deserunt ullamco anim culpa officia. Commodo sit cupidatat et laboris enim.",
-    correctAnswer: "rizzler"
+    correctAnswer: "rizzler",
   },
-]
+];
 
-const lessonText = [
-  {
-    title:"Subheading",
-    img:"https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png",
-    description:"Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip. Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip. Velit enim occaecat exercitation Lorem Lorem aliqua reprehenderit magna duis eiusmod nisi. Lorem voluptate duis occaecat pariatur fugiat excepteur minim. Elit Lorem dolor voluptate eu veniam mollit aliquip.",
-  },
-]
-
-function LearningPath() {
+function LearningPath({ lesson }) {
+  const [cardNum, setCardNum] = useState(1);
+  // const lastCard = Object.keys(lesson)[Object.keys(lesson).length - 1];
+  // const firstCard = lesson.lesson.keys().shift().card_number;
+  const handleNextClick = () => {
+    console.log(lesson.length);
+    if (cardNum < lesson.length - 1) {
+      setCardNum(cardNum + 1);
+    } else {
+      console.log("cannot go forward");
+    }
+  };
+  const handleBackClick = () => {
+    if (cardNum > 1) {
+      setCardNum(cardNum - 1);
+    } else {
+      console.log("cannot go back");
+    }
+  };
+  // Function to render the appropriate card based on the type
+  const renderCard = () => {
+    const currentCard = lesson[cardNum];
+    if (currentCard.type === "MCQ") {
+      return <McqCard key={cardNum} question={currentCard}></McqCard>;
+    } else if (currentCard.type === "FRQ") {
+      return <FillInBlank key={cardNum} question={currentCard}></FillInBlank>;
+    } else if (currentCard.type === "ImgText") {
+      return <ImgText key={cardNum} displayInfo={currentCard}></ImgText>;
+    } else if (currentCard.type === "TextImg") {
+      return <TextImg key={cardNum} displayInfo={currentCard}></TextImg>;
+    }
+    return "Card Rendering Error";
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
       <BigGrid>
-        <CardHolder item sm={10} xs={12} sx={{
-            alignItems: {xs: "flex-start", md: "center"}
-        }}>
-            <ChevronButton><LeftIcon style={{color: "black", fontSize: "3rem" }}></LeftIcon></ChevronButton>
-            <ImgText lessonText={lessonText}/>
-            {/* <McqCard mcqQuestion={mcqQuestion}></McqCard> */}
-            {/* <FillInBlank fillInQuestion={fillInQuestion}></FillInBlank> */}
-            
-            <ChevronButton><RightIcon style={{color: "black", fontSize: "3rem"}}></RightIcon></ChevronButton>
+        <CardHolder
+          item
+          sm={12}
+          xs={12}
+          sx={{ alignItems: { xs: "flex-start", md: "center" } }}
+        >
+          <ChevronButton onClick={handleBackClick}>
+            <LeftIcon style={{ color: "black", fontSize: "3rem" }} />
+          </ChevronButton>
+          {renderCard()}
+          <ChevronButton onClick={handleNextClick}>
+            <RightIcon style={{ color: "black", fontSize: "3rem" }} />
+          </ChevronButton>
         </CardHolder>
       </BigGrid>
     </ThemeProvider>

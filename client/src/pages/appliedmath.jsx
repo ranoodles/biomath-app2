@@ -186,8 +186,8 @@ function AppliedMathPage() {
               <UnitCircle
                 id={"circle" + unit.id}
                 sx={{ backgroundColor: "#4A55A2", borderRadius: "15%" }}
-                onClick={(e) => { 
-                  setSelectedUnit(unit)
+                onClick={(e) => {
+                  setSelectedUnit(unit);
                   prevValue.current = selectedUnit;
                 }}
                 onMouseOver={(e) => {

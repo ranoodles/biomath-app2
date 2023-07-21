@@ -30,7 +30,7 @@ const SubGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${'' /* padding: 2rem; */}
+    ${"" /* padding: 2rem; */}
     width: 100%;
   }
 `;
@@ -50,13 +50,12 @@ const DescriptionText = styled(Typography)`
 const SplitBoxesGrid = styled(Grid)`
   && {
     display: flex;
-    ${'' /* justify-content: center; */}
+    ${"" /* justify-content: center; */}
     align-items: center;
     font-size: 25px;
     height: 100%;
-    gap: 3vw;
+    gap: 10vw;
     padding: 2vw;
-    
   }
 `;
 
@@ -66,7 +65,7 @@ const Img = styled(Image)`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    ${'' /* padding: 1rem; */}
+    ${"" /* padding: 1rem; */}
   }
 `;
 
@@ -78,22 +77,24 @@ const VertStack = styled(Stack)`
   }
 `;
 
-function ImageText(props) {
+function ImageText({ displayInfo }) {
   return (
     <>
-    <ThemeProvider theme={theme} border="none">
-      <SplitBoxesGrid container>
-        <SubGrid item xs={12} sm={5}>
-            <Img src={props.lessonText[0].img} alt=""></Img>
-        </SubGrid>
-        <SubGrid item xs={12} sm={6.5}>
+      <ThemeProvider theme={theme} border="none">
+        <SplitBoxesGrid container>
+          <SubGrid item xs={12} sm={4}>
+            <Img src={displayInfo.img} alt=""></Img>
+          </SubGrid>
+          <SubGrid item xs={12} sm={6}>
             <VertStack>
-                <TitleText variant="h2">{props.lessonText[0].title}</TitleText>
-                <DescriptionText variant="h4">{props.lessonText[0].description}</DescriptionText>
+              <TitleText variant="h2">{displayInfo.title}</TitleText>
+              <DescriptionText variant="h4">
+                {displayInfo.description}
+              </DescriptionText>
             </VertStack>
-        </SubGrid>
-      </SplitBoxesGrid>
-    </ThemeProvider>
+          </SubGrid>
+        </SplitBoxesGrid>
+      </ThemeProvider>
     </>
   );
 }
