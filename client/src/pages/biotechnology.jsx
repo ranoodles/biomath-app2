@@ -1,5 +1,6 @@
 import { React, useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -13,7 +14,6 @@ import {
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 import DisplayCard from "./website-constants/DisplayInfo.jsx";
 
@@ -115,6 +115,14 @@ function BiotechnologyPage() {
   var units = [];
   const [unitsList, setUnitsList] = useState([]);
   const [selectedUnit, setSelectedUnit] = useState(null);
+  const [selectedLessonId, setSelectedLessonId] = useState(null);
+  const navigate = useNavigate();
+  const handleLessonSelect = (lessonDetails) => {
+    setSelectedLessonId(lessonDetails.lesson_id);
+    console.log(lessonDetails);
+    navigate(`/biotechnology/lesson${lessonDetails.lesson_id}`);
+  };
+
   useEffect(() => {
     const fetchAllUnits = async () => {
       try {
@@ -126,21 +134,30 @@ function BiotechnologyPage() {
         for (var lesson = 0; lesson < unitData.length; lesson++) {
           var curr_lesson = unitData[lesson];
           if (usedUnits.includes(curr_lesson.unit_id)) {
-            units[parseInt(curr_lesson.unit_id) - 1].lessons.push(
-              curr_lesson.lesson_name
-            );
+            units[parseInt(curr_lesson.unit_id) - 1].lessons.push({
+              lesson_name: curr_lesson.lesson_name,
+              lesson_id: curr_lesson.lesson_id,
+              unit_id: curr_lesson.unit_id,
+            });
           } else {
             usedUnits.push(curr_lesson.unit_id);
             units.push({
               id: curr_lesson.unit_id.toString(),
               name: curr_lesson.unit_name,
-              lessons: [curr_lesson.lesson_name],
+              lessons: [
+                {
+                  lesson_name: curr_lesson.lesson_name,
+                  lesson_id: curr_lesson.lesson_id,
+                  unit_id: curr_lesson.unit_id,
+                },
+              ],
               description: curr_lesson.unit_description,
             });
           }
         }
         setUnitsList(units);
         setSelectedUnit(units[0]);
+        console.log(units);
       } catch (err) {
         console.log("err");
       }
@@ -176,7 +193,12 @@ function BiotechnologyPage() {
             ))}
         </UnitStack>
         <CardHolder item sm={9} xs={9}>
-          {selectedUnit && <DisplayCard unit={selectedUnit} />}{" "}
+          {selectedUnit && (
+            <DisplayCard
+              unit={selectedUnit}
+              handleLessonSelect={handleLessonSelect}
+            />
+          )}{" "}
         </CardHolder>
       </HolderGrid>
     </ThemeProvider>

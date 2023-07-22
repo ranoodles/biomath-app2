@@ -88,9 +88,7 @@ function ImageText({ displayInfo }) {
           <SubGrid item xs={12} sm={6}>
             <VertStack>
               <TitleText variant="h2">{displayInfo.title}</TitleText>
-              <DescriptionText variant="h4">
-                {displayInfo.description}
-              </DescriptionText>
+              <DescriptionText variant="h4">{displayInfo.text}</DescriptionText>
             </VertStack>
           </SubGrid>
         </SplitBoxesGrid>

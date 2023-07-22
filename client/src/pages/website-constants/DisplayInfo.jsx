@@ -89,7 +89,7 @@ const ListButtons = styled(Button)`
 //     ]
 // }
 
-function DisplayInfo({ unit }) {
+function DisplayInfo({ unit, handleLessonSelect }) {
   if (!unit) {
     return null;
   }
@@ -104,7 +104,12 @@ function DisplayInfo({ unit }) {
           variant="text"
         >
           {unit.lessons.map((lesson) => (
-            <ListButtons key={lesson.toLowerCase()}>• {lesson}</ListButtons>
+            <ListButtons
+              key={lesson.lesson_id}
+              onClick={() => handleLessonSelect(lesson)}
+            >
+              • {lesson.lesson_name}
+            </ListButtons>
           ))}
         </ButtonGroup>
       </VertStack>

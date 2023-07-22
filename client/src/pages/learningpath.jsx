@@ -21,6 +21,7 @@ import RightIcon from "@mui/icons-material/ChevronRight";
 import McqCard from "./website-constants/mcq.jsx";
 import TextImg from "./website-constants/TextImage.jsx";
 import FillInBlank from "./website-constants/fillinblank.jsx";
+import { useParams } from "react-router-dom";
 
 const HolderGrid = styled(Grid)`
   && {
@@ -105,24 +106,17 @@ const fillInQuestion = [
 
 function LearningPath({ lesson }) {
   const [cardNum, setCardNum] = useState(1);
-  // const lastCard = Object.keys(lesson)[Object.keys(lesson).length - 1];
-  // const firstCard = lesson.lesson.keys().shift().card_number;
+  console.log(lesson);
   const handleNextClick = () => {
-    console.log(lesson.length);
     if (cardNum < lesson.length - 1) {
       setCardNum(cardNum + 1);
-    } else {
-      console.log("cannot go forward");
     }
   };
   const handleBackClick = () => {
     if (cardNum > 1) {
       setCardNum(cardNum - 1);
-    } else {
-      console.log("cannot go back");
     }
   };
-  // Function to render the appropriate card based on the type
   const renderCard = () => {
     const currentCard = lesson[cardNum];
     if (currentCard.type === "MCQ") {
@@ -136,7 +130,6 @@ function LearningPath({ lesson }) {
     }
     return "Card Rendering Error";
   };
-
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
