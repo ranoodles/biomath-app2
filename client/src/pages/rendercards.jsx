@@ -17,10 +17,9 @@ const fetchAllLessons = async () => {
         lessons.push([curr_card]);
       }
     }
-
     return lessons;
   } catch (err) {
-    console.log(err);
+    console.log("err");
     return [];
   }
 };

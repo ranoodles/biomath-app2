@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -104,32 +105,68 @@ const fillInQuestion = [
   },
 ];
 
-function LearningPath({ lesson }) {
-  const [cardNum, setCardNum] = useState(1);
-  console.log(lesson);
+function BioLearningPath() {
+  const {lessonid} = useParams(); 
+  const [cardNum, setCardNum] = useState(0);
+  const [lessonList, setLessonList] = useState([]);
+
+  useEffect(() => {
+    const fetchAllLessons = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/biocards");
+        const cardData = res.data;
+        const lessons = [];
+
+        var usedLessons = [];
+        for (var card = 0; card < cardData.length; card++) {
+          var curr_card = cardData[card];
+          if (usedLessons.includes(curr_card.lesson_id)) {
+            lessons[curr_card.lesson_id - 1].push(curr_card);
+          } else {
+            usedLessons.push(curr_card.lesson_id);
+            lessons.push([curr_card]);
+          }
+        }
+        setLessonList(lessons);
+        console.log(lessons, "bob");
+      } catch (err) {
+        console.log("err");
+      }
+    };
+    fetchAllLessons();
+  }, []);
+
+  if (!lessonList || lessonList.length === 0) {
+    return;
+  }
+
+  const lesson = lessonList[lessonid - 1];
+
   const handleNextClick = () => {
     if (cardNum < lesson.length - 1) {
       setCardNum(cardNum + 1);
     }
   };
   const handleBackClick = () => {
-    if (cardNum > 1) {
+    if (cardNum > 0) {
       setCardNum(cardNum - 1);
     }
   };
+
   const renderCard = () => {
     const currentCard = lesson[cardNum];
-    if (currentCard.type === "MCQ") {
+    if (currentCard.card_type === "MCQ") {
       return <McqCard key={cardNum} question={currentCard}></McqCard>;
-    } else if (currentCard.type === "FRQ") {
+    } else if (currentCard.card_type === "FRQ") {
       return <FillInBlank key={cardNum} question={currentCard}></FillInBlank>;
-    } else if (currentCard.type === "ImgText") {
+    } else if (currentCard.card_type === "ImgText") {
       return <ImgText key={cardNum} displayInfo={currentCard}></ImgText>;
-    } else if (currentCard.type === "TextImg") {
+    } else if (currentCard.card_type === "TextImg") {
       return <TextImg key={cardNum} displayInfo={currentCard}></TextImg>;
     }
     return "Card Rendering Error";
   };
+
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
@@ -138,9 +175,9 @@ function LearningPath({ lesson }) {
           item
           sm={12}
           xs={12}
-          sx={{ alignItems: { xs: "flex-start", md: "center" } }}
+          sx={{ alignItems: { xs: "flex-start", md: "center" },  }}
         >
-          <ChevronButton onClick={handleBackClick}>
+          <ChevronButton onClick={handleBackClick} disable="true">
             <LeftIcon style={{ color: "black", fontSize: "3rem" }} />
           </ChevronButton>
           {renderCard()}
@@ -153,4 +190,4 @@ function LearningPath({ lesson }) {
   );
 }
 
-export default LearningPath;
+export default BioLearningPath;

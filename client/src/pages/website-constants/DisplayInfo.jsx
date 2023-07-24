@@ -96,7 +96,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
   return (
     <>
       <VertStack>
-        <TitleText variant="h2">{unit.name}</TitleText>
+        <TitleText variant="h2">{unit.id}. {unit.name}</TitleText>
         <DescriptionText variant="h4">{unit.description}</DescriptionText>
         <ButtonGroup
           orientation="vertical"

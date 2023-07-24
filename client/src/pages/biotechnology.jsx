@@ -120,46 +120,19 @@ function BiotechnologyPage() {
   const handleLessonSelect = (lessonDetails) => {
     setSelectedLessonId(lessonDetails.lesson_id);
     console.log(lessonDetails);
-    navigate(`/biotechnology/lesson${lessonDetails.lesson_id}`);
+    navigate("/biotechnology/" + lessonDetails.lesson_id);
   };
 
   useEffect(() => {
     const fetchAllUnits = async () => {
       try {
         const res = await axios.get("http://localhost:8800/biotechnology");
-        const unitData = res.data;
-        console.log(unitData);
-        var usedUnits = [];
-        var units = [];
-        for (var lesson = 0; lesson < unitData.length; lesson++) {
-          var curr_lesson = unitData[lesson];
-          if (usedUnits.includes(curr_lesson.unit_id)) {
-            units[parseInt(curr_lesson.unit_id) - 1].lessons.push({
-              lesson_name: curr_lesson.lesson_name,
-              lesson_id: curr_lesson.lesson_id,
-              unit_id: curr_lesson.unit_id,
-            });
-          } else {
-            usedUnits.push(curr_lesson.unit_id);
-            units.push({
-              id: curr_lesson.unit_id.toString(),
-              name: curr_lesson.unit_name,
-              lessons: [
-                {
-                  lesson_name: curr_lesson.lesson_name,
-                  lesson_id: curr_lesson.lesson_id,
-                  unit_id: curr_lesson.unit_id,
-                },
-              ],
-              description: curr_lesson.unit_description,
-            });
-          }
-        }
+        const units = res.data;
+        console.log(units, "jake");
         setUnitsList(units);
         setSelectedUnit(units[0]);
-        console.log(units);
       } catch (err) {
-        console.log("err");
+        console.log(err, "bobbby");
       }
     };
     fetchAllUnits();

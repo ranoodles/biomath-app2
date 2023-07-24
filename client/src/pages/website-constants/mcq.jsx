@@ -85,6 +85,9 @@ export default function McqCard({ question }) {
   const [helperText, setHelperText] = React.useState(null);
   const [radioColor, setRadioColor] = React.useState("default");
   const [disable, setDisable] = React.useState(false);
+
+  const answerChoices = [question.mcqChoice1, question.mcqChoice2, question.mcqChoice3, question.mcqChoice4];
+
   React.useEffect(() => {
     setValue(null);
     setError(false);
@@ -99,20 +102,21 @@ export default function McqCard({ question }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (value === question.answerChoices[question.correctAnswer - 1]) {
+    console.log(value);
+    if (value === answerChoices[question.mcqCorrect - 1]) {
       setHelperText("You got it!");
       setError(false);
       setRadioColor("success");
       setDisable(true);
       document.getElementById(value).style.color = "green";
-    } else if (value !== question.answerChoices[question.correctAnswer - 1]) {
+    } else if (value !== answerChoices[question.mcqCorrect - 1] && value != null) {
       document.getElementById(value).style.color = "crimson";
       setHelperText("Sorry, wrong answer. Try again!");
       setRadioColor("danger");
       setError(true);
-    } else {
+    } else if (value == null) {
       setHelperText("Please select an option.");
+      setRadioColor("danger");
       setError(true);
     }
   };
@@ -121,7 +125,7 @@ export default function McqCard({ question }) {
       <ThemeProvider theme={theme}>
         <CardGrid>
           <VertStack>
-            <QuestionText variant="h4">{question.questionText}</QuestionText>
+            <QuestionText variant="h4">{question.mcqQuestion}</QuestionText>
             <form onSubmit={handleSubmit}>
               <FormControl>
                 <RadioGroup
@@ -129,8 +133,8 @@ export default function McqCard({ question }) {
                   name="mcq-question-radio-group"
                   onChange={handleRadioChange}
                 >
-                  {question.answerChoices &&
-                    question.answerChoices.map((answerChoice) => (
+                  {answerChoices &&
+                    answerChoices.map((answerChoice) => (
                       <>
                         <CustomRadio
                           value={answerChoice}
@@ -141,8 +145,8 @@ export default function McqCard({ question }) {
                               }
                               disabled={
                                 answerChoice !==
-                                question.answerChoices[
-                                  question.correctAnswer - 1
+                                answerChoices[
+                                  question.mcqCorrect - 1
                                 ]
                                   ? disable
                                   : false

@@ -101,15 +101,16 @@ export default function FillInBlank({ question }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (value === question.correctAnswer) {
+    if (value.toLowerCase() === question.frqAnswer.toLowerCase()) {
       setHelperText("You got it!");
       setHelperColor("green");
       setDisable(true);
-    } else if (value !== question.correctAnswer) {
+    } else if (value.toLowerCase() !== question.frqAnswer.toLowerCase() && value != null && value != "") {
       setHelperText("Sorry, wrong answer. Try again!");
       setHelperColor("crimson");
-    } else {
-      setHelperText("Please select an option.");
+    } else if (value == null || value == "") {
+      setHelperText("Please fill in an answer.");
+      setHelperColor("default");
     }
   };
   return (
@@ -117,12 +118,12 @@ export default function FillInBlank({ question }) {
       <ThemeProvider theme={theme}>
         <CardGrid>
           <VertStack>
-            <QuestionText variant="h4">{question.questionText}</QuestionText>
+            <QuestionText variant="h4">{question.frqQuestion}</QuestionText>
             <form onSubmit={handleSubmit}>
               <FormControl>
                 <TextFieldStyled
                   type={
-                    typeof question.correctAnswer === "number"
+                    typeof question.frqCorrect === "number"
                       ? "number"
                       : "text"
                   }

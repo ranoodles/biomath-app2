@@ -86,7 +86,7 @@ function TextImage({ displayInfo }) {
             <VertStack>
               <TitleText variant="h2">{displayInfo.title}</TitleText>
               <DescriptionText variant="h4">
-                {displayInfo.description}
+                {displayInfo.text}
               </DescriptionText>
             </VertStack>
           </SubGrid>
