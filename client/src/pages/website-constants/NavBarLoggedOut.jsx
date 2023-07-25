@@ -19,7 +19,7 @@ const pages = [
   "Applied Math",
   "About Us",
   "Log In",
-  "Sign Up",
+  "Sign Up"
 ];
 // const settings = ['Profile', 'Logout'];
 
@@ -37,7 +37,9 @@ function NavBar(props) {
 
   const handleCloseNavMenu = (event) => {
     setAnchorElNav(null);
-    navigate("/" + event.currentTarget.role);
+    if (event.currentTarget.role != null) {
+      navigate("/" + event.currentTarget.role);
+    }
   };
 
   // const handleCloseUserMenu = () => {
@@ -121,7 +123,7 @@ function NavBar(props) {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },

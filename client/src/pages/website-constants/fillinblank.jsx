@@ -28,6 +28,7 @@ const CardGrid = styled(Grid)`
     justify-content: left;
     align-items: left;
     gap: 2rem;
+    width: 100%;
   }
 `;
 
@@ -39,7 +40,6 @@ const VertStack = styled(Stack)`
     padding: 2rem;
     height: 80%;
     width: 100%;
-    
   }
 `;
 const SubtopicText = styled(Typography)`
@@ -89,7 +89,7 @@ const TextFieldStyled = styled(TextField)`
   }
 `;
 
-export default function FillInBlank(props) {
+export default function FillInBlank({ question }) {
   const [value, setValue] = React.useState(null);
   const [helperText, setHelperText] = React.useState(null);
   const [helperColor, setHelperColor] = React.useState("default");
@@ -101,56 +101,64 @@ export default function FillInBlank(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (value === props.fillInQuestion[0].correctAnswer) {
+    if (value.toLowerCase() === question.frqAnswer.toLowerCase()) {
       setHelperText("You got it!");
       setHelperColor("green");
       setDisable(true);
-    } else if (
-      value !== props.fillInQuestion[0].correctAnswer
-    ) {
+    } else if (value.toLowerCase() !== question.frqAnswer.toLowerCase() && value != null && value != "") {
       setHelperText("Sorry, wrong answer. Try again!");
       setHelperColor("crimson");
-    } else {
-      setHelperText("Please select an option.");
+    } else if (value == null || value == "") {
+      setHelperText("Please fill in an answer.");
+      setHelperColor("default");
     }
   };
   return (
     <>
-    <ThemeProvider theme={theme}>
-      <CardGrid>
-        <VertStack>
-          <QuestionText variant="h4">{props.fillInQuestion[0].question}</QuestionText>
-          <form onSubmit={handleSubmit}>
-            <FormControl>
-              <TextFieldStyled
-                type={typeof props.fillInQuestion[0].correctAnswer === "number" ? "number" : "text"}
-                placeholder="Type answer here"
-                variant="standard"
-                sx={{
-                  input: { color: "#000000" },
-                  label: { color: "#000000" },
-                }}
-                onChange={handleFieldChange}
-                disabled={disable}
-                inputProps={{style: {fontSize: "1.5rem"}}} // font size of input text
-                InputLabelProps={{style: {fontSize: "1.5rem"}}} // font size of input label
-              />
-              <FormHelperText variant="" sx={{color: helperColor, fontSize:"1.5rem"}}>{helperText}</FormHelperText>
-              <Button
-                variant="contained"
-                type="submit"
-                sx={{
-                  marginTop: "2rem",
-                  width: "80px",
-                }}
-              >
-                Check
-              </Button>
-            </FormControl>
-          </form>
-        </VertStack>
-      </CardGrid>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CardGrid>
+          <VertStack>
+            <QuestionText variant="h4">{question.frqQuestion}</QuestionText>
+            <form onSubmit={handleSubmit}>
+              <FormControl>
+                <TextFieldStyled
+                  type={
+                    typeof question.frqCorrect === "number"
+                      ? "number"
+                      : "text"
+                  }
+                  placeholder="Type answer here"
+                  variant="standard"
+                  sx={{
+                    input: { color: "#000000" },
+                    label: { color: "#000000" },
+                  }}
+                  onChange={handleFieldChange}
+                  disabled={disable}
+                  inputProps={{ style: { fontSize: "1.5rem" } }} // font size of input text
+                  InputLabelProps={{ style: { fontSize: "1.5rem" } }} // font size of input label
+                />
+                <FormHelperText
+                  variant=""
+                  sx={{ color: helperColor, fontSize: "1.5rem" }}
+                >
+                  {helperText}
+                </FormHelperText>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{
+                    marginTop: "2rem",
+                    width: "80px",
+                  }}
+                >
+                  Check
+                </Button>
+              </FormControl>
+            </form>
+          </VertStack>
+        </CardGrid>
+      </ThemeProvider>
     </>
   );
 }

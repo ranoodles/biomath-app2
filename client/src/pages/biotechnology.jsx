@@ -1,5 +1,6 @@
 import { React, useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -13,7 +14,6 @@ import {
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 import DisplayCard from "./website-constants/DisplayInfo.jsx";
 
@@ -111,84 +111,32 @@ const UnitCircleText = styled(Typography)`
   }
 `;
 
-const units = [
-  {
-    id: "1",
-    name: "otweun",
-    lessons: ["rammywammy", "sweetie cupcake", "aditya ladoo"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure deserunt eu reprehenderit officia irure deserunt eu reprehenderit officia irure deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "2",
-    name: "Fatty",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "3",
-    name: "Ramanannananan",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "4",
-    name: "Mathematicas",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "5",
-    name: "namaskar",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "6",
-    name: "AMRICA",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "7",
-    name: "hdfuiafdhiusdh",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-  {
-    id: "8",
-    name: "Oh YeAh",
-    lessons: ["hellooooo", "fadisfios", "heyyyyyyyy"],
-    description:
-      "Fugiat esse pariatur deserunt eu reprehenderit officia irure.",
-  },
-];
-
 function BiotechnologyPage() {
-  const [selectedUnit, setSelectedUnit] = useState(units[0]);
-  const prevValue = useRef(units[0]);
-  /* const [unitDetails, setUnitDetails] = useState([]);
-  const [listIndex, setListIndex] = useRef(0); */
+  var units = [];
+  const [unitsList, setUnitsList] = useState([]);
+  const [selectedUnit, setSelectedUnit] = useState(null);
+  const [selectedLessonId, setSelectedLessonId] = useState(null);
+  const navigate = useNavigate();
+  const handleLessonSelect = (lessonDetails) => {
+    setSelectedLessonId(lessonDetails.lesson_id);
+    console.log(lessonDetails);
+    navigate("/biotechnology/" + lessonDetails.lesson_id);
+  };
 
   useEffect(() => {
     const fetchAllUnits = async () => {
       try {
         const res = await axios.get("http://localhost:8800/biotechnology");
-        console.log(res.data);
+        const units = res.data;
+        console.log(units, "jake");
+        setUnitsList(units);
+        setSelectedUnit(units[0]);
       } catch (err) {
-        console.log("raman is fat");
+        console.log(err, "bobbby");
       }
     };
     fetchAllUnits();
   }, []);
-  
-  console.log(units)
 
   return (
     <ThemeProvider theme={theme}>
@@ -198,20 +146,16 @@ function BiotechnologyPage() {
       </TitleText>
       <HolderGrid container sm={12}>
         <UnitStack item sm={2} xs={2}>
-          {units &&
-            units.map((unit) => (
+          {unitsList.length > 0 &&
+            unitsList.map((unit) => (
               <UnitCircle
                 id={"circle" + unit.id}
                 sx={{ backgroundColor: "#4A55A2", borderRadius: "15%" }}
                 onClick={(e) => {
                   setSelectedUnit(unit);
-                  prevValue.current = selectedUnit;
                 }}
                 onMouseOver={(e) => {
                   setSelectedUnit(unit);
-                }}
-                onMouseOut={(e) => {
-                  setSelectedUnit(prevValue.current);
                 }}
                 variant="outlined"
               >
@@ -222,7 +166,12 @@ function BiotechnologyPage() {
             ))}
         </UnitStack>
         <CardHolder item sm={9} xs={9}>
-          <DisplayCard unit={selectedUnit}></DisplayCard>
+          {selectedUnit && (
+            <DisplayCard
+              unit={selectedUnit}
+              handleLessonSelect={handleLessonSelect}
+            />
+          )}{" "}
         </CardHolder>
       </HolderGrid>
     </ThemeProvider>
