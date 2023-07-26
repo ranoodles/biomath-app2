@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import fillerImg from "./undraw_lightbulb_moment_re_ulyo.svg";
+import atomGif from "./bubble-gum-test-tubes-and-flask.gif";
 import Image from "mui-image";
 
 const TitleText = styled(Typography)`
@@ -113,7 +114,7 @@ export default function Hero() {
           </TitleStack>
         </Grid>
         <Grid item xs={12} md={5} sx={{justifyContent: "center", alignItems: "center"}}>
-          <HeroImage src={fillerImg} style={{width: "80%", height: "80%"}}></HeroImage>
+          <HeroImage src={atomGif} style={{width: "90%", height: "90%"}}></HeroImage>
         </Grid>
       </Grid>
     /* </TitleBox> */
