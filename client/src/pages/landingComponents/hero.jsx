@@ -44,6 +44,7 @@ const GetStartedText = styled(Typography)`
     text-align: left;
     color: white;
     padding: 0vw 3vw 0vw 3vw;
+    text-transform: none;
   }
 `;
 
