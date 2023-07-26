@@ -1,15 +1,26 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import {
+  Box,
   Button,
   Typography,
+  Container,
   Stack,
+  Divider,
   Grid,
   FormHelperText,
   TextField,
 } from "@mui/material";
+import { motion } from "framer-motion";
+import CheckIcon from "@mui/icons-material/Check";
 import theme from "./Theme";
+import { useRadioGroup } from "@mui/material/RadioGroup";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const CardGrid = styled(Grid)`
   && {
@@ -31,6 +42,16 @@ const VertStack = styled(Stack)`
     width: 100%;
   }
 `;
+const SubtopicText = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+`;
 
 const QuestionText = styled(Typography)`
   && {
@@ -41,6 +62,24 @@ const QuestionText = styled(Typography)`
     text-align: left;
   }
 `;
+
+// const CustomRadio = styled(FormControlLabel)``;
+
+// const CheckmarkIcon = styled(CheckCircleIcon)`
+//   color: green;
+// `;
+
+// const Root = styled("div")(({ theme }) => ({
+//       [theme.breakpoints.down("xs")]: {
+//         alignItems: "flex-start",
+//       },
+//   }));
+
+// const formControlLabelStyle = {
+//     "& .MuiFormControlLabel-label": {
+//       fontSize: "1.4rem"
+//     }
+// }
 
 const TextFieldStyled = styled(TextField)`
   && {
@@ -66,11 +105,7 @@ export default function FillInBlank({ question }) {
       setHelperText("You got it!");
       setHelperColor("green");
       setDisable(true);
-    } else if (
-      value.toLowerCase() !== question.frqAnswer.toLowerCase() &&
-      value != null &&
-      value != ""
-    ) {
+    } else if (value.toLowerCase() !== question.frqAnswer.toLowerCase() && value != null && value != "") {
       setHelperText("Sorry, wrong answer. Try again!");
       setHelperColor("crimson");
     } else if (value == null || value == "") {
@@ -88,7 +123,9 @@ export default function FillInBlank({ question }) {
               <FormControl>
                 <TextFieldStyled
                   type={
-                    typeof question.frqCorrect === "number" ? "number" : "text"
+                    typeof question.frqCorrect === "number"
+                      ? "number"
+                      : "text"
                   }
                   placeholder="Type answer here"
                   variant="standard"

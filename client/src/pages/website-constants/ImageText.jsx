@@ -1,6 +1,16 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { Typography, Stack, Grid } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Container,
+  Stack,
+  Divider,
+  Grid,
+  ButtonGroup,
+} from "@mui/material";
+import { motion } from "framer-motion";
 import theme from "./Theme";
 import Image from "mui-image";
 
@@ -20,6 +30,7 @@ const SubGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
+    ${"" /* padding: 2rem; */}
     width: 100%;
   }
 `;
@@ -39,6 +50,7 @@ const DescriptionText = styled(Typography)`
 const SplitBoxesGrid = styled(Grid)`
   && {
     display: flex;
+    ${"" /* justify-content: center; */}
     align-items: center;
     font-size: 25px;
     height: 100%;
@@ -53,6 +65,7 @@ const Img = styled(Image)`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    ${"" /* padding: 1rem; */}
   }
 `;
 

@@ -1,4 +1,10 @@
-import { createTheme, responsiveFontSizes } from "@mui/material";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+  CssBaseline,
+  createGlobalStyle,
+} from "@mui/material";
 
 var theme = createTheme({
   typography: {

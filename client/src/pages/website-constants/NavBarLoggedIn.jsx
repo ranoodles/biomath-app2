@@ -16,7 +16,7 @@ import BiotechIcon from "@mui/icons-material/Biotech";
 const pages = ["Biotechnology", "Applied Math", "About Us"];
 const settings = ["Profile", "Logout"];
 
-function NavBar() {
+function NavBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 

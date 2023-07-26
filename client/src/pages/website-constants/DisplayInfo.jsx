@@ -61,6 +61,34 @@ const ListButtons = styled(Button)`
   }
 `;
 
+// const units = {
+//     unit1: {
+//         id: 1,
+//         lessons:[
+//             "rammywammy",
+//             "sweetie cupcake",
+//             "aditya ladoo"
+//         ]
+//     },
+//     unit2: {
+//         id: 2,
+//         lessons:[
+//             "hellooooo",
+//             "fadisfios",
+//             "heyyyyyyyy"
+//         ]
+//     }
+// };
+
+// const unit1 = {
+//     id: 1,
+//     lessons:[
+//         "rammywammy",
+//         "sweetie cupcake",
+//         "aditya ladoo"
+//     ]
+// }
+
 function DisplayInfo({ unit, handleLessonSelect }) {
   if (!unit) {
     return null;
@@ -68,9 +96,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
   return (
     <>
       <VertStack>
-        <TitleText variant="h2">
-          {unit.id}. {unit.name}
-        </TitleText>
+        <TitleText variant="h2">{unit.id}. {unit.name}</TitleText>
         <DescriptionText variant="h4">{unit.description}</DescriptionText>
         <ButtonGroup
           orientation="vertical"

@@ -1,12 +1,39 @@
 import React from "react";
 import Nav from "./website-constants/NavBarLoggedOut";
-import { Box, Button, Typography, Stack, Divider, Grid } from "@mui/material";
+import {
+  Paper,
+  Box,
+  Button,
+  Typography,
+  Container,
+  Stack,
+  Divider,
+  Grid,
+  Card,
+} from "@mui/material";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
+import { motion, useScroll } from "framer-motion";
+import { red, blue, green } from "@mui/material/colors";
 import ScienceIcon from "@mui/icons-material/Science";
+import CalculateIcon from "@mui/icons-material/Calculate";
 import { useNavigate } from "react-router-dom";
 import theme from "./website-constants/Theme.jsx";
+import { motion as threeDMotion } from "framer-motion-3d";
 import Image from "mui-image";
+
+const slides = [
+  "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg",
+  "https://res.cloudinary.com/demo/basketball_shot.jpg",
+  "https://i.ytimg.com/vi/PCwL3-hkKrg/maxresdefault.jpg",
+];
+
+const Root = styled("div")(({ theme }) => ({
+  [theme.breakpoints.down("xs")]: {
+    color: red[500],
+    visibility: "hidden",
+  },
+}));
 
 const BiomathText = styled(Typography)`
   && {
@@ -26,6 +53,7 @@ const TitleText = styled(Typography)`
     align-items: center;
     font-weight: 700;
     letter-spacing: .3rem;
+    ${"" /* font-size: 9vw; */}
     text-align: center;
     color: 'white';
 
@@ -44,6 +72,7 @@ const SubtitleText = styled(Typography)`
     display: flex;
     justify-content: center;
     align-items: center;
+    ${"" /* font-size: 25px; */}
     text-align: center;
   }
 `;
@@ -84,6 +113,7 @@ const SplitBoxesGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     font-size: 25px;
+    ${"" /* height: 70vh; */}
     gap: 4vw;
     padding-top: 3rem;
     padding-bottom: 0vw;
@@ -107,6 +137,7 @@ const LearnMoreButton = styled(Button)`
     justify-content: center;
     align-items: center;
     font-size: 25px;
+    ${"" /* background-color: white; */}
   }
 `;
 
@@ -115,6 +146,7 @@ const AppBenefitsHolderGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
+    ${"" /* height: 70vh; */}
     gap: 2vw;
     padding-top: 2vw;
     padding-bottom: 2vw;
@@ -128,6 +160,7 @@ const AppBenefitsGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
+    ${"" /* height: 70vh; */}
     gap: 2vw;
     padding-top: 2vw;
     padding-bottom: 2vw;
@@ -359,10 +392,7 @@ export default function Landing() {
           Our Mission
         </BiomathText>
         <OurMissionGrid container>
-          <OurMissionImgGrid
-            Item
-            xs={11}
-            sm={4}
+          <OurMissionImgGrid Item xs={11} sm={4}
             component={motion.div}
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -377,10 +407,7 @@ export default function Landing() {
               alt="Beakers with pipette"
             />
           </OurMissionImgGrid>
-          <OurMissionTextGrid
-            Item
-            xs={11}
-            sm={5}
+          <OurMissionTextGrid Item xs={11} sm={5}
             component={motion.div}
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}

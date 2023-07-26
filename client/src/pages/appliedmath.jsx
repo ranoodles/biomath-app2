@@ -1,9 +1,19 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import { Button, Typography, Stack, Grid } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Container,
+  Stack,
+  Divider,
+  Grid,
+} from "@mui/material";
+import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
+import { FormControl, TextField } from "@mui/material";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 import DisplayCard from "./website-constants/DisplayInfo.jsx";
 
@@ -45,6 +55,11 @@ const CardHolder = styled(Grid)`
     justify-content: center;
     align-items: center;
     height: 100vh;
+  }
+`;
+const ColoredLink = styled(Link)`
+  &:visited {
+    color: #068fff; /* Same color as the initial color */
   }
 `;
 
@@ -104,6 +119,7 @@ function BiotechnologyPage() {
   const navigate = useNavigate();
   const handleLessonSelect = (lessonDetails) => {
     setSelectedLessonId(lessonDetails.lesson_id);
+    console.log(lessonDetails);
     navigate("/appliedmath/" + lessonDetails.lesson_id);
   };
 
@@ -112,10 +128,11 @@ function BiotechnologyPage() {
       try {
         const res = await axios.get("http://localhost:8800/appliedmath");
         const units = res.data;
+        console.log(units, "jake");
         setUnitsList(units);
         setSelectedUnit(units[0]);
       } catch (err) {
-        console.log("Error rendering units");
+        console.log(err, "bobbby");
       }
     };
     fetchAllUnits();

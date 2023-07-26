@@ -19,7 +19,7 @@ const pages = [
   "Applied Math",
   "About Us",
   "Log In",
-  "Sign Up",
+  "Sign Up"
 ];
 // const settings = ['Profile', 'Logout'];
 
