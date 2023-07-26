@@ -83,7 +83,12 @@ export default function Hero() {
   return (
     // <TitleBox>
     <Grid container>
-      <Grid item xs={12} md={7}>
+      <Grid
+        item
+        xs={12}
+        md={7}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <TitleStack
           spacing={2}
           component={motion.div}
@@ -122,6 +127,5 @@ export default function Hero() {
         ></HeroImage>
       </Grid>
     </Grid>
-    /* </TitleBox> */
   );
 }
