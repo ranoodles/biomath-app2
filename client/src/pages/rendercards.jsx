@@ -19,7 +19,7 @@ const fetchAllLessons = async () => {
     }
     return lessons;
   } catch (err) {
-    console.log("err");
+    console.log(err);
     return [];
   }
 };

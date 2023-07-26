@@ -63,24 +63,6 @@ const QuestionText = styled(Typography)`
   }
 `;
 
-// const CustomRadio = styled(FormControlLabel)``;
-
-// const CheckmarkIcon = styled(CheckCircleIcon)`
-//   color: green;
-// `;
-
-// const Root = styled("div")(({ theme }) => ({
-//       [theme.breakpoints.down("xs")]: {
-//         alignItems: "flex-start",
-//       },
-//   }));
-
-// const formControlLabelStyle = {
-//     "& .MuiFormControlLabel-label": {
-//       fontSize: "1.4rem"
-//     }
-// }
-
 const TextFieldStyled = styled(TextField)`
   && {
     margin: 1rem;
@@ -105,10 +87,10 @@ export default function FillInBlank({ question }) {
       setHelperText("You got it!");
       setHelperColor("green");
       setDisable(true);
-    } else if (value.toLowerCase() !== question.frqAnswer.toLowerCase() && value != null && value != "") {
+    } else if (value.toLowerCase() !== question.frqAnswer.toLowerCase() && value !== null && value !== "") {
       setHelperText("Sorry, wrong answer. Try again!");
       setHelperColor("crimson");
-    } else if (value == null || value == "") {
+    } else if (value === null || value === "") {
       setHelperText("Please fill in an answer.");
       setHelperColor("default");
     }

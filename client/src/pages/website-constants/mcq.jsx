@@ -67,12 +67,6 @@ const CheckmarkIcon = styled(CheckCircleIcon)`
   color: green;
 `;
 
-// const Root = styled("div")(({ theme }) => ({
-//       [theme.breakpoints.down("xs")]: {
-//         alignItems: "flex-start",
-//       },
-//   }));
-
 const formControlLabelStyle = {
   "& .MuiFormControlLabel-label": {
     fontSize: "1.4rem",
@@ -102,7 +96,6 @@ export default function McqCard({ question }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(value);
     if (value === answerChoices[question.mcqCorrect - 1]) {
       setHelperText("You got it!");
       setError(false);

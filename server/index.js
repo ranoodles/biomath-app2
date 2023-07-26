@@ -13,10 +13,6 @@ const db = createConnection({
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.get("/test", (req, res) => {
   const q = "Select * FROM users";
   console.log("log: show table");

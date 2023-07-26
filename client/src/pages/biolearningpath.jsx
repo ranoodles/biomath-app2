@@ -117,7 +117,7 @@ function BioLearningPath() {
         const lessons = res.data;
         setLessonList(lessons);
       } catch (err) {
-        console.log("err");
+        console.log(err);
       }
     };
     fetchAllLessons();

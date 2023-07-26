@@ -59,7 +59,7 @@ const CardHolder = styled(Grid)`
 `;
 const ColoredLink = styled(Link)`
   &:visited {
-    color: #068fff; /* Same color as the initial color */
+    color: #068fff;
   }
 `;
 
@@ -119,7 +119,6 @@ function BiotechnologyPage() {
   const navigate = useNavigate();
   const handleLessonSelect = (lessonDetails) => {
     setSelectedLessonId(lessonDetails.lesson_id);
-    console.log(lessonDetails);
     navigate("/appliedmath/" + lessonDetails.lesson_id);
   };
 
@@ -128,11 +127,10 @@ function BiotechnologyPage() {
       try {
         const res = await axios.get("http://localhost:8800/appliedmath");
         const units = res.data;
-        console.log(units, "jake");
         setUnitsList(units);
         setSelectedUnit(units[0]);
       } catch (err) {
-        console.log(err, "bobbby");
+        console.log(err);
       }
     };
     fetchAllUnits();

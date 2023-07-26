@@ -72,7 +72,6 @@ const SubtitleText = styled(Typography)`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${"" /* font-size: 25px; */}
     text-align: center;
   }
 `;
@@ -113,7 +112,6 @@ const SplitBoxesGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     font-size: 25px;
-    ${"" /* height: 70vh; */}
     gap: 4vw;
     padding-top: 3rem;
     padding-bottom: 0vw;
@@ -137,7 +135,6 @@ const LearnMoreButton = styled(Button)`
     justify-content: center;
     align-items: center;
     font-size: 25px;
-    ${"" /* background-color: white; */}
   }
 `;
 
@@ -146,7 +143,6 @@ const AppBenefitsHolderGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${"" /* height: 70vh; */}
     gap: 2vw;
     padding-top: 2vw;
     padding-bottom: 2vw;
@@ -160,7 +156,6 @@ const AppBenefitsGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${"" /* height: 70vh; */}
     gap: 2vw;
     padding-top: 2vw;
     padding-bottom: 2vw;
@@ -471,7 +466,6 @@ export default function Landing() {
         {/* Start Journey Today */}
         <Box
           sx={{
-            // height: "40vh",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

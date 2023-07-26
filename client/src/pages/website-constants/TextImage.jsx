@@ -50,7 +50,6 @@ const DescriptionText = styled(Typography)`
 const SplitBoxesGrid = styled(Grid)`
   && {
     display: flex;
-    ${"" /* justify-content: center; */}
     align-items: center;
     font-size: 25px;
     height: 100%;

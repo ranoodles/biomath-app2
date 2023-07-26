@@ -39,7 +39,6 @@ const CardHolder = styled(Grid)`
   && {
     display: flex;
     justify-content: center;
-    ${"" /* align-items: center; */}
     height: 90vh;
     width: 80vw;
     background-color: #c5dff8;
@@ -117,7 +116,7 @@ function MathLearningPath() {
         const lessons = res.data;
         setLessonList(lessons);
       } catch (err) {
-        console.log("err");
+        console.log(err);
       }
     };
     fetchAllLessons();

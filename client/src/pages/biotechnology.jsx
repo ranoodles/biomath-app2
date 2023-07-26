@@ -119,7 +119,6 @@ function BiotechnologyPage() {
   const navigate = useNavigate();
   const handleLessonSelect = (lessonDetails) => {
     setSelectedLessonId(lessonDetails.lesson_id);
-    console.log(lessonDetails);
     navigate("/biotechnology/" + lessonDetails.lesson_id);
   };
 
@@ -128,11 +127,10 @@ function BiotechnologyPage() {
       try {
         const res = await axios.get("http://localhost:8800/biotechnology");
         const units = res.data;
-        console.log(units, "jake");
         setUnitsList(units);
         setSelectedUnit(units[0]);
       } catch (err) {
-        console.log(err, "bobbby");
+        console.log(err);
       }
     };
     fetchAllUnits();
