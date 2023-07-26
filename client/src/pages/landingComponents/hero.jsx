@@ -120,6 +120,5 @@ export default function Hero() {
           <HeroImage src={fillerImg} style={{width: "80%", height: "80%"}}></HeroImage>
         </Grid>
       </Grid>
-    </Grid>
   );
 }
