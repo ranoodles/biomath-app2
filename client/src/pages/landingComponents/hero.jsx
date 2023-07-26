@@ -60,7 +60,6 @@ const TitleBox = styled(Box)`
     display: flex;
     align-items: center;
     justify-content: center;
-    ${'' /* background-image: url("https://i.imgur.com/MJupkGx.png"); */}
     background-width: 100%;
     background-size: cover;
   }
