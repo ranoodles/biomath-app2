@@ -38,7 +38,7 @@ function NavBar(props) {
   return (
     <AppBar
       position="static"
-      sx={{ backgroundColor: "black", boxShadow: "none" }}
+      sx={{ backgroundColor: "transparent", boxShadow: "none" }}
     >
       <Container maxWidth="xxl">
         <Toolbar disableGutters>

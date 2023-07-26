@@ -56,11 +56,11 @@ const TitleStack = styled(Stack)`
 
 const TitleBox = styled(Box)`
   && {
-    height: 90vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("https://i.imgur.com/MJupkGx.png");
+    ${'' /* background-image: url("https://i.imgur.com/MJupkGx.png"); */}
     background-width: 100%;
     background-size: cover;
   }
