@@ -21,12 +21,7 @@ import { useNavigate } from "react-router-dom";
 import theme from "./website-constants/Theme.jsx";
 import { motion as threeDMotion } from "framer-motion-3d";
 import Image from "mui-image";
-
-const slides = [
-  "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg",
-  "https://res.cloudinary.com/demo/basketball_shot.jpg",
-  "https://i.ytimg.com/vi/PCwL3-hkKrg/maxresdefault.jpg",
-];
+import Hero from "./landingComponents/hero.jsx";
 
 const Root = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("xs")]: {
@@ -43,27 +38,6 @@ const BiomathText = styled(Typography)`
     font-weight: 700;
     margin-bottom: 3rem;
     text-align: center;
-  }
-`;
-
-const TitleText = styled(Typography)`
-  && {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    letter-spacing: .3rem;
-    ${"" /* font-size: 9vw; */}
-    text-align: center;
-    color: 'white';
-
-    final: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 2
-      }
-    }
   }
 `;
 
@@ -274,18 +248,6 @@ const CourseDescriptionText = [
   },
 ];
 
-const TitleBox = styled(Box)`
-  && {
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url("https://i.imgur.com/MJupkGx.png");
-    background-width: 100%;
-    background-size: cover;
-  }
-`;
-
 export default function Landing() {
   const navigate = useNavigate();
 
@@ -294,41 +256,7 @@ export default function Landing() {
       {/* Hero Section */}
       <ThemeProvider theme={theme} border="none">
         <Nav />
-        <TitleBox>
-          <TitleStack
-            spacing={2}
-            component={motion.div}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 3, ease: "easeInOut" }}
-          >
-            <Box component="span" sx={{ p: 5 }}>
-              <TitleText variant="h1" color="white">
-                BIOMATH
-              </TitleText>
-            </Box>
-            <SubtitleText
-              variant="h5"
-              xs={12}
-              sm={1}
-              sx={{
-                color: "white",
-              }}
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam.
-            </SubtitleText>
-            <SignupButtonTop
-              variant="contained"
-              onClick={() => {
-                navigate("/signup");
-              }}
-            >
-              Sign Up
-            </SignupButtonTop>
-          </TitleStack>
-        </TitleBox>
+        <Hero></Hero>
         {/* ========================================================================================================================================== */}
         {/* Our Courses */}
         <BiomathText
