@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import BiotechIcon from "@mui/icons-material/Biotech";
@@ -40,9 +41,9 @@ function NavBar(props) {
       position="static"
       sx={{ backgroundColor: "transparent", boxShadow: "none" }}
     >
-      <Container maxWidth="xxl">
+      <Grid item xs={11} sx={{ margin: "1.5rem 2rem 1rem 2rem", padding: "0 1rem 0 1rem", borderRadius: "20px", boxShadow: "5px 5px 18px #000000", background: "#6a519c" }}>
         <Toolbar disableGutters>
-          <BiotechIcon
+          {/* <BiotechIcon
             fontSize="large"
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
@@ -62,11 +63,29 @@ function NavBar(props) {
             }}
           >
             BIOMATH
+          </Typography> */}
+
+          <BiotechIcon sx={{ display: { xs: "flex" }, mr: 1 }} />
+          <Typography
+            variant="h4"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "flex" },
+              flexGrow: 1,
+              fontWeight: 700,
+              letterSpacing: ".1rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            BIOMATH
           </Typography>
 
           <Box
-            bgcolor="danger"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            sx={{ flexGrow: 0, display: { xs: "flex" } }}
           >
             <IconButton
               size="large"
@@ -92,7 +111,7 @@ function NavBar(props) {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: "block" },
               }}
             >
               {pages.map((page) => (
@@ -107,25 +126,8 @@ function NavBar(props) {
             </Menu>
           </Box>
 
-          <BiotechIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            BIOMATH
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          
+          {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -144,9 +146,9 @@ function NavBar(props) {
                 {page}
               </Button>
             ))}
-          </Box>
+          </Box> */}
         </Toolbar>
-      </Container>
+      </Grid>
     </AppBar>
   );
 }
