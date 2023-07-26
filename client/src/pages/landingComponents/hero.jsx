@@ -12,7 +12,7 @@ const TitleText = styled(Typography)`
     justify-content: flex-start;
     align-items: left;
     font-weight: 700;
-    ${'' /* letter-spacing: .3rem; */}
+    ${"" /* letter-spacing: .3rem; */}
     ${"" /* font-size: 9vw; */}
     text-align: left;
     color: 'white';
@@ -36,35 +36,37 @@ const SubtitleText = styled(Typography)`
     margin: 2rem 0rem;
   }
 `;
+const GetStartedText = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    color: white;
+  }
+`;
 
 const SignupButtonTop = styled(Button)`
   && {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
-    color: "#395B64";
-  }
+    background-image: linear-gradient(
+      to right,
+      #b200ff,
+      #a300ea,
+      #9500d5,
+      #8600c0,
+      #7800ac
+    );
+  background-size: cover;
 `;
 
 const TitleStack = styled(Stack)`
   && {
-    ${'' /* display: inline-block; */}
+    ${"" /* display: inline-block; */}
     justify-content: left;
     align-items: center;
     padding: 7rem 5rem 7rem 5rem;
-  }
-`;
-
-const TitleBox = styled(Box)`
-  && {
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    ${'' /* background-image: url("https://t3.ftcdn.net/jpg/03/44/67/38/360_F_344673825_6fU6IORyipkYpfU1mg2vmxtHxDToUO6Q.jpg"); */}
-    background-width: 100%;
-    background-size: cover;
   }
 `;
 
@@ -80,42 +82,46 @@ export default function Hero() {
   const navigate = useNavigate();
   return (
     // <TitleBox>
-      <Grid container>
-        <Grid item xs={12} md={7}>
-          <TitleStack
-            spacing={2}
-            component={motion.div}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 3, ease: "easeInOut" }}
-            sx={{ display: { xs: "flex", md: "inline-block" } }}
+    <Grid container>
+      <Grid item xs={12} md={7}>
+        <TitleStack
+          spacing={2}
+          component={motion.div}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 3, ease: "easeInOut" }}
+          sx={{ display: { xs: "flex", md: "inline-block" } }}
+        >
+          <TitleText variant="h2" color="white">
+            Be prepared for your educational career and beyond.
+          </TitleText>
+          <SubtitleText variant="h5" xs={12} sm={1}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </SubtitleText>
+          <SignupButtonTop
+            onClick={() => {
+              navigate("/signup");
+            }}
+            sx={{ borderRadius: "12px" }}
           >
-            <TitleText variant="h2" color="white">
-              Be prepared for your educational career and beyond.
-            </TitleText>
-            <SubtitleText
-              variant="h5"
-              xs={12}
-              sm={1}
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam.
-            </SubtitleText>
-            <SignupButtonTop
-              variant="contained"
-              onClick={() => {
-                navigate("/signup");
-              }}
-            >
-              Get Started
-            </SignupButtonTop>
-          </TitleStack>
-        </Grid>
-        <Grid item xs={12} md={5} sx={{justifyContent: "center", alignItems: "center"}}>
-          <HeroImage src={fillerImg} style={{width: "80%", height: "80%"}}></HeroImage>
-        </Grid>
+            <GetStartedText variant="h6">Get Started</GetStartedText>
+          </SignupButtonTop>
+        </TitleStack>
       </Grid>
+      <Grid
+        item
+        xs={12}
+        md={5}
+        sx={{ justifyContent: "center", alignItems: "center" }}
+      >
+        <HeroImage
+          src={fillerImg}
+          style={{ width: "80%", height: "80%" }}
+        ></HeroImage>
+      </Grid>
+    </Grid>
     /* </TitleBox> */
   );
 }
