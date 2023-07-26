@@ -1,24 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import {
-  Box,
-  Button,
-  Typography,
-  Container,
-  Stack,
-  Divider,
-  Grid,
-  FormHelperText,
-} from "@mui/material";
-import { motion } from "framer-motion";
-import CheckIcon from "@mui/icons-material/Check";
+import { Button, Typography, Stack, Grid, FormHelperText } from "@mui/material";
 import theme from "./Theme";
-import { useRadioGroup } from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const CardGrid = styled(Grid)`
@@ -40,16 +27,6 @@ const VertStack = styled(Stack)`
     width: 100%;
   }
 `;
-const SubtopicText = styled(Typography)`
-  && {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-align: left;
-  }
-`;
 
 const QuestionText = styled(Typography)`
   && {
@@ -62,16 +39,6 @@ const QuestionText = styled(Typography)`
 `;
 
 const CustomRadio = styled(FormControlLabel)``;
-
-const CheckmarkIcon = styled(CheckCircleIcon)`
-  color: green;
-`;
-
-// const Root = styled("div")(({ theme }) => ({
-//       [theme.breakpoints.down("xs")]: {
-//         alignItems: "flex-start",
-//       },
-//   }));
 
 const formControlLabelStyle = {
   "& .MuiFormControlLabel-label": {
@@ -86,7 +53,12 @@ export default function McqCard({ question }) {
   const [radioColor, setRadioColor] = React.useState("default");
   const [disable, setDisable] = React.useState(false);
 
-  const answerChoices = [question.mcqChoice1, question.mcqChoice2, question.mcqChoice3, question.mcqChoice4];
+  const answerChoices = [
+    question.mcqChoice1,
+    question.mcqChoice2,
+    question.mcqChoice3,
+    question.mcqChoice4,
+  ];
 
   React.useEffect(() => {
     setValue(null);
@@ -102,14 +74,16 @@ export default function McqCard({ question }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(value);
     if (value === answerChoices[question.mcqCorrect - 1]) {
       setHelperText("You got it!");
       setError(false);
       setRadioColor("success");
       setDisable(true);
       document.getElementById(value).style.color = "green";
-    } else if (value !== answerChoices[question.mcqCorrect - 1] && value != null) {
+    } else if (
+      value !== answerChoices[question.mcqCorrect - 1] &&
+      value != null
+    ) {
       document.getElementById(value).style.color = "crimson";
       setHelperText("Sorry, wrong answer. Try again!");
       setRadioColor("danger");
@@ -145,9 +119,7 @@ export default function McqCard({ question }) {
                               }
                               disabled={
                                 answerChoice !==
-                                answerChoices[
-                                  question.mcqCorrect - 1
-                                ]
+                                answerChoices[question.mcqCorrect - 1]
                                   ? disable
                                   : false
                               }

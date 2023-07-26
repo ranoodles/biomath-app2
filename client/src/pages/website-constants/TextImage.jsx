@@ -1,16 +1,6 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import {
-  Box,
-  Button,
-  Typography,
-  Container,
-  Stack,
-  Divider,
-  Grid,
-  ButtonGroup,
-} from "@mui/material";
-import { motion } from "framer-motion";
+import { Typography, Stack, Grid } from "@mui/material";
 import theme from "./Theme";
 import Image from "mui-image";
 
@@ -50,7 +40,6 @@ const DescriptionText = styled(Typography)`
 const SplitBoxesGrid = styled(Grid)`
   && {
     display: flex;
-    ${"" /* justify-content: center; */}
     align-items: center;
     font-size: 25px;
     height: 100%;
@@ -65,7 +54,6 @@ const Img = styled(Image)`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    ${"" /* padding: 1rem; */}
   }
 `;
 
@@ -85,9 +73,7 @@ function TextImage({ displayInfo }) {
           <SubGrid item xs={12} sm={6}>
             <VertStack>
               <TitleText variant="h2">{displayInfo.title}</TitleText>
-              <DescriptionText variant="h4">
-                {displayInfo.text}
-              </DescriptionText>
+              <DescriptionText variant="h4">{displayInfo.text}</DescriptionText>
             </VertStack>
           </SubGrid>
           <SubGrid item xs={12} sm={4}>

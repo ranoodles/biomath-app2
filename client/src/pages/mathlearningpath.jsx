@@ -1,39 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled, { ThemeProvider } from "styled-components";
-import {
-  Box,
-  Button,
-  Typography,
-  Container,
-  Stack,
-  Divider,
-  Grid,
-} from "@mui/material";
-import { motion } from "framer-motion";
+import { Button, Grid } from "@mui/material";
 import theme from "./website-constants/Theme.jsx";
-import { FormControl, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 import ImgText from "./website-constants/ImageText.jsx";
-import mcq from "./website-constants/mcq.jsx";
 import LeftIcon from "@mui/icons-material/ChevronLeft";
 import RightIcon from "@mui/icons-material/ChevronRight";
 import McqCard from "./website-constants/mcq.jsx";
 import TextImg from "./website-constants/TextImage.jsx";
 import FillInBlank from "./website-constants/fillinblank.jsx";
 import { useParams } from "react-router-dom";
-
-const HolderGrid = styled(Grid)`
-  && {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    padding-bottom: 3rem;
-    padding-top: 3rem;
-  }
-`;
 
 const CardHolder = styled(Grid)`
   && {
@@ -83,30 +60,8 @@ const ChevronButton = styled(Button)`
   }
 `;
 
-const mcqQuestion = [
-  {
-    question:
-      "Non deserunt esse aliquip quis occaecat ullamco ad. Sint occaecat velit enim aute sit in quis dolore esse. Nostrud ullamco nisi eu non minim qui eu exercitation ullamco tempor. Aliquip ad consectetur nisi exercitation eiusmod deserunt excepteur laborum deserunt ullamco anim culpa officia. Commodo sit cupidatat et laboris enim.",
-    correctAnswer: 0,
-    answerChoices: [
-      "Ea deserunt quis in deserunt sint aliqua consequat ut duis minim sunt ut.",
-      "Commodo officia quis magna esse nostrud minim occaecat elit minim ullamco consectetur culpa nostrud esse.",
-      "Pariatur voluptate proident labore excepteur velit cupidatat.",
-      "Ut velit aliquip elit est reprehenderit pariatur est nulla eiusmod fugiat tempor.",
-    ],
-  },
-];
-
-const fillInQuestion = [
-  {
-    question:
-      "Non deserunt esse aliquip quis occaecat ullamco ad. Sint occaecat velit enim aute sit in quis dolore esse. Nostrud ullamco nisi eu non minim qui eu exercitation ullamco tempor. Aliquip ad consectetur nisi exercitation eiusmod deserunt excepteur laborum deserunt ullamco anim culpa officia. Commodo sit cupidatat et laboris enim.",
-    correctAnswer: "rizzler",
-  },
-];
-
 function MathLearningPath() {
-  const {lessonid} = useParams(); 
+  const { lessonid } = useParams();
   const [cardNum, setCardNum] = useState(0);
   const [lessonList, setLessonList] = useState([]);
 
@@ -128,9 +83,8 @@ function MathLearningPath() {
           }
         }
         setLessonList(lessons);
-        console.log(lessons, "bob");
       } catch (err) {
-        console.log("err");
+        console.log("Error logging lessons");
       }
     };
     fetchAllLessons();
@@ -175,7 +129,7 @@ function MathLearningPath() {
           item
           sm={12}
           xs={12}
-          sx={{ alignItems: { xs: "flex-start", md: "center" },  }}
+          sx={{ alignItems: { xs: "flex-start", md: "center" } }}
         >
           <ChevronButton onClick={handleBackClick} disable="true">
             <LeftIcon style={{ color: "black", fontSize: "3rem" }} />

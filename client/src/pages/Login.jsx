@@ -1,16 +1,6 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import {
-  Box,
-  Button,
-  Typography,
-  Container,
-  Stack,
-  Divider,
-  Grid,
-  InputBase,
-} from "@mui/material";
-import { motion } from "framer-motion";
+import { Button, Typography, Stack, Divider, Grid } from "@mui/material";
 import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -19,7 +9,6 @@ import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 const SplitBoxesGrid = styled(Grid)`
   && {
     display: flex;
-    ${"" /* justify-content: center; */}
     align-items: center;
     font-size: 25px;
     height: 100vh;
@@ -33,7 +22,6 @@ const LayoutGrid = styled(Grid)`
     justify-content: left;
     align-items: left;
     font-size: 25px;
-    ${"" /* padding-bottom: 5rem; */}
     height: 100vh;
     padding: 1rem 2rem 1rem 2rem;
   }
@@ -56,21 +44,21 @@ const TextFieldStyled = styled(TextField)`
   }
   & .MuiOutlinedInput-root {
     & fieldset {
-      border-color: #7895cb; /* Replace 'red' with your desired color */
+      border-color: #7895cb;
     }
     &:hover fieldset {
-      border-color: #7895cb; /* Replace 'green' with your desired color on hover */
+      border-color: #7895cb;
     }
     &.Mui-focused fieldset {
-      border-color: #7895cb; /* Replace 'blue' with your desired color when focused */
+      border-color: #7895cb;
     }
   }
 `;
 
 const ColoredLink = styled(Link)`
-  color: #FFFFFF;
+  color: #ffffff;
   &:visited {
-    color: #FFFFFF; /* Same color as the initial color */
+    color: #ffffff;
   }
 `;
 
