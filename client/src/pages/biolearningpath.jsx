@@ -114,21 +114,8 @@ function BioLearningPath() {
     const fetchAllLessons = async () => {
       try {
         const res = await axios.get("http://localhost:8800/biocards");
-        const cardData = res.data;
-        const lessons = [];
-
-        var usedLessons = [];
-        for (var card = 0; card < cardData.length; card++) {
-          var curr_card = cardData[card];
-          if (usedLessons.includes(curr_card.lesson_id)) {
-            lessons[curr_card.lesson_id - 1].push(curr_card);
-          } else {
-            usedLessons.push(curr_card.lesson_id);
-            lessons.push([curr_card]);
-          }
-        }
+        const lessons = res.data;
         setLessonList(lessons);
-        console.log(lessons, "bob");
       } catch (err) {
         console.log("err");
       }

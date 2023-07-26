@@ -108,7 +108,19 @@ app.get("/biocards", (req, res) => {
   const q = "SELECT * FROM bio_cards";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
-    return res.json(data);
+    const cardData = data;
+    const lessons = [];
+    var usedLessons = [];
+    for (var card = 0; card < cardData.length; card++) {
+      var curr_card = cardData[card];
+      if (usedLessons.includes(curr_card.lesson_id)) {
+        lessons[curr_card.lesson_id - 1].push(curr_card);
+      } else {
+        usedLessons.push(curr_card.lesson_id);
+        lessons.push([curr_card]);
+      }
+    }
+    return res.json(lessons);
   });
 });
 
@@ -116,7 +128,19 @@ app.get("/mathcards", (req, res) => {
   const q = "SELECT * FROM math_cards";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
-    return res.json(data);
+    const cardData = data;
+    const lessons = [];
+    var usedLessons = [];
+    for (var card = 0; card < cardData.length; card++) {
+      var curr_card = cardData[card];
+      if (usedLessons.includes(curr_card.lesson_id)) {
+        lessons[curr_card.lesson_id - 1].push(curr_card);
+      } else {
+        usedLessons.push(curr_card.lesson_id);
+        lessons.push([curr_card]);
+      }
+    }
+    return res.json(lessons);
   });
 });
 
