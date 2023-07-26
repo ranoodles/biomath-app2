@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import fillerImg from "./undraw_lightbulb_moment_re_ulyo.svg";
+import atomGif from "./bubble-gum-test-tubes-and-flask.gif";
 import Image from "mui-image";
 
 const TitleText = styled(Typography)`
@@ -84,50 +85,41 @@ export default function Hero() {
   const navigate = useNavigate();
   return (
     // <TitleBox>
-    <Grid container>
-      <Grid
-        item
-        xs={12}
-        md={7}
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
-        <TitleStack
-          spacing={2}
-          component={motion.div}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 3, ease: "easeInOut" }}
-          sx={{ display: { xs: "flex", md: "inline-block" } }}
-        >
-          <TitleText variant="h2" color="white">
-            Be prepared for your educational career and beyond.
-          </TitleText>
-          <SubtitleText variant="h5" xs={12} sm={1}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam.
-          </SubtitleText>
-          <SignupButtonTop
-            onClick={() => {
-              navigate("/signup");
-            }}
-            sx={{ borderRadius: "12px" }}
+      <Grid container>
+        <Grid item xs={12} md={7} sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+          <TitleStack
+            spacing={2}
+            component={motion.div}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 3, ease: "easeInOut" }}
+            sx={{ display: { xs: "flex", md: "inline-block" } }}
           >
-            <GetStartedText variant="h6">Get Started</GetStartedText>
-          </SignupButtonTop>
-        </TitleStack>
+            <TitleText variant="h2" color="white">
+              Be prepared for your educational career and beyond.
+            </TitleText>
+            <SubtitleText
+              variant="h5"
+              xs={12}
+              sm={1}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+              minim veniam.
+            </SubtitleText>
+            <SignupButtonTop
+              variant="contained"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              Get Started
+            </SignupButtonTop>
+          </TitleStack>
+        </Grid>
+        <Grid item xs={12} md={5} sx={{justifyContent: "center", alignItems: "center"}}>
+          <HeroImage src={fillerImg} style={{width: "80%", height: "80%"}}></HeroImage>
+        </Grid>
       </Grid>
-      <Grid
-        item
-        xs={12}
-        md={5}
-        sx={{ justifyContent: "center", alignItems: "center" }}
-      >
-        <HeroImage
-          src={fillerImg}
-          style={{ width: "80%", height: "80%" }}
-        ></HeroImage>
-      </Grid>
-    </Grid>
   );
 }
