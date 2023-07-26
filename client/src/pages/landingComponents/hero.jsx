@@ -59,6 +59,7 @@ const SignupButtonTop = styled(Button)`
       #7800ac
     );
   background-size: cover;
+  button:focus { border: none;};
 `;
 
 const TitleStack = styled(Stack)`
