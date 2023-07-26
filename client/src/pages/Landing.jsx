@@ -354,6 +354,7 @@ export default function Landing() {
               item
               xs={11}
               sm={5}
+              key={CourseCard.courseName}
               sx={{ backgroundColor: "skyblue" }}
               component={motion.div}
               initial={{ opacity: 0, scale: 0 }}
@@ -392,7 +393,10 @@ export default function Landing() {
           Our Mission
         </BiomathText>
         <OurMissionGrid container>
-          <OurMissionImgGrid Item xs={11} sm={4}
+          <OurMissionImgGrid
+            item
+            xs={11}
+            sm={4}
             component={motion.div}
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -407,7 +411,10 @@ export default function Landing() {
               alt="Beakers with pipette"
             />
           </OurMissionImgGrid>
-          <OurMissionTextGrid Item xs={11} sm={5}
+          <OurMissionTextGrid
+            Item
+            xs={11}
+            sm={5}
             component={motion.div}
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
