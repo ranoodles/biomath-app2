@@ -13,7 +13,7 @@ const TitleText = styled(Typography)`
     justify-content: flex-start;
     align-items: left;
     font-weight: 700;
-    ${'' /* letter-spacing: .3rem; */}
+    ${"" /* letter-spacing: .3rem; */}
     ${"" /* font-size: 9vw; */}
     text-align: left;
     color: 'white';
@@ -37,35 +37,38 @@ const SubtitleText = styled(Typography)`
     margin: 2rem 0rem;
   }
 `;
+const GetStartedText = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    color: white;
+  }
+`;
 
 const SignupButtonTop = styled(Button)`
   && {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
-    color: "#395B64";
-  }
+    background-image: linear-gradient(
+      to right,
+      #b200ff,
+      #a300ea,
+      #9500d5,
+      #8600c0,
+      #7800ac
+    );
+  background-size: cover;
+  button:focus { border: none;};
 `;
 
 const TitleStack = styled(Stack)`
   && {
-    ${'' /* display: inline-block; */}
+    ${"" /* display: inline-block; */}
     justify-content: left;
     align-items: center;
     padding: 7rem 5rem 7rem 5rem;
-  }
-`;
-
-const TitleBox = styled(Box)`
-  && {
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    ${'' /* background-image: url("https://t3.ftcdn.net/jpg/03/44/67/38/360_F_344673825_6fU6IORyipkYpfU1mg2vmxtHxDToUO6Q.jpg"); */}
-    background-width: 100%;
-    background-size: cover;
   }
 `;
 
@@ -114,9 +117,9 @@ export default function Hero() {
           </TitleStack>
         </Grid>
         <Grid item xs={12} md={5} sx={{justifyContent: "center", alignItems: "center"}}>
-          <HeroImage src={atomGif} style={{width: "90%", height: "90%"}}></HeroImage>
+          <HeroImage src={fillerImg} style={{width: "80%", height: "80%"}}></HeroImage>
         </Grid>
       </Grid>
-    /* </TitleBox> */
+    </Grid>
   );
 }
