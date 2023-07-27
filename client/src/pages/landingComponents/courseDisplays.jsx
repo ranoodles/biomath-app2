@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import ScienceIcon from "@mui/icons-material/Science";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import scienceImg from "./scientist.svg"
+import mathImg from "./mathematician.svg"
+import Image from "mui-image";
 
 const Title = styled(Typography)`
   && {
@@ -25,6 +27,7 @@ const TitleStack = styled(Stack)`
     justify-content: center;
     align-items: center;
     padding: 7rem 5rem 7rem 5rem;
+    background-color: transparent;
   }
 `;
 
@@ -90,6 +93,7 @@ const CourseDescriptionText = [
     color: "#C5DFF8",
     color2: "#7895CB",
     linksite: "/appliedmath",
+    backgroundImage: mathImg
   },
 ];
 
@@ -102,6 +106,7 @@ const DescriptionText = styled(Typography)`
     padding-bottom: 2rem;
     color: white;
     transition: 0.25s all ease-in-out;
+    zIndex:3;
   }
 `;
 
@@ -144,10 +149,12 @@ export default function CourseDisplay() {
             role={CourseCard.key}
             sx={{ 
               cursor: "pointer", 
-              backgroundImage: "url(" + CourseCard.backgroundImage + ")", 
-              backgroundRepeat: "no-repeat", 
-              backgroundPosition: "center center", 
+              // backgroundImage: "url(" + CourseCard.backgroundImage + ")", 
+              // backgroundRepeat: "no-repeat", 
+              // backgroundPosition: "center center", 
               opacity: 0.5,
+              zIndex: 1,
+              background: "linear-gradient(to right top, #535EAB, #8351C2)"
             }}
             component={motion.div}
             initial={{ opacity: 0, scale: 0 }}
@@ -168,18 +175,19 @@ export default function CourseDisplay() {
             onMouseOver={hoverOn}
             onMouseOut={hoverOff}
           >
-            <TitleStack>
+            <Image sx={{zIndex:2, opacity:0.5}} src={CourseCard.backgroundImage}></Image>
+            <TitleStack sx={{zIndex: 3}}>
               {CourseCard.key === "bio" ?
                   <ScienceIcon
                     style={{ fontSize: "5rem" }}
                     id={CourseCard.key}
-                    sx={{ paddingBottom: "2rem", color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
+                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
                   />
                 :
                   <CalculateIcon
                     style={{ fontSize: "5rem" }}
                     id={CourseCard.key}
-                    sx={{ paddingBottom: "2rem", color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
+                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
                   />
               }
               <Title variant="h3">{CourseCard.courseName}</Title>
