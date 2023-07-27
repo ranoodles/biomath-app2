@@ -23,12 +23,18 @@ const SubtitleText = styled(Typography)`
 
 const SignupButtonTop = styled(Button)`
   && {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px;
+    background-color: transparent;
+    border: 2px solid;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 white;
+    font-size: 20px;
     margin-top: 2rem;
-    color: "#395B64";
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    &:hover {
+      box-shadow: inset 400px 0 0 0 #b200ff;
+    }
   }
 `;
 
@@ -41,6 +47,7 @@ export default function JoinNow() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          padding: "5rem 0rem 3rem 0rem"
         }}
       >
         <TitleStack spacing={2}>

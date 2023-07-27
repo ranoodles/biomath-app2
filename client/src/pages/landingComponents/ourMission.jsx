@@ -10,6 +10,7 @@ const OurMissionGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     padding: 0rem 0rem 0rem 0rem;
+    gap: 2vw;
   }
 `;
 
@@ -71,7 +72,7 @@ export default function OurMission() {
         <OurMissionImgGrid
           item
           xs={11}
-          sm={4}
+          md={4}
           component={motion.div}
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -89,7 +90,7 @@ export default function OurMission() {
         <OurMissionTextGrid
           Item
           xs={11}
-          sm={5}
+          md={5}
           component={motion.div}
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}

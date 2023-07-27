@@ -1,10 +1,11 @@
-import React from "react";
+import {useState} from "react";
 import { Box, Grid, Button, Typography, Stack, Divider } from "@mui/material";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import ScienceIcon from "@mui/icons-material/Science";
 import CalculateIcon from "@mui/icons-material/Calculate";
+import scienceImg from "./scientist.svg"
 
 const Title = styled(Typography)`
   && {
@@ -12,8 +13,9 @@ const Title = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 2vw;
     text-align: center;
+    color: white;
   }
 `;
 
@@ -32,9 +34,9 @@ const SplitBoxesGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     font-size: 25px;
-    gap: 4vw;
+    gap: 6vw;
     padding-top: 3rem;
-    padding-bottom: 0vw;
+    padding-bottom: 3rem;
   }
 `;
 
@@ -43,9 +45,8 @@ const SubjectDescriptionGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
     border-radius: 30px;
-    margin-top: 0rem;
+    height: 80vh;
   }
 `;
 
@@ -60,27 +61,30 @@ const LearnMoreButton = styled(Button)`
 
 const CourseDescriptionText = [
   {
-    courseName: "Biotechnology",
+    key: "bio",
+    courseName: "Synthetic Biology",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     icon: (
       <ScienceIcon
         style={{ fontSize: "5rem" }}
-        sx={{ paddingBottom: "2rem" }}
+        sx={{ paddingBottom: "2rem", color: "white" }}
       />
     ),
     color: "#C5DFF8",
     color2: "#7895CB",
     linksite: "/biotechnology",
+    backgroundImage: scienceImg
   },
   {
+    key: "math",
     courseName: "Applied Math",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     icon: (
       <CalculateIcon
         style={{ fontSize: "5rem" }}
-        sx={{ paddingBottom: "2rem" }}
+        sx={{ paddingBottom: "2rem", color: "white" }}
       />
     ),
     color: "#C5DFF8",
@@ -96,11 +100,32 @@ const DescriptionText = styled(Typography)`
     align-items: center;
     font-size: 20px;
     padding-bottom: 2rem;
+    color: white;
+    transition: 0.25s all ease-in-out;
   }
 `;
 
 export default function CourseDisplay() {
   const navigate = useNavigate();
+  const [hovering, setHovering] = useState(false);
+
+  const hoverOn = (event) => {
+    const key = event.currentTarget.role;
+    const collection = document.querySelectorAll("#" + key);
+    collection.forEach((item) => {
+      item.style.opacity = "1";
+    })
+    console.log(collection);
+  };
+
+  const hoverOff = (event) => {
+    const key = event.currentTarget.role;
+    const collection = document.querySelectorAll("#" + key);
+    collection.forEach((item) => {
+      item.style.opacity = "0";
+    })
+  };
+
   return (
     <>
       <Title variant="h3" color="white" paddingTop="5rem" marginBotton="0rem">
@@ -114,10 +139,16 @@ export default function CourseDisplay() {
         {CourseDescriptionText.map((CourseCard) => (
           <SubjectDescriptionGrid
             item
-            xs={11}
-            sm={5}
-            key={CourseCard.courseName}
-            sx={{ backgroundColor: "skyblue" }}
+            xs={10}
+            md={4.5}
+            role={CourseCard.key}
+            sx={{ 
+              cursor: "pointer", 
+              backgroundImage: "url(" + CourseCard.backgroundImage + ")", 
+              backgroundRepeat: "no-repeat", 
+              backgroundPosition: "center center", 
+              opacity: 0.5,
+            }}
             component={motion.div}
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{
@@ -130,20 +161,29 @@ export default function CourseDisplay() {
               delay: 0,
               ease: [0, 0.71, 0.2, 1.01],
             }}
-            whileHover={{ scale: 1.05, backgroundColor: CourseCard.color2 }}
+            whileHover={{ scale: 1.1, background: "linear-gradient(to right top, #354083, #6533A4)" }}
+            onClick={() => {
+              navigate(CourseCard.linksite);
+            }}
+            onMouseOver={hoverOn}
+            onMouseOut={hoverOff}
           >
             <TitleStack>
+              {CourseCard.key === "bio" ?
+                  <ScienceIcon
+                    style={{ fontSize: "5rem" }}
+                    id={CourseCard.key}
+                    sx={{ paddingBottom: "2rem", color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
+                  />
+                :
+                  <CalculateIcon
+                    style={{ fontSize: "5rem" }}
+                    id={CourseCard.key}
+                    sx={{ paddingBottom: "2rem", color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
+                  />
+              }
               <Title variant="h3">{CourseCard.courseName}</Title>
-              {CourseCard.icon}
-              <DescriptionText>{CourseCard.description}</DescriptionText>
-              <LearnMoreButton
-                variant="contained"
-                onClick={() => {
-                  navigate(CourseCard.linksite);
-                }}
-              >
-                Learn More
-              </LearnMoreButton>
+              <DescriptionText id={CourseCard.key} variant="h5" sx={{opacity: 0}}>{CourseCard.description}</DescriptionText>
             </TitleStack>
           </SubjectDescriptionGrid>
         ))}

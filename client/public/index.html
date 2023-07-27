@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      #root {
+        background: linear-gradient(to right, #273078, #4A0586, #1f0849); 
+        animation: gradient 10s ease infinite;
+        background-size: 400% 400%;
+      }
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+    </style>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,7 +46,7 @@
   </head>
   <body style="margin: 0 0 0 0; padding: 0 0 0 0">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root" style="background: linear-gradient(to left bottom, #273078, #2b2c7c, #30277f, #372182, #3f1984, #3f1480, #3f0f7d, #3f0879, #370a6f, #300a65, #290a5c, #230a52)"></div>
+    <div id="root"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

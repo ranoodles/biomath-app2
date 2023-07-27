@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import fillerImg from "./undraw_lightbulb_moment_re_ulyo.svg";
 import atomGif from "./bubble-gum-test-tubes-and-flask.gif";
+import nodeGif from "./taxi-molecule.gif";
 import Image from "mui-image";
 
 const TitleText = styled(Typography)`
@@ -49,19 +50,17 @@ const GetStartedText = styled(Typography)`
 
 const SignupButtonTop = styled(Button)`
   && {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(
-      to right,
-      #b200ff,
-      #a300ea,
-      #9500d5,
-      #8600c0,
-      #7800ac
-    );
-  background-size: cover;
-  button:focus { border: none;};
+    background-color: transparent;
+    border: 2px solid;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 white;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    &:hover {
+      box-shadow: inset 400px 0 0 0 #b200ff;
+    }
+  }
 `;
 
 const TitleStack = styled(Stack)`
@@ -125,8 +124,8 @@ export default function Hero() {
         sx={{ justifyContent: "center", alignItems: "center" }}
       >
         <HeroImage
-          src={fillerImg}
-          style={{ width: "80%", height: "80%" }}
+          src={nodeGif}
+          style={{ width: "40vw", height: "40vw" }}
         ></HeroImage>
       </Grid>
     </Grid>
