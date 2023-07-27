@@ -50,6 +50,9 @@ const SubjectDescriptionGrid = styled(Grid)`
     align-items: center;
     border-radius: 30px;
     height: 80vh;
+    &:after {
+      background: "linear-gradient(to right top, #535EAB, #8351C2)";
+    }
   }
 `;
 
@@ -149,12 +152,11 @@ export default function CourseDisplay() {
             role={CourseCard.key}
             sx={{ 
               cursor: "pointer", 
-              // backgroundImage: "url(" + CourseCard.backgroundImage + ")", 
-              // backgroundRepeat: "no-repeat", 
-              // backgroundPosition: "center center", 
+              backgroundImage: "url(" + CourseCard.backgroundImage + ")", 
+              backgroundRepeat: "no-repeat", 
+              backgroundPosition: "center center", 
               opacity: 0.5,
-              zIndex: 1,
-              background: "linear-gradient(to right top, #535EAB, #8351C2)"
+              // background: "linear-gradient(to right top, #535EAB, #8351C2)"
             }}
             component={motion.div}
             initial={{ opacity: 0, scale: 0 }}
@@ -175,8 +177,8 @@ export default function CourseDisplay() {
             onMouseOver={hoverOn}
             onMouseOut={hoverOff}
           >
-            <Image sx={{zIndex:2, opacity:0.5}} src={CourseCard.backgroundImage}></Image>
-            <TitleStack sx={{zIndex: 3}}>
+            {/* <Image sx={{zIndex:1, opacity:0.5, position: "relative"}} src={CourseCard.backgroundImage}></Image> */}
+            <TitleStack sx={{zIndex: 10, position: "relative"}}>
               {CourseCard.key === "bio" ?
                   <ScienceIcon
                     style={{ fontSize: "5rem" }}
