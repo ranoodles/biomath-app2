@@ -143,7 +143,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
             item
             variant="text"
             orientation="vertical"
-            color="secondary"
+            color="primary"
             sx={{ color: "white" }}
           >
             {unit.lessons.map((lesson) => (

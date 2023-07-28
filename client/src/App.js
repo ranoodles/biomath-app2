@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import theme from "./pages/website-constants/Theme.jsx";
+import Intro from "./pages/website-constants/intro.jsx";
 
 const MathLearningPath = lazy(() => import("./pages/mathlearningpath.jsx"));
 const BioLearningPath = lazy(() => import("./pages/biolearningpath.jsx"));
@@ -23,6 +24,10 @@ function App() {
               <Route
                 path="/biotechnology/:lessonid"
                 element={<BioLearningPath />}
+              />
+              <Route
+                path="/test"
+                element={<Intro />}
               />
               <Route
                 path="/appliedmath/:lessonid"

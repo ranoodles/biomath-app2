@@ -73,6 +73,36 @@ const formControlLabelStyle = {
   },
 };
 
+
+const DisplayText = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: center;
+    color: black;
+    padding: 0.2rem;
+    font-weight: 500;
+    text-transform: none;
+  }
+`;
+
+const CheckButton = styled(Button)`
+  && {
+    background-color: transparent;
+    border: 2px solid black;
+    width: 5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #03add5;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    &:hover {
+      box-shadow: inset 400px 0 0 0 #03add5;
+      border-color: white;
+    }
+  }
+`;
+
 export default function McqCard({ question }) {
   const [value, setValue] = React.useState(null);
   const [error, setError] = React.useState(false);
@@ -103,7 +133,7 @@ export default function McqCard({ question }) {
       setDisable(true);
       document.getElementById(value).style.color = "green";
     } else if (value !== answerChoices[question.mcqCorrect - 1] && value != null) {
-      document.getElementById(value).style.color = "crimson";
+      document.getElementById(value).style.color = "darkred";
       setHelperText("Sorry, wrong answer. Try again!");
       setRadioColor("danger");
       setError(true);
@@ -113,6 +143,7 @@ export default function McqCard({ question }) {
       setError(true);
     }
   };
+  
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -160,23 +191,19 @@ export default function McqCard({ question }) {
                       radioColor === "success"
                         ? "green"
                         : radioColor === "danger"
-                        ? "crimson"
+                        ? "darkred"
                         : "default",
                     fontSize: "1.5rem",
                   }}
                 >
                   {helperText}
                 </FormHelperText>
-                <Button
+                <CheckButton
                   variant="contained"
                   type="submit"
-                  sx={{
-                    marginTop: "2rem",
-                    width: "80px",
-                  }}
                 >
-                  Check
-                </Button>
+                  <DisplayText variant="h6">Check</DisplayText>
+                </CheckButton>
               </FormControl>
             </form>
           </VertStack>

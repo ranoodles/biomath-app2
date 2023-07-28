@@ -75,16 +75,44 @@ const VertStack = styled(Stack)`
   }
 `;
 
+const SignUpButton = styled(Button)`
+  && {
+    background-color: transparent;
+    border: 2px solid;
+    width: 7rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #03add5;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    &:hover {
+      box-shadow: inset 400px 0 0 0 #03add5;
+    }
+  }
+`;
+
+const GetStartedText = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: center;
+    color: white;
+    ${'' /* padding: 0.05rem; */}
+    font-weight: 500;
+    text-transform: none;
+  }
+`;
+
 function Signup() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavBar></NavBar>
+        {/* <NavBar></NavBar> */}
         <SplitBoxesGrid
           container
           divider={<Divider orientation="vertical" flexItem />}
         >
-          <LayoutGrid item xs={12} sm={7} sx={{ }}>
+          <LayoutGrid item xs={12} sm={7}>
             <VertStack>
               <Typography
                 variant="h2"
@@ -107,6 +135,7 @@ function Signup() {
                     input: { color: "#A0BFE0" },
                     label: { color: "#A0BFE0" },
                   }}
+                  color="secondary"
                 />
                 <TextFieldStyled
                   type="email"
@@ -116,6 +145,7 @@ function Signup() {
                     input: { color: "#A0BFE0" },
                     label: { color: "#A0BFE0" },
                   }}
+                  color="secondary"
                 />
                 <TextFieldStyled
                   type="password"
@@ -125,6 +155,7 @@ function Signup() {
                     input: { color: "#A0BFE0" },
                     label: { color: "#A0BFE0" },
                   }}
+                  color="secondary"
                 />
                 <TextFieldStyled
                   type="password"
@@ -134,26 +165,27 @@ function Signup() {
                     input: { color: "#A0BFE0" },
                     label: { color: "#A0BFE0" },
                   }}
+                  color="secondary"
                 />
                 <Typography
                   sx={{
                     textAlign: "left",
                     margin: "0 1rem 1rem 1rem",
                     fontWeight: 200,
-                    fontSize: 15,
+                    fontSize: 20,
                     color: "#A0BFE0",
                   }}
+                  color="secondary"
                 >
                   Already have an account?{" "}
                   <ColoredLink to="/login"> Click Here</ColoredLink>
                 </Typography>
-                <Button
+                <SignUpButton
                   variant="contained"
                   type="submit"
-                  sx={{ margin: "1rem", width: "100px" }}
                 >
-                  Sign Up
-                </Button>
+                  <GetStartedText variant="h6">Sign Up</GetStartedText>
+                </SignUpButton>
               </FormControl>
             </VertStack>
           </LayoutGrid>

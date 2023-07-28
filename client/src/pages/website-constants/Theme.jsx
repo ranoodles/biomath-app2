@@ -21,11 +21,17 @@ var theme = createTheme({
     background: {
       default: "#000000",
     },
-    secondary: {
+    primary: {
       light: '#ffffff',
       main: '#ffffff',
       dark: '#ffffff',
       contrastText: '#ffffff',
+    },
+    secondary: {
+      light: '#03add5',
+      main: '#03add5',
+      dark: '#03add5',
+      contrastText: '#03add5',
     },
   },
 });

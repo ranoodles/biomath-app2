@@ -71,6 +71,35 @@ const TextFieldStyled = styled(TextField)`
   }
 `;
 
+const DisplayText = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: center;
+    color: black;
+    padding: 0.2rem;
+    font-weight: 500;
+    text-transform: none;
+  }
+`;
+
+const CheckButton = styled(Button)`
+  && {
+    background-color: transparent;
+    border: 2px solid black;
+    width: 5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #03add5;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    &:hover {
+      box-shadow: inset 400px 0 0 0 #03add5;
+      border-color: white;
+    }
+  }
+`;
+
 export default function FillInBlank({ question }) {
   const [value, setValue] = React.useState(null);
   const [helperText, setHelperText] = React.useState(null);
@@ -89,7 +118,7 @@ export default function FillInBlank({ question }) {
       setDisable(true);
     } else if (value.toLowerCase() !== question.frqAnswer.toLowerCase() && value !== null && value !== "") {
       setHelperText("Sorry, wrong answer. Try again!");
-      setHelperColor("crimson");
+      setHelperColor("darkred");
     } else if (value === null || value === "") {
       setHelperText("Please fill in an answer.");
       setHelperColor("default");
@@ -126,16 +155,12 @@ export default function FillInBlank({ question }) {
                 >
                   {helperText}
                 </FormHelperText>
-                <Button
+                <CheckButton
                   variant="contained"
                   type="submit"
-                  sx={{
-                    marginTop: "2rem",
-                    width: "80px",
-                  }}
                 >
-                  Check
-                </Button>
+                  <DisplayText variant="h6">Check</DisplayText>
+                </CheckButton>
               </FormControl>
             </form>
           </VertStack>

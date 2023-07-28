@@ -69,7 +69,9 @@ const TitleStack = styled(Stack)`
     ${"" /* display: inline-block; */}
     justify-content: left;
     align-items: center;
-    padding: 7rem 0rem 7rem 5rem;
+    padding-top: 7rem;
+    padding-bottom: 7rem; 
+    padding-left: 5rem;
   }
 `;
 
@@ -98,7 +100,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 3, ease: "easeInOut" }}
-          sx={{ display: { xs: "flex", md: "inline-block" } }}
+          sx={{ display: { xs: "flex", md: "inline-block" }, paddingRight: {xs: "5rem", md: "0rem"} }}
         >
           <TitleText variant="h2" color="white">
             Be prepared for your educational career and beyond.
