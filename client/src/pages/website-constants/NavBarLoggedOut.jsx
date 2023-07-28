@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import BiotechIcon from "@mui/icons-material/Functions";
+import BiotechIcon from "@mui/icons-material/Biotech";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -67,12 +67,12 @@ const SignupButtonTop = styled(Button)`
     background-color: transparent;
     border: 2px solid;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 white;
+    box-shadow: inset 0 0 0 0 #03add5;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
     &:hover {
-      box-shadow: inset 400px 0 0 0 #b200ff;
+      box-shadow: inset 400px 0 0 0 #03add5;
     }
   }
 `;
@@ -81,12 +81,12 @@ const LoginButtonTop = styled(Button)`
   && {
     background-color: transparent;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 white;
+    box-shadow: inset 0 0 0 0 #03add5;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
     &:hover {
-      box-shadow: inset 400px 0 0 0 #b200ff;
+      box-shadow: inset 400px 0 0 0 #03add5;
     }
   }
 `;
@@ -136,7 +136,7 @@ const LoginButtonTop = styled(Button)`
                 textDecoration: "none",
               }}
             >
-              XPLORIFY
+              BIOMATH
             </Typography>
           </div>
           <Box sx={{ display: { xs: "none", md: "flex" }, gap:"2rem" }}>

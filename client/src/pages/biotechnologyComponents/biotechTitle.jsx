@@ -19,8 +19,8 @@ const TitleText = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
     text-align: center;
     color: 'white';
 
@@ -38,8 +38,8 @@ export default function BiotechHeader() {
   return (
     <>
       <NavBar />
-      <TitleText variant="h1" sx={{ color: "white" }}>
-        Biotechnology
+      <TitleText variant="h1" sx={{ color: "#03add5" }}>
+        Synthetic Biology
       </TitleText>
     </>
   );

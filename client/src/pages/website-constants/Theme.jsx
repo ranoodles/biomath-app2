@@ -21,6 +21,12 @@ var theme = createTheme({
     background: {
       default: "#000000",
     },
+    secondary: {
+      light: '#ffffff',
+      main: '#ffffff',
+      dark: '#ffffff',
+      contrastText: '#ffffff',
+    },
   },
 });
 

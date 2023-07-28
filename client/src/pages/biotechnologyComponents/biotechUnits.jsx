@@ -14,6 +14,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { motion } from "framer-motion";
+import theme from "../website-constants/Theme";
 
 const TitleText = styled(Typography)`
   && {
@@ -111,33 +112,55 @@ function DisplayInfo({ unit, handleLessonSelect }) {
   }
   return (
     <>
-      <HolderGrid container>
-        <VertStack item>
-          <TitleText variant="h2" xs={{ fontSize: "20px" }}>
-            {unit.id}. {unit.name}
-          </TitleText>
-          <DescriptionText item variant="h4">
-            {unit.description}
-          </DescriptionText>
-          <ButtonHolderGroup
+      <ThemeProvider theme={theme} border="none">
+        <HolderGrid container>
+          <VertStack
             item
-            aria-label="vertical contained button group"
-            variant="text"
-            orientation="vertical"
-            sx={{ color: "#4E8397" }}
+            component={motion.div}
+            viewport={{ once: true }}
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+            }}
+            transition={{
+              duration: 0.8,
+              delay: 0,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+            whileHover={{
+              scale: 1.1,
+              background: "linear-gradient(to right top, #354083, #6533A4)",
+            }}
           >
-            {unit.lessons.map((lesson) => (
-              <ListButtons
-                item
-                key={lesson.lesson_id}
-                onClick={() => handleLessonSelect(lesson)}
-              >
-                {lesson.lesson_name}
-              </ListButtons>
-            ))}
-          </ButtonHolderGroup>
-        </VertStack>
-      </HolderGrid>
+            <TitleText variant="h2">
+              {unit.id}. {unit.name}
+            </TitleText>
+            <DescriptionText item variant="h4">
+              {unit.description}
+            </DescriptionText>
+            <ButtonHolderGroup
+              item
+              variant="text"
+              orientation="vertical"
+              color="secondary"
+              sx={{ color: "white" }}
+            >
+              {unit.lessons.map((lesson) => (
+                <ListButtons
+                  item
+                  key={lesson.lesson_id}
+                  onClick={() => handleLessonSelect(lesson)}
+                >
+                  <Typography sx={{ fontSize: "1.25rem", fontWeight: "600" }}>
+                    {lesson.lesson_name}
+                  </Typography>
+                </ListButtons>
+              ))}
+            </ButtonHolderGroup>
+          </VertStack>
+        </HolderGrid>
+      </ThemeProvider>
     </>
   );
 }

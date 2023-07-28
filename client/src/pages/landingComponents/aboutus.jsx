@@ -21,6 +21,19 @@ const Title = styled(Typography)`
   }
 `;
 
+const AboutTitle = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    ${'' /* margin-bottom: 3vw; */}
+    text-align: center;
+    color: #03add5;
+    margin-bottom: 3rem;
+  }
+`;
+
 const TitleStack = styled(Stack)`
   && {
     display: flex;
@@ -104,13 +117,21 @@ export default function AboutUs() {
 
   return (
     <>
-      <Title variant="h3" color="white" paddingTop="5rem" marginBotton="0rem">
+      <AboutTitle variant="h3" paddingTop="5rem" marginBotton="5rem">
         About Us
-      </Title>
+      </AboutTitle>
       <SplitBoxesGrid
         container
         divider={<Divider orientation="vertical" flexItem />}
         direction="row"
+        component={motion.div}
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 1,
+          delay: 0,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
       >
         {AboutUsText.map((PersonCard) => (
           
@@ -122,18 +143,18 @@ export default function AboutUs() {
               position : "relative",
               height: {xs: "80vh", md: "90vh", lg: "80vh"}
             }}
-          >
+          >        
             <div style={{position: "absolute", opacity: "0.2"}}>
               {/* <Image sx={{zIndex: 2, fillOpacity:0.5 }} src={PersonCard.image} /> */}
               {PersonCard.key === "aditya" ?
                   <ScienceIcon
-                    style={{ fontSize: "40vh" }}
+                    style={{ fontSize: "50vw" }}
                     id={PersonCard.key}
                     sx={{ paddingBottom: "2rem", zIndex:2, color: "white", transition: "0.25s all ease-in-out", opacity: 0.5}}
                   />
                 :
                   <CalculateIcon
-                    style={{ fontSize: "40vh" }}
+                    style={{ fontSize: "50vw" }}
                     id={PersonCard.key}
                     sx={{ paddingBottom: "2rem", zIndex:2, color: "white", transition: "0.25s all ease-in-out", opacity: 0.5}}
                   />
