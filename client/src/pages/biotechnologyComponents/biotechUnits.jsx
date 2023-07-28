@@ -60,10 +60,11 @@ const VertStack = styled(Stack)`
     align-items: left;
     padding: 3rem;
     border-radius: 2rem;
-    width: 50%;
+    width: 40%;
     border: 1px solid grey;
     padding-bottom: 3rem;
     background: linear-gradient(to right top, #535eab, #8351c2);
+    disable-align: false;
   }
 `;
 
@@ -112,7 +113,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
     <>
       <HolderGrid container>
         <VertStack item>
-          <TitleText variant="h2">
+          <TitleText variant="h2" xs={{ fontSize: "20px" }}>
             {unit.id}. {unit.name}
           </TitleText>
           <DescriptionText item variant="h4">
