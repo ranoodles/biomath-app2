@@ -69,7 +69,7 @@ const TitleStack = styled(Stack)`
     ${"" /* display: inline-block; */}
     justify-content: left;
     align-items: center;
-    padding: 7rem 5rem 7rem 5rem;
+    padding: 7rem 0rem 7rem 5rem;
   }
 `;
 

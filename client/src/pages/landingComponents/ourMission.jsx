@@ -58,15 +58,16 @@ const BiomathText = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    margin-bottom: 3rem;
+    ${'' /* margin-bottom: 1rem; */}
     text-align: center;
+    color: #03add5;
   }
 `;
 
 export default function OurMission() {
   return (
     <>
-      <BiomathText variant="h3" color="white" paddingTop="7rem">
+      <BiomathText variant="h3" paddingTop="7rem">
         Our Mission
       </BiomathText>
       <OurMissionGrid container>

@@ -14,6 +14,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { motion } from "framer-motion";
+import theme from "../website-constants/Theme";
 
 const TitleText = styled(Typography)`
   && {
@@ -61,7 +62,7 @@ const VertStack = styled(Stack)`
     padding: 3rem;
     border-radius: 2rem;
     width: 50%;
-    border: 1px solid grey;
+    ${'' /* border: 1px solid grey; */}
     padding-bottom: 3rem;
     background: linear-gradient(to right top, #535eab, #8351c2);
   }
@@ -75,6 +76,7 @@ const ListButtons = styled(Button)`
     text-align: center;
     padding: 1rem 1rem 1rem 1rem;
     color: white;
+    border-color: white;
     box-shadow: inset 0 0 0 0 #03add5;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
@@ -82,7 +84,7 @@ const ListButtons = styled(Button)`
     width: 90%;
     &:hover {
       box-shadow: inset 60vw 0vh 0vh 0vh #03add5;
-      color: black;
+      ${'' /* color: black; */}
     }
   }
 `;
@@ -110,20 +112,39 @@ function DisplayInfo({ unit, handleLessonSelect }) {
   }
   return (
     <>
+      <ThemeProvider theme={theme} border="none">
       <HolderGrid container>
-        <VertStack item>
+        <VertStack item
+            component={motion.div}
+            viewport={{ once: true }}
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{
+              opacity: 1,
+              scale: 1
+            }}
+            transition={{
+              duration: 0.8,
+              delay: 0,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+            whileHover={{
+              scale: 1.1,
+              background: "linear-gradient(to right top, #354083, #6533A4)",
+            }}
+        >
           <TitleText variant="h2">
             {unit.id}. {unit.name}
+            {/* {unit.name} */}
           </TitleText>
           <DescriptionText item variant="h4">
             {unit.description}
           </DescriptionText>
           <ButtonHolderGroup
             item
-            aria-label="vertical contained button group"
             variant="text"
             orientation="vertical"
-            sx={{ color: "#4E8397" }}
+            color="secondary"
+            sx={{ color: "white" }}
           >
             {unit.lessons.map((lesson) => (
               <ListButtons
@@ -131,12 +152,13 @@ function DisplayInfo({ unit, handleLessonSelect }) {
                 key={lesson.lesson_id}
                 onClick={() => handleLessonSelect(lesson)}
               >
-                {lesson.lesson_name}
+                <Typography sx={{fontSize: "1.25rem", fontWeight: "600"}}>{lesson.lesson_name}</Typography>
               </ListButtons>
             ))}
           </ButtonHolderGroup>
         </VertStack>
       </HolderGrid>
+      </ThemeProvider>
     </>
   );
 }

@@ -26,14 +26,14 @@ const SignupButtonTop = styled(Button)`
     background-color: transparent;
     border: 2px solid;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 white;
+    box-shadow: inset 0 0 0 0 #03add5;
     font-size: 20px;
     margin-top: 2rem;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
     &:hover {
-      box-shadow: inset 400px 0 0 0 #b200ff;
+      box-shadow: inset 400px 0 0 0 #03add5;
     }
   }
 `;
