@@ -10,7 +10,8 @@ const OurMissionGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     padding: 0rem 0rem 0rem 0rem;
-    gap: 2vw;
+    gap: 3vw;
+    height: 80vh;
   }
 `;
 
@@ -71,7 +72,7 @@ export default function OurMission() {
       <OurMissionGrid container>
         <OurMissionImgGrid
           item
-          xs={11}
+          xs={10}
           md={4}
           component={motion.div}
           initial={{ opacity: 0, scale: 0 }}

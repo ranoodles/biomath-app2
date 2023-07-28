@@ -8,6 +8,7 @@ import Hero from "./landingComponents/hero.jsx";
 import CourseDisplay from "./landingComponents/courseDisplays.jsx";
 import OurMission from "./landingComponents/ourMission.jsx";
 import JoinNow from "./landingComponents/joinNow.jsx";
+import AboutUs from "./landingComponents/aboutus";
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function Landing() {
         <Hero></Hero>
         <CourseDisplay></CourseDisplay>
         <OurMission></OurMission>
+        <AboutUs></AboutUs>
         <JoinNow></JoinNow>
       </ThemeProvider>
     </>

@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import BiotechIcon from "@mui/icons-material/Biotech";
+import BiotechIcon from "@mui/icons-material/Functions";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -119,25 +119,26 @@ const LoginButtonTop = styled(Button)`
           >
             BIOMATH
           </Typography> */}
-
-          <BiotechIcon sx={{ display: { xs: "flex" }, fontSize: "2rem", mr: .5 }} />
-          <Typography
-            variant="h4"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex" },
-              flexGrow: 1,
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            BIOMATH
-          </Typography>
+          <div style={{display: "flex", flexGrow: 1, alignItems: "center"}}>
+            <BiotechIcon sx={{ display: { xs: "flex" }, fontSize: "2.5rem" }} />
+            <Typography
+              variant="h4"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 1,
+                display: { xs: "flex" },
+                flexGrow: 1,
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              XPLORIFY
+            </Typography>
+          </div>
           <Box sx={{ display: { xs: "none", md: "flex" }, gap:"2rem" }}>
             <LoginButtonTop
                 variant="contained"

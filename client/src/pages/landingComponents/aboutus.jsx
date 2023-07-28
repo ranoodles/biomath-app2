@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import ScienceIcon from "@mui/icons-material/Science";
 import CalculateIcon from "@mui/icons-material/Calculate";
-import scienceImg from "./scientist.svg"
-import mathImg from "./mathematician.svg"
+import scienceImg from "./sample.jpeg"
+import mathImg from "./sample2.jpeg"
 import Image from "mui-image";
 
 const Title = styled(Typography)`
@@ -15,7 +15,7 @@ const Title = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    margin-bottom: 2vw;
+    ${'' /* margin-bottom: 3vw; */}
     text-align: center;
     color: white;
   }
@@ -56,10 +56,10 @@ const SubjectDescriptionGrid = styled(Grid)`
   }
 `;
 
-const CourseDescriptionText = [
+const AboutUsText = [
   {
-    key: "bio",
-    courseName: "Synthetic Biology",
+    key: "aditya",
+    nameText: "Aditya Lagu",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     icon: (
@@ -68,14 +68,12 @@ const CourseDescriptionText = [
         sx={{ paddingBottom: "2rem", color: "white" }}
       />
     ),
-    // color: "#C5DFF8",
-    // color2: "#7895CB",
     linksite: "/biotechnology",
-    backgroundImage: scienceImg
+    image: scienceImg
   },
   {
-    key: "math",
-    courseName: "Applied Math",
+    key: "raman",
+    nameText: "Raman Arora",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     icon: (
@@ -84,10 +82,8 @@ const CourseDescriptionText = [
         sx={{ paddingBottom: "2rem", color: "white" }}
       />
     ),
-    // color: "#C5DFF8",
-    // color2: "#7895CB",
     linksite: "/appliedmath",
-    backgroundImage: mathImg
+    image: mathImg
   },
 ];
 
@@ -97,95 +93,69 @@ const DescriptionText = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    ${'' /* padding-bottom: 2rem; */}
+    ${'' /* margin-top: 3vw; */}
     color: white;
     transition: 0.25s all ease-in-out;
     zIndex:3;
   }
 `;
 
-export default function CourseDisplay() {
-  const navigate = useNavigate();
-
-  const hoverOn = (event) => {
-    const key = event.currentTarget.role;
-    const collection = document.querySelectorAll("#" + key);
-    collection.forEach((item) => {
-      item.style.opacity = "1";
-    })
-    console.log(collection);
-  };
-
-  const hoverOff = (event) => {
-    const key = event.currentTarget.role;
-    const collection = document.querySelectorAll("#" + key);
-    collection.forEach((item) => {
-      item.style.opacity = "0";
-    })
-  };
+export default function AboutUs() {
 
   return (
     <>
       <Title variant="h3" color="white" paddingTop="5rem" marginBotton="0rem">
-        Our Courses
+        About Us
       </Title>
       <SplitBoxesGrid
         container
         divider={<Divider orientation="vertical" flexItem />}
         direction="row"
       >
-        {CourseDescriptionText.map((CourseCard) => (
+        {AboutUsText.map((PersonCard) => (
           
           <SubjectDescriptionGrid
             item
             xs={10}
             md={4.5}
-            role={CourseCard.key}
-            sx={{ 
-              cursor: "pointer",
+            sx={{
               position : "relative",
-              background: "linear-gradient(to right top, #535EAB, #8351C2)",
-              overflow: "hidden",
               height: {xs: "80vh", md: "90vh", lg: "80vh"}
             }}
-            component={motion.div}
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{
-              opacity: 1,
-              scale: 1,
-              backgroundColor: CourseCard.color,
-            }}
-            transition={{
-              duration: 0.8,
-              delay: 0,
-              ease: [0, 0.71, 0.2, 1.01],
-            }}
-            whileHover={{ scale: 1.1, background: "linear-gradient(to right top, #354083, #6533A4)" }}
-            onClick={() => {
-              navigate(CourseCard.linksite);
-            }}
-            onMouseOver={hoverOn}
-            onMouseOut={hoverOff}
           >
             <div style={{position: "absolute", opacity: "0.2"}}>
-              <Image sx={{zIndex: 2, fillOpacity:0.5 }} src={CourseCard.backgroundImage} />
+              {/* <Image sx={{zIndex: 2, fillOpacity:0.5 }} src={PersonCard.image} /> */}
+              {PersonCard.key === "aditya" ?
+                  <ScienceIcon
+                    style={{ fontSize: "40vh" }}
+                    id={PersonCard.key}
+                    sx={{ paddingBottom: "2rem", zIndex:2, color: "white", transition: "0.25s all ease-in-out", opacity: 0.5}}
+                  />
+                :
+                  <CalculateIcon
+                    style={{ fontSize: "40vh" }}
+                    id={PersonCard.key}
+                    sx={{ paddingBottom: "2rem", zIndex:2, color: "white", transition: "0.25s all ease-in-out", opacity: 0.5}}
+                  />
+              }
             </div>
             <TitleStack sx={{zIndex: 10, position: "absolute"}}>
-              {CourseCard.key === "bio" ?
+              {/* {PersonCard.key === "aditya" ?
                   <ScienceIcon
                     style={{ fontSize: "5rem" }}
-                    id={CourseCard.key}
-                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
+                    id={PersonCard.key}
+                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out"}}
                   />
                 :
                   <CalculateIcon
                     style={{ fontSize: "5rem" }}
-                    id={CourseCard.key}
-                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
+                    id={PersonCard.key}
+                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out"}}
                   />
-              }
-              <Title variant="h3">{CourseCard.courseName}</Title>
-              <DescriptionText id={CourseCard.key} variant="h5" sx={{opacity: 0}}>{CourseCard.description}</DescriptionText>
+              } */}
+              <Title variant="h3" sx={{marginBottom: {xs: "2rem", md: "3vw"}}}>{PersonCard.nameText}</Title>
+              <Image sx={{zIndex: 3, borderRadius: "20px"}} src={PersonCard.image} />
+              <DescriptionText variant="h5" sx={{marginTop: {xs: "2rem", md: "3vw"}}}>{PersonCard.description}</DescriptionText>
             </TitleStack>
           </SubjectDescriptionGrid>
         ))}
