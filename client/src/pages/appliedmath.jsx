@@ -45,7 +45,6 @@ const HolderGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    padding-bottom: 3rem;
   }
 `;
 

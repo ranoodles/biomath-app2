@@ -40,10 +40,8 @@ const VertStack = styled(Stack)`
     display: flex;
     justify-content: left;
     align-items: left;
-    background-color: white;
     padding: 3rem;
     border-radius: 2rem;
-    background-color: #c5dff8;
     height: 70vh;
     width: 100%;
   }
@@ -68,7 +66,9 @@ function DisplayInfo({ unit, handleLessonSelect }) {
   return (
     <>
       <VertStack>
-        <TitleText variant="h2">{unit.id}. {unit.name}</TitleText>
+        <TitleText variant="h2">
+          {unit.id}. {unit.name}
+        </TitleText>
         <DescriptionText variant="h4">{unit.description}</DescriptionText>
         <ButtonGroup
           orientation="vertical"

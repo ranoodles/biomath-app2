@@ -1,12 +1,12 @@
-import {useState} from "react";
+import { useState } from "react";
 import { Box, Grid, Button, Typography, Stack, Divider } from "@mui/material";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import ScienceIcon from "@mui/icons-material/Science";
 import CalculateIcon from "@mui/icons-material/Calculate";
-import scienceImg from "./scientist.svg"
-import mathImg from "./mathematician.svg"
+import scienceImg from "./scientist.svg";
+import mathImg from "./mathematician.svg";
 import Image from "mui-image";
 
 const Title = styled(Typography)`
@@ -17,7 +17,6 @@ const Title = styled(Typography)`
     font-weight: 700;
     margin-bottom: 2vw;
     text-align: center;
-    color: white;
   }
 `;
 
@@ -49,10 +48,6 @@ const SubjectDescriptionGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     border-radius: 30px;
-    ${'' /* height: 80vh; */}
-    &:after {
-      background: "linear-gradient(to right top, #535EAB, #8351C2)";
-    }
   }
 `;
 
@@ -71,7 +66,7 @@ const CourseDescriptionText = [
     // color: "#C5DFF8",
     // color2: "#7895CB",
     linksite: "/biotechnology",
-    backgroundImage: scienceImg
+    backgroundImage: scienceImg,
   },
   {
     key: "math",
@@ -87,7 +82,7 @@ const CourseDescriptionText = [
     // color: "#C5DFF8",
     // color2: "#7895CB",
     linksite: "/appliedmath",
-    backgroundImage: mathImg
+    backgroundImage: mathImg,
   },
 ];
 
@@ -97,10 +92,10 @@ const DescriptionText = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    ${'' /* padding-bottom: 2rem; */}
+    ${"" /* padding-bottom: 2rem; */}
     color: white;
     transition: 0.25s all ease-in-out;
-    zIndex:3;
+    zindex: 3;
   }
 `;
 
@@ -112,7 +107,7 @@ export default function CourseDisplay() {
     const collection = document.querySelectorAll("#" + key);
     collection.forEach((item) => {
       item.style.opacity = "1";
-    })
+    });
     console.log(collection);
   };
 
@@ -121,12 +116,17 @@ export default function CourseDisplay() {
     const collection = document.querySelectorAll("#" + key);
     collection.forEach((item) => {
       item.style.opacity = "0";
-    })
+    });
   };
 
   return (
     <>
-      <Title variant="h3" color="white" paddingTop="5rem" marginBotton="0rem">
+      <Title
+        variant="h3"
+        paddingTop="5rem"
+        marginBotton="0rem"
+        sx={{ color: "#03add5" }}
+      >
         Our Courses
       </Title>
       <SplitBoxesGrid
@@ -135,18 +135,17 @@ export default function CourseDisplay() {
         direction="row"
       >
         {CourseDescriptionText.map((CourseCard) => (
-          
           <SubjectDescriptionGrid
             item
             xs={10}
             md={4.5}
             role={CourseCard.key}
-            sx={{ 
+            sx={{
               cursor: "pointer",
-              position : "relative",
+              position: "relative",
               background: "linear-gradient(to right top, #535EAB, #8351C2)",
               overflow: "hidden",
-              height: {xs: "80vh", md: "90vh", lg: "80vh"}
+              height: { xs: "80vh", md: "90vh", lg: "80vh" },
             }}
             component={motion.div}
             initial={{ opacity: 0, scale: 0 }}
@@ -160,36 +159,61 @@ export default function CourseDisplay() {
               delay: 0,
               ease: [0, 0.71, 0.2, 1.01],
             }}
-            whileHover={{ scale: 1.1, background: "linear-gradient(to right top, #354083, #6533A4)" }}
+            whileHover={{
+              scale: 1.1,
+              background: "linear-gradient(to right top, #354083, #6533A4)",
+            }}
             onClick={() => {
               navigate(CourseCard.linksite);
             }}
             onMouseOver={hoverOn}
             onMouseOut={hoverOff}
           >
-            <div style={{position: "absolute", opacity: "0.2"}}>
-              <Image sx={{zIndex: 2, fillOpacity:0.5 }} src={CourseCard.backgroundImage} />
+            <div style={{ position: "absolute", opacity: "0.2" }}>
+              <Image
+                sx={{ zIndex: 2, fillOpacity: 0.5 }}
+                src={CourseCard.backgroundImage}
+              />
             </div>
-            <TitleStack sx={{zIndex: 10, position: "absolute"}}>
-              {CourseCard.key === "bio" ?
-                  <ScienceIcon
-                    style={{ fontSize: "5rem" }}
-                    id={CourseCard.key}
-                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
-                  />
-                :
-                  <CalculateIcon
-                    style={{ fontSize: "5rem" }}
-                    id={CourseCard.key}
-                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out", opacity: 0}}
-                  />
-              }
-              <Title variant="h3">{CourseCard.courseName}</Title>
-              <DescriptionText id={CourseCard.key} variant="h5" sx={{opacity: 0}}>{CourseCard.description}</DescriptionText>
+            <TitleStack sx={{ zIndex: 10, position: "absolute" }}>
+              {CourseCard.key === "bio" ? (
+                <ScienceIcon
+                  style={{ fontSize: "5rem" }}
+                  id={CourseCard.key}
+                  sx={{
+                    paddingBottom: "2rem",
+                    zIndex: 3,
+                    color: "white",
+                    transition: "0.25s all ease-in-out",
+                    opacity: 0,
+                  }}
+                />
+              ) : (
+                <CalculateIcon
+                  style={{ fontSize: "5rem" }}
+                  id={CourseCard.key}
+                  sx={{
+                    paddingBottom: "2rem",
+                    zIndex: 3,
+                    color: "white",
+                    transition: "0.25s all ease-in-out",
+                    opacity: 0,
+                  }}
+                />
+              )}
+              <Title variant="h3" sx={{ color: "white" }}>
+                {CourseCard.courseName}
+              </Title>
+              <DescriptionText
+                id={CourseCard.key}
+                variant="h5"
+                sx={{ opacity: 0 }}
+              >
+                {CourseCard.description}
+              </DescriptionText>
             </TitleStack>
           </SubjectDescriptionGrid>
         ))}
-        
       </SplitBoxesGrid>
     </>
   );
