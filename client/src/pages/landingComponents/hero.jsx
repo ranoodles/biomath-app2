@@ -69,7 +69,7 @@ const TitleStack = styled(Stack)`
     ${"" /* display: inline-block; */}
     justify-content: left;
     align-items: center;
-    padding: 7rem 0rem 7rem 5rem;
+    padding: 7rem 7rem 7rem 7rem;
   }
 `;
 
@@ -98,7 +98,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 3, ease: "easeInOut" }}
-          sx={{ display: { xs: "flex", md: "inline-block" } }}
+          sx={{ display: { xs: "flex", md: "inline-block" }, padding: "5px" }}
         >
           <TitleText variant="h2" color="white">
             Be prepared for your educational career and beyond.
@@ -114,7 +114,7 @@ export default function Hero() {
               navigate("/signup");
             }}
           >
-            <GetStartedText variant="h5">Get Started</GetStartedText>
+            <GetStartedText variant="h5">Start Learning</GetStartedText>
           </SignupButtonTop>
         </TitleStack>
       </Grid>

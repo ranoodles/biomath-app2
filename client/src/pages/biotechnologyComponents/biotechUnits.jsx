@@ -21,7 +21,6 @@ const TitleText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
-    font-weight: 700;
     margin-bottom: 2rem;
     text-align: left;
     color: white;
@@ -33,12 +32,7 @@ const CardHolder = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${
-      "" /* padding-left: 10vw;
-    padding-right: 10vw; */
-    }
     border-color: #d99565;
-    padding-bottom: 10vh;
   }
 `;
 
@@ -61,9 +55,8 @@ const VertStack = styled(Stack)`
     align-items: left;
     padding: 3rem;
     border-radius: 2rem;
-    width: 40%;
+    width: 70%;
     border: 1px solid grey;
-    padding-bottom: 3rem;
     background: linear-gradient(to right top, #535eab, #8351c2);
     disable-align: false;
   }
@@ -102,7 +95,8 @@ const HolderGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 4rem;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
   }
 `;
 
@@ -129,7 +123,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
               ease: [0, 0.71, 0.2, 1.01],
             }}
             whileHover={{
-              scale: 1.1,
+              scale: 1.05,
               background: "linear-gradient(to right top, #354083, #6533A4)",
             }}
           >
