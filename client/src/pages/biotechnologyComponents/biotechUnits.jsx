@@ -61,10 +61,11 @@ const VertStack = styled(Stack)`
     align-items: left;
     padding: 3rem;
     border-radius: 2rem;
-    width: 50%;
-    ${'' /* border: 1px solid grey; */}
+    width: 40%;
+    border: 1px solid grey;
     padding-bottom: 3rem;
     background: linear-gradient(to right top, #535eab, #8351c2);
+    disable-align: false;
   }
 `;
 
@@ -76,7 +77,6 @@ const ListButtons = styled(Button)`
     text-align: center;
     padding: 1rem 1rem 1rem 1rem;
     color: white;
-    border-color: white;
     box-shadow: inset 0 0 0 0 #03add5;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
@@ -84,7 +84,7 @@ const ListButtons = styled(Button)`
     width: 90%;
     &:hover {
       box-shadow: inset 60vw 0vh 0vh 0vh #03add5;
-      ${'' /* color: black; */}
+      color: black;
     }
   }
 `;
@@ -113,14 +113,15 @@ function DisplayInfo({ unit, handleLessonSelect }) {
   return (
     <>
       <ThemeProvider theme={theme} border="none">
-      <HolderGrid container>
-        <VertStack item
+        <HolderGrid container>
+          <VertStack
+            item
             component={motion.div}
             viewport={{ once: true }}
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{
               opacity: 1,
-              scale: 1
+              scale: 1,
             }}
             transition={{
               duration: 0.8,
