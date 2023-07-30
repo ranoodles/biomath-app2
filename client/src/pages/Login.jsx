@@ -13,7 +13,7 @@ import {
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 
 const SplitBoxesGrid = styled(Grid)`
@@ -22,7 +22,7 @@ const SplitBoxesGrid = styled(Grid)`
     align-items: center;
     font-size: 25px;
     height: 100vh;
-    background-image: url("https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg");
+    ${'' /* background-image: url("https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg"); */}
   }
 `;
 
@@ -65,8 +65,9 @@ const TextFieldStyled = styled(TextField)`
   }
 `;
 
-const ColoredLink = styled(Link)`
+const ColoredLink = styled(Typography)`
   color: #FFFFFF;
+  cursor: pointer;
   &:visited {
     color: #FFFFFF;
   }
@@ -101,6 +102,7 @@ const GetStartedText = styled(Typography)`
 `;
 
 function Login() {
+  const navigate = useNavigate();
   return (
     <>
       {/* <NavBar></NavBar> */}
@@ -158,7 +160,11 @@ function Login() {
                     fontSize: 20,
                   }}
                 >
-                  <ColoredLink to="/forgotmypassword">
+                  <ColoredLink 
+                  onClick={() => {
+                      navigate("/forgotpassword");
+                    }}
+                  style={{textDecoration: "underline"}}>
                     Forgot my Password
                   </ColoredLink>
                 </Typography>
@@ -170,20 +176,17 @@ function Login() {
                 >
                   <GetStartedText variant="h6">Log In</GetStartedText>
                 </SignUpButton>
-
-                {/* DONT HAVE ACCT LINK*/}
-                <Typography
-                  sx={{
-                    textAlign: "left",
-                    margin: "1rem 1rem 1rem 1rem",
-                    fontWeight: 200,
-                    fontSize: 20,
-                    color: "#A0BFE0",
-                  }}
-                >
-                  Don't have an account?{" "}
-                  <ColoredLink to="/signup"> Click Here</ColoredLink>
-                </Typography>
+                <ColoredLink sx={{margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0"}}>
+                  Don't have an account? {" "}
+                  <span 
+                    onClick={() => {
+                      navigate("/signup");
+                    }}
+                    style={{textDecoration: "underline", color: "white"}}
+                  >
+                    Click Here
+                  </span>
+                </ColoredLink>
               </FormControl>
             </VertStack>
           </LayoutGrid>
