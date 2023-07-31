@@ -19,10 +19,11 @@ const TitleText = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     text-align: center;
     color: 'white';
-    padding-bottom: 25px;
-    
+
     final: {
       opacity: 1,
       scale: 1,
