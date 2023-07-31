@@ -2,6 +2,7 @@ import { React, useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
+import Image from "mui-image";
 import {
   Box,
   Button,
@@ -10,107 +11,75 @@ import {
   Stack,
   Divider,
   Grid,
+  Card,
+  CardActions,
+  CardContent,
+  Modal,
+  LinearProgress,
+  Hidden,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
-import NavBar from "./website-constants/NavBarLoggedOut.jsx";
-import DisplayCard from "./website-constants/DisplayInfo.jsx";
-
-const TitleText = styled(Typography)`
-  && {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    letter-spacing: .3rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    text-align: center;
-    color: 'white';
-
-    final: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 2
-      }
-    }
-  }
-`;
-
-const HolderGrid = styled(Grid)`
-  && {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-  }
-`;
+import NavBar from "./website-constants/NavBarLoggedIn.jsx";
+import DisplayCard from "./aMathComponents/aMathUnits.jsx";
+import BiotechTitle from "./aMathComponents/aMathTitle.jsx";
+import scienceImg from "./aMathComponents/mathematician.svg";
 
 const CardHolder = styled(Grid)`
   && {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    border-color: #d99565;
+    flex-direction: row;
+    overflow-y: hidden;
+    height: 80vh;
   }
 `;
-const ColoredLink = styled(Link)`
-  &:visited {
-    color: #068fff;
-  }
-`;
-
-const UnitStack = styled(Stack)`
+const FatHolder = styled(Grid)`
   && {
-    display: flex;
+    border-color: #d99565;
+    overflow-y: auto;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 1rem 2rem 1rem 2rem;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    max-height: 70vh;
+    overflow-x: hidden; /* Hide horizontal scrollbar if necessary */
+    scrollbar-width: 0px; /* Firefox */
+    -ms-overflow-style: 0px; /* Internet Explorer 10+ */
     &::-webkit-scrollbar {
-      display: none;
+      width: 0px; /* Safari and Chrome */
+    }
+    position: relative;
+
+    border-radius: 2rem;
+    padding: 0px 0px 0px 0px;
   }
-  &::-webkit-scrollbar-track {
-      background-color: #f1f1f1;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #888;
-      border-radius: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: #555;
-    }
 `;
-
-const UnitCircle = styled(Button)`
+const StyledImageHolder = styled(Grid)`
   && {
-    display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2vw 0vw 0vw 0vw;
+    padding-left: 40px;
   }
 `;
 
-const UnitCircleText = styled(Typography)`
-  && {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    text-align: center;
-    color: "#C5DFF8";
-  }
+const Progress = styled.div`
+  display: flex;
+  background: linear-gradient(
+    to right,
+    #7900ff,
+    #6903ff,
+    #5508ff,
+    #3c0dff,
+    #0011ff ${(props) => props.scroll},
+    transparent 0
+  );
+  width: ${(props) => props.scrollWidth};
+  height: 4px;
+  z-index: 3;
 `;
-
 function BiotechnologyPage() {
+  document.body.style.overflow = "hidden";
   var units = [];
   const [unitsList, setUnitsList] = useState([]);
   const [selectedUnit, setSelectedUnit] = useState(null);
@@ -120,7 +89,6 @@ function BiotechnologyPage() {
     setSelectedLessonId(lessonDetails.lesson_id);
     navigate("/appliedmath/" + lessonDetails.lesson_id);
   };
-
   useEffect(() => {
     const fetchAllUnits = async () => {
       try {
@@ -134,43 +102,45 @@ function BiotechnologyPage() {
     };
     fetchAllUnits();
   }, []);
-
+  const [scrollProg, setScrollProg] = useState(0);
+  const handleScroll = (event) => {
+    const element = event.currentTarget;
+    const totalScrollHeight = element.scrollHeight - element.clientHeight;
+    const scrollPosition = element.scrollTop;
+    const percentageScrolled = (scrollPosition / totalScrollHeight) * 100;
+    setScrollProg(percentageScrolled);
+  };
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
-      <TitleText variant="h1" sx={{ color: "white" }}>
-        Applied Math
-      </TitleText>
-      <HolderGrid container sm={12}>
-        <UnitStack item sm={2} xs={2}>
+      <BiotechTitle item />
+      <CardHolder
+        container
+        sx={{ padding: { xs: "none", md: "0rem 2rem 2rem 2rem" } }}
+      >
+        <Hidden xsDown>
+          <StyledImageHolder
+            item
+            md={3.5}
+            sx={{ display: { xs: "none", md: "flex" }, paddingRight: "20px" }}
+          >
+            <Image src={scienceImg} />
+          </StyledImageHolder>
+        </Hidden>
+
+        <FatHolder item xs={12} md={8.5} onScroll={handleScroll}>
           {unitsList.length > 0 &&
-            unitsList.map((unit) => (
-              <UnitCircle
-                id={"circle" + unit.id}
-                sx={{ backgroundColor: "#4A55A2", borderRadius: "15%" }}
-                onClick={(e) => {
-                  setSelectedUnit(unit);
-                }}
-                onMouseOver={(e) => {
-                  setSelectedUnit(unit);
-                }}
-                variant="outlined"
-              >
-                <UnitCircleText sx={{ color: "#C5DFF8" }} variant="h4">
-                  {unit.id}
-                </UnitCircleText>
-              </UnitCircle>
+            unitsList.map((unit, index) => (
+              <DisplayCard
+                item
+                unit={unit}
+                handleLessonSelect={handleLessonSelect}
+                key={index}
+              />
             ))}
-        </UnitStack>
-        <CardHolder item sm={9} xs={9}>
-          {selectedUnit && (
-            <DisplayCard
-              unit={selectedUnit}
-              handleLessonSelect={handleLessonSelect}
-            />
-          )}{" "}
-        </CardHolder>
-      </HolderGrid>
+        </FatHolder>
+      </CardHolder>
+      <Grid sx={{ paddingBottom: "10000px" }}></Grid>
     </ThemeProvider>
   );
 }

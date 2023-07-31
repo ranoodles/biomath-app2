@@ -52,15 +52,14 @@ const FatHolder = styled(Grid)`
     position: relative;
 
     border-radius: 2rem;
-    padding: 30px;
+    padding: 0px 0px 0px 0px;
   }
 `;
 const StyledImageHolder = styled(Grid)`
   && {
     justify-content: center;
     align-items: center;
-    border-color: #d99565;
-    size: medium;
+    padding-left: 40px;
   }
 `;
 
@@ -115,22 +114,21 @@ function BiotechnologyPage() {
     <ThemeProvider theme={theme}>
       <NavBar />
       <BiotechTitle item />
-      <hr></hr>
       <CardHolder
         container
-        sx={{ padding: { xs: "none", md: "0rem 5rem 0rem 5rem" } }}
+        sx={{ padding: { xs: "none", md: "0rem 2rem 2rem 2rem" } }}
       >
         <Hidden xsDown>
           <StyledImageHolder
             item
-            md={2}
-            sx={{ display: { xs: "none", md: "flex" } }}
+            md={3.5}
+            sx={{ display: { xs: "none", md: "flex" }, paddingRight: "20px" }}
           >
             <Image src={scienceImg} />
           </StyledImageHolder>
         </Hidden>
 
-        <FatHolder item xs={12} sm={10} md={10} onScroll={handleScroll}>
+        <FatHolder item xs={12} md={8.5} onScroll={handleScroll}>
           {unitsList.length > 0 &&
             unitsList.map((unit, index) => (
               <DisplayCard

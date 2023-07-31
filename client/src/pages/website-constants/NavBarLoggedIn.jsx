@@ -108,7 +108,7 @@ function NavBar(props) {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "avenir",
-              fontWeight: 700,
+              fontWeight: 400,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
