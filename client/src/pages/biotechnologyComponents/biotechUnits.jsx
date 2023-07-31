@@ -21,7 +21,6 @@ const TitleText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
-    font-weight: 700;
     margin-bottom: 2rem;
     text-align: left;
     color: white;
@@ -33,12 +32,7 @@ const CardHolder = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${
-      "" /* padding-left: 10vw;
-    padding-right: 10vw; */
-    }
     border-color: #d99565;
-    padding-bottom: 10vh;
   }
 `;
 
@@ -47,7 +41,6 @@ const DescriptionText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
-    font-size: 20px;
     padding-bottom: 1rem;
     text-align: left;
     color: white;
@@ -61,9 +54,7 @@ const VertStack = styled(Stack)`
     align-items: left;
     padding: 3rem;
     border-radius: 2rem;
-    width: 40%;
     border: 1px solid grey;
-    padding-bottom: 3rem;
     background: linear-gradient(to right top, #535eab, #8351c2);
     disable-align: false;
   }
@@ -102,7 +93,7 @@ const HolderGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 4rem;
+    padding: 3rem 3rem 3rem 3rem;
   }
 `;
 
@@ -129,7 +120,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
               ease: [0, 0.71, 0.2, 1.01],
             }}
             whileHover={{
-              scale: 1.1,
+              scale: 1.05,
               background: "linear-gradient(to right top, #354083, #6533A4)",
             }}
         >
@@ -147,18 +138,38 @@ function DisplayInfo({ unit, handleLessonSelect }) {
             color="primary"
             sx={{ color: "white" }}
           >
-            {unit.lessons.map((lesson) => (
-              <ListButtons
-                item
-                key={lesson.lesson_id}
-                onClick={() => handleLessonSelect(lesson)}
-              >
-                <Typography sx={{fontSize: "1.25rem", fontWeight: "600"}}>{lesson.lesson_name}</Typography>
-              </ListButtons>
-            ))}
-          </ButtonHolderGroup>
-        </VertStack>
-      </HolderGrid>
+            <TitleText sx={{ fontSize: { xs: "6vw", md: "4vw" } }}>
+              {unit.id}. {unit.name}
+            </TitleText>
+            <DescriptionText item sx={{ fontSize: { xs: "2vw", md: "1.5vw" } }}>
+              {unit.description}
+            </DescriptionText>
+            <ButtonHolderGroup
+              item
+              variant="text"
+              orientation="vertical"
+              color="secondary"
+              sx={{ color: "white" }}
+            >
+              {unit.lessons.map((lesson) => (
+                <ListButtons
+                  item
+                  key={lesson.lesson_id}
+                  onClick={() => handleLessonSelect(lesson)}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "3vw", md: "1.5vw" },
+                      fontWeight: "600",
+                    }}
+                  >
+                    {lesson.lesson_name}
+                  </Typography>
+                </ListButtons>
+              ))}
+            </ButtonHolderGroup>
+          </VertStack>
+        </HolderGrid>
       </ThemeProvider>
     </>
   );

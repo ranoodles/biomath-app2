@@ -19,11 +19,10 @@ const TitleText = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     text-align: center;
     color: 'white';
-
     final: {
       opacity: 1,
       scale: 1,
@@ -37,8 +36,7 @@ const TitleText = styled(Typography)`
 export default function BiotechHeader() {
   return (
     <>
-      <NavBar />
-      <TitleText variant="h1" sx={{ color: "#03add5" }}>
+      <TitleText sx={{ color: "#03add5", fontSize: { xs: "9vw", md: "6vw" } }}>
         Synthetic Biology
       </TitleText>
     </>
