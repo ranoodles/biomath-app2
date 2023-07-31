@@ -114,20 +114,19 @@ function Login() {
 
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
-    console.log("Awrhiauwcnheiunfehciun");
     const userData = {
       username: e.target.username.value,
       pass: e.target.password.value,
       email: e.target.email.value,
     };
     try {
-      await axios.post("http://localhost:8800/signup", userData);
+      if (userData.pass === e.target.confPassword.value) {
+        await axios.post("http://localhost:8800/signup", userData);
+        document.querySelectorAll('input').forEach(singleInput => singleInput.value = '');
+      }
     } catch (err) {
-      console.log("oh yeah zaddy");
+      console.log(err);
     }
-
-    console.log(e.target.username.value);
-    console.log(e.target.password.value);
   };
   return (
     <>
@@ -160,6 +159,7 @@ function Login() {
                     label="Username"
                     variant="outlined"
                     name="username"
+                    id="username"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
@@ -171,6 +171,7 @@ function Login() {
                     label="Email"
                     variant="outlined"
                     name="email"
+                    id="email"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
@@ -184,6 +185,7 @@ function Login() {
                     color="primary"
                     variant="outlined"
                     name="password"
+                    id="password"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
@@ -196,6 +198,7 @@ function Login() {
                     color="primary"
                     variant="outlined"
                     name="confPassword"
+                    id="confPassword"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },

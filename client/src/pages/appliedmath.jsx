@@ -63,23 +63,13 @@ const StyledImageHolder = styled(Grid)`
   }
 `;
 
-const Progress = styled.div`
-  display: flex;
-  background: linear-gradient(
-    to right,
-    #7900ff,
-    #6903ff,
-    #5508ff,
-    #3c0dff,
-    #0011ff ${(props) => props.scroll},
-    transparent 0
-  );
-  width: ${(props) => props.scrollWidth};
-  height: 4px;
-  z-index: 3;
+const Bruh = styled.div`
+  height: 120vh;
+  ${'' /* overflow: hidden; */}
 `;
+
 function AppliedMathPage() {
-  document.body.style.overflow = "hidden";
+  // document.body.style.overflow = "hidden";
   var units = [];
   const [unitsList, setUnitsList] = useState([]);
   const [selectedUnit, setSelectedUnit] = useState(null);
@@ -112,6 +102,7 @@ function AppliedMathPage() {
   };
   return (
     <ThemeProvider theme={theme}>
+      <Bruh>
       <NavBar />
       <BiotechTitle item />
       <CardHolder
@@ -140,7 +131,7 @@ function AppliedMathPage() {
             ))}
         </FatHolder>
       </CardHolder>
-      <Grid sx={{ paddingBottom: "10000px" }}></Grid>
+      </Bruh>
     </ThemeProvider>
   );
 }

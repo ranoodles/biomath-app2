@@ -63,23 +63,12 @@ const StyledImageHolder = styled(Grid)`
   }
 `;
 
-const Progress = styled.div`
-  display: flex;
-  background: linear-gradient(
-    to right,
-    #7900ff,
-    #6903ff,
-    #5508ff,
-    #3c0dff,
-    #0011ff ${(props) => props.scroll},
-    transparent 0
-  );
-  width: ${(props) => props.scrollWidth};
-  height: 4px;
-  z-index: 3;
+const Bruh = styled.div`
+  height: 120vh;
+  ${'' /* overflow: hidden; */}
 `;
+
 function BiotechnologyPage() {
-  document.body.style.overflow = "hidden";
   var units = [];
   const [unitsList, setUnitsList] = useState([]);
   const [selectedUnit, setSelectedUnit] = useState(null);
@@ -90,6 +79,7 @@ function BiotechnologyPage() {
     navigate("/biotechnology/" + lessonDetails.lesson_id);
   };
   useEffect(() => {
+    // document.body.style.overflow = "hidden";
     const fetchAllUnits = async () => {
       try {
         const res = await axios.get("http://localhost:8800/biotechnology");
@@ -112,6 +102,7 @@ function BiotechnologyPage() {
   };
   return (
     <ThemeProvider theme={theme}>
+      <Bruh>
       <NavBar />
       <BiotechTitle item />
       <CardHolder
@@ -140,7 +131,8 @@ function BiotechnologyPage() {
             ))}
         </FatHolder>
       </CardHolder>
-      <Grid sx={{ paddingBottom: "10000px" }}></Grid>
+      {/* <Grid sx={{ paddingBottom: "10000px" }}></Grid> */}
+      </Bruh>
     </ThemeProvider>
   );
 }

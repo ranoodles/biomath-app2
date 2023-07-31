@@ -11,8 +11,9 @@ import JoinNow from "./landingComponents/joinNow.jsx";
 import AboutUs from "./landingComponents/aboutus";
 
 export default function Landing() {
-  const navigate = useNavigate();
-
+  const prevOver = document.body.style.overflow;
+  document.body.style.overflow = prevOver;
+  // document.body.style.overflow = "none";
   return (
     <>
       <ThemeProvider theme={theme} border="none">
