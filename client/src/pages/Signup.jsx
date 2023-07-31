@@ -15,6 +15,7 @@ import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
+import axios from "axios";
 
 const SplitBoxesGrid = styled(Grid)`
   && {
@@ -22,7 +23,6 @@ const SplitBoxesGrid = styled(Grid)`
     align-items: center;
     font-size: 25px;
     height: 100vh;
-    ${'' /* background-image: url("https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg"); */}
   }
 `;
 
@@ -62,14 +62,22 @@ const TextFieldStyled = styled(TextField)`
     &.Mui-focused fieldset {
       border-color: #7895cb;
     }
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px white inset; /* Change white to your desired background color */
+      -webkit-text-fill-color: #a0bfe0; /* Change text color to your desired color */
+    }
+    &:-moz-autofill {
+      -moz-box-shadow: 0 0 0 1000px white inset; /* Change white to your desired background color */
+      -moz-text-fill-color: #a0bfe0; /* Change text color to your desired color */
+    }
   }
 `;
 
 const ColoredLink = styled(Typography)`
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   &:visited {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 `;
 
@@ -95,7 +103,7 @@ const GetStartedText = styled(Typography)`
     display: flex;
     justify-content: center;
     color: white;
-    ${'' /* padding: 0.05rem; */}
+    ${"" /* padding: 0.05rem; */}
     font-weight: 500;
     text-transform: none;
   }
@@ -103,6 +111,24 @@ const GetStartedText = styled(Typography)`
 
 function Login() {
   const navigate = useNavigate();
+
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Awrhiauwcnheiunfehciun");
+    const userData = {
+      username: e.target.username.value,
+      pass: e.target.password.value,
+      email: e.target.email.value,
+    };
+    try {
+      await axios.post("http://localhost:8800/signup", userData);
+    } catch (err) {
+      console.log("oh yeah zaddy");
+    }
+
+    console.log(e.target.username.value);
+    console.log(e.target.password.value);
+  };
   return (
     <>
       {/* <NavBar></NavBar> */}
@@ -126,73 +152,77 @@ function Login() {
               >
                 Sign Up
               </Typography>
-
-              <FormControl>
-                {/* EMAIL TEXT FIELD */}
-                <TextFieldStyled
-                  type="text"
-                  label="Name"
-                  variant="outlined"
-                  sx={{
-                    input: { color: "#A0BFE0" },
-                    label: { color: "#A0BFE0" },
-                  }}
-                />
-
-                <TextFieldStyled
-                  type="email"
-                  label="Email"
-                  variant="outlined"
-                  sx={{
-                    input: { color: "#A0BFE0" },
-                    label: { color: "#A0BFE0" },
-                  }}
-                />
-
-                {/* PASSWORD TEXT FIELD */}
-                <TextFieldStyled
-                  type="password"
-                  label="Password"
-                  color="primary"
-                  variant="outlined"
-                  sx={{
-                    input: { color: "#A0BFE0" },
-                    label: { color: "#A0BFE0" },
-                  }}
-                />
-
-                <TextFieldStyled
-                  type="password"
-                  label="Confirm Password"
-                  color="primary"
-                  variant="outlined"
-                  sx={{
-                    input: { color: "#A0BFE0" },
-                    label: { color: "#A0BFE0" },
-                  }}
-                />
-
-                {/* FORGOT PWD*/}
-                <ColoredLink sx={{margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0"}}>
-                  Already have an account? {" "}
-                  <span 
-                    onClick={() => {
-                      navigate("/login");
+              <form onSubmit={handleSignUpSubmit}>
+                <FormControl onSubmit={handleSignUpSubmit}>
+                  {/* EMAIL TEXT FIELD */}
+                  <TextFieldStyled
+                    type="text"
+                    label="Username"
+                    variant="outlined"
+                    name="username"
+                    sx={{
+                      input: { color: "#A0BFE0" },
+                      label: { color: "#A0BFE0" },
                     }}
-                    style={{textDecoration: "underline", color: "white"}}
-                  >
-                    Click Here
-                  </span>
-                </ColoredLink>
+                  />
 
-                {/* SUBMIT BUTTON*/}
-                <SignUpButton
-                  variant="contained"
-                  type="submit"
-                >
-                  <GetStartedText variant="h6">Sign Up</GetStartedText>
-                </SignUpButton>
-              </FormControl>
+                  <TextFieldStyled
+                    type="email"
+                    label="Email"
+                    variant="outlined"
+                    name="email"
+                    sx={{
+                      input: { color: "#A0BFE0" },
+                      label: { color: "#A0BFE0" },
+                    }}
+                  />
+
+                  {/* PASSWORD TEXT FIELD */}
+                  <TextFieldStyled
+                    type="password"
+                    label="Password"
+                    color="primary"
+                    variant="outlined"
+                    name="password"
+                    sx={{
+                      input: { color: "#A0BFE0" },
+                      label: { color: "#A0BFE0" },
+                    }}
+                  />
+
+                  <TextFieldStyled
+                    type="password"
+                    label="Confirm Password"
+                    color="primary"
+                    variant="outlined"
+                    name="confPassword"
+                    sx={{
+                      input: { color: "#A0BFE0" },
+                      label: { color: "#A0BFE0" },
+                    }}
+                  />
+
+                  {/* FORGOT PWD*/}
+                  <ColoredLink
+                    sx={{ margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0" }}
+                  >
+                    Already have an account?{" "}
+                    <span
+                      onClick={() => {
+                        navigate("/login");
+                      }}
+                      style={{ textDecoration: "underline", color: "white" }}
+                    >
+                      Click Here
+                    </span>
+                  </ColoredLink>
+
+                  {/* SUBMIT BUTTON*/}
+                  <SignUpButton variant="contained" type="submit">
+                    <GetStartedText variant="h6">Sign Up</GetStartedText>
+                  </SignUpButton>
+                </FormControl>
+              </form>
             </VertStack>
           </LayoutGrid>
         </SplitBoxesGrid>

@@ -1,6 +1,7 @@
 const express = require("express");
 const { createConnection } = require("mysql");
 const cors = require("cors");
+const md5 = require("md5");
 
 const app = express();
 const db = createConnection({
@@ -27,6 +28,23 @@ app.get("/biolessons", (req, res) => {
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
+  });
+});
+
+app.get("/mathlessons", (req, res) => {
+  const q = "Select * FROM math_lessons";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+app.post("/signup", (req, res) => {
+  const q = "INSERT INTO users (`username`, `password`, `email`) VALUES (?)";
+  const values = [req.body.username, md5(req.body.pass), req.body.email];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    return res.json("user added succesfully");
   });
 });
 
@@ -66,7 +84,7 @@ app.get("/biotechnology", (req, res) => {
       }
     }
     return res.json(units);
-  })
+  });
 });
 
 app.get("/appliedmath", (req, res) => {
@@ -105,7 +123,7 @@ app.get("/appliedmath", (req, res) => {
       }
     }
     return res.json(units);
-  })
+  });
 });
 
 app.get("/biocards", (req, res) => {
@@ -147,7 +165,6 @@ app.get("/mathcards", (req, res) => {
     return res.json(lessons);
   });
 });
-
 
 app.listen(8800, () => {
   console.log("Server running on port 8800");

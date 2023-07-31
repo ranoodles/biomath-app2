@@ -31,7 +31,7 @@ const SubGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${'' /* width: 100%; */}
+    ${"" /* width: 100%; */}
   }
 `;
 
@@ -40,7 +40,7 @@ const DescriptionText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
-    ${'' /* font-size: 20px; */}
+    ${"" /* font-size: 20px; */}
     padding-bottom: 1rem;
     text-align: left;
     line-height: 175%;
@@ -67,31 +67,35 @@ const VertStack = styled(Stack)`
   }
 `;
 
-export default function Intro({ lessonIndex }) {
-    const [lesson, setLesson] = useState([]);
-    useEffect(() => {
-        const fetchAllLessons = async () => {
-          try {
-            const res = await axios.get("http://localhost:8800/biolessons");
-            const lessons = res.data;
-            setLesson(lessons[lessonIndex - 1])
-            // setLesson(lessons[1])
-          } catch (err) {
-            console.log(err);
-          }
-        };
-        fetchAllLessons();
-      }, []);
-  
+export default function Intro({ lessonIndex, course }) {
+  const [lesson, setLesson] = useState([]);
+  useEffect(() => {
+    const fetchAllLessons = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:8800/" + course + "lessons"
+        );
+        const lessons = res.data;
+        setLesson(lessons[lessonIndex - 1]);
+        // setLesson(lessons[1])
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAllLessons();
+  }, []);
+
   return (
     <>
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
-            <VertStack>
-                <DescriptionText variant="h3">Welcome to Unit {lesson.unit_id} Lesson {lesson.lesson_number}!</DescriptionText>
-                <TitleText variant="h1">{lesson.lesson_name}</TitleText>
-                <DescriptionText variant="h3">Let's get started!</DescriptionText>
-            </VertStack>
+          <VertStack>
+            <DescriptionText variant="h3">
+              Welcome to Unit {lesson.unit_id} Lesson {lesson.lesson_number}!
+            </DescriptionText>
+            <TitleText variant="h1">{lesson.lesson_name}</TitleText>
+            <DescriptionText variant="h3">Let's get started!</DescriptionText>
+          </VertStack>
         </SplitBoxesGrid>
       </ThemeProvider>
     </>

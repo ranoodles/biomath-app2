@@ -78,7 +78,7 @@ const Progress = styled.div`
   height: 4px;
   z-index: 3;
 `;
-function BiotechnologyPage() {
+function AppliedMathPage() {
   document.body.style.overflow = "hidden";
   var units = [];
   const [unitsList, setUnitsList] = useState([]);
@@ -145,4 +145,4 @@ function BiotechnologyPage() {
   );
 }
 
-export default BiotechnologyPage;
+export default AppliedMathPage;
