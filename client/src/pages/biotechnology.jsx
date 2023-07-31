@@ -24,7 +24,7 @@ import { FormControl, TextField } from "@mui/material";
 import NavBar from "./website-constants/NavBarLoggedIn.jsx";
 import DisplayCard from "./biotechnologyComponents/biotechUnits.jsx";
 import BiotechTitle from "./biotechnologyComponents/biotechTitle.jsx";
-import scienceImg from "./biotechnologyComponents/scientific-microscope.png";
+import scienceImg from "./biotechnologyComponents/scienstist_goat.svg";
 
 const CardHolder = styled(Grid)`
   && {
@@ -34,9 +34,7 @@ const CardHolder = styled(Grid)`
     border-color: #d99565;
     flex-direction: row;
     overflow-y: hidden;
-    padding: 0rem 5rem 5rem 5rem;
     height: 80vh;
-    margin: 0 0px 1000px 0px;
   }
 `;
 const FatHolder = styled(Grid)`
@@ -118,7 +116,10 @@ function BiotechnologyPage() {
       <NavBar />
       <BiotechTitle item />
       <hr></hr>
-      <CardHolder container>
+      <CardHolder
+        container
+        sx={{ padding: { xs: "none", md: "0rem 5rem 0rem 5rem" } }}
+      >
         <Hidden xsDown>
           <StyledImageHolder
             item

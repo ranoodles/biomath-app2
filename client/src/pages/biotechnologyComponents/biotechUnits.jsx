@@ -41,7 +41,6 @@ const DescriptionText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
-    font-size: 20px;
     padding-bottom: 1rem;
     text-align: left;
     color: white;
@@ -55,7 +54,6 @@ const VertStack = styled(Stack)`
     align-items: left;
     padding: 3rem;
     border-radius: 2rem;
-    width: 70%;
     border: 1px solid grey;
     background: linear-gradient(to right top, #535eab, #8351c2);
     disable-align: false;
@@ -95,8 +93,7 @@ const HolderGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 3rem;
-    padding-top: 3rem;
+    padding: 3rem 3rem 3rem 3rem;
   }
 `;
 
@@ -127,10 +124,10 @@ function DisplayInfo({ unit, handleLessonSelect }) {
               background: "linear-gradient(to right top, #354083, #6533A4)",
             }}
           >
-            <TitleText variant="h2">
+            <TitleText sx={{ fontSize: { xs: "6vw", md: "4vw" } }}>
               {unit.id}. {unit.name}
             </TitleText>
-            <DescriptionText item variant="h4">
+            <DescriptionText item sx={{ fontSize: { xs: "2vw", md: "1.5vw" } }}>
               {unit.description}
             </DescriptionText>
             <ButtonHolderGroup
@@ -146,7 +143,12 @@ function DisplayInfo({ unit, handleLessonSelect }) {
                   key={lesson.lesson_id}
                   onClick={() => handleLessonSelect(lesson)}
                 >
-                  <Typography sx={{ fontSize: "1.25rem", fontWeight: "600" }}>
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "3vw", md: "1.5vw" },
+                      fontWeight: "600",
+                    }}
+                  >
                     {lesson.lesson_name}
                   </Typography>
                 </ListButtons>
