@@ -15,14 +15,16 @@ import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
-
+import axios from "axios";
 const SplitBoxesGrid = styled(Grid)`
   && {
     display: flex;
     align-items: center;
     font-size: 25px;
     height: 100vh;
-    ${'' /* background-image: url("https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg"); */}
+    ${
+      "" /* background-image: url("https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg"); */
+    }
   }
 `;
 
@@ -66,14 +68,14 @@ const TextFieldStyled = styled(TextField)`
 `;
 
 const ColoredLink = styled(Typography)`
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   &:visited {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 `;
 
-const SignUpButton = styled(Button)`
+const LogInButton = styled(Button)`
   && {
     background-color: transparent;
     border: 2px solid;
@@ -95,7 +97,7 @@ const GetStartedText = styled(Typography)`
     display: flex;
     justify-content: center;
     color: white;
-    ${'' /* padding: 0.05rem; */}
+    ${"" /* padding: 0.05rem; */}
     font-weight: 500;
     text-transform: none;
   }
@@ -103,6 +105,23 @@ const GetStartedText = styled(Typography)`
 
 function Login() {
   const navigate = useNavigate();
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Awrhiauwcnheiunfehciun");
+    const userData = {
+      username: e.target.username.value,
+      pass: e.target.password.value,
+      email: e.target.email.value,
+    };
+    try {
+      await axios.post("http://localhost:8800/signup", userData);
+    } catch (err) {
+      console.log("oh yeah zaddy");
+    }
+
+    console.log(e.target.username.value);
+    console.log(e.target.password.value);
+  };
   return (
     <>
       {/* <NavBar></NavBar> */}
@@ -160,29 +179,29 @@ function Login() {
                     fontSize: 20,
                   }}
                 >
-                  <ColoredLink 
-                  onClick={() => {
+                  <ColoredLink
+                    onClick={() => {
                       navigate("/forgotpassword");
                     }}
-                  style={{textDecoration: "underline"}}>
+                    style={{ textDecoration: "underline" }}
+                  >
                     Forgot my Password
                   </ColoredLink>
                 </Typography>
 
                 {/* SUBMIT BUTTON*/}
-                <SignUpButton
-                  variant="contained"
-                  type="submit"
-                >
+                <LogInButton variant="contained" type="submit">
                   <GetStartedText variant="h6">Log In</GetStartedText>
-                </SignUpButton>
-                <ColoredLink sx={{margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0"}}>
-                  Don't have an account? {" "}
-                  <span 
+                </LogInButton>
+                <ColoredLink
+                  sx={{ margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0" }}
+                >
+                  Don't have an account?{" "}
+                  <span
                     onClick={() => {
                       navigate("/signup");
                     }}
-                    style={{textDecoration: "underline", color: "white"}}
+                    style={{ textDecoration: "underline", color: "white" }}
                   >
                     Click Here
                   </span>
