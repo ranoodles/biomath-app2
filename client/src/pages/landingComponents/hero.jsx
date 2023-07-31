@@ -99,6 +99,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 3, ease: "easeInOut" }}
           sx={{ display: { xs: "flex", md: "inline-block" }, padding: "5px" }}
+
         >
           <TitleText variant="h2" color="white">
             Be prepared for your educational career and beyond.

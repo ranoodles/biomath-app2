@@ -123,6 +123,20 @@ function DisplayInfo({ unit, handleLessonSelect }) {
               scale: 1.05,
               background: "linear-gradient(to right top, #354083, #6533A4)",
             }}
+        >
+          <TitleText variant="h2">
+            {unit.id}. {unit.name}
+            {/* {unit.name} */}
+          </TitleText>
+          <DescriptionText item variant="h4">
+            {unit.description}
+          </DescriptionText>
+          <ButtonHolderGroup
+            item
+            variant="text"
+            orientation="vertical"
+            color="primary"
+            sx={{ color: "white" }}
           >
             <TitleText sx={{ fontSize: { xs: "6vw", md: "4vw" } }}>
               {unit.id}. {unit.name}

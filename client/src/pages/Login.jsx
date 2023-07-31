@@ -13,7 +13,7 @@ import {
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 
 const SplitBoxesGrid = styled(Grid)`
@@ -22,7 +22,7 @@ const SplitBoxesGrid = styled(Grid)`
     align-items: center;
     font-size: 25px;
     height: 100vh;
-    background-image: url("https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg");
+    ${'' /* background-image: url("https://wallpaperboat.com/wp-content/uploads/2019/10/free-website-background-07.jpg"); */}
   }
 `;
 
@@ -65,23 +65,53 @@ const TextFieldStyled = styled(TextField)`
   }
 `;
 
-const ColoredLink = styled(Link)`
+const ColoredLink = styled(Typography)`
   color: #FFFFFF;
+  cursor: pointer;
   &:visited {
     color: #FFFFFF;
   }
 `;
 
+const SignUpButton = styled(Button)`
+  && {
+    background-color: transparent;
+    border: 2px solid;
+    width: 7rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #03add5;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    &:hover {
+      box-shadow: inset 400px 0 0 0 #03add5;
+    }
+  }
+`;
+
+const GetStartedText = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: center;
+    color: white;
+    ${'' /* padding: 0.05rem; */}
+    font-weight: 500;
+    text-transform: none;
+  }
+`;
+
 function Login() {
+  const navigate = useNavigate();
   return (
     <>
-      <NavBar></NavBar>
+      {/* <NavBar></NavBar> */}
       <ThemeProvider theme={theme}>
         <SplitBoxesGrid
           container
           divider={<Divider orientation="vertical" flexItem />}
         >
-          <LayoutGrid item xs={12} sm={7.5} sx={{ backgroundColor: "black" }}>
+          <LayoutGrid item xs={12} sm={7.5}>
             <VertStack>
               {/* LOGIN MAIN TEXT */}
               <Typography
@@ -127,39 +157,36 @@ function Login() {
                     textAlign: "left",
                     margin: "0 1rem 1rem 1rem",
                     fontWeight: 200,
-                    fontSize: 15,
+                    fontSize: 20,
                   }}
                 >
-                  <ColoredLink to="/forgotmypassword">
+                  <ColoredLink 
+                  onClick={() => {
+                      navigate("/forgotpassword");
+                    }}
+                  style={{textDecoration: "underline"}}>
                     Forgot my Password
                   </ColoredLink>
                 </Typography>
 
                 {/* SUBMIT BUTTON*/}
-                <Button
+                <SignUpButton
                   variant="contained"
                   type="submit"
-                  sx={{
-                    margin: "1rem",
-                    width: "80px",
-                  }}
                 >
-                  Login
-                </Button>
-
-                {/* DONT HAVE ACCT LINK*/}
-                <Typography
-                  sx={{
-                    textAlign: "left",
-                    margin: "0 1rem 1rem 1rem",
-                    fontWeight: 200,
-                    fontSize: 15,
-                    color: "#A0BFE0",
-                  }}
-                >
-                  Don't have an account?{" "}
-                  <ColoredLink to="/signup"> Click Here</ColoredLink>
-                </Typography>
+                  <GetStartedText variant="h6">Log In</GetStartedText>
+                </SignUpButton>
+                <ColoredLink sx={{margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0"}}>
+                  Don't have an account? {" "}
+                  <span 
+                    onClick={() => {
+                      navigate("/signup");
+                    }}
+                    style={{textDecoration: "underline", color: "white"}}
+                  >
+                    Click Here
+                  </span>
+                </ColoredLink>
               </FormControl>
             </VertStack>
           </LayoutGrid>

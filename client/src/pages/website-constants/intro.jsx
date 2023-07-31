@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -30,7 +31,6 @@ const SubGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${"" /* padding: 2rem; */}
     ${'' /* width: 100%; */}
   }
 `;
@@ -40,7 +40,7 @@ const DescriptionText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
-    font-size: 20px;
+    ${'' /* font-size: 20px; */}
     padding-bottom: 1rem;
     text-align: left;
     line-height: 175%;
@@ -59,43 +59,41 @@ const SplitBoxesGrid = styled(Grid)`
   }
 `;
 
-const Img = styled(Image)`
+const VertStack = styled(Stack)`
   && {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    width: 100%;
-    ${"" /* padding: 1rem; */}
   }
 `;
 
-const VertStack = styled(Stack)`
-  && {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-  }
-`;
-
-function ImageText({ displayInfo }) {
+export default function Intro({ lessonIndex }) {
+    const [lesson, setLesson] = useState([]);
+    useEffect(() => {
+        const fetchAllLessons = async () => {
+          try {
+            const res = await axios.get("http://localhost:8800/biolessons");
+            const lessons = res.data;
+            setLesson(lessons[lessonIndex - 1])
+            // setLesson(lessons[1])
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        fetchAllLessons();
+      }, []);
+  
   return (
     <>
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
-          <SubGrid item xs={12} md={4}>
-            <Img src={displayInfo.img} alt=""></Img>
-          </SubGrid>
-          <SubGrid item xs={12} md={7}>
             <VertStack>
-              <TitleText variant="h2">{displayInfo.title}</TitleText>
-              <DescriptionText variant="h6">{displayInfo.text}</DescriptionText>
+                <DescriptionText variant="h3">Welcome to Unit {lesson.unit_id} Lesson {lesson.lesson_number}!</DescriptionText>
+                <TitleText variant="h1">{lesson.lesson_name}</TitleText>
+                <DescriptionText variant="h3">Let's get started!</DescriptionText>
             </VertStack>
-          </SubGrid>
         </SplitBoxesGrid>
       </ThemeProvider>
     </>
   );
 }
-
-export default ImageText;
