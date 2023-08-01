@@ -119,12 +119,15 @@ function Login() {
       pass: e.target.password.value,
       email: e.target.email.value,
     };
+    const confPass = e.target.confPassword.value;
     try {
-      document.querySelectorAll('input').forEach(singleInput => singleInput.value = '');
-      if (userData.pass === e.target.confPassword.value) {
+      if (userData.pass === confPass) {
         console.log("signed up!");
-        await axios.post("http://localhost:8800/signup", userData);
-        navigate('/courses');
+        const res = await axios.post("http://localhost:8800/signup", userData);
+        console.log(res.data);
+        document
+          .querySelectorAll("input")
+          .forEach((singleInput) => (singleInput.value = ""));
       }
     } catch (err) {
       console.log(err);

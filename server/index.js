@@ -2,6 +2,8 @@ const express = require("express");
 const { createConnection } = require("mysql");
 const cors = require("cors");
 const md5 = require("md5");
+const session = require("express-session");
+const path = require("path");
 
 const app = express();
 const db = createConnection({
@@ -11,8 +13,17 @@ const db = createConnection({
   database: "biomath",
 });
 
-app.use(express.json());
 app.use(cors());
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "static")));
 
 app.get("/test", (req, res) => {
   const q = "Select * FROM users";
@@ -44,8 +55,39 @@ app.post("/signup", (req, res) => {
   const values = [req.body.username, md5(req.body.pass), req.body.email];
   db.query(q, [values], (err, data) => {
     if (err) return res.json(err);
-    return res.json("user added succesfully");
+    res.send(data);
   });
+});
+
+app.post("/login", function (req, res) {
+  // Capture the input fields
+  let username = req.body.username;
+  let password = req.body.password;
+  // Ensure the input fields exists and are not empty
+  if (username && password) {
+    // Execute SQL query that'll select the account from the database based on the specified username and password
+    db.query(
+      "SELECT * FROM users WHERE username = ? AND password = ?",
+      [username, md5(password)],
+      function (error, results, fields) {
+        // If there is an issue with the query, output the error
+        if (error) throw error;
+        // If the account exists
+        if (results.length > 0) {
+          // Authenticate the user
+          req.session.loggedin = true;
+          req.session.username = username;
+          res.send(req.session.username);
+        } else {
+          res.send("Incorrect Username and/or Password!");
+        }
+        res.end();
+      }
+    );
+  } else {
+    res.send("Please enter Username and Password!");
+    res.end();
+  }
 });
 
 app.get("/biotechnology", (req, res) => {

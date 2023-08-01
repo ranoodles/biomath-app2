@@ -107,20 +107,20 @@ function Login() {
   const navigate = useNavigate();
   const handleLogInSubmit = async (e) => {
     e.preventDefault();
-    console.log("Awrhiauwcnheiunfehciun");
     const userData = {
       username: e.target.username.value,
       password: e.target.password.value,
     };
     try {
-      await axios.post("http://localhost:8800/login", userData);
-      document.querySelectorAll('input').forEach(singleInput => singleInput.value = '');
-      navigate('/courses');
+      const res = await axios.post("http://localhost:8800/login", userData);
+      document
+        .querySelectorAll("input")
+        .forEach((singleInput) => (singleInput.value = ""));
+      console.log(res.data);
+      // navigate("/courses");
     } catch (err) {
       console.log(err);
     }
-    console.log(e.target.username.value);
-    console.log(e.target.password.value);
   };
   return (
     <>
@@ -149,10 +149,11 @@ function Login() {
                 <FormControl onSubmit={handleLogInSubmit}>
                   {/* EMAIL TEXT FIELD */}
                   <TextFieldStyled
-                    type="username"
-                    label="text"
+                    type="text"
+                    label="Username"
                     variant="outlined"
                     color="primary"
+                    name="username"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
@@ -165,6 +166,7 @@ function Login() {
                     label="Password"
                     color="primary"
                     variant="outlined"
+                    name="password"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
