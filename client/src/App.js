@@ -27,7 +27,7 @@ function App() {
                 element={<BioLearningPath />}
               />
               <Route
-                path="/test"
+                path="/courses"
                 element={<Courses />}
               />
               <Route

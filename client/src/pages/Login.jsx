@@ -105,20 +105,20 @@ const GetStartedText = styled(Typography)`
 
 function Login() {
   const navigate = useNavigate();
-  const handleSignUpSubmit = async (e) => {
+  const handleLogInSubmit = async (e) => {
     e.preventDefault();
     console.log("Awrhiauwcnheiunfehciun");
     const userData = {
       username: e.target.username.value,
       pass: e.target.password.value,
-      email: e.target.email.value,
     };
     try {
-      await axios.post("http://localhost:8800/signup", userData);
+      await axios.post("http://localhost:8800/login", userData);
+      document.querySelectorAll('input').forEach(singleInput => singleInput.value = '');
+      navigate('/courses');
     } catch (err) {
-      console.log("oh yeah zaddy");
+      console.log(err);
     }
-
     console.log(e.target.username.value);
     console.log(e.target.password.value);
   };
@@ -145,68 +145,70 @@ function Login() {
               >
                 Log In
               </Typography>
+              <form onSubmit={handleLogInSubmit}>
+                <FormControl onSubmit={handleLogInSubmit}>
+                  {/* EMAIL TEXT FIELD */}
+                  <TextFieldStyled
+                    type="username"
+                    label="text"
+                    variant="outlined"
+                    color="primary"
+                    sx={{
+                      input: { color: "#A0BFE0" },
+                      label: { color: "#A0BFE0" },
+                    }}
+                  />
 
-              <FormControl>
-                {/* EMAIL TEXT FIELD */}
-                <TextFieldStyled
-                  type="email"
-                  label="Email"
-                  variant="outlined"
-                  sx={{
-                    input: { color: "#A0BFE0" },
-                    label: { color: "#A0BFE0" },
-                  }}
-                />
+                  {/* PASSWORD TEXT FIELD */}
+                  <TextFieldStyled
+                    type="password"
+                    label="Password"
+                    color="primary"
+                    variant="outlined"
+                    sx={{
+                      input: { color: "#A0BFE0" },
+                      label: { color: "#A0BFE0" },
+                    }}
+                  />
 
-                {/* PASSWORD TEXT FIELD */}
-                <TextFieldStyled
-                  type="password"
-                  label="Password"
-                  color="primary"
-                  variant="outlined"
-                  sx={{
-                    input: { color: "#A0BFE0" },
-                    label: { color: "#A0BFE0" },
-                  }}
-                />
+                  {/* FORGOT PWD*/}
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                      margin: "0 1rem 1rem 1rem",
+                      fontWeight: 200,
+                      fontSize: 20,
+                    }}
+                  >
+                    <ColoredLink
+                      onClick={() => {
+                        navigate("/forgotpassword");
+                      }}
+                      style={{ textDecoration: "underline" }}
+                    >
+                      Forgot my Password
+                    </ColoredLink>
+                  </Typography>
 
-                {/* FORGOT PWD*/}
-                <Typography
-                  sx={{
-                    textAlign: "left",
-                    margin: "0 1rem 1rem 1rem",
-                    fontWeight: 200,
-                    fontSize: 20,
-                  }}
-                >
+                  {/* SUBMIT BUTTON*/}
+                  <LogInButton variant="contained" type="submit">
+                    <GetStartedText variant="h6">Log In</GetStartedText>
+                  </LogInButton>
                   <ColoredLink
-                    onClick={() => {
-                      navigate("/forgotpassword");
-                    }}
-                    style={{ textDecoration: "underline" }}
+                    sx={{ margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0" }}
                   >
-                    Forgot my Password
+                    Don't have an account?{" "}
+                    <span
+                      onClick={() => {
+                        navigate("/signup");
+                      }}
+                      style={{ textDecoration: "underline", color: "white" }}
+                    >
+                      Click Here
+                    </span>
                   </ColoredLink>
-                </Typography>
-
-                {/* SUBMIT BUTTON*/}
-                <LogInButton variant="contained" type="submit">
-                  <GetStartedText variant="h6">Log In</GetStartedText>
-                </LogInButton>
-                <ColoredLink
-                  sx={{ margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0" }}
-                >
-                  Don't have an account?{" "}
-                  <span
-                    onClick={() => {
-                      navigate("/signup");
-                    }}
-                    style={{ textDecoration: "underline", color: "white" }}
-                  >
-                    Click Here
-                  </span>
-                </ColoredLink>
-              </FormControl>
+                </FormControl>
+              </form>
             </VertStack>
           </LayoutGrid>
         </SplitBoxesGrid>

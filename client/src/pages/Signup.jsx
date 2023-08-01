@@ -120,9 +120,11 @@ function Login() {
       email: e.target.email.value,
     };
     try {
+      document.querySelectorAll('input').forEach(singleInput => singleInput.value = '');
       if (userData.pass === e.target.confPassword.value) {
+        console.log("signed up!");
         await axios.post("http://localhost:8800/signup", userData);
-        document.querySelectorAll('input').forEach(singleInput => singleInput.value = '');
+        navigate('/courses');
       }
     } catch (err) {
       console.log(err);
@@ -159,7 +161,7 @@ function Login() {
                     label="Username"
                     variant="outlined"
                     name="username"
-                    id="username"
+                    // id="username"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
@@ -171,7 +173,7 @@ function Login() {
                     label="Email"
                     variant="outlined"
                     name="email"
-                    id="email"
+                    // id="email"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
@@ -185,7 +187,7 @@ function Login() {
                     color="primary"
                     variant="outlined"
                     name="password"
-                    id="password"
+                    // id="password"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
