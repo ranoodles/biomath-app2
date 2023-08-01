@@ -110,7 +110,7 @@ function Login() {
     console.log("Awrhiauwcnheiunfehciun");
     const userData = {
       username: e.target.username.value,
-      pass: e.target.password.value,
+      password: e.target.password.value,
     };
     try {
       await axios.post("http://localhost:8800/login", userData);
