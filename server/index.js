@@ -59,6 +59,11 @@ app.post("/signup", (req, res) => {
   });
 });
 
+app.post("/logout", function (req, res) {
+  req.session.destroy();
+  res.send(req.session.loggedIn);
+});
+
 app.post("/login", function (req, res) {
   // Capture the input fields
   let username = req.body.username;
@@ -77,7 +82,7 @@ app.post("/login", function (req, res) {
           // Authenticate the user
           req.session.loggedin = true;
           req.session.username = username;
-          res.send(req.session.username);
+          res.send([req.session.loggedin, req.session.username]);
         } else {
           res.send("Incorrect Username and/or Password!");
         }
@@ -87,6 +92,17 @@ app.post("/login", function (req, res) {
   } else {
     res.send("Please enter Username and Password!");
     res.end();
+  }
+});
+
+app.get("/check-login-status", (req, res) => {
+  // Check if the user is logged in based on the session data
+  if (req.session.loggedin) {
+    // If the user is logged in, send the response with loggedIn as true
+    res.json({ loggedIn: true, username: req.session.username });
+  } else {
+    // If the user is not logged in, send the response with loggedIn as false
+    res.json({ loggedIn: false, username: null });
   }
 });
 

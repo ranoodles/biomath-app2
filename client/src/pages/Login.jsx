@@ -16,6 +16,8 @@ import { FormControl, TextField } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 import axios from "axios";
+import checkAuth from "./authCheck.js";
+
 const SplitBoxesGrid = styled(Grid)`
   && {
     display: flex;
@@ -117,6 +119,7 @@ function Login() {
         .querySelectorAll("input")
         .forEach((singleInput) => (singleInput.value = ""));
       console.log(res.data);
+      const pres = checkAuth();
       // navigate("/courses");
     } catch (err) {
       console.log(err);

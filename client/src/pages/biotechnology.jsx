@@ -25,6 +25,7 @@ import NavBar from "./website-constants/NavBarLoggedIn.jsx";
 import DisplayCard from "./biotechnologyComponents/biotechUnits.jsx";
 import BiotechTitle from "./biotechnologyComponents/biotechTitle.jsx";
 import scienceImg from "./biotechnologyComponents/scienstist_goat.svg";
+import authCheck from "./authCheck.js";
 
 const CardHolder = styled(Grid)`
   && {
@@ -65,7 +66,7 @@ const StyledImageHolder = styled(Grid)`
 
 const Bruh = styled.div`
   height: 120vh;
-  ${'' /* overflow: hidden; */}
+  ${"" /* overflow: hidden; */}
 `;
 
 function BiotechnologyPage() {
@@ -74,6 +75,16 @@ function BiotechnologyPage() {
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [selectedLessonId, setSelectedLessonId] = useState(null);
   const navigate = useNavigate();
+  useEffect(() => {
+    const checkStatus = async () => {
+      const loggedIn = await authCheck();
+      if (!loggedIn) {
+        navigate("/login");
+      }
+    };
+    checkStatus();
+  }, [navigate]);
+
   const handleLessonSelect = (lessonDetails) => {
     setSelectedLessonId(lessonDetails.lesson_id);
     navigate("/biotechnology/" + lessonDetails.lesson_id);
@@ -103,35 +114,35 @@ function BiotechnologyPage() {
   return (
     <ThemeProvider theme={theme}>
       <Bruh>
-      <NavBar />
-      <BiotechTitle item />
-      <CardHolder
-        container
-        sx={{ padding: { xs: "none", md: "0rem 2rem 2rem 2rem" } }}
-      >
-        <Hidden xsDown>
-          <StyledImageHolder
-            item
-            md={3.5}
-            sx={{ display: { xs: "none", md: "flex" }, paddingRight: "20px" }}
-          >
-            <Image src={scienceImg} />
-          </StyledImageHolder>
-        </Hidden>
+        <NavBar />
+        <BiotechTitle item />
+        <CardHolder
+          container
+          sx={{ padding: { xs: "none", md: "0rem 2rem 2rem 2rem" } }}
+        >
+          <Hidden xsDown>
+            <StyledImageHolder
+              item
+              md={3.5}
+              sx={{ display: { xs: "none", md: "flex" }, paddingRight: "20px" }}
+            >
+              <Image src={scienceImg} />
+            </StyledImageHolder>
+          </Hidden>
 
-        <FatHolder item xs={12} md={8.5} onScroll={handleScroll}>
-          {unitsList.length > 0 &&
-            unitsList.map((unit, index) => (
-              <DisplayCard
-                item
-                unit={unit}
-                handleLessonSelect={handleLessonSelect}
-                key={index}
-              />
-            ))}
-        </FatHolder>
-      </CardHolder>
-      {/* <Grid sx={{ paddingBottom: "10000px" }}></Grid> */}
+          <FatHolder item xs={12} md={8.5} onScroll={handleScroll}>
+            {unitsList.length > 0 &&
+              unitsList.map((unit, index) => (
+                <DisplayCard
+                  item
+                  unit={unit}
+                  handleLessonSelect={handleLessonSelect}
+                  key={index}
+                />
+              ))}
+          </FatHolder>
+        </CardHolder>
+        {/* <Grid sx={{ paddingBottom: "10000px" }}></Grid> */}
       </Bruh>
     </ThemeProvider>
   );

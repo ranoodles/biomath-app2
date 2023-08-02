@@ -12,7 +12,8 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import BiotechIcon from "@mui/icons-material/Biotech";
-
+import axios from "axios";
+import { unstable_createMuiStrictModeTheme } from "@mui/material";
 const pages = ["Biotechnology", "Applied Math", "About Us"];
 const settings = ["Profile", "Logout"];
 
@@ -23,6 +24,7 @@ function NavBar(props) {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -33,6 +35,15 @@ function NavBar(props) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogOut = async () => {
+    try {
+      const res = await axios.post("http://localhost:8800/logout");
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -152,7 +163,9 @@ function NavBar(props) {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Button onClick={handleLogOut}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </Button>
                 </MenuItem>
               ))}
             </Menu>
