@@ -17,7 +17,7 @@ app.use(cors());
 app.use(
   session({
     secret: "secret",
-    resave: true,
+    resave: false,
     saveUninitialized: true,
   })
 );
@@ -61,7 +61,8 @@ app.post("/signup", (req, res) => {
 
 app.post("/logout", function (req, res) {
   req.session.destroy();
-  res.send(req.session.loggedIn);
+  res.send(false);
+  res.end();
 });
 
 app.post("/login", function (req, res) {
@@ -95,15 +96,14 @@ app.post("/login", function (req, res) {
   }
 });
 
-app.get("/check-login-status", (req, res) => {
-  // Check if the user is logged in based on the session data
-  if (req.session.loggedin) {
-    // If the user is logged in, send the response with loggedIn as true
-    res.json({ loggedIn: true, username: req.session.username });
+app.get("/checkLoggedIn", (req, res) => {
+  const loginCheck = req.session.loggedin;
+  if (loginCheck) {
+    res.send(true);
   } else {
-    // If the user is not logged in, send the response with loggedIn as false
-    res.json({ loggedIn: false, username: null });
+    res.send(false);
   }
+  res.end();
 });
 
 app.get("/biotechnology", (req, res) => {

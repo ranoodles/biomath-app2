@@ -75,15 +75,6 @@ function BiotechnologyPage() {
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [selectedLessonId, setSelectedLessonId] = useState(null);
   const navigate = useNavigate();
-  useEffect(() => {
-    const checkStatus = async () => {
-      const loggedIn = await authCheck();
-      if (!loggedIn) {
-        navigate("/login");
-      }
-    };
-    checkStatus();
-  }, [navigate]);
 
   const handleLessonSelect = (lessonDetails) => {
     setSelectedLessonId(lessonDetails.lesson_id);

@@ -1,13 +1,16 @@
+// Create a separate file authCheck.js or any other appropriate filename
+// Import the necessary dependencies
 import axios from "axios";
-const checkLoginStatus = async () => {
+
+// Function to check if the user is authenticated (logged in)
+const checkAuth = async () => {
   try {
-    const res = await axios.get("http://localhost:8800/check-login-status");
-    console.log(res.data);
-    return res.data.loggedIn;
-  } catch (err) {
-    console.log(err);
-    return false;
+    const response = await axios.get("http://localhost:8800/checkLoggedIn");
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    return error;
   }
 };
 
-export default checkLoginStatus;
+export default checkAuth;

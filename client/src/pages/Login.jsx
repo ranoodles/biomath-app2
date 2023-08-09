@@ -118,13 +118,20 @@ function Login() {
       document
         .querySelectorAll("input")
         .forEach((singleInput) => (singleInput.value = ""));
-      console.log(res.data);
-      const pres = checkAuth();
+      const resTwo = await axios.get("http://localhost:8800/checkLoggedIn");
+      const isLoggedIn = resTwo.data;
+      if (isLoggedIn) {
+        console.log(isLoggedIn);
+        navigate("/courses");
+      } else {
+        console.log("");
+      }
       // navigate("/courses");
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <>
       {/* <NavBar></NavBar> */}
