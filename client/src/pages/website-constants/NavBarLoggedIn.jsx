@@ -14,13 +14,15 @@ import MenuItem from "@mui/material/MenuItem";
 import BiotechIcon from "@mui/icons-material/Biotech";
 import axios from "axios";
 import { unstable_createMuiStrictModeTheme } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 const pages = ["Biotechnology", "Applied Math", "About Us"];
 const settings = ["Profile", "Logout"];
 
 function NavBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const navigate = useNavigate();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -41,6 +43,7 @@ function NavBar(props) {
     try {
       const res = await axios.post("http://localhost:8800/logout");
       console.log(res.data);
+      navigate("/login");
     } catch (err) {
       console.log(err);
     }
@@ -72,61 +75,7 @@ function NavBar(props) {
             BIOMATH
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <BiotechIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "avenir",
-              fontWeight: 400,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+          {/* Pages buttons */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -139,6 +88,7 @@ function NavBar(props) {
             ))}
           </Box>
 
+          {/* User settings */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -163,9 +113,13 @@ function NavBar(props) {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Button onClick={handleLogOut}>
+                  {setting === "Logout" ? (
+                    <Button onClick={handleLogOut}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </Button>
+                  ) : (
                     <Typography textAlign="center">{setting}</Typography>
-                  </Button>
+                  )}
                 </MenuItem>
               ))}
             </Menu>
@@ -175,4 +129,5 @@ function NavBar(props) {
     </AppBar>
   );
 }
+
 export default NavBar;

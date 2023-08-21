@@ -1,18 +1,10 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Router,
-  Navigate,
-} from "react-router-dom";
-import { lazy, Suspense } from "react";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useState, useEffect, Suspense, lazy } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
 import theme from "./pages/website-constants/Theme.jsx";
 import Intro from "./pages/website-constants/intro.jsx";
 import Courses from "./pages/Courses.jsx";
-import checkAuth from "./pages/authCheck.js";
+import axios from "axios";
 const MathLearningPath = lazy(() => import("./pages/mathlearningpath.jsx"));
 const BioLearningPath = lazy(() => import("./pages/biolearningpath.jsx"));
 const Landing = lazy(() => import("./pages/Landing"));
@@ -23,10 +15,15 @@ const AppliedMathPage = lazy(() => import("./pages/appliedmath"));
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+
   useEffect(() => {
     const checkLoggedIn = async () => {
-      console.log(await checkAuth());
-      setLoggedIn(await checkAuth());
+      try {
+        const res = await axios.get("http://localhost:8800/checkLoggedIn");
+        setLoggedIn(res.data);
+      } catch (err) {
+        console.log(err);
+      }
     };
     checkLoggedIn();
   }, []);
@@ -40,7 +37,13 @@ function App() {
               <Route
                 key="login"
                 path="/login"
-                element={!loggedIn ? <Login /> : <Navigate to="/courses" />}
+                element={
+                  loggedIn ? (
+                    <Navigate to="/courses" />
+                  ) : (
+                    <Login setLoggedIn={setLoggedIn} />
+                  )
+                }
               />
               <Route
                 path="/biotechnology/:lessonid"
@@ -68,7 +71,6 @@ function App() {
                 path="/signup"
                 element={!loggedIn ? <Signup /> : <Navigate to="/courses" />}
               />
-
               <Route
                 key="biotechnology"
                 path="/biotechnology"

@@ -108,7 +108,6 @@ export default function CourseDisplay() {
     collection.forEach((item) => {
       item.style.opacity = "1";
     });
-    console.log(collection);
   };
 
   const hoverOff = (event) => {
