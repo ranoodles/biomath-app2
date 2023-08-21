@@ -1,11 +1,26 @@
 const express = require("express");
-const { createConnection } = require("mysql");
+const { createConnection } = require("mysql2");
 const cors = require("cors");
 const md5 = require("md5");
-const session = require("express-session");
 const path = require("path");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const bcrypt = require("bcrypt");
 
 const app = express();
+
+const bodyParser = require("body-parser");
+const expressSession = session({
+  secret: "juicy",
+  resave: false,
+  saveUninitialized: false,
+});
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSession);
+app.use(cookieParser());
+
 const db = createConnection({
   host: "mysql.biomath.dreamhosters.com",
   user: "biomath",
@@ -14,16 +29,14 @@ const db = createConnection({
 });
 
 app.use(cors());
-app.use(
-  session({
-    secret: "secret",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static")));
+const passport = require("passport");
+const { errorMonitor } = require("events");
+const { resourceLimits } = require("worker_threads");
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/test", (req, res) => {
   const q = "Select * FROM users";
@@ -51,59 +64,107 @@ app.get("/mathlessons", (req, res) => {
 });
 
 app.post("/signup", (req, res) => {
-  const q = "INSERT INTO users (`username`, `password`, `email`) VALUES (?)";
-  const values = [req.body.username, md5(req.body.pass), req.body.email];
-  db.query(q, [values], (err, data) => {
-    if (err) return res.json(err);
-    res.send(data);
+  bcrypt.hash(req.body.pass, 10, function (err, hash) {
+    const q = "INSERT INTO users (`username`, `password`, `email`) VALUES (?)";
+    const values = [req.body.username, hash, req.body.email];
+    db.query(q, [values], (err, data) => {
+      if (err) return res.json(err);
+      res.send(data);
+    });
   });
 });
 
 app.post("/logout", function (req, res) {
-  req.session.destroy();
-  res.send(false);
-  res.end();
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+      res.status(500).send("Error logging out");
+    } else {
+      res.send(false);
+    }
+  });
 });
 
-app.post("/login", function (req, res) {
-  // Capture the input fields
-  let username = req.body.username;
-  let password = req.body.password;
-  // Ensure the input fields exists and are not empty
-  if (username && password) {
-    // Execute SQL query that'll select the account from the database based on the specified username and password
-    db.query(
-      "SELECT * FROM users WHERE username = ? AND password = ?",
-      [username, md5(password)],
-      function (error, results, fields) {
-        // If there is an issue with the query, output the error
-        if (error) throw error;
-        // If the account exists
-        if (results.length > 0) {
-          // Authenticate the user
-          req.session.loggedin = true;
-          req.session.username = username;
-          res.send([req.session.loggedin, req.session.username]);
-        } else {
-          res.send("Incorrect Username and/or Password!");
-        }
-        res.end();
+app.post("/login", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  // Fetch the user's data from the database based on the username
+  db.execute(
+    "SELECT * FROM users WHERE username = ?;",
+    [username],
+    (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: "Database error" });
       }
-    );
-  } else {
-    res.send("Please enter Username and Password!");
-    res.end();
-  }
+
+      if (result.length > 0) {
+        const storedPassword = result[0].password;
+
+        // Compare the provided password with the stored hashed password using bcrypt
+        bcrypt.compare(password, storedPassword, (bcryptErr, isMatch) => {
+          if (bcryptErr) {
+            return res.status(500).json({ error: "Error comparing passwords" });
+          }
+
+          if (isMatch) {
+            // Passwords match, user is authenticated
+            res.send(true);
+          } else {
+            // Passwords don't match
+            res.send(false);
+          }
+        });
+      } else {
+        // No user found with the provided username
+        return res.json({ success: false, message: "User doesn't exist" });
+      }
+    }
+  );
 });
+
+// app.post("/login", function (req, res) {
+//   let username = req.body.username;
+//   let password = req.body.password;
+//   if (username && password) {
+//     db.execute(
+//       "SELECT * FROM users WHERE username = ?;", [username],
+//       (err, result)=> {
+//         if (err) {
+//             res.send({err: err});
+//         }
+
+//         )
+
+//   }
+//   if (username && password) {
+//     db.query(
+//       "SELECT * FROM users WHERE username = ? AND password = ?",
+//       [username, md5(password)],
+//       function (error, results, fields) {
+//         if (error) throw error;
+//         if (results.length > 0) {
+//           req.session.loggedin = true;
+//           req.session.username = username;
+//           res.send([req.session.loggedin, req.session.username]);
+//         } else {
+//           res.send("Incorrect Username and/or Password!");
+//         }
+//         res.end();
+//       }
+//     );
+//   } else {
+//     res.send("Please enter Username and Password!");
+//     res.end();
+//   }
+// });
 
 app.get("/checkLoggedIn", (req, res) => {
-  const loginCheck = req.session.loggedin;
-  if (loginCheck) {
+  if (req.session.loggedin) {
     res.send(true);
   } else {
     res.send(false);
   }
-  res.end();
 });
 
 app.get("/biotechnology", (req, res) => {

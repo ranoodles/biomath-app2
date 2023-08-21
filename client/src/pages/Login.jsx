@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -16,7 +16,6 @@ import { FormControl, TextField } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 import axios from "axios";
-import checkAuth from "./authCheck.js";
 
 const SplitBoxesGrid = styled(Grid)`
   && {
@@ -104,31 +103,30 @@ const GetStartedText = styled(Typography)`
     text-transform: none;
   }
 `;
-
-function Login() {
+function Login({ setLoggedIn }) {
   const navigate = useNavigate();
+  const [error, setError] = useState(""); // State to hold login error message
+
   const handleLogInSubmit = async (e) => {
     e.preventDefault();
     const userData = {
       username: e.target.username.value,
       password: e.target.password.value,
     };
+    console.log(e.target.password.value);
+
     try {
       const res = await axios.post("http://localhost:8800/login", userData);
-      document
-        .querySelectorAll("input")
-        .forEach((singleInput) => (singleInput.value = ""));
-      const resTwo = await axios.get("http://localhost:8800/checkLoggedIn");
-      const isLoggedIn = resTwo.data;
-      if (isLoggedIn) {
-        console.log(isLoggedIn);
+      console.log(res.data);
+      if (res.data === true) {
+        setLoggedIn(true); // Set the loggedIn state to true
         navigate("/courses");
       } else {
-        console.log("");
+        setError("Incorrect Username and/or Password");
       }
-      // navigate("/courses");
     } catch (err) {
-      console.log(err);
+      setError("An error occurred while logging in");
+      console.error(err);
     }
   };
 
@@ -162,8 +160,8 @@ function Login() {
                     type="text"
                     label="Username"
                     variant="outlined"
-                    color="primary"
                     name="username"
+                    // id="username"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
@@ -177,13 +175,14 @@ function Login() {
                     color="primary"
                     variant="outlined"
                     name="password"
+                    // id="password"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
                     }}
                   />
 
-                  {/* FORGOT PWD*/}
+                  {/* FORGOT PWD */}
                   <Typography
                     sx={{
                       textAlign: "left",
@@ -202,10 +201,23 @@ function Login() {
                     </ColoredLink>
                   </Typography>
 
-                  {/* SUBMIT BUTTON*/}
+                  {/* SUBMIT BUTTON */}
                   <LogInButton variant="contained" type="submit">
                     <GetStartedText variant="h6">Log In</GetStartedText>
                   </LogInButton>
+                  {error && (
+                    <Typography
+                      sx={{
+                        color: "red",
+                        textAlign: "left",
+                        margin: "0 1rem 1rem 1rem",
+                        fontWeight: 200,
+                        fontSize: 20,
+                      }}
+                    >
+                      {error}
+                    </Typography>
+                  )}
                   <ColoredLink
                     sx={{ margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0" }}
                   >
