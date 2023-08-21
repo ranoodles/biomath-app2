@@ -2,7 +2,6 @@ import React, { useState, useEffect, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./pages/website-constants/Theme.jsx";
-import Intro from "./pages/website-constants/intro.jsx";
 import Courses from "./pages/Courses.jsx";
 import axios from "axios";
 const MathLearningPath = lazy(() => import("./pages/mathlearningpath.jsx"));

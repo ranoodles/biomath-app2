@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -12,7 +11,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import theme from "./Theme";
+import theme from "../website-constants/Theme";
 import Image from "mui-image";
 
 const TitleText = styled(Typography)`
@@ -40,7 +39,7 @@ const DescriptionText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
-    ${"" /* font-size: 20px; */}
+    font-size: 20px;
     padding-bottom: 1rem;
     text-align: left;
     line-height: 175%;
@@ -59,43 +58,38 @@ const SplitBoxesGrid = styled(Grid)`
   }
 `;
 
-const VertStack = styled(Stack)`
+const Img = styled(Image)`
   && {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
+    ${"" /* padding: 1rem; */}
   }
 `;
 
-export default function Conclusion({ lessonIndex, course }) {
-  const [lesson, setLesson] = useState([]);
-  useEffect(() => {
-    const fetchAllLessons = async () => {
-      try {
-        const res = await axios.get(
-          "http://localhost:8800/" + course + "lessons"
-        );
-        const lessons = res.data;
-        setLesson(lessons[lessonIndex - 1]);
-        // setLesson(lessons[1])
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchAllLessons();
-  }, []);
+const VertStack = styled(Stack)`
+  && {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+  }
+`;
+
+export default function TextImage({ displayInfo }) {
   return (
     <>
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
-          <VertStack>
-            <DescriptionText variant="h3">
-              Congratulations on completing
-            </DescriptionText>
-            <TitleText variant="h1">
-              Unit {lesson.unit_id} Lesson {lesson.lesson_number}!
-            </TitleText>
-          </VertStack>
+          <SubGrid item xs={12} md={7}>
+            <VertStack>
+              <TitleText variant="h2">{displayInfo.title}</TitleText>
+              <DescriptionText variant="h6">{displayInfo.text}</DescriptionText>
+            </VertStack>
+          </SubGrid>
+          <SubGrid item xs={12} md={4}>
+            <Img src={displayInfo.img} alt=""></Img>
+          </SubGrid>
         </SplitBoxesGrid>
       </ThemeProvider>
     </>

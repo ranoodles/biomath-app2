@@ -12,7 +12,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import theme from "./Theme";
+import theme from "../website-constants/Theme.jsx";
 import Image from "mui-image";
 
 const TitleText = styled(Typography)`
@@ -67,7 +67,7 @@ const VertStack = styled(Stack)`
   }
 `;
 
-export default function Intro({ lessonIndex, course }) {
+export default function Conclusion({ lessonIndex, course }) {
   const [lesson, setLesson] = useState([]);
   useEffect(() => {
     const fetchAllLessons = async () => {
@@ -83,18 +83,19 @@ export default function Intro({ lessonIndex, course }) {
       }
     };
     fetchAllLessons();
+    // eslint-disable-next-line
   }, []);
-
   return (
     <>
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
           <VertStack>
             <DescriptionText variant="h3">
-              Welcome to Unit {lesson.unit_id} Lesson {lesson.lesson_number}!
+              Congratulations on completing
             </DescriptionText>
-            <TitleText variant="h1">{lesson.lesson_name}</TitleText>
-            <DescriptionText variant="h3">Let's get started!</DescriptionText>
+            <TitleText variant="h1">
+              Unit {lesson.unit_id} Lesson {lesson.lesson_number}!
+            </TitleText>
           </VertStack>
         </SplitBoxesGrid>
       </ThemeProvider>

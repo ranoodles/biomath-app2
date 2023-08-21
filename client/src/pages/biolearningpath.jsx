@@ -16,16 +16,15 @@ import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedIn.jsx";
-import ImgText from "./website-constants/ImageText.jsx";
-import mcq from "./website-constants/mcq.jsx";
+import ImgText from "./cardTemplates/ImageText.jsx";
 import LeftIcon from "@mui/icons-material/ChevronLeft";
 import RightIcon from "@mui/icons-material/ChevronRight";
-import McqCard from "./website-constants/mcq.jsx";
-import TextImg from "./website-constants/TextImage.jsx";
-import FillInBlank from "./website-constants/fillinblank.jsx";
+import McqCard from "./cardTemplates/mcq.jsx";
+import TextImg from "./cardTemplates/TextImage.jsx";
+import FillInBlank from "./cardTemplates/fillinblank.jsx";
 import { useParams } from "react-router-dom";
-import Intro from "./website-constants/intro.jsx";
-import Conclusion from "./website-constants/conclusion.jsx";
+import Intro from "./cardTemplates/intro.jsx";
+import Conclusion from "./cardTemplates/conclusion.jsx";
 
 const HolderGrid = styled(Grid)`
   && {

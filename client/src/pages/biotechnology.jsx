@@ -25,7 +25,6 @@ import NavBar from "./website-constants/NavBarLoggedIn.jsx";
 import DisplayCard from "./biotechnologyComponents/biotechUnits.jsx";
 import BiotechTitle from "./biotechnologyComponents/biotechTitle.jsx";
 import scienceImg from "./biotechnologyComponents/scienstist_goat.svg";
-import authCheck from "./authCheck.js";
 
 const CardHolder = styled(Grid)`
   && {

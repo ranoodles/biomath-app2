@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import CheckIcon from "@mui/icons-material/Check";
-import theme from "./Theme";
+import theme from "../website-constants/Theme.jsx";
 import { useRadioGroup } from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -116,7 +116,11 @@ export default function FillInBlank({ question }) {
       setHelperText("You got it!");
       setHelperColor("green");
       setDisable(true);
-    } else if (value.toLowerCase() !== question.frqAnswer.toLowerCase() && value !== null && value !== "") {
+    } else if (
+      value.toLowerCase() !== question.frqAnswer.toLowerCase() &&
+      value !== null &&
+      value !== ""
+    ) {
       setHelperText("Sorry, wrong answer. Try again!");
       setHelperColor("darkred");
     } else if (value === null || value === "") {
@@ -134,9 +138,7 @@ export default function FillInBlank({ question }) {
               <FormControl>
                 <TextFieldStyled
                   type={
-                    typeof question.frqCorrect === "number"
-                      ? "number"
-                      : "text"
+                    typeof question.frqCorrect === "number" ? "number" : "text"
                   }
                   placeholder="Type answer here"
                   variant="standard"
@@ -155,10 +157,7 @@ export default function FillInBlank({ question }) {
                 >
                   {helperText}
                 </FormHelperText>
-                <CheckButton
-                  variant="contained"
-                  type="submit"
-                >
+                <CheckButton variant="contained" type="submit">
                   <DisplayText variant="h6">Check</DisplayText>
                 </CheckButton>
               </FormControl>

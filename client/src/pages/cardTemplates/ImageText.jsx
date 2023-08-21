@@ -11,7 +11,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import theme from "./Theme";
+import theme from "../website-constants/Theme.jsx";
 import Image from "mui-image";
 
 const TitleText = styled(Typography)`
@@ -31,7 +31,7 @@ const SubGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     ${"" /* padding: 2rem; */}
-    ${'' /* width: 100%; */}
+    ${"" /* width: 100%; */}
   }
 `;
 

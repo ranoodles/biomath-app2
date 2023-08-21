@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import CheckIcon from "@mui/icons-material/Check";
-import theme from "./Theme";
+import theme from "../website-constants/Theme.jsx";
 import { useRadioGroup } from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -73,7 +73,6 @@ const formControlLabelStyle = {
   },
 };
 
-
 const DisplayText = styled(Typography)`
   && {
     display: flex;
@@ -110,7 +109,12 @@ export default function McqCard({ question }) {
   const [radioColor, setRadioColor] = React.useState("default");
   const [disable, setDisable] = React.useState(false);
 
-  const answerChoices = [question.mcqChoice1, question.mcqChoice2, question.mcqChoice3, question.mcqChoice4];
+  const answerChoices = [
+    question.mcqChoice1,
+    question.mcqChoice2,
+    question.mcqChoice3,
+    question.mcqChoice4,
+  ];
 
   React.useEffect(() => {
     setValue(null);
@@ -132,7 +136,10 @@ export default function McqCard({ question }) {
       setRadioColor("success");
       setDisable(true);
       document.getElementById(value).style.color = "green";
-    } else if (value !== answerChoices[question.mcqCorrect - 1] && value != null) {
+    } else if (
+      value !== answerChoices[question.mcqCorrect - 1] &&
+      value != null
+    ) {
       document.getElementById(value).style.color = "darkred";
       setHelperText("Sorry, wrong answer. Try again!");
       setRadioColor("danger");
@@ -143,7 +150,7 @@ export default function McqCard({ question }) {
       setError(true);
     }
   };
-  
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -169,9 +176,7 @@ export default function McqCard({ question }) {
                               }
                               disabled={
                                 answerChoice !==
-                                answerChoices[
-                                  question.mcqCorrect - 1
-                                ]
+                                answerChoices[question.mcqCorrect - 1]
                                   ? disable
                                   : false
                               }
@@ -198,10 +203,7 @@ export default function McqCard({ question }) {
                 >
                   {helperText}
                 </FormHelperText>
-                <CheckButton
-                  variant="contained"
-                  type="submit"
-                >
+                <CheckButton variant="contained" type="submit">
                   <DisplayText variant="h6">Check</DisplayText>
                 </CheckButton>
               </FormControl>
