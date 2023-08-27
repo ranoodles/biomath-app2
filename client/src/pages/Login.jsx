@@ -113,12 +113,19 @@ function Login({ setLoggedIn }) {
       username: e.target.username.value,
       password: e.target.password.value,
     };
-    console.log(e.target.password.value);
-
     try {
       const res = await axios.post("http://localhost:8800/login", userData);
-      console.log(res.data);
-      if (res.data === true) {
+      document
+        .querySelectorAll("input")
+        .forEach((singleInput) => (singleInput.value = ""));
+      const config = {
+        headers: { Authorization: `Bearer ${res.data.accessToken}` },
+      };
+      const resTwo = await axios.get(
+        "http://localhost:8800/fetchCurrentUser",
+        config
+      );
+      if (resTwo.data) {
         setLoggedIn(true); // Set the loggedIn state to true
         navigate("/courses");
       } else {

@@ -1,26 +1,12 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const { createConnection } = require("mysql2");
 const cors = require("cors");
-const md5 = require("md5");
 const path = require("path");
-const session = require("express-session");
-const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const app = express();
-
-const bodyParser = require("body-parser");
-const expressSession = session({
-  secret: "juicy",
-  resave: false,
-  saveUninitialized: false,
-});
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressSession);
-app.use(cookieParser());
-
 const db = createConnection({
   host: "mysql.biomath.dreamhosters.com",
   user: "biomath",
@@ -32,31 +18,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static")));
-const passport = require("passport");
-const { errorMonitor } = require("events");
-const { resourceLimits } = require("worker_threads");
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(cookieParser());
+
+access_token_secret =
+  "594c4835eb5397e3068ab9fb451db0f1a7247ecedbe0bd9baabe7baca4961cdf0a51935366aa82bd2ed0a8518e05a858726e98f0fbcfcb6585243d976f52ae72";
+refresh_token_secret =
+  "70e2e02ce3a2c7ee05a883b35317b7a6308db30d14f98aba0f0dac450c86aacd4134ed32f04f61171c105c3e0e3b7b238ba4c62cd2899986483292a6a2d7e62f";
 
 app.get("/test", (req, res) => {
   const q = "Select * FROM users";
   console.log("log: show table");
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
-});
-
-app.get("/biolessons", (req, res) => {
-  const q = "Select * FROM bio_lessons";
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
-});
-
-app.get("/mathlessons", (req, res) => {
-  const q = "Select * FROM math_lessons";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -75,15 +46,23 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/logout", function (req, res) {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error("Error destroying session:", err);
-      res.status(500).send("Error logging out");
-    } else {
-      res.send(false);
-    }
-  });
+  // req.session.destroy();
+  // res.send(false);
+  // res.end();
+  res.send(false);
 });
+
+app.get("/fetchCurrentUser", authenticateToken, (req, res) => {
+  res.send(req.user);
+});
+
+// app.get("/checkLoggedIn", (req, res) => {
+//   if (req.user) {
+//     res.send(true);
+//   } else {
+//     res.send(false);
+//   }
+// });
 
 app.post("/login", (req, res) => {
   const username = req.body.username;
@@ -108,8 +87,10 @@ app.post("/login", (req, res) => {
           }
 
           if (isMatch) {
-            // Passwords match, user is authenticated
-            res.send(true);
+            const user = { id: result[0].userId, name: username };
+            const accessToken = jwt.sign(user, access_token_secret);
+            res.json({ accessToken: accessToken });
+            console.log(req.headers);
           } else {
             // Passwords don't match
             res.send(false);
@@ -123,49 +104,16 @@ app.post("/login", (req, res) => {
   );
 });
 
-// app.post("/login", function (req, res) {
-//   let username = req.body.username;
-//   let password = req.body.password;
-//   if (username && password) {
-//     db.execute(
-//       "SELECT * FROM users WHERE username = ?;", [username],
-//       (err, result)=> {
-//         if (err) {
-//             res.send({err: err});
-//         }
-
-//         )
-
-//   }
-//   if (username && password) {
-//     db.query(
-//       "SELECT * FROM users WHERE username = ? AND password = ?",
-//       [username, md5(password)],
-//       function (error, results, fields) {
-//         if (error) throw error;
-//         if (results.length > 0) {
-//           req.session.loggedin = true;
-//           req.session.username = username;
-//           res.send([req.session.loggedin, req.session.username]);
-//         } else {
-//           res.send("Incorrect Username and/or Password!");
-//         }
-//         res.end();
-//       }
-//     );
-//   } else {
-//     res.send("Please enter Username and Password!");
-//     res.end();
-//   }
-// });
-
-app.get("/checkLoggedIn", (req, res) => {
-  if (req.session.loggedin) {
-    res.send(true);
-  } else {
-    res.send(false);
-  }
-});
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token == null) return res.sendStatus(401);
+  jwt.verify(token, access_token_secret, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+}
 
 app.get("/biotechnology", (req, res) => {
   const q =
@@ -284,6 +232,58 @@ app.get("/mathcards", (req, res) => {
     return res.json(lessons);
   });
 });
+
+app.get("/biolessons", (req, res) => {
+  const q = "Select * FROM bio_lessons";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+app.get("/mathlessons", (req, res) => {
+  const q = "Select * FROM math_lessons";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+// app.post("/login", function (req, res) {
+//   let username = req.body.username;
+//   let password = req.body.password;
+//   if (username && password) {
+//     db.execute(
+//       "SELECT * FROM users WHERE username = ?;", [username],
+//       (err, result)=> {
+//         if (err) {
+//             res.send({err: err});
+//         }
+
+//         )
+
+//   }
+//   if (username && password) {
+//     db.query(
+//       "SELECT * FROM users WHERE username = ? AND password = ?",
+//       [username, md5(password)],
+//       function (error, results, fields) {
+//         if (error) throw error;
+//         if (results.length > 0) {
+//           req.session.loggedin = true;
+//           req.session.username = username;
+//           res.send([req.session.loggedin, req.session.username]);
+//         } else {
+//           res.send("Incorrect Username and/or Password!");
+//         }
+//         res.end();
+//       }
+//     );
+//   } else {
+//     res.send("Please enter Username and Password!");
+//     res.end();
+//   }
+// });
 
 app.listen(8800, () => {
   console.log("Server running on port 8800");

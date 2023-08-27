@@ -14,17 +14,18 @@ const AppliedMathPage = lazy(() => import("./pages/appliedmath"));
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-
   useEffect(() => {
-    const checkLoggedIn = async () => {
+    // document.body.style.overflow = "hidden";
+    const fetchLoginStatus = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/checkLoggedIn");
-        setLoggedIn(res.data);
+        const res = await axios.get("http://localhost:8800/checkLoggedin");
+        const user = res.data;
+        setLoggedIn(user);
       } catch (err) {
         console.log(err);
       }
     };
-    checkLoggedIn();
+    fetchLoginStatus();
   }, []);
 
   return (
