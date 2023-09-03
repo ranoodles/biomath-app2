@@ -9,7 +9,7 @@ const TitleStack = styled(Stack)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 7rem 5rem 7rem 5rem;
+    padding: 3rem 5rem 5rem 5rem;
   }
 `;
 const SubtitleText = styled(Typography)`
@@ -47,7 +47,7 @@ export default function JoinNow() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "5rem 0rem 3rem 0rem"
+          padding: "0rem 0rem 0rem 0rem",
         }}
       >
         <TitleStack spacing={2}>

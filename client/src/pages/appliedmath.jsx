@@ -21,7 +21,7 @@ import {
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
-import NavBar from "./website-constants/NavBarLoggedIn.jsx";
+import NavBar from "./website-constants/NavBar.jsx";
 import DisplayCard from "./aMathComponents/aMathUnits.jsx";
 import BiotechTitle from "./aMathComponents/aMathTitle.jsx";
 import scienceImg from "./aMathComponents/mathematician.svg";
@@ -65,7 +65,7 @@ const StyledImageHolder = styled(Grid)`
 
 const Bruh = styled.div`
   height: 120vh;
-  ${'' /* overflow: hidden; */}
+  ${"" /* overflow: hidden; */}
 `;
 
 function AppliedMathPage() {
@@ -103,34 +103,34 @@ function AppliedMathPage() {
   return (
     <ThemeProvider theme={theme}>
       <Bruh>
-      <NavBar />
-      <BiotechTitle item />
-      <CardHolder
-        container
-        sx={{ padding: { xs: "none", md: "0rem 2rem 2rem 2rem" } }}
-      >
-        <Hidden xsDown>
-          <StyledImageHolder
-            item
-            md={3.5}
-            sx={{ display: { xs: "none", md: "flex" }, paddingRight: "20px" }}
-          >
-            <Image src={scienceImg} />
-          </StyledImageHolder>
-        </Hidden>
+        <NavBar />
+        <BiotechTitle item />
+        <CardHolder
+          container
+          sx={{ padding: { xs: "none", md: "0rem 2rem 2rem 2rem" } }}
+        >
+          <Hidden xsDown>
+            <StyledImageHolder
+              item
+              md={3.5}
+              sx={{ display: { xs: "none", md: "flex" }, paddingRight: "20px" }}
+            >
+              <Image src={scienceImg} />
+            </StyledImageHolder>
+          </Hidden>
 
-        <FatHolder item xs={12} md={8.5} onScroll={handleScroll}>
-          {unitsList.length > 0 &&
-            unitsList.map((unit, index) => (
-              <DisplayCard
-                item
-                unit={unit}
-                handleLessonSelect={handleLessonSelect}
-                key={index}
-              />
-            ))}
-        </FatHolder>
-      </CardHolder>
+          <FatHolder item xs={12} md={8.5} onScroll={handleScroll}>
+            {unitsList.length > 0 &&
+              unitsList.map((unit, index) => (
+                <DisplayCard
+                  item
+                  unit={unit}
+                  handleLessonSelect={handleLessonSelect}
+                  key={index}
+                />
+              ))}
+          </FatHolder>
+        </CardHolder>
       </Bruh>
     </ThemeProvider>
   );

@@ -4,6 +4,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./pages/website-constants/Theme.jsx";
 import Courses from "./pages/Courses.jsx";
 import axios from "axios";
+import { Orbit } from "@uiball/loaders";
+import { LineWobble } from "@uiball/loaders";
 const MathLearningPath = lazy(() => import("./pages/mathlearningpath.jsx"));
 const BioLearningPath = lazy(() => import("./pages/biolearningpath.jsx"));
 const Landing = lazy(() => import("./pages/Landing"));
@@ -13,28 +15,44 @@ const BiotechnologyPage = lazy(() => import("./pages/biotechnology"));
 const AppliedMathPage = lazy(() => import("./pages/appliedmath"));
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+  // useEffect(() => {
+  //   // document.body.style.overflow = "hidden";
+  //   const fetchLoginStatus = async () => {
+  //     try {
+  //       const res = await axios.get("http://localhost:8800/checkLoggedin");
+  //       const user = res.data;
+  //       setLoggedIn(user);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchLoginStatus();
+  // }, []);
   useEffect(() => {
     // document.body.style.overflow = "hidden";
-    const fetchLoginStatus = async () => {
+    const updateVisit = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/checkLoggedin");
-        const user = res.data;
-        setLoggedIn(user);
+        const res = await axios.post("http://localhost:8800/updateNumber");
+        console.log(res.data);
       } catch (err) {
         console.log(err);
       }
     };
-    fetchLoginStatus();
+    updateVisit();
   }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <BrowserRouter>
-          <Suspense fallback={<div className="container">Loading...</div>}>
+          <Suspense
+            fallback={
+              <LineWobble size={80} lineWeight={5} speed={1.75} color="black" />
+            }
+          >
             <Routes>
-              <Route
+              {/* <Route
                 key="login"
                 path="/login"
                 element={
@@ -44,7 +62,7 @@ function App() {
                     <Login setLoggedIn={setLoggedIn} />
                   )
                 }
-              />
+              /> */}
               <Route
                 path="/biotechnology/:lessonid"
                 element={
@@ -61,11 +79,7 @@ function App() {
                   loggedIn ? <MathLearningPath /> : <Navigate to="/login" />
                 }
               />
-              <Route
-                key="landing"
-                path="/"
-                element={!loggedIn ? <Landing /> : <Navigate to="/courses" />}
-              />
+              <Route key="landing" path="/" element={<Landing />} />
               <Route
                 key="signup"
                 path="/signup"

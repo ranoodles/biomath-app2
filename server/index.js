@@ -249,6 +249,15 @@ app.get("/mathlessons", (req, res) => {
   });
 });
 
+app.post("/updateNumber", (req, res) => {
+  const q = "INSERT INTO visits (`lol`) VALUES (?)";
+  const values = [1];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    res.send(data);
+  });
+});
+
 // app.post("/login", function (req, res) {
 //   let username = req.body.username;
 //   let password = req.body.password;

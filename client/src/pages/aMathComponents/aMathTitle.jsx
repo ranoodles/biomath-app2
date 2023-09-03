@@ -11,7 +11,6 @@ import {
   Divider,
   Grid,
 } from "@mui/material";
-import NavBar from "../website-constants/NavBarLoggedIn";
 
 const TitleText = styled(Typography)`
   && {

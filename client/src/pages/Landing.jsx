@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "./website-constants/NavBarLoggedOut";
+import Nav from "./website-constants/NavBar";
 import { ThemeProvider } from "@mui/material";
 import { motion, useScroll } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ export default function Landing() {
         <Hero></Hero>
         <CourseDisplay></CourseDisplay>
         <OurMission></OurMission>
-        <AboutUs></AboutUs>
+        {/* <AboutUs></AboutUs> */}
         <JoinNow></JoinNow>
       </ThemeProvider>
     </>

@@ -92,7 +92,7 @@ export default function Intro({ lessonIndex, course }) {
         <SplitBoxesGrid container>
           <VertStack>
             <DescriptionText variant="h3">
-              Welcome to Unit {lesson.unit_id} Lesson {lesson.lesson_number}!
+              Unit {lesson.unit_id} Lesson {lesson.lesson_number}
             </DescriptionText>
             <TitleText variant="h1">{lesson.lesson_name}</TitleText>
             <DescriptionText variant="h3">Let's get started!</DescriptionText>

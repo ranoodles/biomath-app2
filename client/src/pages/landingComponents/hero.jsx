@@ -23,7 +23,7 @@ const TitleText = styled(Typography)`
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 2
+        duration: 0.5
       }
     }
   }
@@ -97,9 +97,8 @@ export default function Hero() {
           component={motion.div}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 3, ease: "easeInOut" }}
+          transition={{ duration: 2, ease: "easeInOut" }}
           sx={{ display: { xs: "flex", md: "inline-block" }, padding: "5px" }}
-
         >
           <TitleText variant="h2" color="white">
             Be prepared for your educational career and beyond.

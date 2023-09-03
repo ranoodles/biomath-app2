@@ -83,10 +83,10 @@ function ImageText({ displayInfo }) {
     <>
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
-          <SubGrid item xs={12} md={4}>
+          <SubGrid item xs={12} md={5}>
             <Img src={displayInfo.img} alt=""></Img>
           </SubGrid>
-          <SubGrid item xs={12} md={7}>
+          <SubGrid item xs={12} md={5}>
             <VertStack>
               <TitleText variant="h2">{displayInfo.title}</TitleText>
               <DescriptionText variant="h6">{displayInfo.text}</DescriptionText>

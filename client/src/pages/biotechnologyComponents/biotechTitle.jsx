@@ -11,7 +11,6 @@ import {
   Divider,
   Grid,
 } from "@mui/material";
-import NavBar from "../website-constants/NavBarLoggedIn";
 
 const TitleText = styled(Typography)`
   && {
@@ -42,7 +41,7 @@ export default function BiotechHeader() {
           fontSize: { xs: "9vw", md: "6vw" },
         }}
       >
-        Synthetic Biology
+        Biotechnology{" "}
       </TitleText>
     </>
   );

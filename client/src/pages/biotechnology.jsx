@@ -21,7 +21,7 @@ import {
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
-import NavBar from "./website-constants/NavBarLoggedIn.jsx";
+import NavBar from "./website-constants/NavBar.jsx";
 import DisplayCard from "./biotechnologyComponents/biotechUnits.jsx";
 import BiotechTitle from "./biotechnologyComponents/biotechTitle.jsx";
 import scienceImg from "./biotechnologyComponents/scienstist_goat.svg";
@@ -108,7 +108,9 @@ function BiotechnologyPage() {
         <BiotechTitle item />
         <CardHolder
           container
-          sx={{ padding: { xs: "none", md: "0rem 2rem 2rem 2rem" } }}
+          sx={{
+            padding: { xs: "none", md: "0rem 2rem 2rem 2rem", border: "white" },
+          }}
         >
           <Hidden xsDown>
             <StyledImageHolder

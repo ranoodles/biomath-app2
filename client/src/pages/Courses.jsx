@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "./website-constants/NavBarLoggedIn";
+import Nav from "./website-constants/NavBar";
 import { ThemeProvider } from "@mui/material";
 import theme from "./website-constants/Theme.jsx";
 import CourseDisplay from "./landingComponents/courseDisplays.jsx";

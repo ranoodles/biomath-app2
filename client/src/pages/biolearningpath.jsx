@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
 import { FormControl, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import NavBar from "./website-constants/NavBarLoggedIn.jsx";
+import NavBar from "./website-constants/NavBar.jsx";
 import ImgText from "./cardTemplates/ImageText.jsx";
 import LeftIcon from "@mui/icons-material/ChevronLeft";
 import RightIcon from "@mui/icons-material/ChevronRight";
@@ -99,7 +99,6 @@ function BioLearningPath() {
         const res = await axios.get("http://localhost:8800/biocards");
         const lessons = res.data;
         setLessonList(lessons);
-        console.log(lessons);
       } catch (err) {
         console.log(err);
       }
@@ -116,19 +115,11 @@ function BioLearningPath() {
   const handleNextClick = () => {
     if (cardNum < lesson.length) {
       setCardNum(cardNum + 1);
-    } else if (lessonid < lessonList.length) {
-      const newIndex = Number(lessonid) + 1;
-      navigate("/biotechnology/" + newIndex);
-      window.location.reload(false);
     }
   };
   const handleBackClick = (e) => {
     if (cardNum > -1) {
       setCardNum(cardNum - 1);
-    } else if (lessonid > 1) {
-      const newIndex = Number(lessonid) - 1;
-      navigate("/biotechnology/" + newIndex);
-      window.location.reload(false);
     }
   };
 
