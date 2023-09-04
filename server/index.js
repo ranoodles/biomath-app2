@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const app = express();
+
 const db = createConnection({
   host: "mysql.biomath.dreamhosters.com",
   user: "biomath",
@@ -14,11 +15,22 @@ const db = createConnection({
   database: "biomath",
 });
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "static")));
 app.use(cookieParser());
+app.use(express.json());
+// const corsOptions = {
+//   origin: "http://localhost:3000",
+//   credentials: true,  // Allow cookies to be sent with CORS requests
+//   allowedHeaders: ["Content-Type", "Authorization"]  // Include Authorization header
+// };
+// app.use(cors(corsOptions));
+const corsOptions = {
+  origin: 'http://localhost:3000', // Replace with your client's origin
+  credentials: true, // This is important for cookies
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'HEAD']
+};
+app.use(cors(corsOptions));
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.static(path.join(__dirname, "static")));
 
 access_token_secret =
   "594c4835eb5397e3068ab9fb451db0f1a7247ecedbe0bd9baabe7baca4961cdf0a51935366aa82bd2ed0a8518e05a858726e98f0fbcfcb6585243d976f52ae72";
@@ -46,9 +58,6 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/logout", function (req, res) {
-  // req.session.destroy();
-  // res.send(false);
-  // res.end();
   res.send(false);
 });
 
@@ -64,49 +73,148 @@ app.get("/fetchCurrentUser", authenticateToken, (req, res) => {
 //   }
 // });
 
+// app.post("/login", async (req, res) => {
+//   const username = req.body.username;
+//   const password = req.body.password;
+//   console.log(req.body.username)
+//   try {
+//     const [rows, fields] = await db.promise().query(
+//       "SELECT * FROM users WHERE username = ?",
+//       [username]
+//     );
+//     if (rows.length > 0) {
+//       const storedPassword = rows[0].password;
+//       const isMatch = await bcrypt.compare(password, storedPassword);
+
+//       if (isMatch) {
+//         const user = { id: rows[0].userId, name: username };
+//         const accessToken = jwt.sign(user, access_token_secret);
+//         const token_obj= {accessToken: accessToken}
+//         // res.cookie('jwt', {accessToken: accessToken}, {httpOnly: true, sameSite: 'none', secure: true});
+//         res.cookie('jwt', token_obj)
+//         res.json({ accessToken: accessToken });
+//       } else {
+//         res.send(false); // Passwords don't match
+//       }
+//     } else {
+//       res.json({ success: false, message: "User doesn't exist" });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ error: "Database error" });
+//   }
+// });
+
+// app.post("/login", (req, res) => {
+//   const username = req.body.username;
+//   const password = req.body.password;
+
+//   // Fetch the user's data from the database based on the username
+//   db.execute(
+//     "SELECT * FROM users WHERE username = ?;",
+//     [username],
+//     (err, result) => {
+//       if (err) {
+//         return res.status(500).json({ error: "Database error" });
+//       }
+//       if (result.length > 0) {
+//         const storedPassword = result[0].password;
+
+//         // Compare the provided password with the stored hashed password using bcrypt
+//         bcrypt.compare(password, storedPassword, (bcryptErr, isMatch) => {
+//           if (bcryptErr) {
+//             return res.status(500).json({ error: "Error comparing passwords" });
+//           }
+
+//           if (isMatch) {
+//             const user = { id: result[0].userId, name: username };
+//             const accessToken = jwt.sign(user, access_token_secret);
+
+//             // Set the JWT token as a cookie
+//             res.cookie("jwt", accessToken, {
+//               httpOnly: true,
+//               secure: false,   // Set to false for testing on non-HTTPS environment
+//               sameSite: 'strict'
+//             });
+
+//             // Send the JWT token in the response headers as well
+//             res.header("Authorization", `Bearer ${accessToken}`);
+//             res.json({ accessToken: accessToken });
+//           } else {
+//             // Passwords don't match
+//             res.send(false);
+//           }
+//         });
+//       } else {
+//         // No user found with the provided username
+//         return res.json({ success: false, message: "User doesn't exist" });
+//       }
+//     }
+//   );
+// });
+
 app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-
-  // Fetch the user's data from the database based on the username
-  db.execute(
-    "SELECT * FROM users WHERE username = ?;",
-    [username],
-    (err, result) => {
-      if (err) {
-        return res.status(500).json({ error: "Database error" });
-      }
-
-      if (result.length > 0) {
-        const storedPassword = result[0].password;
-
-        // Compare the provided password with the stored hashed password using bcrypt
-        bcrypt.compare(password, storedPassword, (bcryptErr, isMatch) => {
-          if (bcryptErr) {
-            return res.status(500).json({ error: "Error comparing passwords" });
-          }
-
-          if (isMatch) {
-            const user = { id: result[0].userId, name: username };
-            const accessToken = jwt.sign(user, access_token_secret);
-            res.json({ accessToken: accessToken });
-            console.log(req.headers);
+  console.log(req.body)
+  const queryPromise = new Promise((resolve, reject) => {
+      db.query("SELECT * FROM users WHERE username = ?;", [username], (err, results) => {
+          if (err) {
+              reject(err);
           } else {
-            // Passwords don't match
-            res.send(false);
+              resolve(results);
           }
-        });
-      } else {
-        // No user found with the provided username
-        return res.json({ success: false, message: "User doesn't exist" });
-      }
-    }
-  );
+      });
+  });
+  const loginPromise = queryPromise
+      .then((results) => {
+          if (results.length > 0) {
+            const result = results[0]; // Assuming you want the first row
+            console.log("inside promise:", result);
+            
+            return new Promise((resolve, reject) => {
+                bcrypt.compare(password, result.password, (err, isMatch) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve({ isMatch, userId: result.userId, username: result.username });
+                    }
+                });
+            });
+          } else {
+            res.send("User does not exist.")
+          }
+      })
+      .catch((err) => {
+          console.error(err);
+          res.status(500).send("Error occurred");
+  });
+  loginPromise
+      .then(({ isMatch, userId, username }) => {
+          if (isMatch) {
+              const user = { id: userId, name: username };
+              const accessToken = jwt.sign(user, access_token_secret);
+              res.cookie("jwt", accessToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'strict'
+              });
+              res.send("Login successful!");
+          } else {
+              console.log("Password not matching!");
+              res.send("Incorrect password");
+          }
+      })
+      .catch((err) => {
+          console.error(err);
+          res.status(500).send("Error occurred");
+      });
 });
 
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  // const authHeader = req.headers["authorization"];
+  // const token = authHeader && authHeader.split(" ")[1];
+  console.log("z", req.cookies)
+  const token = req.cookies.jwt;
   if (token == null) return res.sendStatus(401);
   jwt.verify(token, access_token_secret, (err, user) => {
     if (err) return res.sendStatus(403);

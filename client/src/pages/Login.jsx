@@ -103,38 +103,100 @@ const GetStartedText = styled(Typography)`
     text-transform: none;
   }
 `;
-function Login({ setLoggedIn }) {
+
+function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState(""); // State to hold login error message
 
   const handleLogInSubmit = async (e) => {
-    e.preventDefault();
-    const userData = {
-      username: e.target.username.value,
-      password: e.target.password.value,
-    };
+    
+    
+
+    // const fetchLogin = new Promise((resolve, reject) => {
+    //   axios.get("http://localhost:8001/login")
+    //     .then(response => {
+    //       console.log(response.data)
+    //       resolve(response.data);
+    //     })
+    //     .catch(error => {
+    //       console.error("Error fetching data:", error);
+    //       reject(error);
+    //     });
+    // });
+
+    // fetchLogin
+    // .then(async (response) => {
+    //   const resTwo = await axios.get("http://localhost:8001/fetchCurrentUser");
+    //   console.log(resTwo.data)
+    // })
+    // .catch((err) => {
+    //   console.error(err);
+    // });
+    
     try {
-      const res = await axios.post("http://localhost:8800/login", userData);
-      document
-        .querySelectorAll("input")
-        .forEach((singleInput) => (singleInput.value = ""));
-      const config = {
-        headers: { Authorization: `Bearer ${res.data.accessToken}` },
+      e.preventDefault();
+      const userData = {
+        username: e.target.username.value,
+        password: e.target.password.value,
       };
-      const resTwo = await axios.get(
-        "http://localhost:8800/fetchCurrentUser",
-        config
-      );
-      if (resTwo.data) {
-        setLoggedIn(true); // Set the loggedIn state to true
-        navigate("/courses");
+      document.querySelectorAll("input").forEach((singleInput) => (singleInput.value = ""));
+      const loginResponse = await axios.post("http://localhost:8001/login", userData, {
+        withCredentials: true,
+        credentials: "include"
+      });
+      if (loginResponse.data) {
+        console.log("going to courses")
+        window.location.reload()
       } else {
-        setError("Incorrect Username and/or Password");
+        console.log("Login failed");
       }
+    //   axios.post("http://localhost:8001/login", userData, {
+    //   withCredentials: true,
+    //   credentials: "include"
+    // })
+    //   .then((loginResponse) => {
+    //     if (loginResponse.data) {
+    //       navigate("/courses");
+    //     } else {
+    //       console.log("Login failed");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+
     } catch (err) {
-      setError("An error occurred while logging in");
       console.error(err);
     }
+    
+
+    // try {
+    //   // const res = await axios.post("http://localhost:8800/login", userData);
+    //   const res = await axios.get("http://localhost:8001/login", {withCredntials: true, credentials: 'include'})
+    //   console.log("data", res.data)
+    //   document.querySelectorAll("input").forEach((singleInput) => (singleInput.value = ""));
+    //   // const config = {
+    //   //   headers: { Authorization: `Bearer ${res.data.accessToken}` },
+    //   // };
+    //   // const resTwo = await axios.get(
+    //   //   "http://localhost:8800/fetchCurrentUser",
+    //   //   config
+    //   // );
+    //   // if (res.data === "Login successful!") {
+    //     // const resTwo = await axios.get("http://localhost:8800/fetchCurrentUser", { withCredentials: true });
+    //     const resTwo = await axios.get("http://localhost:8001/fetchCurrentUser");
+    //     console.log(resTwo.data)
+    //     // if (resTwo.data != null) {
+    //     //   setLoggedIn(true); // Set the loggedIn state to true
+    //     //   navigate("/courses");
+    //     // } else {
+    //     //   setError("Incorrect Username and/or Password");
+    //     // }
+    //   // }
+    // } catch (err) {
+    //   setError("An error occurred while logging in");
+    //   console.error(err);
+    // }
   };
 
   return (

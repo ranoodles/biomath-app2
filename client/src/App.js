@@ -12,22 +12,47 @@ const Login = lazy(() => import("./pages/Login"));
 const BiotechnologyPage = lazy(() => import("./pages/biotechnology"));
 const AppliedMathPage = lazy(() => import("./pages/appliedmath"));
 
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(null);
   useEffect(() => {
     // document.body.style.overflow = "hidden";
     const fetchLoginStatus = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/checkLoggedin");
+        const res = await axios.get("http://localhost:8001/fetchCurrentUser", {
+          withCredentials: true,
+          credentials: "include"
+        });
         const user = res.data;
-        setLoggedIn(user);
+        setLoggedIn(user != null ? true : false);
+        // setLoggedIn(false)
       } catch (err) {
-        console.log(err);
+        console.log("im in app js", err);
       }
     };
     fetchLoginStatus();
   }, []);
 
+  if (loggedIn === null) {
+    // return <div>Loading...</div>;
+    // console.log("Loading start...")
+    // async function test() {
+    //   await sleep(5000);
+    // }
+    // test();
+    // console.log("Loading end...")
+    // function sleep(ms) {
+    //   const start = Date.now();
+    //   while (Date.now() - start < ms) {
+    //     // This loop will block the thread
+    //   }
+    // }
+    // console.log("Before sleep");
+    // sleep(10000);
+    // console.log("After sleep");
+  }
+  
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -35,13 +60,13 @@ function App() {
           <Suspense fallback={<div className="container">Loading...</div>}>
             <Routes>
               <Route
-                key="login"
+                // key="login"
                 path="/login"
                 element={
                   loggedIn ? (
                     <Navigate to="/courses" />
                   ) : (
-                    <Login setLoggedIn={setLoggedIn} />
+                    <Login />
                   )
                 }
               />
@@ -65,6 +90,7 @@ function App() {
                 key="landing"
                 path="/"
                 element={!loggedIn ? <Landing /> : <Navigate to="/courses" />}
+                // element = {loggedIn === null ? <Landing></Landing>}
               />
               <Route
                 key="signup"

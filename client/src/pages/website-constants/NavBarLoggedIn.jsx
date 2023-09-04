@@ -39,11 +39,16 @@ function NavBar(props) {
     setAnchorElUser(null);
   };
 
-  const handleLogOut = async () => {
+  const handleLogOut = async (e) => {
+    e.preventDefault()
     try {
-      const res = await axios.post("http://localhost:8800/logout");
-      console.log(res.data);
-      navigate("/login");
+      const res = await axios.get("http://localhost:8001/clear", {
+        withCredentials: true,
+        credentials: "include"
+      });
+      if (res.data) {
+        window.location.reload()
+      }
     } catch (err) {
       console.log(err);
     }
