@@ -113,21 +113,47 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSignUpSubmit = async (e) => {
-    e.preventDefault();
-    const userData = {
-      username: e.target.username.value,
-      pass: e.target.password.value,
-      email: e.target.email.value,
-    };
-    const confPass = e.target.confPassword.value;
     try {
-      if (userData.pass === confPass) {
-        console.log("signed up!");
-        const res = await axios.post("http://localhost:8800/signup", userData);
-        console.log(res.data);
-        document
+      e.preventDefault();
+      const userData = {
+        username: e.target.username.value,
+        password: e.target.password.value,
+        email: e.target.email.value,
+      };
+      const confPass = e.target.confPassword.value;
+      const checkCondition = (userData.username !== "" && !(userData.username.includes(" ")) && userData.password !== "" && !(userData.password.includes(" ")) && userData.email !== "" && !(userData.username.includes(" ")) && userData.confPass !== "" && !(userData.username.includes(" ")))
+      document
           .querySelectorAll("input")
           .forEach((singleInput) => (singleInput.value = ""));
+      if (userData.password === confPass && checkCondition) {
+        const signUpPromise = axios.post("http://localhost:8001/signup", userData, {
+          withCredentials: true,
+          credentials: "include"
+        });
+        signUpPromise.then((res) => {
+          if (res.data) {
+            console.log("Signup successful");
+            const loginPromise = axios.post("http://localhost:8001/login", userData, {
+              withCredentials: true,
+              credentials: "include"
+            });
+            
+            loginPromise.then((loginResponse) => {
+              if (loginResponse.data) {
+                console.log("Going to courses");
+                window.location.reload();
+              } else {
+                console.log("Login failed");
+              }
+            }).catch((loginError) => {
+              console.log("Login error:", loginError);
+            });
+          } else {
+            console.log("Signup failed");
+          }
+        }).catch((signUpError) => {
+          console.log("Signup error:", signUpError);
+        });
       }
     } catch (err) {
       console.log(err);

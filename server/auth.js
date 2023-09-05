@@ -4,7 +4,6 @@ const { createConnection } = require("mysql2");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 //setup express app
-var result = [];
 const app = express();
 const db = createConnection({
     host: "mysql.biomath.dreamhosters.com",
@@ -17,9 +16,8 @@ const cors = require("cors");
 app.use(cookieParser());
 app.use(express.json());
 const corsOptions = {
-    origin: 'http://localhost:3000', // Replace with your client's origin
-    credentials: true, // This is important for cookies
-    methods: ['GET', 'PUT', 'POST', 'DELETE', 'HEAD']
+    origin: 'http://localhost:3000', 
+    credentials: true
 };
 app.use(cors(corsOptions));
 // app.use(express.urlencoded({ extended: true }));
@@ -32,6 +30,17 @@ app.get("/", (req, res) => {
    res.send("Express app is created successfully, and you are on homepage");
 });
 
+app.post("/signup", (req, res) => {
+    bcrypt.hash(req.body.password, 10, function (err, hash) {
+        const q = "INSERT INTO users (`username`, `password`, `email`) VALUES (?)";
+        const values = [req.body.username, hash, req.body.email];
+        db.query(q, [values], (err, data) => {
+        if (err) return res.json(err);
+        res.send(data);
+        });
+    });
+});
+
 app.post("/login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -40,6 +49,7 @@ app.post("/login", (req, res) => {
             if (err) {
                 reject(err);
             } else {
+                console.log(results[0])
                 resolve(results);
             }
         });
@@ -96,26 +106,17 @@ function authenticateToken(req, res, next) {
     const token = req.cookies.jwt;
     if (token == null) return false;
     jwt.verify(token, access_token_secret, (err, user) => {
-      if (err) return res.sendStatus(403);
-      req.user = user;
-      next();
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
     });
-  }
+}
 
-// // route to get car object from cookies
-// app.get("/fetchCurrentUser", (req, res) => {
-//     console.log("fetch", req.cookies)
-//     res.send(req.cookies)
-// });
-
-// route to clear car object from cookies
 app.get("/clear", (req, res) => {
    res.clearCookie("jwt", { path: '/' });
    res.send(true);
 });
 
-//server listens to port 3000
-app.listen(8001, (err) => {
-   if (err) throw err;
-   console.log("listening on port 8001");
+app.listen(8001, () => {
+   console.log("Server running on port 8001");
 });

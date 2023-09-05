@@ -109,30 +109,6 @@ function Login() {
   const [error, setError] = useState(""); // State to hold login error message
 
   const handleLogInSubmit = async (e) => {
-    
-    
-
-    // const fetchLogin = new Promise((resolve, reject) => {
-    //   axios.get("http://localhost:8001/login")
-    //     .then(response => {
-    //       console.log(response.data)
-    //       resolve(response.data);
-    //     })
-    //     .catch(error => {
-    //       console.error("Error fetching data:", error);
-    //       reject(error);
-    //     });
-    // });
-
-    // fetchLogin
-    // .then(async (response) => {
-    //   const resTwo = await axios.get("http://localhost:8001/fetchCurrentUser");
-    //   console.log(resTwo.data)
-    // })
-    // .catch((err) => {
-    //   console.error(err);
-    // });
-    
     try {
       e.preventDefault();
       const userData = {
@@ -150,53 +126,9 @@ function Login() {
       } else {
         console.log("Login failed");
       }
-    //   axios.post("http://localhost:8001/login", userData, {
-    //   withCredentials: true,
-    //   credentials: "include"
-    // })
-    //   .then((loginResponse) => {
-    //     if (loginResponse.data) {
-    //       navigate("/courses");
-    //     } else {
-    //       console.log("Login failed");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-
     } catch (err) {
       console.error(err);
     }
-    
-
-    // try {
-    //   // const res = await axios.post("http://localhost:8800/login", userData);
-    //   const res = await axios.get("http://localhost:8001/login", {withCredntials: true, credentials: 'include'})
-    //   console.log("data", res.data)
-    //   document.querySelectorAll("input").forEach((singleInput) => (singleInput.value = ""));
-    //   // const config = {
-    //   //   headers: { Authorization: `Bearer ${res.data.accessToken}` },
-    //   // };
-    //   // const resTwo = await axios.get(
-    //   //   "http://localhost:8800/fetchCurrentUser",
-    //   //   config
-    //   // );
-    //   // if (res.data === "Login successful!") {
-    //     // const resTwo = await axios.get("http://localhost:8800/fetchCurrentUser", { withCredentials: true });
-    //     const resTwo = await axios.get("http://localhost:8001/fetchCurrentUser");
-    //     console.log(resTwo.data)
-    //     // if (resTwo.data != null) {
-    //     //   setLoggedIn(true); // Set the loggedIn state to true
-    //     //   navigate("/courses");
-    //     // } else {
-    //     //   setError("Incorrect Username and/or Password");
-    //     // }
-    //   // }
-    // } catch (err) {
-    //   setError("An error occurred while logging in");
-    //   console.error(err);
-    // }
   };
 
   return (
