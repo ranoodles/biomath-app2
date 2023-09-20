@@ -16,6 +16,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import Menu from "@mui/material/Menu";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +25,6 @@ const pages = [
   { label: "Biotechnology", path: "/biotechnology" },
   { label: "Applied Math", path: "/appliedmath" },
 ];
-const settings = ["Logout"];
 
 function NavBar(props) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -120,6 +120,13 @@ function NavBar(props) {
                 <Avatar sx={{ color: "white" }} />
               </IconButton>
             </Tooltip>
+            <Menu
+              anchorEl={anchorElUser}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+            </Menu>
           </Box>
         </Toolbar>
       </Container>
