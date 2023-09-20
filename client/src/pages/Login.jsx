@@ -115,14 +115,20 @@ function Login() {
         username: e.target.username.value,
         password: e.target.password.value,
       };
-      document.querySelectorAll("input").forEach((singleInput) => (singleInput.value = ""));
-      const loginResponse = await axios.post("http://localhost:8001/login", userData, {
-        withCredentials: true,
-        credentials: "include"
-      });
+      document
+        .querySelectorAll("input")
+        .forEach((singleInput) => (singleInput.value = ""));
+      const loginResponse = await axios.post(
+        "http://localhost:8001/login",
+        userData,
+        {
+          withCredentials: true,
+          credentials: "include",
+        }
+      );
       if (loginResponse.data) {
-        console.log("going to courses")
-        window.location.reload()
+        console.log("going to courses");
+        window.location.reload();
       } else {
         console.log("Login failed");
       }
@@ -182,25 +188,6 @@ function Login() {
                       label: { color: "#A0BFE0" },
                     }}
                   />
-
-                  {/* FORGOT PWD */}
-                  <Typography
-                    sx={{
-                      textAlign: "left",
-                      margin: "0 1rem 1rem 1rem",
-                      fontWeight: 200,
-                      fontSize: 20,
-                    }}
-                  >
-                    <ColoredLink
-                      onClick={() => {
-                        navigate("/forgotpassword");
-                      }}
-                      style={{ textDecoration: "underline" }}
-                    >
-                      Forgot my Password
-                    </ColoredLink>
-                  </Typography>
 
                   {/* SUBMIT BUTTON */}
                   <LogInButton variant="contained" type="submit">

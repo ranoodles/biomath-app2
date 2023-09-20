@@ -93,7 +93,7 @@ const HolderGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3rem 3rem 3rem 3rem;
+    padding: 1rem 1rem 3rem 3rem;
   }
 `;
 

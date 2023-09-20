@@ -122,9 +122,9 @@ export default function CourseDisplay() {
     <>
       <Title
         variant="h3"
-        paddingTop="5rem"
+        paddingTop="10rem"
         marginBotton="0rem"
-        sx={{ color: "#03add5" }}
+        sx={{ color: "#5383ec" }}
       >
         Our Courses
       </Title>
@@ -142,7 +142,6 @@ export default function CourseDisplay() {
             sx={{
               cursor: "pointer",
               position: "relative",
-              background: "linear-gradient(to right top, #535EAB, #8351C2)",
               overflow: "hidden",
               height: { xs: "80vh", md: "90vh", lg: "80vh" },
             }}
@@ -151,7 +150,8 @@ export default function CourseDisplay() {
             whileInView={{
               opacity: 1,
               scale: 1,
-              backgroundColor: CourseCard.color,
+              backgroundImage:
+                "linear-gradient(to right top, #272727, #313131, #3b3b3b, #464646, #515151)",
             }}
             transition={{
               duration: 0.8,
@@ -160,7 +160,8 @@ export default function CourseDisplay() {
             }}
             whileHover={{
               scale: 1.1,
-              background: "linear-gradient(to right top, #354083, #6533A4)",
+              backgroundImage:
+                "linear-gradient(to left top, #363738, #2c3c4c, #213f62, #174177, #1c418a)",
             }}
             onClick={() => {
               navigate(CourseCard.linksite);

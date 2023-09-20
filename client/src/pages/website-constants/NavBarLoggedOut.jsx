@@ -14,10 +14,7 @@ import BiotechIcon from "@mui/icons-material/Biotech";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const pages = [
-  "Log In",
-  "Sign Up"
-];
+const pages = ["Log In", "Sign Up"];
 
 function NavBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,68 +32,72 @@ function NavBar(props) {
   };
 
   const GetStartedText = styled(Typography)`
-  && {
-    display: flex;
-    justify-content: center;
-    color: white;
-    font-weight: 500;
-  }
-`;
-
-// const SignupButtonTop = styled(Button)`
-//   && {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     background:transparent;
-//     &:hover, &:focus {
-//       background: linear-gradient(
-//         to right,
-//         #b200ff,
-//         #a300ea,
-//         #9500d5,
-//         #8600c0,
-//         #7800ac
-//       );
-//     }
-//   }
-// `;
-
-const SignupButtonTop = styled(Button)`
-  && {
-    background-color: transparent;
-    border: 2px solid;
-    cursor: pointer;
-    box-shadow: inset 0 0 0 0 #03add5;
-    -webkit-transition: ease-out 0.4s;
-    -moz-transition: ease-out 0.4s;
-    transition: ease-out 0.4s;
-    &:hover {
-      box-shadow: inset 400px 0 0 0 #03add5;
+    && {
+      display: flex;
+      justify-content: center;
+      color: white;
+      font-weight: 500;
     }
-  }
-`;
+  `;
 
-const LoginButtonTop = styled(Button)`
-  && {
-    background-color: transparent;
-    cursor: pointer;
-    box-shadow: inset 0 0 0 0 #03add5;
-    -webkit-transition: ease-out 0.4s;
-    -moz-transition: ease-out 0.4s;
-    transition: ease-out 0.4s;
-    &:hover {
-      box-shadow: inset 400px 0 0 0 #03add5;
+  // const SignupButtonTop = styled(Button)`
+  //   && {
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     background:transparent;
+  //     &:hover, &:focus {
+  //       background: linear-gradient(
+  //         to right,
+  //         #b200ff,
+  //         #a300ea,
+  //         #9500d5,
+  //         #8600c0,
+  //         #7800ac
+  //       );
+  //     }
+  //   }
+  // `;
+
+  const SignupButtonTop = styled(Button)`
+    && {
+      background-color: transparent;
+      border: 2px solid;
+      cursor: pointer;
+      box-shadow: inset 0 0 0 0 #5383ec;
+      -webkit-transition: ease-out 0.4s;
+      -moz-transition: ease-out 0.4s;
+      transition: ease-out 0.4s;
+      &:hover {
+        box-shadow: inset 400px 0 0 0 #5383ec;
+      }
     }
-  }
-`;
+  `;
+
+  const LoginButtonTop = styled(Button)`
+    && {
+      background-color: transparent;
+      cursor: pointer;
+      box-shadow: inset 0 0 0 0 #5383ec;
+      -webkit-transition: ease-out 0.4s;
+      -moz-transition: ease-out 0.4s;
+      transition: ease-out 0.4s;
+      &:hover {
+        box-shadow: inset 400px 0 0 0 #5383ec;
+      }
+    }
+  `;
 
   return (
     <AppBar
       position="static"
       sx={{ backgroundColor: "transparent", boxShadow: "none" }}
     >
-      <Grid item xs={11} sx={{ margin: "1.5rem 2rem 1rem 2rem", padding: "0 1rem 0 1rem" }}>
+      <Grid
+        item
+        xs={11}
+        sx={{ margin: "1.5rem 2rem 1rem 2rem", padding: "0 1rem 0 1rem" }}
+      >
         <Toolbar disableGutters>
           {/* <BiotechIcon
             fontSize="large"
@@ -119,7 +120,7 @@ const LoginButtonTop = styled(Button)`
           >
             BIOMATH
           </Typography> */}
-          <div style={{display: "flex", flexGrow: 1, alignItems: "center"}}>
+          <div style={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
             <BiotechIcon sx={{ display: { xs: "flex" }, fontSize: "2.5rem" }} />
             <Typography
               variant="h4"
@@ -139,27 +140,25 @@ const LoginButtonTop = styled(Button)`
               BIOMATH
             </Typography>
           </div>
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap:"2rem" }}>
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: "2rem" }}>
             <LoginButtonTop
-                variant="contained"
-                onClick={() => {
-                  navigate("/login");
-                }}
+              variant="contained"
+              onClick={() => {
+                navigate("/login");
+              }}
             >
               <GetStartedText variant="h6">Log In</GetStartedText>
             </LoginButtonTop>
             <SignupButtonTop
-                variant="contained"
-                onClick={() => {
-                  navigate("/signup");
-                }}
-              >
+              variant="contained"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
               <GetStartedText variant="h6">Sign Up</GetStartedText>
             </SignupButtonTop>
           </Box>
-          <Box
-            sx={{ flexGrow: 0, display: { xs: "flex", md: "none"} }}
-          >
+          <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-controls="menu-appbar"
@@ -199,9 +198,6 @@ const LoginButtonTop = styled(Button)`
             </Menu>
           </Box>
 
-          
-
-          
           {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
