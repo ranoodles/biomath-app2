@@ -49,8 +49,13 @@ app.post("/login", (req, res) => {
             if (err) {
                 reject(err);
             } else {
-                console.log(results[0])
-                resolve(results);
+                console.log("bob", results[0])
+                if (results[0]) {
+                    resolve(results);
+                } else {
+                    console.log("Username does not exist!")
+                    res.send(false);
+                }
             }
         });
     });
@@ -95,7 +100,8 @@ app.get("/fetchCurrentUser", authenticateToken, (req, res) => {
 });
 
 app.get("/isLoggedIn", (req, res) => {
-    if (req.cookies.hasOwnProperty("jwt")) {
+    console.log(req.cookies)
+    if (req.cookies["jwt"]) {
         res.send(true)
     } else {
         res.send(false)
