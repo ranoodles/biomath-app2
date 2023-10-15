@@ -115,22 +115,21 @@ function Login() {
         username: e.target.username.value,
         password: e.target.password.value,
       };
-      document
-        .querySelectorAll("input")
-        .forEach((singleInput) => (singleInput.value = ""));
-      const loginResponse = await axios.post(
-        "http://localhost:8001/login",
-        userData,
-        {
+      const checkCondition = (userData.username !== "" && !(userData.username.includes(" ")) && userData.password !== "" && !(userData.password.includes(" ")))
+      document.querySelectorAll("input").forEach((singleInput) => (singleInput.value = ""));
+      if (checkCondition) {
+        const loginResponse = await axios.post("http://localhost:8001/login", userData, {
           withCredentials: true,
-          credentials: "include",
+          credentials: "include"
+        });
+        if (loginResponse.data) {
+          console.log("going to courses")
+          window.location.reload()
+        } else {
+          setError("Login failed. Please try changing your username or password.")
         }
-      );
-      if (loginResponse.data) {
-        console.log("going to courses");
-        window.location.reload();
       } else {
-        console.log("Login failed");
+        setError("Please enter a username and password.")
       }
     } catch (err) {
       console.error(err);
@@ -198,7 +197,7 @@ function Login() {
                       sx={{
                         color: "red",
                         textAlign: "left",
-                        margin: "0 1rem 1rem 1rem",
+                        margin: "1rem 1rem 0rem 1rem",
                         fontWeight: 200,
                         fontSize: 20,
                       }}

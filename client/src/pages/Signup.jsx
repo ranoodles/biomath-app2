@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Box,
@@ -109,8 +109,9 @@ const GetStartedText = styled(Typography)`
   }
 `;
 
-function Login() {
+function SignUp() {
   const navigate = useNavigate();
+  const [error, setError] = useState(""); // State to hold login error message
 
   const handleSignUpSubmit = async (e) => {
     try {
@@ -121,7 +122,7 @@ function Login() {
         email: e.target.email.value,
       };
       const confPass = e.target.confPassword.value;
-      const checkCondition = (userData.username !== "" && !(userData.username.includes(" ")) && userData.password !== "" && !(userData.password.includes(" ")) && userData.email !== "" && !(userData.username.includes(" ")) && userData.confPass !== "" && !(userData.username.includes(" ")))
+      const checkCondition = (userData.username !== "" && !(userData.username.includes(" ")) && userData.password !== "" && !(userData.password.includes(" ")) && userData.email !== "" && !(userData.email.includes(" ")) && userData.confPass !== "" && !(userData.confPass.includes(" ")))
       document
           .querySelectorAll("input")
           .forEach((singleInput) => (singleInput.value = ""));
@@ -154,6 +155,8 @@ function Login() {
         }).catch((signUpError) => {
           console.log("Signup error:", signUpError);
         });
+      } else {
+        setError("Please enter valid information in the provided fields.");
       }
     } catch (err) {
       console.log(err);
@@ -255,6 +258,19 @@ function Login() {
                   <SignUpButton variant="contained" type="submit">
                     <GetStartedText variant="h6">Sign Up</GetStartedText>
                   </SignUpButton>
+                  {error && (
+                    <Typography
+                      sx={{
+                        color: "red",
+                        textAlign: "left",
+                        margin: "1rem 1rem 0rem 1rem",
+                        fontWeight: 200,
+                        fontSize: 20,
+                      }}
+                    >
+                      {error}
+                    </Typography>
+                  )}
                 </FormControl>
               </form>
             </VertStack>
@@ -265,4 +281,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;
