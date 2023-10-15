@@ -188,25 +188,6 @@ function Login() {
                     }}
                   />
 
-                  {/* FORGOT PWD */}
-                  <Typography
-                    sx={{
-                      textAlign: "left",
-                      margin: "0 1rem 1rem 1rem",
-                      fontWeight: 200,
-                      fontSize: 20,
-                    }}
-                  >
-                    <ColoredLink
-                      onClick={() => {
-                        navigate("/forgotpassword");
-                      }}
-                      style={{ textDecoration: "underline" }}
-                    >
-                      Forgot my Password
-                    </ColoredLink>
-                  </Typography>
-
                   {/* SUBMIT BUTTON */}
                   <LogInButton variant="contained" type="submit">
                     <GetStartedText variant="h6">Log In</GetStartedText>

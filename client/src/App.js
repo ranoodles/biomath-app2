@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./pages/website-constants/Theme.jsx";
 import Courses from "./pages/Courses.jsx";
 import axios from "axios";
+import Loading from "./pages/website-constants/loading.jsx";
 const MathLearningPath = lazy(() => import("./pages/mathlearningpath.jsx"));
 const BioLearningPath = lazy(() => import("./pages/biolearningpath.jsx"));
 const Landing = lazy(() => import("./pages/Landing"));
@@ -22,7 +23,7 @@ function App() {
       try {
         const res = await axios.get("http://localhost:8001/isLoggedIn", {
           withCredentials: true,
-          credentials: "include"
+          credentials: "include",
         });
         const user = res.data;
         setLoggedIn(user);
@@ -41,39 +42,103 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <BrowserRouter>
-          <Suspense fallback={<div className="container">Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Routes>
               <Route
                 path="/login"
-                element={loggedIn === true ? <Navigate to="/courses" /> : loggedIn === false ? <Login /> : <div>Loading...</div>}
+                element={
+                  loggedIn === true ? (
+                    <Navigate to="/courses" />
+                  ) : loggedIn === false ? (
+                    <Login />
+                  ) : (
+                    <Loading />
+                  )
+                }
               />
               <Route
                 path="/biotechnology/:lessonid"
-                element={loggedIn === true ? <BioLearningPath /> : loggedIn === false ? <Navigate to="/login" /> : <div>Loading...</div>}
+                element={
+                  loggedIn === true ? (
+                    <BioLearningPath />
+                  ) : loggedIn === false ? (
+                    <Navigate to="/login" />
+                  ) : (
+                    <Loading />
+                  )
+                }
               />
               <Route
                 path="/courses"
-                element={loggedIn === true ? <Courses /> : loggedIn === false ? <Navigate to="/login" /> : <div>Loading...</div>}
+                element={
+                  loggedIn === true ? (
+                    <Courses />
+                  ) : loggedIn === false ? (
+                    <Navigate to="/login" />
+                  ) : (
+                    <Loading />
+                  )
+                }
               />
               <Route
                 path="/appliedmath/:lessonid"
-                element={loggedIn === true ? <MathLearningPath /> : loggedIn === false ? <Navigate to="/login" /> : <div>Loading...</div>}
+                element={
+                  loggedIn === true ? (
+                    <MathLearningPath />
+                  ) : loggedIn === false ? (
+                    <Navigate to="/login" />
+                  ) : (
+                    <Loading />
+                  )
+                }
               />
               <Route
                 path="/"
-                element={loggedIn === false ? <Landing /> : loggedIn === true ? <Navigate to="/courses" /> : <div>Loading...</div>}
+                element={
+                  loggedIn === false ? (
+                    <Landing />
+                  ) : loggedIn === true ? (
+                    <Navigate to="/courses" />
+                  ) : (
+                    <Loading />
+                  )
+                }
               />
               <Route
                 path="/signup"
-                element={loggedIn === false ? <Signup /> : loggedIn === true ? <Navigate to="/courses" /> : <div>Loading...</div>}
+                element={
+                  loggedIn === false ? (
+                    <Signup />
+                  ) : loggedIn === true ? (
+                    <Navigate to="/courses" />
+                  ) : (
+                    <Loading />
+                  )
+                }
               />
               <Route
                 path="/biotechnology"
-                element={loggedIn === true ? <BiotechnologyPage /> : loggedIn === false ? <Navigate to="/login" /> : <div>Loading...</div>}
+                element={
+                  loggedIn === true ? (
+                    <BiotechnologyPage />
+                  ) : loggedIn === false ? (
+                    <Navigate to="/login" />
+                  ) : (
+                    <Loading />
+                  )
+                }
               />
               <Route
                 path="/appliedmath"
-                element={loggedIn === true ? <AppliedMathPage /> : loggedIn === false ? <Navigate to="/login" /> : <div>Loading...</div>}
+                element={
+                  loggedIn === true ? (
+                    <AppliedMathPage />
+                  ) : loggedIn === false ? (
+                    <Navigate to="/login" />
+                  ) : (
+                    <Loading />
+                  )
+                }
               />
             </Routes>
           </Suspense>

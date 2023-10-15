@@ -21,7 +21,7 @@ export default function Landing() {
         <Hero></Hero>
         <CourseDisplay></CourseDisplay>
         <OurMission></OurMission>
-        <AboutUs></AboutUs>
+        {/* <AboutUs></AboutUs> */}
         <JoinNow></JoinNow>
       </ThemeProvider>
     </>
