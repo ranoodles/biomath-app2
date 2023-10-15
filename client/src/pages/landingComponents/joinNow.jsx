@@ -9,7 +9,7 @@ const TitleStack = styled(Stack)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 7rem 5rem 7rem 5rem;
+    padding: 4rem 0rem 4rem 0rem;
   }
 `;
 const SubtitleText = styled(Typography)`

@@ -9,9 +9,9 @@ const OurMissionGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0rem 0rem 0rem 0rem;
-    gap: 3vw;
-    height: 80vh;
+    padding: 2rem 0rem 2rem 0rem;
+    gap: 4vw;
+    ${'' /* height: 60vh; */}
   }
 `;
 
@@ -67,9 +67,7 @@ const BiomathText = styled(Typography)`
 export default function OurMission() {
   return (
     <>
-      <BiomathText variant="h3" paddingTop="7rem">
-        Our Mission
-      </BiomathText>
+      
       <OurMissionGrid container>
         <OurMissionImgGrid
           item
@@ -102,6 +100,10 @@ export default function OurMission() {
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
+        <Stack>
+          <BiomathText variant="h3" paddingTop="5rem">
+            Our Mission
+          </BiomathText>
           <OurMissionText variant="h5">
             Deserunt reprehenderit aute amet Lorem laborum irure. Dolor eu
             pariatur incididunt dolore aute minim qui est et tempor velit elit.
@@ -109,6 +111,7 @@ export default function OurMission() {
             exercitation in culpa ad voluptate ullamco eu ex cupidatat. Cillum
             nulla eu labore quis adipisicing mollit ad velit cupidatat.
           </OurMissionText>
+        </Stack>
         </OurMissionTextGrid>
       </OurMissionGrid>
     </>

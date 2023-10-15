@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import fillerImg from "./undraw_lightbulb_moment_re_ulyo.svg";
 import atomGif from "./bubble-gum-test-tubes-and-flask.gif";
-import nodeGif from "./taxi-molecule.gif";
+import nodeGif from "./taxi-molecule-whitemod.gif";
 import Image from "mui-image";
 import "./bouncingArrow.css";
+
 const TitleText = styled(Typography)`
   && {
     display: flex;
@@ -65,7 +66,7 @@ const TitleStack = styled(Stack)`
     ${"" /* display: inline-block; */}
     justify-content: left;
     align-items: center;
-    padding: 7rem 7rem 7rem 7rem;
+    padding: 5rem 5rem 5rem 5rem;
   }
 `;
 
@@ -83,7 +84,7 @@ export default function Hero() {
     color: "789de5",
   };
   return (
-    <Grid container>
+    <Grid container sx={{height: {xs: "100%", md: "100vh"}}}>
       <Grid
         item
         xs={12}
@@ -134,6 +135,7 @@ export default function Hero() {
           <path class="a3" d="M0 40 L30 72 L60 40"></path>
         </svg>
       </Grid>
+      
     </Grid>
   );
 }

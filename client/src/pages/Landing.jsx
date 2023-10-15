@@ -9,7 +9,6 @@ import CourseDisplay from "./landingComponents/courseDisplays.jsx";
 import OurMission from "./landingComponents/ourMission.jsx";
 import JoinNow from "./landingComponents/joinNow.jsx";
 import AboutUs from "./landingComponents/aboutus";
-
 export default function Landing() {
   const prevOver = document.body.style.overflow;
   document.body.style.overflow = prevOver;
