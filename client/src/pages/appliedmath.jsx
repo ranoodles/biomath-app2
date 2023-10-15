@@ -1,139 +1,202 @@
-import { React, useState, useRef, useEffect } from "react";
+import * as React from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import Image from "mui-image";
 import {
   Box,
-  Button,
   Typography,
-  Container,
-  Stack,
-  Divider,
   Grid,
   Card,
   CardActions,
   CardContent,
-  Modal,
-  LinearProgress,
-  Hidden,
+  useMediaQuery,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import theme from "./website-constants/Theme.jsx";
-import { FormControl, TextField } from "@mui/material";
 import NavBar from "./website-constants/NavBarLoggedIn.jsx";
-import DisplayCard from "./aMathComponents/aMathUnits.jsx";
-import BiotechTitle from "./aMathComponents/aMathTitle.jsx";
-import scienceImg from "./aMathComponents/mathematician.svg";
+import DisplayCard from "./biotechnologyComponents/biotechUnits.jsx";
+import BiotechTitle from "./biotechnologyComponents/biotechTitle.jsx";
+import AppliedMathHeader from "./aMathComponents/aMathTitle.jsx";
 
-const CardHolder = styled(Grid)`
+const RootContainer = styled.div`
+  height: 100vh;
+  overflow: hidden;
+`;
+
+const CenteredContainer = styled(Grid)`
   && {
     display: flex;
     justify-content: center;
-    align-items: center;
-    border-color: #d99565;
-    flex-direction: row;
-    overflow-y: hidden;
-    height: 80vh;
+    align-items: flex-start;
+    margin: 0;
+    height: 100%;
+    padding: 1rem;
   }
 `;
-const FatHolder = styled(Grid)`
+
+const UnitMenu = styled.div`
+  display: block;
+  max-height: 80vh;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const CenteredSidebar = styled(Grid)`
   && {
-    border-color: #d99565;
-    overflow-y: auto;
+    display: flex;
     flex-direction: column;
-    max-height: 70vh;
-    overflow-x: hidden; /* Hide horizontal scrollbar if necessary */
-    scrollbar-width: 0px; /* Firefox */
-    -ms-overflow-style: 0px; /* Internet Explorer 10+ */
-    &::-webkit-scrollbar {
-      width: 0px; /* Safari and Chrome */
+    align-items: left;
+    border-radius: 10px;
+    padding: 1rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar {
+      display: none;
     }
-    position: relative;
+    color: "white";
+  }
 
-    border-radius: 2rem;
-    padding: 0px 0px 0px 0px;
+  @media (min-width: 960px) {
+    /* Increase padding for md screens */
+    padding: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    /* Decrease font size for xs screens */
+    font-size: 14px;
   }
 `;
-const StyledImageHolder = styled(Grid)`
-  && {
-    justify-content: center;
-    align-items: center;
-    padding-left: 40px;
+
+const UnitItem = styled(Typography)`
+  cursor: pointer;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  border-bottom: 1px solid #a983e6;
+  &:last-child {
+    border-bottom: none;
   }
+  ${'' /* &:hover {
+    background-color: #a983e6;
+  } */}
+  color: white;
+  text-align: center;
+  font-size: 18px; /* Default font size */
+  box-shadow: inset 0 0 0 0 #5383ec;
+    -webkit-transition: ease-out 0.2s;
+    -moz-transition: ease-out 0.2s;
+    transition: ease-out 0.2s;
+    &:hover {
+      box-shadow: inset 600px 0 0 0 #5383ec;
+    }
 `;
 
-const Bruh = styled.div`
-  height: 120vh;
-  ${'' /* overflow: hidden; */}
+const ContentWrapper = styled(Grid)`
+  max-height: 80vh;
 `;
 
-function AppliedMathPage() {
-  // document.body.style.overflow = "hidden";
-  var units = [];
-  const [unitsList, setUnitsList] = useState([]);
-  const [selectedUnit, setSelectedUnit] = useState(null);
-  const [selectedLessonId, setSelectedLessonId] = useState(null);
+function BiotechnologyPage() {
+  const [unitsList, setUnitsList] = React.useState([]);
+  const [selectedUnit, setSelectedUnit] = React.useState(null);
+  const [selectedLessonId, setSelectedLessonId] = React.useState(null);
   const navigate = useNavigate();
+  const isXs = useMediaQuery((theme) => theme.breakpoints.down("xs"));
+
+  const handleUnitSelect = (unit) => {
+    setSelectedUnit(unit);
+    setSelectedLessonId(null); // Clear the selected lesson when a new unit is selected
+  };
+
   const handleLessonSelect = (lessonDetails) => {
     setSelectedLessonId(lessonDetails.lesson_id);
-    navigate("/appliedmath/" + lessonDetails.lesson_id);
+    navigate(`/appliedmath/${lessonDetails.lesson_id}`);
   };
-  useEffect(() => {
+
+  React.useEffect(() => {
     const fetchAllUnits = async () => {
       try {
         const res = await axios.get("http://localhost:8800/appliedmath");
         const units = res.data;
         setUnitsList(units);
-        setSelectedUnit(units[0]);
+        setSelectedUnit(units[0]); // Select the first unit by default
       } catch (err) {
         console.log(err);
       }
     };
     fetchAllUnits();
   }, []);
-  const [scrollProg, setScrollProg] = useState(0);
-  const handleScroll = (event) => {
-    const element = event.currentTarget;
-    const totalScrollHeight = element.scrollHeight - element.clientHeight;
-    const scrollPosition = element.scrollTop;
-    const percentageScrolled = (scrollPosition / totalScrollHeight) * 100;
-    setScrollProg(percentageScrolled);
-  };
-  return (
-    <ThemeProvider theme={theme}>
-      <Bruh>
-      <NavBar />
-      <BiotechTitle item />
-      <CardHolder
-        container
-        sx={{ padding: { xs: "none", md: "0rem 2rem 2rem 2rem" } }}
-      >
-        <Hidden xsDown>
-          <StyledImageHolder
-            item
-            md={3.5}
-            sx={{ display: { xs: "none", md: "flex" }, paddingRight: "20px" }}
-          >
-            <Image src={scienceImg} />
-          </StyledImageHolder>
-        </Hidden>
 
-        <FatHolder item xs={12} md={8.5} onScroll={handleScroll}>
-          {unitsList.length > 0 &&
-            unitsList.map((unit, index) => (
-              <DisplayCard
-                item
-                unit={unit}
-                handleLessonSelect={handleLessonSelect}
-                key={index}
-              />
-            ))}
-        </FatHolder>
-      </CardHolder>
-      </Bruh>
+  return (
+    <ThemeProvider
+      theme={theme}
+      sx={{
+        minHeight: "100%",
+        width: "100vw",
+        margin: "0",
+      }}
+    >
+      <NavBar />
+      <AppliedMathHeader />
+      <RootContainer>
+        <CenteredContainer container>
+          {isXs ? (
+            <UnitMenu>
+              {unitsList.map((unit, index) => (
+                <UnitItem
+                  key={index}
+                  onClick={() => handleUnitSelect(unit)}
+                  variant="h6"
+                  // color={selectedUnit === unit ? "#5383ec" : "white"}
+                  sx={{boxShadow: selectedUnit === unit ? "inset 600px 0 0 0 #5383ec" : "transparent"}}
+                >
+                  Unit {unit.id}: {unit.name}
+                </UnitItem>
+              ))}
+            </UnitMenu>
+          ) : (
+            <CenteredSidebar
+              item
+              md={4}
+              xs={2}
+              sx={{
+                padding: "0.5rem",
+                marginTop: "3rem",
+                order: 1,
+              }}
+            >
+              {unitsList.map((unit, index) => (
+                <UnitItem
+                  key={index}
+                  onClick={() => handleUnitSelect(unit)}
+                  variant="h6"
+                  // color={selectedUnit === unit ? "#5383ec" : "white"}
+                  sx={{boxShadow: (selectedUnit === unit) ? "inset 600px 0 0 0 #5383ec" : "transparent"}}
+                >
+                  Unit {unit.id}: {unit.name}
+                </UnitItem>
+              ))}
+            </CenteredSidebar>
+          )}
+          <ContentWrapper
+            item
+            md={7}
+            xs={10}
+            sx={{
+              order: 2,
+            }}
+          >
+            <DisplayCard
+              unit={selectedUnit}
+              selectedLessonId={selectedLessonId}
+              handleLessonSelect={handleLessonSelect}
+            />
+          </ContentWrapper>
+        </CenteredContainer>
+      </RootContainer>
     </ThemeProvider>
   );
 }
 
-export default AppliedMathPage;
+export default BiotechnologyPage;

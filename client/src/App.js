@@ -5,6 +5,7 @@ import theme from "./pages/website-constants/Theme.jsx";
 import Courses from "./pages/Courses.jsx";
 import axios from "axios";
 import Loading from "./pages/website-constants/loading.jsx";
+import NotFound from "./pages/website-constants/notfoundpage.jsx";
 const MathLearningPath = lazy(() => import("./pages/mathlearningpath.jsx"));
 const BioLearningPath = lazy(() => import("./pages/biolearningpath.jsx"));
 const Landing = lazy(() => import("./pages/Landing"));
@@ -138,6 +139,12 @@ function App() {
                   ) : (
                     <Loading />
                   )
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <NotFound></NotFound>
                 }
               />
             </Routes>

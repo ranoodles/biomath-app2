@@ -38,7 +38,7 @@ export default function BiotechHeader() {
     <>
       <TitleText
         sx={{
-          color: "#03add5",
+          color: "#5383ec",
           fontSize: { xs: "9vw", md: "6vw" },
         }}
       >

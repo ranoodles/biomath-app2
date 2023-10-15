@@ -26,7 +26,7 @@ const CenteredContainer = styled(Grid)`
   && {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 0;
     height: 100%;
     padding: 1rem;
@@ -47,7 +47,7 @@ const CenteredSidebar = styled(Grid)`
   && {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     border-radius: 10px;
     padding: 1rem;
     max-height: 80vh;
@@ -77,12 +77,19 @@ const UnitItem = styled(Typography)`
   &:last-child {
     border-bottom: none;
   }
-  &:hover {
+  ${'' /* &:hover {
     background-color: #a983e6;
-  }
+  } */}
   color: white;
   text-align: center;
   font-size: 18px; /* Default font size */
+  box-shadow: inset 0 0 0 0 #5383ec;
+    -webkit-transition: ease-out 0.2s;
+    -moz-transition: ease-out 0.2s;
+    transition: ease-out 0.2s;
+    &:hover {
+      box-shadow: inset 600px 0 0 0 #5383ec;
+    }
 `;
 
 const ContentWrapper = styled(Grid)`
@@ -140,7 +147,8 @@ function BiotechnologyPage() {
                   key={index}
                   onClick={() => handleUnitSelect(unit)}
                   variant="h6"
-                  color={selectedUnit === unit ? "white" : "initial"}
+                  // color={selectedUnit === unit ? "#5383ec" : "white"}
+                  sx={{boxShadow: selectedUnit === unit ? "inset 600px 0 0 0 #5383ec" : "transparent"}}
                 >
                   Unit {unit.id}: {unit.name}
                 </UnitItem>
@@ -153,6 +161,7 @@ function BiotechnologyPage() {
               xs={2}
               sx={{
                 padding: "0.5rem",
+                marginTop: "3rem",
                 order: 1,
               }}
             >
@@ -161,7 +170,8 @@ function BiotechnologyPage() {
                   key={index}
                   onClick={() => handleUnitSelect(unit)}
                   variant="h6"
-                  color={selectedUnit === unit ? "white" : "initial"}
+                  // color={selectedUnit === unit ? "#5383ec" : "white"}
+                  sx={{boxShadow: (selectedUnit === unit) ? "inset 600px 0 0 0 #5383ec" : "transparent"}}
                 >
                   Unit {unit.id}: {unit.name}
                 </UnitItem>

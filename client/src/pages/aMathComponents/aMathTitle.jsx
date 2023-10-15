@@ -33,12 +33,12 @@ const TitleText = styled(Typography)`
   }
 `;
 
-export default function BiotechHeader() {
+export default function AppliedMathHeader() {
   return (
     <>
       <TitleText
         sx={{
-          color: "#03add5",
+          color: "#5383ec",
           fontSize: { xs: "9vw", md: "6vw" },
         }}
       >

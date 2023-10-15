@@ -60,7 +60,7 @@ const BiomathText = styled(Typography)`
     font-weight: 700;
     ${'' /* margin-bottom: 1rem; */}
     text-align: center;
-    color: #03add5;
+    color: #5383ec;
   }
 `;
 

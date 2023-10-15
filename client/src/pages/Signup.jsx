@@ -88,12 +88,12 @@ const SignUpButton = styled(Button)`
     width: 7rem;
     margin-left: 1rem;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #03add5;
+    box-shadow: inset 0 0 0 0 #5383ec;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
     &:hover {
-      box-shadow: inset 400px 0 0 0 #03add5;
+      box-shadow: inset 400px 0 0 0 #5383ec;
     }
   }
 `;

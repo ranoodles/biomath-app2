@@ -26,14 +26,14 @@ const SignupButtonTop = styled(Button)`
     background-color: transparent;
     border: 2px solid;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #03add5;
+    box-shadow: inset 0 0 0 0 #5383ec;
     font-size: 20px;
     margin-top: 2rem;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
     &:hover {
-      box-shadow: inset 400px 0 0 0 #03add5;
+      box-shadow: inset 400px 0 0 0 #5383ec;
     }
   }
 `;
@@ -47,7 +47,7 @@ export default function JoinNow() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "5rem 0rem 3rem 0rem"
+          padding: "1rem 0rem 3rem 0rem"
         }}
       >
         <TitleStack spacing={2}>

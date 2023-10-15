@@ -55,7 +55,8 @@ const VertStack = styled(Stack)`
     padding: 3rem;
     border-radius: 2rem;
     border: 1px solid grey;
-    background: linear-gradient(to right top, #535eab, #8351c2);
+    ${'' /* background: linear-gradient(to right top, #535eab, #8351c2); */}
+    ${'' /* background-color: #2b5bc4; */}
     disable-align: false;
   }
 `;
@@ -68,13 +69,13 @@ const ListButtons = styled(Button)`
     text-align: center;
     padding: 1rem 1rem 1rem 1rem;
     color: white;
-    box-shadow: inset 0 0 0 0 #03add5;
+    box-shadow: inset 0 0 0 0 #5383ec;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.2s;
     width: 90%;
     &:hover {
-      box-shadow: inset 60vw 0vh 0vh 0vh #03add5;
+      box-shadow: inset 60vw 0vh 0vh 0vh #5383ec;
       color: black;
     }
   }
@@ -121,7 +122,8 @@ function DisplayInfo({ unit, handleLessonSelect }) {
             }}
             whileHover={{
               scale: 1.05,
-              background: "linear-gradient(to right top, #354083, #6533A4)",
+              // background: "linear-gradient(to right top, #354083, #6533A4)",
+              backgroundColor: "#1747b0"
             }}
           >
             <TitleText sx={{ fontSize: { xs: "6vw", md: "4vw" } }}>

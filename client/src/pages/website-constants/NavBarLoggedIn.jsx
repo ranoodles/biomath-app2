@@ -19,12 +19,39 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const pages = [
   { label: "Courses", path: "/courses" },
   { label: "Biotechnology", path: "/biotechnology" },
   { label: "Applied Math", path: "/appliedmath" },
 ];
+
+const MenuButton = styled(Button)`
+  && {
+    background-color: transparent;
+    ${'' /* border: 2px solid; */}
+    cursor: pointer;
+    font-size: 110%;
+    box-shadow: inset 0 0 0 0 #5383ec;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    &:hover {
+      box-shadow: inset 400px 0 0 0 #5383ec;
+    }
+  }
+`;
+
+const ButtonText = styled(Typography)`
+  && {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: 500;
+    font-size: 100%;
+  }
+`;
 
 function NavBar(props) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -59,7 +86,7 @@ function NavBar(props) {
   };
 
   return (
-    <AppBar position="static" sx={{ background: "transparent" }}>
+    <AppBar position="static" sx={{ background: "transparent", boxShadow: "none", padding:"1rem" }}>
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
           {/* Hamburger Menu Icon (centered on XS breakpoint) */}
@@ -83,7 +110,7 @@ function NavBar(props) {
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="a"
             href="/"
@@ -101,15 +128,16 @@ function NavBar(props) {
           </Typography>
 
           {/* User settings (right corner on XS breakpoint) */}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, paddingLeft: "1rem" }}>
             {pages.map((page) => (
-              <Button
+              <MenuButton
                 key={page.label}
                 onClick={() => navigate(page.path)}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ color: "white", display: "block", marginRight:"1rem" }}
+                variant="h4"
               >
-                {page.label}
-              </Button>
+                <ButtonText>{page.label}</ButtonText>
+              </MenuButton>
             ))}
           </Box>
 
@@ -136,7 +164,7 @@ function NavBar(props) {
         <List>
           {pages.map((page) => (
             <ListItem
-              button
+              // button
               key={page.label}
               onClick={() => {
                 toggleDrawer();
