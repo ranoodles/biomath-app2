@@ -45,8 +45,9 @@ const CardHolder = styled(Grid)`
     height: 90vh;
     width: 90vw;
     ${"" /* background: linear-gradient(to right top, #535EAB, #8351C2); */}
-    background: linear-gradient(to right top, #99a4f1, #c997f4);
+    background-image: linear-gradient(to right top, #000000, #141414, #202020, #2d2d2d, #3a3a3a, #3b3b3b, #3b3b3b, #3c3c3c, #303030, #252525, #1b1b1b, #0f0f0f);
     border-radius: 2rem;
+    border: 5px solid grey;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -116,19 +117,11 @@ function BioLearningPath() {
   const handleNextClick = () => {
     if (cardNum < lesson.length) {
       setCardNum(cardNum + 1);
-    } else if (lessonid < lessonList.length) {
-      const newIndex = Number(lessonid) + 1;
-      navigate("/biotechnology/" + newIndex);
-      window.location.reload(false);
     }
   };
   const handleBackClick = (e) => {
     if (cardNum > -1) {
       setCardNum(cardNum - 1);
-    } else if (lessonid > 1) {
-      const newIndex = Number(lessonid) - 1;
-      navigate("/biotechnology/" + newIndex);
-      window.location.reload(false);
     }
   };
 
@@ -155,54 +148,80 @@ function BioLearningPath() {
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
-      <BigGrid>
-        <ChevronButton
-          onClick={handleBackClick}
-          disable="true"
-          sx={{ marginRight: "2rem", display: { xs: "none", md: "flex" } }}
+      <Stack>
+        <BigGrid>
+          <ChevronButton
+            onClick={handleBackClick}
+            disable="true"
+            sx={{ marginRight: "2rem", display: { xs: "none", md: "flex" } }}
+          >
+            <LeftIcon style={{ color: "white", fontSize: "3rem" }} />
+          </ChevronButton>
+          <CardHolder
+            item
+            sm={12}
+            xs={12}
+            sx={{ alignItems: { xs: "flex-start", md: "center" } }}
+          >
+            {renderCard()}
+          </CardHolder>
+          <ChevronButton
+            onClick={handleNextClick}
+            disable="true"
+            sx={{ marginLeft: "2rem", display: { xs: "none", md: "flex" } }}
+          >
+            <RightIcon style={{ color: "white", fontSize: "3rem" }} />
+          </ChevronButton>
+        </BigGrid>
+        <Container
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            padding: "3rem 0rem",
+            visibility: { xs: "visible", md: "hidden" },
+          }}
         >
-          <LeftIcon style={{ color: "white", fontSize: "3rem" }} />
-        </ChevronButton>
-        <CardHolder
-          item
-          sm={12}
-          xs={12}
-          sx={{ alignItems: { xs: "flex-start", md: "center" } }}
+          <ChevronButton
+            onClick={handleBackClick}
+            disable="true"
+            sx={{ marginRight: "2rem" }}
+          >
+            <LeftIcon style={{ color: "white", fontSize: "3rem" }} />
+          </ChevronButton>
+          <ChevronButton
+            onClick={handleNextClick}
+            disable="true"
+            sx={{ marginLeft: "2rem" }}
+          >
+            <RightIcon style={{ color: "white", fontSize: "3rem" }} />
+          </ChevronButton>
+        </Container>
+        <Container
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            padding: "3rem 0rem",
+            visibility: { xs: "hidden", md: "visible" },
+          }}
         >
-          {renderCard()}
-        </CardHolder>
-        <ChevronButton
-          onClick={handleNextClick}
-          disable="true"
-          sx={{ marginLeft: "2rem", display: { xs: "none", md: "flex" } }}
-        >
-          <RightIcon style={{ color: "white", fontSize: "3rem" }} />
-        </ChevronButton>
-      </BigGrid>
-      <Container
-        sx={{
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-          padding: "3rem 0rem",
-          visibility: { xs: "visible", md: "hidden" },
-        }}
-      >
-        <ChevronButton
-          onClick={handleBackClick}
-          disable="true"
-          sx={{ marginRight: "2rem" }}
-        >
-          <LeftIcon style={{ color: "white", fontSize: "3rem" }} />
-        </ChevronButton>
-        <ChevronButton
-          onClick={handleNextClick}
-          disable="true"
-          sx={{ marginLeft: "2rem" }}
-        >
-          <RightIcon style={{ color: "white", fontSize: "3rem" }} />
-        </ChevronButton>
-      </Container>
+          <ChevronButton
+            onClick={handleBackClick}
+            disable="true"
+            sx={{ marginRight: "2rem" }}
+          >
+            <LeftIcon style={{ color: "white", fontSize: "3rem" }} />
+          </ChevronButton>
+          <ChevronButton
+            onClick={handleNextClick}
+            disable="true"
+            sx={{ marginLeft: "2rem" }}
+          >
+            <RightIcon style={{ color: "white", fontSize: "3rem" }} />
+          </ChevronButton>
+        </Container>
+      </Stack>
     </ThemeProvider>
   );
 }

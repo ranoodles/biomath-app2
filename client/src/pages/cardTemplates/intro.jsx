@@ -40,6 +40,7 @@ const DescriptionText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
+    font-weight: bold;
     ${"" /* font-size: 20px; */}
     padding-bottom: 1rem;
     text-align: left;
@@ -92,10 +93,10 @@ export default function Intro({ lessonIndex, course }) {
         <SplitBoxesGrid container>
           <VertStack>
             <DescriptionText variant="h3">
-              Welcome to Unit {lesson.unit_id} Lesson {lesson.lesson_number}!
+              Unit {lesson.unit_id} Lesson {lesson.lesson_number}
             </DescriptionText>
             <TitleText variant="h1">{lesson.lesson_name}</TitleText>
-            <DescriptionText variant="h3">Let's get started!</DescriptionText>
+            {/* <DescriptionText variant="h3">Let's get started!</DescriptionText> */}
           </VertStack>
         </SplitBoxesGrid>
       </ThemeProvider>

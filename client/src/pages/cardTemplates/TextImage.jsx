@@ -20,7 +20,7 @@ const TitleText = styled(Typography)`
     justify-content: left;
     align-items: left;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     text-align: left;
   }
 `;
@@ -31,12 +31,14 @@ const SubGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     ${"" /* width: 100%; */}
+    margin: 2vw;
   }
 `;
 
 const DescriptionText = styled(Typography)`
   && {
     display: flex;
+    color: #111111;
     justify-content: left;
     align-items: left;
     font-size: 20px;
@@ -53,8 +55,6 @@ const SplitBoxesGrid = styled(Grid)`
     align-items: center;
     font-size: 25px;
     height: 100%;
-    gap: 3vw;
-    padding: 2vw;
   }
 `;
 
@@ -81,13 +81,13 @@ export default function TextImage({ displayInfo }) {
     <>
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
-          <SubGrid item xs={12} md={7}>
+          <SubGrid item xs={12} md={5}>
             <VertStack>
               <TitleText variant="h2">{displayInfo.title}</TitleText>
               <DescriptionText variant="h6">{displayInfo.text}</DescriptionText>
             </VertStack>
           </SubGrid>
-          <SubGrid item xs={12} md={4}>
+          <SubGrid item xs={12} md={5}>
             <Img src={displayInfo.img} alt=""></Img>
           </SubGrid>
         </SplitBoxesGrid>
