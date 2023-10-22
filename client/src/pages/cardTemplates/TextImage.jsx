@@ -22,6 +22,7 @@ const TitleText = styled(Typography)`
     font-weight: 700;
     margin-bottom: 2rem;
     text-align: left;
+    color: white;
   }
 `;
 
@@ -43,6 +44,7 @@ const DescriptionText = styled(Typography)`
     padding-bottom: 1rem;
     text-align: left;
     line-height: 175%;
+    color: white;
   }
 `;
 

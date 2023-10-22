@@ -50,6 +50,7 @@ const SubtopicText = styled(Typography)`
     font-weight: 700;
     margin-bottom: 2rem;
     text-align: left;
+    color: white;
   }
 `;
 
@@ -60,6 +61,7 @@ const QuestionText = styled(Typography)`
     align-items: left;
     padding-bottom: 2rem;
     text-align: left;
+    color: white;
   }
 `;
 
@@ -68,6 +70,7 @@ const TextFieldStyled = styled(TextField)`
     margin: 1rem;
     width: 50vw;
     font-size: 2rem;
+    color: white;
   }
 `;
 
@@ -79,23 +82,23 @@ const DisplayText = styled(Typography)`
     padding: 0.2rem;
     font-weight: 500;
     text-transform: none;
+    color: white;
   }
 `;
 
 const CheckButton = styled(Button)`
   && {
     background-color: transparent;
-    border: 2px solid black;
+    border: 2px solid white;
     width: 5rem;
     margin-top: 1rem;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #03add5;
+    box-shadow: inset 0 0 0 0 #5383ec;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
     &:hover {
-      box-shadow: inset 400px 0 0 0 #03add5;
-      border-color: white;
+      box-shadow: inset 400px 0 0 0 #5383ec;
     }
   }
 `;
@@ -143,8 +146,8 @@ export default function FillInBlank({ question }) {
                   placeholder="Type answer here"
                   variant="standard"
                   sx={{
-                    input: { color: "#000000" },
-                    label: { color: "#000000" },
+                    input: { color: "#FFFFFF" },
+                    label: { color: "#FFFFFF" },
                   }}
                   onChange={handleFieldChange}
                   disabled={disable}

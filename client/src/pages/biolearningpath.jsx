@@ -45,8 +45,10 @@ const CardHolder = styled(Grid)`
     height: 90vh;
     width: 90vw;
     ${"" /* background: linear-gradient(to right top, #535EAB, #8351C2); */}
-    background: linear-gradient(to right top, #99a4f1, #c997f4);
+    ${'' /* background: linear-gradient(to right top, #99a4f1, #c997f4); */}
     border-radius: 2rem;
+    ${'' /* border: 1px solid grey; */}
+    box-shadow: 0px 0px 5rem grey;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;

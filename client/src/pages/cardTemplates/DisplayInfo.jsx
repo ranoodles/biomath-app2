@@ -21,6 +21,7 @@ const TitleText = styled(Typography)`
     font-weight: 700;
     margin-bottom: 2rem;
     text-align: left;
+    
   }
 `;
 

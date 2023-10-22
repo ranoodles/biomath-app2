@@ -48,6 +48,7 @@ const SubtopicText = styled(Typography)`
     font-weight: 700;
     margin-bottom: 2rem;
     text-align: left;
+    color: white;
   }
 `;
 
@@ -58,6 +59,7 @@ const QuestionText = styled(Typography)`
     align-items: left;
     padding-bottom: 2rem;
     text-align: left;
+    color: white;
   }
 `;
 
@@ -70,6 +72,7 @@ const CheckmarkIcon = styled(CheckCircleIcon)`
 const formControlLabelStyle = {
   "& .MuiFormControlLabel-label": {
     fontSize: "1.4rem",
+    color: "white"
   },
 };
 
@@ -77,7 +80,7 @@ const DisplayText = styled(Typography)`
   && {
     display: flex;
     justify-content: center;
-    color: black;
+    color: white;
     padding: 0.2rem;
     font-weight: 500;
     text-transform: none;
@@ -87,17 +90,16 @@ const DisplayText = styled(Typography)`
 const CheckButton = styled(Button)`
   && {
     background-color: transparent;
-    border: 2px solid black;
+    border: 2px solid white;
     width: 5rem;
     margin-top: 1rem;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #03add5;
+    box-shadow: inset 0 0 0 0 #5383ec;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
     &:hover {
-      box-shadow: inset 400px 0 0 0 #03add5;
-      border-color: white;
+      box-shadow: inset 400px 0 0 0 #5383ec;
     }
   }
 `;
@@ -108,6 +110,7 @@ export default function McqCard({ question }) {
   const [helperText, setHelperText] = React.useState(null);
   const [radioColor, setRadioColor] = React.useState("default");
   const [disable, setDisable] = React.useState(false);
+  const [radioButtonColor, setColor] = React.useState("white");
 
   const answerChoices = [
     question.mcqChoice1,
@@ -136,6 +139,8 @@ export default function McqCard({ question }) {
       setRadioColor("success");
       setDisable(true);
       document.getElementById(value).style.color = "green";
+      setColor("black");
+      // document.getElementById("radiobuttoon").style.color = "black";
     } else if (
       value !== answerChoices[question.mcqCorrect - 1] &&
       value != null
@@ -171,9 +176,12 @@ export default function McqCard({ question }) {
                           value={answerChoice}
                           control={
                             <Radio
-                              color={
-                                radioColor !== "danger" ? radioColor : "default"
-                              }
+                            style={{ color: answerChoice === answerChoices[question.mcqCorrect - 1] ? "white" : radioButtonColor }}
+                              // color={
+                              //   radioColor !== "danger" ? radioColor : "default"
+                              // }
+                              // color = "default"
+                              color = "default"
                               disabled={
                                 answerChoice !==
                                 answerChoices[question.mcqCorrect - 1]
