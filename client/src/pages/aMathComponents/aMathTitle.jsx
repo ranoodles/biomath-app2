@@ -42,7 +42,7 @@ export default function AppliedMathHeader() {
           fontSize: { xs: "9vw", md: "6vw" },
         }}
       >
-        Applied Math
+        Engineering
       </TitleText>
     </>
   );

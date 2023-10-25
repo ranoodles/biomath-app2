@@ -109,6 +109,21 @@ export default function FillInBlank({ question }) {
   const [helperColor, setHelperColor] = React.useState("default");
   const [disable, setDisable] = React.useState(false);
 
+  const titleVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1 } }, // Adjust the delay as needed
+  };
+
+  const subtitleVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 0.5 } }, // Adjust the delay as needed
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 1.0 } }, // Adjust the delay as needed
+  };
+
   const handleFieldChange = (event) => {
     setValue(event.target.value);
   };
@@ -136,7 +151,10 @@ export default function FillInBlank({ question }) {
       <ThemeProvider theme={theme}>
         <CardGrid>
           <VertStack>
-            <QuestionText variant="h4">{question.frqQuestion}</QuestionText>
+            <QuestionText variant="h4" component={motion.div}
+                  initial="hidden"
+                  animate="visible"
+                  variants={titleVariants}>{question.frqQuestion}</QuestionText>
             <form onSubmit={handleSubmit}>
               <FormControl>
                 <TextFieldStyled
@@ -153,6 +171,10 @@ export default function FillInBlank({ question }) {
                   disabled={disable}
                   inputProps={{ style: { fontSize: "1.5rem" } }} // font size of input text
                   InputLabelProps={{ style: { fontSize: "1.5rem" } }} // font size of input label
+                  component={motion.div}
+                  initial="hidden"
+                  animate="visible"
+                  variants={subtitleVariants}
                 />
                 <FormHelperText
                   variant=""
@@ -160,7 +182,10 @@ export default function FillInBlank({ question }) {
                 >
                   {helperText}
                 </FormHelperText>
-                <CheckButton variant="contained" type="submit">
+                <CheckButton variant="contained" type="submit" component={motion.div}
+                  initial="hidden"
+                  animate="visible"
+                  variants={buttonVariants}>
                   <DisplayText variant="h6">Check</DisplayText>
                 </CheckButton>
               </FormControl>

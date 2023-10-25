@@ -63,7 +63,7 @@ const QuestionText = styled(Typography)`
   }
 `;
 
-const CustomRadio = styled(FormControlLabel)``;
+const CustomRadio = motion(styled(FormControlLabel)``);
 
 const CheckmarkIcon = styled(CheckCircleIcon)`
   color: green;
@@ -111,6 +111,16 @@ export default function McqCard({ question }) {
   const [radioColor, setRadioColor] = React.useState("default");
   const [disable, setDisable] = React.useState(false);
   const [radioButtonColor, setColor] = React.useState("white");
+
+  const titleVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1 } }, // Adjust the delay as needed
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 1.0 } }, // Adjust the delay as needed
+  };
 
   const answerChoices = [
     question.mcqChoice1,
@@ -161,7 +171,10 @@ export default function McqCard({ question }) {
       <ThemeProvider theme={theme}>
         <CardGrid>
           <VertStack>
-            <QuestionText variant="h4">{question.mcqQuestion}</QuestionText>
+            <QuestionText variant="h4" component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={titleVariants}>{question.mcqQuestion}</QuestionText>
             <form onSubmit={handleSubmit}>
               <FormControl>
                 <RadioGroup
@@ -174,6 +187,13 @@ export default function McqCard({ question }) {
                       <>
                         <CustomRadio
                           value={answerChoice}
+                          component={motion.div}
+                          initial="hidden"
+                          animate="visible"
+                          variants={{
+                            hidden: { opacity: 0, x: -50 },
+                            visible: { opacity: 1, x: 0, transition: { duration: 1, delay: (0.5 + answerChoices.indexOf(answerChoice)/4) } },
+                          }}
                           control={
                             <Radio
                             style={{ color: answerChoice === answerChoices[question.mcqCorrect - 1] ? "white" : radioButtonColor }}
@@ -211,7 +231,10 @@ export default function McqCard({ question }) {
                 >
                   {helperText}
                 </FormHelperText>
-                <CheckButton variant="contained" type="submit">
+                <CheckButton variant="contained" type="submit" component={motion.div}
+                  initial="hidden"
+                  animate="visible"
+                  variants={buttonVariants}>
                   <DisplayText variant="h6">Check</DisplayText>
                 </CheckButton>
               </FormControl>

@@ -102,7 +102,8 @@ function BiotechnologyPage() {
   const [selectedUnit, setSelectedUnit] = React.useState(null);
   const [selectedLessonId, setSelectedLessonId] = React.useState(null);
   const navigate = useNavigate();
-  const isXs = useMediaQuery((theme) => theme.breakpoints.down("xs"));
+  // const isXs = useMediaQuery((theme) => theme.breakpoints.down("xs"));
+  const isXs = useMediaQuery("(max-width:900px)");
 
   const handleUnitSelect = (unit) => {
     setSelectedUnit(unit);
@@ -111,7 +112,7 @@ function BiotechnologyPage() {
 
   const handleLessonSelect = (lessonDetails) => {
     setSelectedLessonId(lessonDetails.lesson_id);
-    navigate(`/appliedmath/${lessonDetails.lesson_id}`);
+    navigate(`/engineering/${lessonDetails.lesson_id}`);
   };
 
   React.useEffect(() => {
@@ -141,21 +142,6 @@ function BiotechnologyPage() {
       <AppliedMathHeader />
       <RootContainer>
         <CenteredContainer container>
-          {isXs ? (
-            <UnitMenu>
-              {unitsList.map((unit, index) => (
-                <UnitItem
-                  key={index}
-                  onClick={() => handleUnitSelect(unit)}
-                  variant="h6"
-                  // color={selectedUnit === unit ? "#5383ec" : "white"}
-                  sx={{boxShadow: selectedUnit === unit ? "inset 600px 0 0 0 #5383ec" : "transparent"}}
-                >
-                  Unit {unit.id}: {unit.name}
-                </UnitItem>
-              ))}
-            </UnitMenu>
-          ) : (
             <CenteredSidebar
               item
               md={4}
@@ -174,11 +160,10 @@ function BiotechnologyPage() {
                   // color={selectedUnit === unit ? "#5383ec" : "white"}
                   sx={{boxShadow: (selectedUnit === unit) ? "inset 600px 0 0 0 #5383ec" : "transparent"}}
                 >
-                  Unit {unit.id}: {unit.name}
+                  {!isXs ? `Unit ${unit.id}: ${unit.name}` : `${unit.id}`}
                 </UnitItem>
               ))}
             </CenteredSidebar>
-          )}
           <ContentWrapper
             item
             md={7}

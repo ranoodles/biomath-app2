@@ -20,11 +20,15 @@ import Menu from "@mui/material/Menu";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import iconImg from "./catalystlogo.png";
+import Image from "mui-image";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import theme from "./Theme";
 
 const pages = [
   { label: "Courses", path: "/courses" },
   { label: "Biotechnology", path: "/biotechnology" },
-  { label: "Applied Math", path: "/appliedmath" },
+  { label: "Engineering", path: "/engineering" },
 ];
 
 const MenuButton = styled(Button)`
@@ -57,6 +61,7 @@ function NavBar(props) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const navigate = useNavigate();
+  const isSmallScreen = useMediaQuery("(max-width:900px)");
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -103,12 +108,20 @@ function NavBar(props) {
                 <MenuIcon sx={{ color: "white" }} />
               </IconButton>
             </Tooltip>
+            
           </Box>
 
-          <BiotechIcon
-            fontSize="large"
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-          />
+          {isSmallScreen ? null : ( // Hide the image on extra-small screens
+            <img
+              src={iconImg}
+              alt="Catalyst Logo"
+              style={{
+                width: "4rem",
+                marginRight: "0.2rem", // Default styling
+              }}
+            />
+          )}
+          {/* </Container> */}
           <Typography
             variant="h4"
             noWrap
@@ -119,14 +132,13 @@ function NavBar(props) {
               display: { xs: "none", md: "flex" },
               fontFamily: "avenir",
               fontWeight: 700,
-              letterSpacing: ".1rem",
+              // letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            BIOMATH
+            P<span style={{fontSize: "1.5rem", alignSelf: "flex-end", margin: "0rem 0.5rem 0.15rem 0.15rem"}}>ROJECT</span>C<span style={{fontSize: "1.5rem", alignSelf: "flex-end", margin: "0rem 0.5rem 0.15rem 0.15rem"}}>ATALYST</span>
           </Typography>
-
           {/* User settings (right corner on XS breakpoint) */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, paddingLeft: "1rem" }}>
             {pages.map((page) => (
@@ -144,7 +156,7 @@ function NavBar(props) {
           {/* User settings (right corner on XS breakpoint) */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, padding: "10px", border: "1px solid grey" }}>
                 <Avatar sx={{ color: "white" }} />
               </IconButton>
             </Tooltip>

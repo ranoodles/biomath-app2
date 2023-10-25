@@ -79,14 +79,29 @@ const VertStack = styled(Stack)`
 `;
 
 export default function TextImage({ displayInfo }) {
+  const titleVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1 } }, // Adjust the delay as needed
+  };
+
+  const subtitleVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 0.5 } }, // Adjust the delay as needed
+  };
   return (
     <>
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
-          <SubGrid item xs={12} md={7}>
+          <SubGrid item xs={12} md={7} style={{justifyContent: "left"}}>
             <VertStack>
-              <TitleText variant="h2">{displayInfo.title}</TitleText>
-              <DescriptionText variant="h6">{displayInfo.text}</DescriptionText>
+              <TitleText variant="h2" component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={titleVariants}>{displayInfo.title}</TitleText>
+              <DescriptionText variant="h6" component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={subtitleVariants}>{displayInfo.text}</DescriptionText>
             </VertStack>
           </SubGrid>
           <SubGrid item xs={12} md={4}>

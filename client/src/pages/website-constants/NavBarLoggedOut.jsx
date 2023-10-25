@@ -13,12 +13,15 @@ import MenuItem from "@mui/material/MenuItem";
 import BiotechIcon from "@mui/icons-material/Biotech";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useMediaQuery } from "@mui/material";
+import iconImg from "./catalystlogo.png";
 
 const pages = ["Log In", "Sign Up"];
 
 function NavBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
+  const isSmallScreen = useMediaQuery("(max-width:900px)");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -121,24 +124,34 @@ function NavBar(props) {
             BIOMATH
           </Typography> */}
           <div style={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
-            <BiotechIcon sx={{ display: { xs: "flex" }, fontSize: "2.5rem" }} />
-            <Typography
-              variant="h4"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 1,
-                display: { xs: "flex" },
-                flexGrow: 1,
-                fontWeight: 700,
-                letterSpacing: ".1rem",
-                color: "inherit",
-                textDecoration: "none",
+          {isSmallScreen ? null : ( // Hide the image on extra-small screens
+            <img
+              src={iconImg}
+              alt="Catalyst Logo"
+              style={{
+                width: "4rem",
+                marginRight: "0.2rem", // Default styling
               }}
-            >
-              BIOMATH
-            </Typography>
+            />
+          )}
+          {/* </Container> */}
+          <Typography
+            variant="h4"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "avenir",
+              fontWeight: 700,
+              // letterSpacing: ".1rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            P<span style={{fontSize: "1.5rem", alignSelf: "flex-end", margin: "0rem 0.5rem 0.15rem 0.15rem"}}>ROJECT</span>C<span style={{fontSize: "1.5rem", alignSelf: "flex-end", margin: "0rem 0.5rem 0.15rem 0.15rem"}}>ATALYST</span>
+          </Typography>
           </div>
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: "2rem" }}>
             <LoginButtonTop

@@ -25,6 +25,9 @@ import FillInBlank from "./cardTemplates/fillinblank.jsx";
 import { useParams } from "react-router-dom";
 import Intro from "./cardTemplates/intro.jsx";
 import Conclusion from "./cardTemplates/conclusion.jsx";
+import VideoCard from "./cardTemplates/videoCard.jsx";
+import TextCard from "./cardTemplates/Text.jsx";
+import ImageCard from "./cardTemplates/ImageCard.jsx";
 
 const HolderGrid = styled(Grid)`
   && {
@@ -70,12 +73,19 @@ const CardHolder = styled(Grid)`
   }
 `;
 
+const CardWrapper = styled.div`
+  /* Your other styles */
+  opacity: ${(props) => (props.fadeOut ? 0 : 1)};
+  transition: opacity 0.3s ease-in-out;
+`;
+
+
 const BigGrid = styled(Grid)`
   && {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 4rem 2rem;
+    padding: 4rem 2rem 2rem 2rem;
     width: 100%;
   }
 `;
@@ -94,6 +104,7 @@ function BioLearningPath() {
   const [lessonList, setLessonList] = useState([]);
   const navigate = useNavigate();
   const [trigger, setTrigger] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     const fetchAllLessons = async () => {
@@ -117,7 +128,11 @@ function BioLearningPath() {
 
   const handleNextClick = () => {
     if (cardNum < lesson.length) {
-      setCardNum(cardNum + 1);
+      setFadeOut(true);
+      setTimeout(() => {
+        setCardNum(cardNum + 1);
+        setFadeOut(false); // Reset the fade-out state
+      }, 300);
     } else if (lessonid < lessonList.length) {
       const newIndex = Number(lessonid) + 1;
       navigate("/biotechnology/" + newIndex);
@@ -126,7 +141,11 @@ function BioLearningPath() {
   };
   const handleBackClick = (e) => {
     if (cardNum > -1) {
-      setCardNum(cardNum - 1);
+      setFadeOut(true);
+      setTimeout(() => {
+        setCardNum(cardNum - 1);
+        setFadeOut(false); // Reset the fade-out state
+      }, 300);
     } else if (lessonid > 1) {
       const newIndex = Number(lessonid) - 1;
       navigate("/biotechnology/" + newIndex);
@@ -145,6 +164,12 @@ function BioLearningPath() {
         return <ImgText key={cardNum} displayInfo={currentCard}></ImgText>;
       } else if (currentCard.card_type === "TextImg") {
         return <TextImg key={cardNum} displayInfo={currentCard}></TextImg>;
+      } else if (currentCard.card_type === "Video") {
+        return <VideoCard key={cardNum} displayInfo={currentCard}></VideoCard>;
+      } else if (currentCard.card_type === "Text") {
+        return <TextCard key={cardNum} displayInfo={currentCard}></TextCard>;
+      } else if (currentCard.card_type === "Image") {
+        return <ImageCard key={cardNum} displayInfo={currentCard}></ImageCard>;
       }
       return "Card Rendering Error";
     } else if (cardNum === -1) {
@@ -169,9 +194,12 @@ function BioLearningPath() {
           item
           sm={12}
           xs={12}
-          sx={{ alignItems: { xs: "flex-start", md: "center" } }}
+          sx={{ alignItems: {xs: cardNum <= -1 || cardNum === lesson.length ? "center" : "flex-start", md: "center"}, cursor: "pointer" }}
+          onClick={handleNextClick}
         >
-          {renderCard()}
+          <CardWrapper fadeOut={fadeOut}>
+            {renderCard()}
+          </CardWrapper>
         </CardHolder>
         <ChevronButton
           onClick={handleNextClick}
@@ -186,7 +214,7 @@ function BioLearningPath() {
           justifyContent: "center",
           alignItems: "center",
           display: "flex",
-          padding: "3rem 0rem",
+          padding: "0rem 0rem 3rem 0rem",
           visibility: { xs: "visible", md: "hidden" },
         }}
       >

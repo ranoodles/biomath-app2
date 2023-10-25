@@ -11,7 +11,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import theme from "../website-constants/Theme.jsx";
+import theme from "../website-constants/Theme";
 import Image from "mui-image";
 
 const TitleText = styled(Typography)`
@@ -31,7 +31,6 @@ const SubGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${"" /* padding: 2rem; */}
     ${"" /* width: 100%; */}
   }
 `;
@@ -55,7 +54,8 @@ const SplitBoxesGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     font-size: 25px;
-    height: 100%;
+    ${'' /* width: 100%; */}
+    ${'' /* height: 50vh; */}
     gap: 3vw;
     padding: 2vw;
   }
@@ -67,8 +67,12 @@ const Img = styled(Image)`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    width: 100%;
     ${"" /* padding: 1rem; */}
+    ${'' /* max-width: 100%; */}
+    max-height: 60%;
+    max-width: 60%;
+    ${'' /* width: auto; */}
+    object-fit: contain
   }
 `;
 
@@ -80,40 +84,33 @@ const VertStack = styled(Stack)`
   }
 `;
 
-function ImageText({ displayInfo }) {
+export default function ImageCard({ displayInfo }) {
   const titleVariants = {
-    hidden: { opacity: 0, x: 50 },
+    hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0, transition: { duration: 1 } }, // Adjust the delay as needed
   };
 
   const subtitleVariants = {
-    hidden: { opacity: 0, x: 50 },
+    hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 0.5 } }, // Adjust the delay as needed
   };
-
   return (
     <>
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
-          <SubGrid item xs={12} md={4}>
-            <Img src={displayInfo.img} alt=""></Img>
-          </SubGrid>
-          <SubGrid item xs={12} md={7} style={{justifyContent: "left"}}>
-            <VertStack>
-              <TitleText variant="h2" component={motion.div}
+           <VertStack>
+           {displayInfo.text ? 
+           <DescriptionText variant="h3" component={motion.div}
             initial="hidden"
             animate="visible"
-            variants={titleVariants}>{displayInfo.title}</TitleText>
-              <DescriptionText variant="h6" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={subtitleVariants}>{displayInfo.text}</DescriptionText>
-            </VertStack>
-          </SubGrid>
+            variants={titleVariants}>
+              {displayInfo.text}
+            </DescriptionText>
+           : ""}
+           <Img src={displayInfo.img} alt=""></Img>
+           </VertStack>
         </SplitBoxesGrid>
       </ThemeProvider>
     </>
   );
 }
-
-export default ImageText;

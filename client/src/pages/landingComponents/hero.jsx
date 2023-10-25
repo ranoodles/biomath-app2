@@ -8,6 +8,7 @@ import atomGif from "./bubble-gum-test-tubes-and-flask.gif";
 import nodeGif from "./taxi-molecule-whitemod.gif";
 import Image from "mui-image";
 import "./bouncingArrow.css";
+// import { AnimatedSubTitleText, AnimatedTitleText } from "./animatedtext";
 
 const TitleText = styled(Typography)`
   && {
@@ -78,11 +79,52 @@ const HeroImage = styled(Image)`
   }
 `;
 
+// const SubtitleAnimation = ({ words }) => {
+//   const wordVariants = {
+//     hidden: { opacity: 0, x: -20 },
+//     visible: { opacity: 1, x: 0, transition: { duration: 1 } },
+//   };
+
+//   return (
+//     <motion.div
+//       variants={{
+//         visible: {
+//           transition: { staggerChildren: 0.1 },
+//         },
+//       }}
+//       initial="hidden"
+//       animate="visible"
+//     >
+//       {words.map((word, index) => (
+//         <motion.div key={index} variants={wordVariants} style={{ display: 'inline' }}>
+//           {word}
+//         </motion.div>
+//       ))}
+//     </motion.div>
+//   );
+// };
+
+
 export default function Hero() {
   const navigate = useNavigate();
   const highlightStyle = {
     color: "789de5",
   };
+  const titleVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1 } }, // Adjust the delay as needed
+  };
+
+  const subtitleVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 0.5 } }, // Adjust the delay as needed
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 1.0 } }, // Adjust the delay as needed
+  };
+
   return (
     <Grid container sx={{height: {xs: "100%", md: "100vh"}}}>
       <Grid
@@ -93,25 +135,44 @@ export default function Hero() {
       >
         <TitleStack
           spacing={2}
-          component={motion.div}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 3, ease: "easeInOut" }}
+          // component={motion.div}
+          // initial={{ opacity: 0, scale: 0.5 }}
+          // animate={{ opacity: 1, scale: 1 }}
+          // transition={{ duration: 3, ease: "easeInOut" }}
           sx={{ display: { xs: "flex", md: "inline-block" }, padding: "5px" }}
         >
-          <TitleText variant="h2" color="#5383ec">
+          <TitleText
+            variant="h2"
+            color="#5383ec"
+            component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={titleVariants}
+          >
             Unleash your potential.
           </TitleText>
 
-          <SubtitleText variant="h5" xs={12} sm={1}>
-            Prepare for a Journey Beyond Textbooks: Empowering the Next
-            Generation of Scientific Leaders
+          <SubtitleText
+            variant="h5"
+            xs={12}
+            sm={1}
+            component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={subtitleVariants}
+          >
+            We go beyond textbooks. We empower students to become tomorrow's scientific leaders in biotechnology and engineering.
           </SubtitleText>
+
           <SignupButtonTop
             variant="contained"
             onClick={() => {
               navigate("/signup");
             }}
+            component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={buttonVariants}
           >
             <GetStartedText variant="h5">Start Learning</GetStartedText>
           </SignupButtonTop>

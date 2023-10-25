@@ -82,7 +82,7 @@ function App() {
                 }
               />
               <Route
-                path="/appliedmath/:lessonid"
+                path="/engineering/:lessonid"
                 element={
                   loggedIn === true ? (
                     <MathLearningPath />
@@ -130,7 +130,7 @@ function App() {
                 }
               />
               <Route
-                path="/appliedmath"
+                path="/engineering"
                 element={
                   loggedIn === true ? (
                     <AppliedMathPage />

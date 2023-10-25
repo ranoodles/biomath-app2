@@ -22,7 +22,7 @@ const TitleText = styled(Typography)`
     align-items: left;
     font-weight: 700;
     margin-bottom: 2rem;
-    text-align: left;
+    text-align: center;
     color: white;
   }
 `;
@@ -44,7 +44,7 @@ const DescriptionText = styled(Typography)`
     ${'' /* font-weight: bold; */}
     ${"" /* font-size: 20px; */}
     padding-bottom: 1rem;
-    text-align: left;
+    text-align: center;
     line-height: 175%;
     color: white;
   }
@@ -72,6 +72,17 @@ const VertStack = styled(Stack)`
 
 export default function Intro({ lessonIndex, course }) {
   const [lesson, setLesson] = useState([]);
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } }, // Adjust the delay as needed
+  };
+
+  const subtitleVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, delay: 0.5 } }, // Adjust the delay as needed
+  };
+
   useEffect(() => {
     const fetchAllLessons = async () => {
       try {
@@ -94,10 +105,16 @@ export default function Intro({ lessonIndex, course }) {
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
           <VertStack>
-            <DescriptionText variant="h3">
+            <DescriptionText variant="h3" component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={titleVariants}>
               Unit {lesson.unit_id} Lesson {lesson.lesson_number}
             </DescriptionText>
-            <TitleText variant="h1">{lesson.lesson_name}</TitleText>
+            <TitleText variant="h1" component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={subtitleVariants}>{lesson.lesson_name}</TitleText>
             {/* <DescriptionText variant="h3">Let's get started!</DescriptionText> */}
           </VertStack>
         </SplitBoxesGrid>

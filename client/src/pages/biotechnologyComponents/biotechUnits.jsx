@@ -52,7 +52,7 @@ const VertStack = styled(Stack)`
     display: flex;
     justify-content: left;
     align-items: left;
-    padding: 3rem;
+    padding: 4vw;
     border-radius: 2rem;
     border: 1px solid grey;
     ${'' /* background: linear-gradient(to right top, #535eab, #8351c2); */}
@@ -94,7 +94,7 @@ const HolderGrid = styled(Grid)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 1rem 3rem 3rem;
+    padding: 1rem 1rem 3rem 3vw;
   }
 `;
 

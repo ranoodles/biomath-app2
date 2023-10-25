@@ -22,7 +22,7 @@ const TitleText = styled(Typography)`
     align-items: left;
     font-weight: 700;
     margin-bottom: 2rem;
-    text-align: left;
+    text-align: center;
     color: white;
   }
 `;
@@ -46,6 +46,7 @@ const DescriptionText = styled(Typography)`
     text-align: left;
     line-height: 175%;
     color: white;
+    text-align: center;
   }
 `;
 
@@ -87,15 +88,32 @@ export default function Conclusion({ lessonIndex, course }) {
     fetchAllLessons();
     // eslint-disable-next-line
   }, []);
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1 } }, // Adjust the delay as needed
+  };
+
+  const subtitleVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, delay: 0.5 } }, // Adjust the delay as needed
+  };
+
   return (
     <>
       <ThemeProvider theme={theme} border="none">
         <SplitBoxesGrid container>
           <VertStack>
-            <DescriptionText variant="h3">
+            <DescriptionText variant="h3" component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={titleVariants}>
               Congratulations on completing
             </DescriptionText>
-            <TitleText variant="h1">
+            <TitleText variant="h1" component={motion.div}
+            initial="hidden"
+            animate="visible"
+            variants={subtitleVariants}>
               Unit {lesson.unit_id} Lesson {lesson.lesson_number}!
             </TitleText>
           </VertStack>
