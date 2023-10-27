@@ -122,7 +122,7 @@ function SignUp() {
         email: e.target.email.value,
       };
       const confPass = e.target.confPassword.value;
-      const checkCondition = (userData.username !== "" && !(userData.username.includes(" ")) && userData.password !== "" && !(userData.password.includes(" ")) && userData.email !== "" && !(userData.email.includes(" ")) && userData.confPass !== "" && !(userData.confPass.includes(" ")))
+      const checkCondition = (userData && userData.username !== "" && !(userData.username?.includes(" ")) && userData.password !== "" && !(userData.password?.includes(" ")) && userData.email !== "" && !(userData.email?.includes(" ")) && userData.confPass !== "" && !(userData.confPass?.includes(" ")))
       document
           .querySelectorAll("input")
           .forEach((singleInput) => (singleInput.value = ""));
