@@ -43,18 +43,20 @@ export default function JoinNow() {
   return (
     <>
       <Box
+        key="joinnow-1"
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "1rem 0rem 3rem 0rem"
+          padding: "1rem 0rem 3rem 0rem",
         }}
       >
-        <TitleStack spacing={2}>
-          <SubtitleText color="common.white" variant="h4">
+        <TitleStack spacing={2} key="joinnow-2">
+          <SubtitleText key="joinnow-3" color="common.white" variant="h4">
             Start your journey today!
           </SubtitleText>
           <SignupButtonTop
+            key="joinnow-4"
             variant="contained"
             onClick={() => {
               navigate("/signup");

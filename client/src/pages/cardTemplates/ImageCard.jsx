@@ -54,8 +54,8 @@ const SplitBoxesGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     font-size: 25px;
-    ${'' /* width: 100%; */}
-    ${'' /* height: 50vh; */}
+    ${"" /* width: 100%; */}
+    ${"" /* height: 50vh; */}
     gap: 3vw;
     padding: 2vw;
   }
@@ -68,10 +68,10 @@ const Img = styled(Image)`
     align-items: center;
     border-radius: 20px;
     ${"" /* padding: 1rem; */}
-    ${'' /* max-width: 100%; */}
+    ${"" /* max-width: 100%; */}
     max-height: 60%;
     max-width: 60%;
-    ${'' /* width: auto; */}
+    ${"" /* width: auto; */}
     object-fit: contain
   }
 `;
@@ -96,19 +96,25 @@ export default function ImageCard({ displayInfo }) {
   };
   return (
     <>
-      <ThemeProvider theme={theme} border="none">
-        <SplitBoxesGrid container>
-           <VertStack>
-           {displayInfo.text ? 
-           <DescriptionText variant="h3" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={titleVariants}>
-              {displayInfo.text}
-            </DescriptionText>
-           : ""}
-           <Img src={displayInfo.img} alt=""></Img>
-           </VertStack>
+      <ThemeProvider theme={theme} border="none" key="imagecard-tp-1">
+        <SplitBoxesGrid container key="imagecard-sbg-1">
+          <VertStack key="imagecard-vst-1">
+            {displayInfo.text ? (
+              <DescriptionText
+                variant="h3"
+                component={motion.div}
+                initial="hidden"
+                animate="visible"
+                variants={titleVariants}
+                key="imagecard-desctxt-1"
+              >
+                {displayInfo.text}
+              </DescriptionText>
+            ) : (
+              ""
+            )}
+            <Img src={displayInfo.img} alt="" key="imagecard-image-1"></Img>
+          </VertStack>
         </SplitBoxesGrid>
       </ThemeProvider>
     </>

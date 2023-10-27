@@ -90,18 +90,36 @@ export default function TextImage({ displayInfo }) {
   };
   return (
     <>
-      <ThemeProvider theme={theme} border="none">
-        <SplitBoxesGrid container>
-          <SubGrid item xs={12} md={7} style={{justifyContent: "left"}}>
-            <VertStack>
-              <TitleText variant="h2" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={titleVariants}>{displayInfo.title}</TitleText>
-              <DescriptionText variant="h6" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={subtitleVariants}>{displayInfo.text}</DescriptionText>
+      <ThemeProvider theme={theme} border="none" key="txtimg-1">
+        <SplitBoxesGrid container key="txtimg-2">
+          <SubGrid
+            item
+            xs={12}
+            md={7}
+            style={{ justifyContent: "left" }}
+            key="txtimg-3"
+          >
+            <VertStack key="txtimg-4">
+              <TitleText
+                key="txtimg-5"
+                variant="h2"
+                component={motion.div}
+                initial="hidden"
+                animate="visible"
+                variants={titleVariants}
+              >
+                {displayInfo.title}
+              </TitleText>
+              <DescriptionText
+                key="txtimg-6"
+                variant="h6"
+                component={motion.div}
+                initial="hidden"
+                animate="visible"
+                variants={subtitleVariants}
+              >
+                {displayInfo.text}
+              </DescriptionText>
             </VertStack>
           </SubGrid>
           <SubGrid item xs={12} md={4}>

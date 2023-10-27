@@ -21,7 +21,6 @@ const TitleText = styled(Typography)`
     font-weight: 700;
     margin-bottom: 2rem;
     text-align: left;
-    
   }
 `;
 
@@ -66,15 +65,18 @@ function DisplayInfo({ unit, handleLessonSelect }) {
   }
   return (
     <>
-      <VertStack>
-        <TitleText variant="h2">
+      <VertStack key="displayInfo-vstack-1">
+        <TitleText variant="h2" key="displayInfo-tt-1">
           {unit.id}. {unit.name}
         </TitleText>
-        <DescriptionText variant="h4">{unit.description}</DescriptionText>
+        <DescriptionText variant="h4" key="displayInfo-tt-1">
+          {unit.description}
+        </DescriptionText>
         <ButtonGroup
           orientation="vertical"
           aria-label="vertical contained button group"
           variant="text"
+          key="displayInfo-bg-1"
         >
           {unit.lessons.map((lesson) => (
             <ListButtons

@@ -42,40 +42,46 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    const queryPromise = new Promise((resolve, reject) => {
-        db.query("SELECT * FROM users WHERE username = ?;", [username], (err, results) => {
-            if (err) {
-                reject(err);
-            } else {
-                console.log("bob", results[0])
-                if (results[0]) {
-                    resolve(results);
-                } else {
-                    console.log("Username does not exist!")
-                    res.send(false);
-                }
-            }
-        });
-    });
-    const loginPromise = queryPromise
-        .then((results) => {
-            const result = results[0]; // Assuming you want the first row
-            
-            return new Promise((resolve, reject) => {
-                bcrypt.compare(password, result.password, (err, isMatch) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve({ isMatch, userId: result.userId, username: result.username });
-                    }
-                });
+  const username = req.body.username;
+  const password = req.body.password;
+  const queryPromise = new Promise((resolve, reject) => {
+    db.query(
+      "SELECT * FROM users WHERE username = ?;",
+      [username],
+      (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results[0]) {
+            resolve(results);
+          } else {
+            res.send(false);
+          }
+        }
+      }
+    );
+  });
+  const loginPromise = queryPromise
+    .then((results) => {
+      const result = results[0]; // Assuming you want the first row
+
+      return new Promise((resolve, reject) => {
+        bcrypt.compare(password, result.password, (err, isMatch) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve({
+              isMatch,
+              userId: result.userId,
+              username: result.username,
             });
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send("Error occurred");
+          }
+        });
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error occurred");
     });
   loginPromise
     .then(({ isMatch, userId, username }) => {

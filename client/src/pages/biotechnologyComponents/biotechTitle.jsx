@@ -41,6 +41,7 @@ export default function BiotechHeader() {
           color: "#5383ec",
           fontSize: { xs: "9vw", md: "6vw" },
         }}
+        key="biotechTitle-titletext-1"
       >
         Synthetic Biology
       </TitleText>

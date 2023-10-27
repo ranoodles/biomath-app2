@@ -101,19 +101,31 @@ export default function Conclusion({ lessonIndex, course }) {
 
   return (
     <>
-      <ThemeProvider theme={theme} border="none">
-        <SplitBoxesGrid container>
-          <VertStack>
-            <DescriptionText variant="h3" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={titleVariants}>
+      <ThemeProvider
+        theme={theme}
+        border="none"
+        key="conclusion-themeprovider-1"
+      >
+        <SplitBoxesGrid container key="conclusion-splitboxesgrid-1">
+          <VertStack key="conclusion-vstack-1">
+            <DescriptionText
+              variant="h3"
+              component={motion.div}
+              initial="hidden"
+              animate="visible"
+              variants={titleVariants}
+              key="conclusion-dtext-1"
+            >
               Congratulations on completing
             </DescriptionText>
-            <TitleText variant="h1" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={subtitleVariants}>
+            <TitleText
+              variant="h1"
+              component={motion.div}
+              initial="hidden"
+              animate="visible"
+              variants={subtitleVariants}
+              key="conclusion-titletext-1"
+            >
               Unit {lesson.unit_id} Lesson {lesson.lesson_number}!
             </TitleText>
           </VertStack>

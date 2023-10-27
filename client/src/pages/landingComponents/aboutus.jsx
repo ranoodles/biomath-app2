@@ -1,12 +1,12 @@
-import {useState} from "react";
+import { useState } from "react";
 import { Box, Grid, Button, Typography, Stack, Divider } from "@mui/material";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import ScienceIcon from "@mui/icons-material/Science";
 import CalculateIcon from "@mui/icons-material/Calculate";
-import scienceImg from "./sample.jpeg"
-import mathImg from "./sample2.jpeg"
+import scienceImg from "./sample.jpeg";
+import mathImg from "./sample2.jpeg";
 import Image from "mui-image";
 
 const Title = styled(Typography)`
@@ -15,7 +15,7 @@ const Title = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    ${'' /* margin-bottom: 3vw; */}
+    ${"" /* margin-bottom: 3vw; */}
     text-align: center;
     color: white;
   }
@@ -27,7 +27,7 @@ const AboutTitle = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    ${'' /* margin-bottom: 3vw; */}
+    ${"" /* margin-bottom: 3vw; */}
     text-align: center;
     color: #03add5;
     margin-bottom: 3rem;
@@ -62,7 +62,7 @@ const SubjectDescriptionGrid = styled(Grid)`
     justify-content: center;
     align-items: center;
     border-radius: 30px;
-    ${'' /* height: 80vh; */}
+    ${"" /* height: 80vh; */}
     &:after {
       background: "linear-gradient(to right top, #535EAB, #8351C2)";
     }
@@ -82,7 +82,7 @@ const AboutUsText = [
       />
     ),
     linksite: "/biotechnology",
-    image: scienceImg
+    image: scienceImg,
   },
   {
     key: "raman",
@@ -96,7 +96,7 @@ const AboutUsText = [
       />
     ),
     linksite: "/appliedmath",
-    image: mathImg
+    image: mathImg,
   },
 ];
 
@@ -106,23 +106,28 @@ const DescriptionText = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    ${'' /* margin-top: 3vw; */}
+    ${"" /* margin-top: 3vw; */}
     color: white;
     transition: 0.25s all ease-in-out;
-    zIndex:3;
+    zindex: 3;
   }
 `;
 
 export default function AboutUs() {
-
   return (
     <>
-      <AboutTitle variant="h3" paddingTop="5rem" marginBotton="5rem">
+      <AboutTitle
+        variant="h3"
+        paddingTop="5rem"
+        marginBotton="5rem"
+        key="aboutus-1"
+      >
         About Us
       </AboutTitle>
       <SplitBoxesGrid
+        key="aboutus-2"
         container
-        divider={<Divider orientation="vertical" flexItem />}
+        divider={<Divider key="aboutus-3" orientation="vertical" flexItem />}
         direction="row"
         component={motion.div}
         initial={{ opacity: 0, scale: 0 }}
@@ -134,53 +139,75 @@ export default function AboutUs() {
         }}
       >
         {AboutUsText.map((PersonCard) => (
-          
           <SubjectDescriptionGrid
+            key="aboutus-4"
             item
             xs={10}
             md={4.5}
             sx={{
-              position : "relative",
-              height: {xs: "80vh", md: "90vh", lg: "80vh"}
+              position: "relative",
+              height: { xs: "80vh", md: "90vh", lg: "80vh" },
             }}
-          >        
-            <div style={{position: "absolute", opacity: "0.2"}}>
+          >
+            <div
+              key="aboutus-5"
+              style={{ position: "absolute", opacity: "0.2" }}
+            >
               {/* <Image sx={{zIndex: 2, fillOpacity:0.5 }} src={PersonCard.image} /> */}
-              {PersonCard.key === "aditya" ?
-                  <ScienceIcon
-                    style={{ fontSize: "50vw" }}
-                    id={PersonCard.key}
-                    sx={{ paddingBottom: "2rem", zIndex:2, color: "white", transition: "0.25s all ease-in-out", opacity: 0.5}}
-                  />
-                :
-                  <CalculateIcon
-                    style={{ fontSize: "50vw" }}
-                    id={PersonCard.key}
-                    sx={{ paddingBottom: "2rem", zIndex:2, color: "white", transition: "0.25s all ease-in-out", opacity: 0.5}}
-                  />
-              }
+              {PersonCard.key === "aditya" ? (
+                <ScienceIcon
+                  key="aboutus-6"
+                  style={{ fontSize: "50vw" }}
+                  id={PersonCard.key}
+                  sx={{
+                    paddingBottom: "2rem",
+                    zIndex: 2,
+                    color: "white",
+                    transition: "0.25s all ease-in-out",
+                    opacity: 0.5,
+                  }}
+                />
+              ) : (
+                <CalculateIcon
+                  key="aboutus-7"
+                  style={{ fontSize: "50vw" }}
+                  id={PersonCard.key}
+                  sx={{
+                    paddingBottom: "2rem",
+                    zIndex: 2,
+                    color: "white",
+                    transition: "0.25s all ease-in-out",
+                    opacity: 0.5,
+                  }}
+                />
+              )}
             </div>
-            <TitleStack sx={{zIndex: 10, position: "absolute"}}>
-              {/* {PersonCard.key === "aditya" ?
-                  <ScienceIcon
-                    style={{ fontSize: "5rem" }}
-                    id={PersonCard.key}
-                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out"}}
-                  />
-                :
-                  <CalculateIcon
-                    style={{ fontSize: "5rem" }}
-                    id={PersonCard.key}
-                    sx={{ paddingBottom: "2rem", zIndex:3, color: "white", transition: "0.25s all ease-in-out"}}
-                  />
-              } */}
-              <Title variant="h3" sx={{marginBottom: {xs: "2rem", md: "3vw"}}}>{PersonCard.nameText}</Title>
-              <Image sx={{zIndex: 3, borderRadius: "20px"}} src={PersonCard.image} />
-              <DescriptionText variant="h5" sx={{marginTop: {xs: "2rem", md: "3vw"}}}>{PersonCard.description}</DescriptionText>
+            <TitleStack
+              sx={{ zIndex: 10, position: "absolute" }}
+              key="aboutus-8"
+            >
+              <Title
+                variant="h3"
+                sx={{ marginBottom: { xs: "2rem", md: "3vw" } }}
+                key="aboutus-9"
+              >
+                {PersonCard.nameText}
+              </Title>
+              <Image
+                key="aboutus-10"
+                sx={{ zIndex: 3, borderRadius: "20px" }}
+                src={PersonCard.image}
+              />
+              <DescriptionText
+                key="aboutus-11"
+                variant="h5"
+                sx={{ marginTop: { xs: "2rem", md: "3vw" } }}
+              >
+                {PersonCard.description}
+              </DescriptionText>
             </TitleStack>
           </SubjectDescriptionGrid>
         ))}
-        
       </SplitBoxesGrid>
     </>
   );

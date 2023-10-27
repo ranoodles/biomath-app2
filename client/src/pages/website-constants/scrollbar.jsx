@@ -3,7 +3,7 @@ import { LinearProgress } from "@mui/material";
 const ScrollBar = () => {
   return (
     <div>
-      <LinearProgress />
+      <LinearProgress key="linprog-1" />
     </div>
   );
 };

@@ -115,21 +115,32 @@ function Login() {
         username: e.target.username.value,
         password: e.target.password.value,
       };
-      const checkCondition = (userData.username !== "" && !(userData.username.includes(" ")) && userData.password !== "" && !(userData.password.includes(" ")))
-      document.querySelectorAll("input").forEach((singleInput) => (singleInput.value = ""));
+      const checkCondition =
+        userData.username !== "" &&
+        !userData.username.includes(" ") &&
+        userData.password !== "" &&
+        !userData.password.includes(" ");
+      document
+        .querySelectorAll("input")
+        .forEach((singleInput) => (singleInput.value = ""));
       if (checkCondition) {
-        const loginResponse = await axios.post("http://localhost:8001/login", userData, {
-          withCredentials: true,
-          credentials: "include"
-        });
+        const loginResponse = await axios.post(
+          "http://localhost:8001/login",
+          userData,
+          {
+            withCredentials: true,
+            credentials: "include",
+          }
+        );
         if (loginResponse.data) {
-          console.log("going to courses")
-          window.location.reload()
+          window.location.reload();
         } else {
-          setError("Login failed. Please try changing your username or password.")
+          setError(
+            "Login failed. Please try changing your username or password."
+          );
         }
       } else {
-        setError("Please enter a username and password.")
+        setError("Please enter a username and password.");
       }
     } catch (err) {
       console.error(err);
@@ -139,15 +150,17 @@ function Login() {
   return (
     <>
       {/* <NavBar></NavBar> */}
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} key="login-1">
         <SplitBoxesGrid
+          key="login-2"
           container
-          divider={<Divider orientation="vertical" flexItem />}
+          divider={<Divider key="login-3" orientation="vertical" flexItem />}
         >
-          <LayoutGrid item xs={12} sm={7.5}>
-            <VertStack>
+          <LayoutGrid item xs={12} sm={7.5} key="login-4">
+            <VertStack key="login-5">
               {/* LOGIN MAIN TEXT */}
               <Typography
+                key="login-6"
                 variant="h2"
                 sx={{
                   textAlign: "left",
@@ -159,10 +172,11 @@ function Login() {
               >
                 Log In
               </Typography>
-              <form onSubmit={handleLogInSubmit}>
-                <FormControl onSubmit={handleLogInSubmit}>
+              <form key="login-7" onSubmit={handleLogInSubmit}>
+                <FormControl key="login-8" onSubmit={handleLogInSubmit}>
                   {/* EMAIL TEXT FIELD */}
                   <TextFieldStyled
+                    key="login-9"
                     type="text"
                     label="Username"
                     variant="outlined"
@@ -176,6 +190,7 @@ function Login() {
 
                   {/* PASSWORD TEXT FIELD */}
                   <TextFieldStyled
+                    key="login-10"
                     type="password"
                     label="Password"
                     color="primary"
@@ -189,11 +204,14 @@ function Login() {
                   />
 
                   {/* SUBMIT BUTTON */}
-                  <LogInButton variant="contained" type="submit">
-                    <GetStartedText variant="h6">Log In</GetStartedText>
+                  <LogInButton key="login-11" variant="contained" type="submit">
+                    <GetStartedText key="login-12" variant="h6">
+                      Log In
+                    </GetStartedText>
                   </LogInButton>
                   {error && (
                     <Typography
+                      key="login-13"
                       sx={{
                         color: "red",
                         textAlign: "left",
@@ -206,10 +224,12 @@ function Login() {
                     </Typography>
                   )}
                   <ColoredLink
+                    key="login-14"
                     sx={{ margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0" }}
                   >
                     Don't have an account?{" "}
                     <span
+                      key="login-15"
                       onClick={() => {
                         navigate("/signup");
                       }}

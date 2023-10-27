@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import iconImg from "./catalystlogo.png";
 import Image from "mui-image";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import useMediaQuery from "@mui/material/useMediaQuery";
 import theme from "./Theme";
 
 const pages = [
@@ -34,7 +34,7 @@ const pages = [
 const MenuButton = styled(Button)`
   && {
     background-color: transparent;
-    ${'' /* border: 2px solid; */}
+    ${"" /* border: 2px solid; */}
     cursor: pointer;
     font-size: 110%;
     box-shadow: inset 0 0 0 0 #5383ec;
@@ -91,11 +91,16 @@ function NavBar(props) {
   };
 
   return (
-    <AppBar position="static" sx={{ background: "transparent", boxShadow: "none", padding:"1rem" }}>
-      <Container maxWidth="xxl">
-        <Toolbar disableGutters>
+    <AppBar
+      key="navin-1"
+      position="static"
+      sx={{ background: "transparent", boxShadow: "none", padding: "1rem" }}
+    >
+      <Container key="navin-2" maxWidth="xxl">
+        <Toolbar disableGutters key="navin-3">
           {/* Hamburger Menu Icon (centered on XS breakpoint) */}
           <Box
+            key="navin-4"
             sx={{
               display: { xs: "flex", md: "none" },
               justifyContent: "center",
@@ -103,16 +108,16 @@ function NavBar(props) {
               width: "100%",
             }}
           >
-            <Tooltip title="Open Menu">
-              <IconButton onClick={toggleDrawer} sx={{ p: 0 }}>
-                <MenuIcon sx={{ color: "white" }} />
+            <Tooltip title="Open Menu" key="navin-5">
+              <IconButton key="navin-6" onClick={toggleDrawer} sx={{ p: 0 }}>
+                <MenuIcon key="navin-7" sx={{ color: "white" }} />
               </IconButton>
             </Tooltip>
-            
           </Box>
 
           {isSmallScreen ? null : ( // Hide the image on extra-small screens
             <img
+              key="navin-8"
               src={iconImg}
               alt="Catalyst Logo"
               style={{
@@ -123,6 +128,7 @@ function NavBar(props) {
           )}
           {/* </Container> */}
           <Typography
+            key="navin-9"
             variant="h4"
             noWrap
             component="a"
@@ -137,43 +143,81 @@ function NavBar(props) {
               textDecoration: "none",
             }}
           >
-            P<span style={{fontSize: "1.5rem", alignSelf: "flex-end", margin: "0rem 0.5rem 0.15rem 0.15rem"}}>ROJECT</span>C<span style={{fontSize: "1.5rem", alignSelf: "flex-end", margin: "0rem 0.5rem 0.15rem 0.15rem"}}>ATALYST</span>
+            P
+            <span
+              key="navin-10"
+              style={{
+                fontSize: "1.5rem",
+                alignSelf: "flex-end",
+                margin: "0rem 0.5rem 0.15rem 0.15rem",
+              }}
+            >
+              ROJECT
+            </span>
+            C
+            <span
+              style={{
+                fontSize: "1.5rem",
+                alignSelf: "flex-end",
+                margin: "0rem 0.5rem 0.15rem 0.15rem",
+              }}
+            >
+              ATALYST
+            </span>
           </Typography>
           {/* User settings (right corner on XS breakpoint) */}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, paddingLeft: "1rem" }}>
+          <Box
+            key="navin-11"
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              paddingLeft: "1rem",
+            }}
+          >
             {pages.map((page) => (
               <MenuButton
                 key={page.label}
                 onClick={() => navigate(page.path)}
-                sx={{ color: "white", display: "block", marginRight:"1rem" }}
+                sx={{ color: "white", display: "block", marginRight: "1rem" }}
                 variant="h4"
               >
-                <ButtonText>{page.label}</ButtonText>
+                <ButtonText key="navin-12">{page.label}</ButtonText>
               </MenuButton>
             ))}
           </Box>
 
-          {/* User settings (right corner on XS breakpoint) */}
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, padding: "10px", border: "1px solid grey" }}>
-                <Avatar sx={{ color: "white" }} />
+          <Box key="navin-13" sx={{ flexGrow: 0 }}>
+            <Tooltip key="navin-14" title="Open settings">
+              <IconButton
+                key="navin-15"
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0, padding: "10px", border: "1px solid grey" }}
+              >
+                <Avatar key="navin-16" sx={{ color: "white" }} />
               </IconButton>
             </Tooltip>
             <Menu
+              key="navin-17"
               anchorEl={anchorElUser}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+              <MenuItem key="navin-18" onClick={handleLogOut}>
+                Logout
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
       </Container>
 
       {/* Drawer for XS breakpoint */}
-      <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
-        <List>
+      <Drawer
+        key="navin-19"
+        anchor="right"
+        open={isDrawerOpen}
+        onClose={toggleDrawer}
+      >
+        <List key="navin-20">
           {pages.map((page) => (
             <ListItem
               // button
@@ -183,7 +227,7 @@ function NavBar(props) {
                 navigate(page.path);
               }}
             >
-              <ListItemText primary={page.label} />
+              <ListItemText primary={page.label} key="navin-21" />
             </ListItem>
           ))}
         </List>

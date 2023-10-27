@@ -48,9 +48,9 @@ const CardHolder = styled(Grid)`
     height: 90vh;
     width: 90vw;
     ${"" /* background: linear-gradient(to right top, #535EAB, #8351C2); */}
-    ${'' /* background: linear-gradient(to right top, #99a4f1, #c997f4); */}
+    ${"" /* background: linear-gradient(to right top, #99a4f1, #c997f4); */}
     border-radius: 2rem;
-    ${'' /* border: 1px solid grey; */}
+    ${"" /* border: 1px solid grey; */}
     box-shadow: 0px 0px 5rem grey;
     overflow-y: scroll;
     scrollbar-width: none;
@@ -78,7 +78,6 @@ const CardWrapper = styled.div`
   opacity: ${(props) => (props.fadeOut ? 0 : 1)};
   transition: opacity 0.3s ease-in-out;
 `;
-
 
 const BigGrid = styled(Grid)`
   && {
@@ -112,7 +111,6 @@ function BioLearningPath() {
         const res = await axios.get("http://localhost:8800/mathcards");
         const lessons = res.data;
         setLessonList(lessons);
-        console.log(lessons);
       } catch (err) {
         console.log(err);
       }
@@ -180,36 +178,53 @@ function BioLearningPath() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <NavBar />
-      <BigGrid>
+    <ThemeProvider theme={theme} key="mthlearningpath-1">
+      <NavBar key="mthlearningpath-2" />
+      <BigGrid key="mthlearningpath-3">
         <ChevronButton
+          key="mthlearningpath-4"
           onClick={handleBackClick}
           disable="true"
           sx={{ marginRight: "2rem", display: { xs: "none", md: "flex" } }}
         >
-          <LeftIcon style={{ color: "white", fontSize: "3rem" }} />
+          <LeftIcon
+            style={{ color: "white", fontSize: "3rem" }}
+            key="mthlearningpath-5"
+          />
         </ChevronButton>
         <CardHolder
+          key="mthlearningpath-6"
           item
           sm={12}
           xs={12}
-          sx={{ alignItems: {xs: cardNum <= -1 || cardNum === lesson.length ? "center" : "flex-start", md: "center"}, cursor: "pointer" }}
-          onClick={handleNextClick}
+          sx={{
+            alignItems: {
+              xs:
+                cardNum <= -1 || cardNum === lesson.length
+                  ? "center"
+                  : "flex-start",
+              md: "center",
+            },
+          }}
         >
-          <CardWrapper fadeOut={fadeOut}>
+          <CardWrapper key="mthlearningpath-7" fadeOut={fadeOut}>
             {renderCard()}
           </CardWrapper>
         </CardHolder>
         <ChevronButton
+          key="mthlearningpath-8"
           onClick={handleNextClick}
           disable="true"
           sx={{ marginLeft: "2rem", display: { xs: "none", md: "flex" } }}
         >
-          <RightIcon style={{ color: "white", fontSize: "3rem" }} />
+          <RightIcon
+            key="mthlearningpath-9"
+            style={{ color: "white", fontSize: "3rem" }}
+          />
         </ChevronButton>
       </BigGrid>
       <Container
+        key="mthlearningpath-10"
         sx={{
           justifyContent: "center",
           alignItems: "center",
@@ -219,18 +234,26 @@ function BioLearningPath() {
         }}
       >
         <ChevronButton
+          key="mthlearningpath-11"
           onClick={handleBackClick}
           disable="true"
           sx={{ marginRight: "2rem" }}
         >
-          <LeftIcon style={{ color: "white", fontSize: "3rem" }} />
+          <LeftIcon
+            style={{ color: "white", fontSize: "3rem" }}
+            key="mthlearningpath-12"
+          />
         </ChevronButton>
         <ChevronButton
+          key="mthlearningpath-13"
           onClick={handleNextClick}
           disable="true"
           sx={{ marginLeft: "2rem" }}
         >
-          <RightIcon style={{ color: "white", fontSize: "3rem" }} />
+          <RightIcon
+            style={{ color: "white", fontSize: "3rem" }}
+            key="mthlearningpath-14"
+          />
         </ChevronButton>
       </Container>
     </ThemeProvider>

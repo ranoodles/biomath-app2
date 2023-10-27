@@ -123,13 +123,16 @@ function DisplayInfo({ unit, handleLessonSelect }) {
               scale: 1.05,
               background: "linear-gradient(to right top, #354083, #6533A4)",
             }}
+            key="aMathUnits-VStack"
           >
             <TitleText sx={{ fontSize: { xs: "6vw", md: "4vw" } }}>
               {unit.id}. {unit.name}
+              key="aMathUnits-titletext-1"
             </TitleText>
             <DescriptionText
               item
               sx={{ fontSize: { xs: "2.5vw", md: "1.5vw" } }}
+              key="aMathUnits-descriptiontext-1"
             >
               {unit.description}
             </DescriptionText>
@@ -139,6 +142,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
               orientation="vertical"
               color="secondary"
               sx={{ color: "white" }}
+              key="aMathUnits-buttonholder-1"
             >
               {unit.lessons.map((lesson) => (
                 <ListButtons
@@ -151,6 +155,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
                       fontSize: { xs: "3vw", md: "1.5vw" },
                       fontWeight: "600",
                     }}
+                    key="aMathUnits-typo-1"
                   >
                     {lesson.lesson_name}
                   </Typography>

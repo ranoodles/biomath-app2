@@ -79,32 +79,6 @@ const HeroImage = styled(Image)`
   }
 `;
 
-// const SubtitleAnimation = ({ words }) => {
-//   const wordVariants = {
-//     hidden: { opacity: 0, x: -20 },
-//     visible: { opacity: 1, x: 0, transition: { duration: 1 } },
-//   };
-
-//   return (
-//     <motion.div
-//       variants={{
-//         visible: {
-//           transition: { staggerChildren: 0.1 },
-//         },
-//       }}
-//       initial="hidden"
-//       animate="visible"
-//     >
-//       {words.map((word, index) => (
-//         <motion.div key={index} variants={wordVariants} style={{ display: 'inline' }}>
-//           {word}
-//         </motion.div>
-//       ))}
-//     </motion.div>
-//   );
-// };
-
-
 export default function Hero() {
   const navigate = useNavigate();
   const highlightStyle = {
@@ -126,14 +100,16 @@ export default function Hero() {
   };
 
   return (
-    <Grid container sx={{height: {xs: "100%", md: "100vh"}}}>
+    <Grid container sx={{ height: { xs: "100%", md: "100vh" } }} key="hero-1">
       <Grid
+        key="hero-2"
         item
         xs={12}
         md={7}
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         <TitleStack
+          key="hero-3"
           spacing={2}
           // component={motion.div}
           // initial={{ opacity: 0, scale: 0.5 }}
@@ -142,6 +118,7 @@ export default function Hero() {
           sx={{ display: { xs: "flex", md: "inline-block" }, padding: "5px" }}
         >
           <TitleText
+            key="hero-4"
             variant="h2"
             color="#5383ec"
             component={motion.div}
@@ -153,6 +130,7 @@ export default function Hero() {
           </TitleText>
 
           <SubtitleText
+            key="hero-5"
             variant="h5"
             xs={12}
             sm={1}
@@ -161,10 +139,12 @@ export default function Hero() {
             animate="visible"
             variants={subtitleVariants}
           >
-            We go beyond textbooks. We empower students to become tomorrow's scientific leaders in biotechnology and engineering.
+            We go beyond textbooks. We empower students to become tomorrow's
+            scientific leaders in biotechnology and engineering.
           </SubtitleText>
 
           <SignupButtonTop
+            key="hero-6"
             variant="contained"
             onClick={() => {
               navigate("/signup");
@@ -174,29 +154,32 @@ export default function Hero() {
             animate="visible"
             variants={buttonVariants}
           >
-            <GetStartedText variant="h5">Start Learning</GetStartedText>
+            <GetStartedText key="hero-7" variant="h5">
+              Start Learning
+            </GetStartedText>
           </SignupButtonTop>
         </TitleStack>
       </Grid>
       <Grid
+        key="hero-8"
         item
         xs={12}
         md={5}
         sx={{ justifyContent: "center", alignItems: "center" }}
       >
         <HeroImage
+          key="hero-9"
           src={nodeGif}
           style={{ width: "40vw", height: "40vw" }}
         ></HeroImage>
       </Grid>
-      <Grid container display={{ xs: "none", md: "block" }}>
-        <svg class="arrows" item>
-          <path class="a1" d="M0 0 L30 32 L60 0"></path>
-          <path class="a2" d="M0 20 L30 52 L60 20"></path>
-          <path class="a3" d="M0 40 L30 72 L60 40"></path>
+      <Grid key="hero-10" container display={{ xs: "none", md: "block" }}>
+        <svg key="hero-11" class="arrows" item>
+          <path key="hero-12" class="a1" d="M0 0 L30 32 L60 0"></path>
+          <path key="hero-13" class="a2" d="M0 20 L30 52 L60 20"></path>
+          <path key="hero-14" class="a3" d="M0 40 L30 72 L60 40"></path>
         </svg>
       </Grid>
-      
     </Grid>
   );
 }

@@ -78,19 +78,21 @@ const UnitItem = styled(Typography)`
   &:last-child {
     border-bottom: none;
   }
-  ${'' /* &:hover {
+  ${
+    "" /* &:hover {
     background-color: #a983e6;
-  } */}
+  } */
+  }
   color: white;
   text-align: center;
   font-size: 18px; /* Default font size */
   box-shadow: inset 0 0 0 0 #5383ec;
-    -webkit-transition: ease-out 0.2s;
-    -moz-transition: ease-out 0.2s;
-    transition: ease-out 0.2s;
-    &:hover {
-      box-shadow: inset 600px 0 0 0 #5383ec;
-    }
+  -webkit-transition: ease-out 0.2s;
+  -moz-transition: ease-out 0.2s;
+  transition: ease-out 0.2s;
+  &:hover {
+    box-shadow: inset 600px 0 0 0 #5383ec;
+  }
 `;
 
 const ContentWrapper = styled(Grid)`
@@ -131,6 +133,7 @@ function BiotechnologyPage() {
 
   return (
     <ThemeProvider
+      key="apmath-1"
       theme={theme}
       sx={{
         minHeight: "100%",
@@ -138,33 +141,40 @@ function BiotechnologyPage() {
         margin: "0",
       }}
     >
-      <NavBar />
-      <AppliedMathHeader />
-      <RootContainer>
-        <CenteredContainer container>
-            <CenteredSidebar
-              item
-              md={4}
-              xs={2}
-              sx={{
-                padding: "0.5rem",
-                marginTop: "3rem",
-                order: 1,
-              }}
-            >
-              {unitsList.map((unit, index) => (
-                <UnitItem
-                  key={index}
-                  onClick={() => handleUnitSelect(unit)}
-                  variant="h6"
-                  // color={selectedUnit === unit ? "#5383ec" : "white"}
-                  sx={{boxShadow: (selectedUnit === unit) ? "inset 600px 0 0 0 #5383ec" : "transparent"}}
-                >
-                  {!isXs ? `Unit ${unit.id}: ${unit.name}` : `${unit.id}`}
-                </UnitItem>
-              ))}
-            </CenteredSidebar>
+      <NavBar key="apmath-2" />
+      <AppliedMathHeader key="apmath-3" />
+      <RootContainer key="apmath-4">
+        <CenteredContainer key="apmath-5" container>
+          <CenteredSidebar
+            key="apmath-6"
+            item
+            md={4}
+            xs={2}
+            sx={{
+              padding: "0.5rem",
+              marginTop: "3rem",
+              order: 1,
+            }}
+          >
+            {unitsList.map((unit, index) => (
+              <UnitItem
+                key={index}
+                onClick={() => handleUnitSelect(unit)}
+                variant="h6"
+                // color={selectedUnit === unit ? "#5383ec" : "white"}
+                sx={{
+                  boxShadow:
+                    selectedUnit === unit
+                      ? "inset 600px 0 0 0 #5383ec"
+                      : "transparent",
+                }}
+              >
+                {!isXs ? `Unit ${unit.id}: ${unit.name}` : `${unit.id}`}
+              </UnitItem>
+            ))}
+          </CenteredSidebar>
           <ContentWrapper
+            key="apmath-7"
             item
             md={7}
             xs={10}
@@ -173,6 +183,7 @@ function BiotechnologyPage() {
             }}
           >
             <DisplayCard
+              key="apmath-8"
               unit={selectedUnit}
               selectedLessonId={selectedLessonId}
               handleLessonSelect={handleLessonSelect}

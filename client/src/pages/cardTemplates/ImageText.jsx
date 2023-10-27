@@ -93,21 +93,39 @@ function ImageText({ displayInfo }) {
 
   return (
     <>
-      <ThemeProvider theme={theme} border="none">
-        <SplitBoxesGrid container>
-          <SubGrid item xs={12} md={4}>
-            <Img src={displayInfo.img} alt=""></Img>
+      <ThemeProvider theme={theme} border="none" key="imgtext-tp-1">
+        <SplitBoxesGrid container key="imgtext-sbg-1">
+          <SubGrid item xs={12} md={4} key="imgtext-subg-1">
+            <Img src={displayInfo.img} alt="" key="imgtext-text-1"></Img>
           </SubGrid>
-          <SubGrid item xs={12} md={7} style={{justifyContent: "left"}}>
-            <VertStack>
-              <TitleText variant="h2" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={titleVariants}>{displayInfo.title}</TitleText>
-              <DescriptionText variant="h6" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={subtitleVariants}>{displayInfo.text}</DescriptionText>
+          <SubGrid
+            item
+            xs={12}
+            md={7}
+            style={{ justifyContent: "left" }}
+            key="imgtext-1"
+          >
+            <VertStack key="imgtext-2">
+              <TitleText
+                variant="h2"
+                component={motion.div}
+                initial="hidden"
+                animate="visible"
+                variants={titleVariants}
+                key="imgtext-3"
+              >
+                {displayInfo.title}
+              </TitleText>
+              <DescriptionText
+                variant="h6"
+                component={motion.div}
+                initial="hidden"
+                animate="visible"
+                variants={subtitleVariants}
+                key="imgtext-4"
+              >
+                {displayInfo.text}
+              </DescriptionText>
             </VertStack>
           </SubGrid>
         </SplitBoxesGrid>

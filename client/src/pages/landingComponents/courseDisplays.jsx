@@ -122,6 +122,7 @@ export default function CourseDisplay() {
   return (
     <>
       <Title
+        key="coursedisplays-1"
         variant="h3"
         paddingTop="10rem"
         marginBotton="0rem"
@@ -130,12 +131,16 @@ export default function CourseDisplay() {
         Our Courses
       </Title>
       <SplitBoxesGrid
+        key="coursedisplays-2"
         container
-        divider={<Divider orientation="vertical" flexItem />}
+        divider={
+          <Divider key="coursedisplays-3" orientation="vertical" flexItem />
+        }
         direction="row"
       >
         {CourseDescriptionText.map((CourseCard) => (
           <SubjectDescriptionGrid
+            key="coursedisplays-4"
             item
             xs={10}
             md={4.5}
@@ -164,24 +169,31 @@ export default function CourseDisplay() {
               // backgroundImage:
               //   "linear-gradient(to left top, #16283b, #2c3c4c, #213f62, #174177, #1c418a)",
               // backgroundColor: "#03339c"
-              backgroundColor: 	"#003c88"
+              backgroundColor: "#003c88",
             }}
             onClick={() => {
               // navigate(CourseCard.linksite);
-              navigate("/login")
+              navigate("/login");
             }}
             onMouseOver={hoverOn}
             onMouseOut={hoverOff}
           >
-            <div style={{ position: "absolute", opacity: "0.2" }}>
+            <div
+              key="coursedisplays-5"
+              style={{ position: "absolute", opacity: "0.2" }}
+            >
               <Image
                 sx={{ zIndex: 2, fillOpacity: 0.5 }}
                 src={CourseCard.backgroundImage}
               />
             </div>
-            <TitleStack sx={{ zIndex: 10, position: "absolute" }}>
+            <TitleStack
+              key="coursedisplays-6"
+              sx={{ zIndex: 10, position: "absolute" }}
+            >
               {CourseCard.key === "bio" ? (
                 <ScienceIcon
+                  key="coursedisplays-7"
                   style={{ fontSize: "5rem" }}
                   id={CourseCard.key}
                   sx={{
@@ -194,6 +206,7 @@ export default function CourseDisplay() {
                 />
               ) : (
                 <CalculateIcon
+                  key="coursedisplays-7"
                   style={{ fontSize: "5rem" }}
                   id={CourseCard.key}
                   sx={{
@@ -205,10 +218,15 @@ export default function CourseDisplay() {
                   }}
                 />
               )}
-              <Title variant="h3" sx={{ color: "white" }}>
+              <Title
+                variant="h3"
+                sx={{ color: "white" }}
+                key="coursedisplays-8"
+              >
                 {CourseCard.courseName}
               </Title>
               <DescriptionText
+                key="coursedisplays-9"
                 id={CourseCard.key}
                 variant="h5"
                 sx={{ opacity: 0 }}

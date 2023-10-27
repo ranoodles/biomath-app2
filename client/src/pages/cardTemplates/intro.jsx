@@ -41,7 +41,7 @@ const DescriptionText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
-    ${'' /* font-weight: bold; */}
+    ${"" /* font-weight: bold; */}
     ${"" /* font-size: 20px; */}
     padding-bottom: 1rem;
     text-align: center;
@@ -102,19 +102,29 @@ export default function Intro({ lessonIndex, course }) {
 
   return (
     <>
-      <ThemeProvider theme={theme} border="none">
-        <SplitBoxesGrid container>
-          <VertStack>
-            <DescriptionText variant="h3" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={titleVariants}>
+      <ThemeProvider theme={theme} border="none" key="intro-1">
+        <SplitBoxesGrid container key="intro-2">
+          <VertStack key="intro-3">
+            <DescriptionText
+              key="intro-4"
+              variant="h3"
+              component={motion.div}
+              initial="hidden"
+              animate="visible"
+              variants={titleVariants}
+            >
               Unit {lesson.unit_id} Lesson {lesson.lesson_number}
             </DescriptionText>
-            <TitleText variant="h1" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={subtitleVariants}>{lesson.lesson_name}</TitleText>
+            <TitleText
+              key="intro-5"
+              variant="h1"
+              component={motion.div}
+              initial="hidden"
+              animate="visible"
+              variants={subtitleVariants}
+            >
+              {lesson.lesson_name}
+            </TitleText>
             {/* <DescriptionText variant="h3">Let's get started!</DescriptionText> */}
           </VertStack>
         </SplitBoxesGrid>

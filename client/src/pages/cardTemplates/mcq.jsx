@@ -72,7 +72,7 @@ const CheckmarkIcon = styled(CheckCircleIcon)`
 const formControlLabelStyle = {
   "& .MuiFormControlLabel-label": {
     fontSize: "1.4rem",
-    color: "white"
+    color: "white",
   },
 };
 
@@ -168,16 +168,23 @@ export default function McqCard({ question }) {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <CardGrid>
-          <VertStack>
-            <QuestionText variant="h4" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={titleVariants}>{question.mcqQuestion}</QuestionText>
-            <form onSubmit={handleSubmit}>
-              <FormControl>
+      <ThemeProvider theme={theme} key="mcq-1">
+        <CardGrid key="mcq-2">
+          <VertStack key="mcq-3">
+            <QuestionText
+              key="mcq-4"
+              variant="h4"
+              component={motion.div}
+              initial="hidden"
+              animate="visible"
+              variants={titleVariants}
+            >
+              {question.mcqQuestion}
+            </QuestionText>
+            <form key="mcq-5" onSubmit={handleSubmit}>
+              <FormControl key="mcq-6">
                 <RadioGroup
+                  key="mcq-7"
                   aria-labelledby="mcq-question"
                   name="mcq-question-radio-group"
                   onChange={handleRadioChange}
@@ -186,22 +193,34 @@ export default function McqCard({ question }) {
                     answerChoices.map((answerChoice) => (
                       <>
                         <CustomRadio
+                          key="mcq-8"
                           value={answerChoice}
                           component={motion.div}
                           initial="hidden"
                           animate="visible"
                           variants={{
                             hidden: { opacity: 0, x: -50 },
-                            visible: { opacity: 1, x: 0, transition: { duration: 1, delay: (0.5 + answerChoices.indexOf(answerChoice)/4) } },
+                            visible: {
+                              opacity: 1,
+                              x: 0,
+                              transition: {
+                                duration: 1,
+                                delay:
+                                  0.5 + answerChoices.indexOf(answerChoice) / 4,
+                              },
+                            },
                           }}
                           control={
                             <Radio
-                            style={{ color: answerChoice === answerChoices[question.mcqCorrect - 1] ? "white" : radioButtonColor }}
-                              // color={
-                              //   radioColor !== "danger" ? radioColor : "default"
-                              // }
-                              // color = "default"
-                              color = "default"
+                              key="mcq-9"
+                              style={{
+                                color:
+                                  answerChoice ===
+                                  answerChoices[question.mcqCorrect - 1]
+                                    ? "white"
+                                    : radioButtonColor,
+                              }}
+                              color="default"
                               disabled={
                                 answerChoice !==
                                 answerChoices[question.mcqCorrect - 1]
@@ -218,6 +237,7 @@ export default function McqCard({ question }) {
                     ))}
                 </RadioGroup>
                 <FormHelperText
+                  key="mcq-10"
                   variant=""
                   sx={{
                     color:
@@ -231,11 +251,18 @@ export default function McqCard({ question }) {
                 >
                   {helperText}
                 </FormHelperText>
-                <CheckButton variant="contained" type="submit" component={motion.div}
+                <CheckButton
+                  key="mcq-11"
+                  variant="contained"
+                  type="submit"
+                  component={motion.div}
                   initial="hidden"
                   animate="visible"
-                  variants={buttonVariants}>
-                  <DisplayText variant="h6">Check</DisplayText>
+                  variants={buttonVariants}
+                >
+                  <DisplayText key="mcq-12" variant="h6">
+                    Check
+                  </DisplayText>
                 </CheckButton>
               </FormControl>
             </form>

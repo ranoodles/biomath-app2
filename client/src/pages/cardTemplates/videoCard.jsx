@@ -47,26 +47,16 @@ const VertStack = styled(Stack)`
   }
 `;
 
-// const VideoiFrame = styled.iframe`
-//   && {
-//     left: 0;
-//     top: 0;
-//     height: 100%;
-//     width: 100%;
-//     position: absolute;
-//   }
-// `;
-
 const YoutubeEmbed = ({ embedId }) => (
-    <div>
-        <iframe
-        src={`https://www.youtube.com/embed/${embedId}`}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        style={{borderRadius: "20px", height: "50vh", width: "50vw"}}
-        title="Embedded youtube">
-        </iframe>
-    </div>
+  <div>
+    <iframe
+      src={`https://www.youtube.com/embed/${embedId}`}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      style={{ borderRadius: "20px", height: "50vh", width: "50vw" }}
+      title="Embedded youtube"
+    ></iframe>
+  </div>
 );
 
 export default function VideoCard({ displayInfo }) {
@@ -82,24 +72,34 @@ export default function VideoCard({ displayInfo }) {
 
   return (
     <>
-      <ThemeProvider theme={theme} border="none">
-        <SplitBoxesGrid container>
-        <VertStack>
-            {displayInfo.text ?
-            <DescriptionText variant="h3" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={titleVariants}>
-              {displayInfo.text}
-            </DescriptionText>
-            : ""}
+      <ThemeProvider theme={theme} border="none" key="video-1">
+        <SplitBoxesGrid container key="video-2">
+          <VertStack key="video-3">
+            {displayInfo.text ? (
+              <DescriptionText
+                key="video-4"
+                variant="h3"
+                component={motion.div}
+                initial="hidden"
+                animate="visible"
+                variants={titleVariants}
+              >
+                {displayInfo.text}
+              </DescriptionText>
+            ) : (
+              ""
+            )}
             <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={subtitleVariants}>
-            <YoutubeEmbed embedId={displayInfo.img}></YoutubeEmbed>
+              key="video-5"
+              initial="hidden"
+              animate="visible"
+              variants={subtitleVariants}
+            >
+              <YoutubeEmbed
+                key="video-6"
+                embedId={displayInfo.img}
+              ></YoutubeEmbed>
             </motion.div>
-            {/* <DescriptionText variant="h3">Let's get started!</DescriptionText> */}
           </VertStack>
         </SplitBoxesGrid>
       </ThemeProvider>
