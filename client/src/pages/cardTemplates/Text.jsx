@@ -40,7 +40,7 @@ const DescriptionText = styled(Typography)`
     display: flex;
     justify-content: left;
     align-items: left;
-    ${'' /* font-size: 20px; */}
+    ${"" /* font-size: 20px; */}
     padding-bottom: 1rem;
     text-align: left;
     line-height: 175%;
@@ -80,18 +80,30 @@ export default function TextCard({ displayInfo }) {
   };
   return (
     <>
-      <ThemeProvider theme={theme} border="none">
-        <SplitBoxesGrid container>
-          <SubGrid item xs={12} md={12}>
-            <VertStack>
-              <TitleText variant="h3" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={titleVariants}>{displayInfo.title}</TitleText>
-              <DescriptionText variant="h6" component={motion.div}
-            initial="hidden"
-            animate="visible"
-            variants={subtitleVariants}>{displayInfo.text}</DescriptionText>
+      <ThemeProvider theme={theme} key="text-1" border="none">
+        <SplitBoxesGrid container key="text-2">
+          <SubGrid item xs={12} md={12} key="text-3">
+            <VertStack key="text-4">
+              <TitleText
+                key="text-5"
+                variant="h3"
+                component={motion.div}
+                initial="hidden"
+                animate="visible"
+                variants={titleVariants}
+              >
+                {displayInfo.title}
+              </TitleText>
+              <DescriptionText
+                key="text-6"
+                variant="h6"
+                component={motion.div}
+                initial="hidden"
+                animate="visible"
+                variants={subtitleVariants}
+              >
+                {displayInfo.text}
+              </DescriptionText>
             </VertStack>
           </SubGrid>
         </SplitBoxesGrid>

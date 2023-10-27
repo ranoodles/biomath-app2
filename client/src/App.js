@@ -29,7 +29,7 @@ function App() {
         const user = res.data;
         setLoggedIn(user);
       } catch (err) {
-        console.log("im in app js", err);
+        console.log(err);
       }
     };
     fetchLoginStatus();
@@ -40,113 +40,116 @@ function App() {
   // }
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <BrowserRouter>
-          <Suspense fallback={<Loading />}>
-            <Routes>
+    <ThemeProvider theme={theme} key="app-1">
+      <div className="App" key="app-2">
+        <BrowserRouter key="app-3">
+          <Suspense fallback={<Loading key="app-4" />} key="app-5">
+            <Routes key="app-6">
               <Route
+                key="app-7"
                 path="/login"
                 element={
                   loggedIn === true ? (
-                    <Navigate to="/courses" />
+                    <Navigate to="/courses" key="app-8" />
                   ) : loggedIn === false ? (
-                    <Login />
+                    <Login key="app-9" />
                   ) : (
-                    <Loading />
+                    <Loading key="app-10" />
                   )
                 }
               />
               <Route
+                key="app-11"
                 path="/biotechnology/:lessonid"
                 element={
                   loggedIn === true ? (
-                    <BioLearningPath />
+                    <BioLearningPath key="app-12" />
                   ) : loggedIn === false ? (
-                    <Navigate to="/login" />
+                    <Navigate to="/login" key="app-13" />
                   ) : (
-                    <Loading />
+                    <Loading key="app-14" />
                   )
                 }
               />
               <Route
+                key="app-15"
                 path="/courses"
                 element={
                   loggedIn === true ? (
-                    <Courses />
+                    <Courses key="app-16" />
                   ) : loggedIn === false ? (
-                    <Navigate to="/login" />
+                    <Navigate to="/login" key="app-17" />
                   ) : (
-                    <Loading />
+                    <Loading key="app-18" />
                   )
                 }
               />
               <Route
+                key="app-19"
                 path="/engineering/:lessonid"
                 element={
                   loggedIn === true ? (
-                    <MathLearningPath />
+                    <MathLearningPath key="app-20" />
                   ) : loggedIn === false ? (
-                    <Navigate to="/login" />
+                    <Navigate to="/login" key="app-21" />
                   ) : (
-                    <Loading />
+                    <Loading key="app-22" />
                   )
                 }
               />
               <Route
+                ey="app-23"
                 path="/"
                 element={
                   loggedIn === false ? (
-                    <Landing />
+                    <Landing key="app-24" />
                   ) : loggedIn === true ? (
-                    <Navigate to="/courses" />
+                    <Navigate to="/courses" key="app-19" />
                   ) : (
-                    <Loading />
+                    <Loading key="app-20" />
                   )
                 }
               />
               <Route
+                key="app-21"
                 path="/signup"
                 element={
                   loggedIn === false ? (
-                    <Signup />
+                    <Signup key="app-22" />
                   ) : loggedIn === true ? (
-                    <Navigate to="/courses" />
+                    <Navigate key="app-23" to="/courses" />
                   ) : (
-                    <Loading />
+                    <Loading key="app-24" />
                   )
                 }
               />
               <Route
+                key="app-25"
                 path="/biotechnology"
                 element={
                   loggedIn === true ? (
-                    <BiotechnologyPage />
+                    <BiotechnologyPage key="app-26" />
                   ) : loggedIn === false ? (
-                    <Navigate to="/login" />
+                    <Navigate to="/login" key="app-27" />
                   ) : (
-                    <Loading />
+                    <Loading key="app-28" />
                   )
                 }
               />
               <Route
+                key="app-29"
                 path="/engineering"
                 element={
                   loggedIn === true ? (
-                    <AppliedMathPage />
+                    <AppliedMathPage key="app-30" />
                   ) : loggedIn === false ? (
-                    <Navigate to="/login" />
+                    <Navigate to="/login" key="app-31" />
                   ) : (
-                    <Loading />
+                    <Loading key="app-32" />
                   )
                 }
               />
-              <Route
-                path="*"
-                element={
-                  <NotFound></NotFound>
-                }
-              />
+              <Route key="app-33" path="*" element={<NotFound></NotFound>} />
             </Routes>
           </Suspense>
         </BrowserRouter>

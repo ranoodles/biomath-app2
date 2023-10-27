@@ -3,7 +3,7 @@ import { Box, Grid, Button, Typography, Stack, Divider } from "@mui/material";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Image from "mui-image";
-import progressImg from "./progressImg.svg"
+import progressImg from "./progressImg.svg";
 
 const OurMissionGrid = styled(Grid)`
   && {
@@ -12,7 +12,7 @@ const OurMissionGrid = styled(Grid)`
     align-items: center;
     padding: 2rem 0rem 2rem 0rem;
     gap: 4vw;
-    ${'' /* height: 60vh; */}
+    ${"" /* height: 60vh; */}
   }
 `;
 
@@ -59,7 +59,7 @@ const BiomathText = styled(Typography)`
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    ${'' /* margin-bottom: 1rem; */}
+    ${"" /* margin-bottom: 1rem; */}
     text-align: center;
     color: #5383ec;
   }
@@ -68,9 +68,9 @@ const BiomathText = styled(Typography)`
 export default function OurMission() {
   return (
     <>
-      
-      <OurMissionGrid container>
+      <OurMissionGrid container key="ourmission-1">
         <OurMissionImgGrid
+          key="ourmission-2"
           item
           xs={10}
           md={4}
@@ -83,15 +83,10 @@ export default function OurMission() {
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
-          {/* <OurMissionImg
-            src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-            alt="Beakers with pipette"
-          /> */}
-          <Image
-            src={progressImg}
-          />
+          <Image key="ourmission-3" src={progressImg} />
         </OurMissionImgGrid>
         <OurMissionTextGrid
+          key="ourmission-4"
           Item
           xs={11}
           md={5}
@@ -104,18 +99,18 @@ export default function OurMission() {
             ease: [0, 0.71, 0.2, 1.01],
           }}
         >
-        <Stack>
-          <BiomathText variant="h3" paddingTop="5rem">
-            Our Mission
-          </BiomathText>
-          <OurMissionText variant="h5">
-            Deserunt reprehenderit aute amet Lorem laborum irure. Dolor eu
-            pariatur incididunt dolore aute minim qui est et tempor velit elit.
-            Sint sit duis nulla esse dolor. Id officia do dolore aliqua
-            exercitation in culpa ad voluptate ullamco eu ex cupidatat. Cillum
-            nulla eu labore quis adipisicing mollit ad velit cupidatat.
-          </OurMissionText>
-        </Stack>
+          <Stack key="ourmission-5">
+            <BiomathText key="ourmission-6" variant="h3" paddingTop="5rem">
+              Our Mission
+            </BiomathText>
+            <OurMissionText variant="h5" key="ourmission-7">
+              Deserunt reprehenderit aute amet Lorem laborum irure. Dolor eu
+              pariatur incididunt dolore aute minim qui est et tempor velit
+              elit. Sint sit duis nulla esse dolor. Id officia do dolore aliqua
+              exercitation in culpa ad voluptate ullamco eu ex cupidatat. Cillum
+              nulla eu labore quis adipisicing mollit ad velit cupidatat.
+            </OurMissionText>
+          </Stack>
         </OurMissionTextGrid>
       </OurMissionGrid>
     </>

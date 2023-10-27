@@ -41,6 +41,7 @@ export default function AppliedMathHeader() {
           color: "#5383ec",
           fontSize: { xs: "9vw", md: "6vw" },
         }}
+        key="aMathTitle-TitleText"
       >
         Engineering
       </TitleText>

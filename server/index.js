@@ -18,8 +18,8 @@ const db = createConnection({
 app.use(cookieParser());
 app.use(express.json());
 const corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true
+  origin: "http://localhost:3000",
+  credentials: true,
 };
 app.use(cors(corsOptions));
 
@@ -30,7 +30,6 @@ refresh_token_secret =
 
 app.get("/test", (req, res) => {
   const q = "Select * FROM users";
-  console.log("log: show table");
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);

@@ -122,39 +122,59 @@ function SignUp() {
         email: e.target.email.value,
       };
       const confPass = e.target.confPassword.value;
-      const checkCondition = (userData.username !== "" && !(userData.username.includes(" ")) && userData.password !== "" && !(userData.password.includes(" ")) && userData.email !== "" && !(userData.email.includes(" ")) && userData.confPass !== "" && !(userData.confPass.includes(" ")))
+      const checkCondition =
+        userData.username !== "" &&
+        !userData.username.includes(" ") &&
+        userData.password !== "" &&
+        !userData.password.includes(" ") &&
+        userData.email !== "" &&
+        !userData.email.includes(" ") &&
+        userData.confPass !== "" &&
+        !userData.confPass.includes(" ");
       document
-          .querySelectorAll("input")
-          .forEach((singleInput) => (singleInput.value = ""));
+        .querySelectorAll("input")
+        .forEach((singleInput) => (singleInput.value = ""));
       if (userData.password === confPass && checkCondition) {
-        const signUpPromise = axios.post("http://localhost:8001/signup", userData, {
-          withCredentials: true,
-          credentials: "include"
-        });
-        signUpPromise.then((res) => {
-          if (res.data) {
-            console.log("Signup successful");
-            const loginPromise = axios.post("http://localhost:8001/login", userData, {
-              withCredentials: true,
-              credentials: "include"
-            });
-            
-            loginPromise.then((loginResponse) => {
-              if (loginResponse.data) {
-                console.log("Going to courses");
-                window.location.reload();
-              } else {
-                console.log("Login failed");
-              }
-            }).catch((loginError) => {
-              console.log("Login error:", loginError);
-            });
-          } else {
-            console.log("Signup failed");
+        const signUpPromise = axios.post(
+          "http://localhost:8001/signup",
+          userData,
+          {
+            withCredentials: true,
+            credentials: "include",
           }
-        }).catch((signUpError) => {
-          console.log("Signup error:", signUpError);
-        });
+        );
+        signUpPromise
+          .then((res) => {
+            if (res.data) {
+              console.log("Signup successful");
+              const loginPromise = axios.post(
+                "http://localhost:8001/login",
+                userData,
+                {
+                  withCredentials: true,
+                  credentials: "include",
+                }
+              );
+
+              loginPromise
+                .then((loginResponse) => {
+                  if (loginResponse.data) {
+                    console.log("Going to courses");
+                    window.location.reload();
+                  } else {
+                    console.log("Login failed");
+                  }
+                })
+                .catch((loginError) => {
+                  console.log("Login error:", loginError);
+                });
+            } else {
+              console.log("Signup failed");
+            }
+          })
+          .catch((signUpError) => {
+            console.log("Signup error:", signUpError);
+          });
       } else {
         setError("Please enter valid information in the provided fields.");
       }
@@ -165,15 +185,17 @@ function SignUp() {
   return (
     <>
       {/* <NavBar></NavBar> */}
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} key="signup-1">
         <SplitBoxesGrid
+          key="signup-2"
           container
-          divider={<Divider orientation="vertical" flexItem />}
+          divider={<Divider key="signup-3" orientation="vertical" flexItem />}
         >
-          <LayoutGrid item xs={12} sm={7.5}>
-            <VertStack>
+          <LayoutGrid item xs={12} sm={7.5} key="signup-4">
+            <VertStack key="signup-5">
               {/* LOGIN MAIN TEXT */}
               <Typography
+                key="signup-6"
                 variant="h2"
                 sx={{
                   textAlign: "left",
@@ -185,15 +207,15 @@ function SignUp() {
               >
                 Sign Up
               </Typography>
-              <form onSubmit={handleSignUpSubmit}>
-                <FormControl onSubmit={handleSignUpSubmit}>
+              <form onSubmit={handleSignUpSubmit} key="signup-7">
+                <FormControl onSubmit={handleSignUpSubmit} key="signup-8">
                   {/* EMAIL TEXT FIELD */}
                   <TextFieldStyled
+                    key="signup-9"
                     type="text"
                     label="Username"
                     variant="outlined"
                     name="username"
-                    // id="username"
                     sx={{
                       input: { color: "#A0BFE0" },
                       label: { color: "#A0BFE0" },
@@ -201,6 +223,7 @@ function SignUp() {
                   />
 
                   <TextFieldStyled
+                    key="signup-10"
                     type="email"
                     label="Email"
                     variant="outlined"
@@ -214,6 +237,7 @@ function SignUp() {
 
                   {/* PASSWORD TEXT FIELD */}
                   <TextFieldStyled
+                    key="signup-11"
                     type="password"
                     label="Password"
                     color="primary"
@@ -227,6 +251,7 @@ function SignUp() {
                   />
 
                   <TextFieldStyled
+                    key="signup-12"
                     type="password"
                     label="Confirm Password"
                     color="primary"
@@ -241,10 +266,12 @@ function SignUp() {
 
                   {/* FORGOT PWD*/}
                   <ColoredLink
+                    key="signup-13"
                     sx={{ margin: "1rem 1rem 1rem 1rem", color: "#A0BFE0" }}
                   >
                     Already have an account?{" "}
                     <span
+                      key="signup-14"
                       onClick={() => {
                         navigate("/login");
                       }}
@@ -255,11 +282,18 @@ function SignUp() {
                   </ColoredLink>
 
                   {/* SUBMIT BUTTON*/}
-                  <SignUpButton variant="contained" type="submit">
-                    <GetStartedText variant="h6">Sign Up</GetStartedText>
+                  <SignUpButton
+                    key="signup-15"
+                    variant="contained"
+                    type="submit"
+                  >
+                    <GetStartedText key="signup-16" variant="h6">
+                      Sign Up
+                    </GetStartedText>
                   </SignUpButton>
                   {error && (
                     <Typography
+                      key="signup-17"
                       sx={{
                         color: "red",
                         textAlign: "left",

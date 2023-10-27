@@ -15,13 +15,12 @@ export default function Landing() {
   // document.body.style.overflow = "none";
   return (
     <>
-      <ThemeProvider theme={theme} border="none">
-        <Nav />
-        <Hero></Hero>
-        <CourseDisplay></CourseDisplay>
-        <OurMission></OurMission>
-        {/* <AboutUs></AboutUs> */}
-        <JoinNow></JoinNow>
+      <ThemeProvider theme={theme} border="none" key="landing-1">
+        <Nav key="landing-2" />
+        <Hero key="landing-3"></Hero>
+        <CourseDisplay key="landing-4"></CourseDisplay>
+        <OurMission key="landing-5"></OurMission>
+        <JoinNow key="landing-6"></JoinNow>
       </ThemeProvider>
     </>
   );

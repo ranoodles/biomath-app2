@@ -148,16 +148,23 @@ export default function FillInBlank({ question }) {
   };
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <CardGrid>
-          <VertStack>
-            <QuestionText variant="h4" component={motion.div}
-                  initial="hidden"
-                  animate="visible"
-                  variants={titleVariants}>{question.frqQuestion}</QuestionText>
-            <form onSubmit={handleSubmit}>
-              <FormControl>
+      <ThemeProvider theme={theme} key="fillinblank-tp-1">
+        <CardGrid key="fillinblank-cg-1">
+          <VertStack key="fillinblank-vs-1">
+            <QuestionText
+              variant="h4"
+              component={motion.div}
+              initial="hidden"
+              animate="visible"
+              variants={titleVariants}
+              key="fillinblank-qt-1"
+            >
+              {question.frqQuestion}
+            </QuestionText>
+            <form onSubmit={handleSubmit} key="aiworcnoaiwnhcoiwanchfio">
+              <FormControl key="fillinblank-fc-1">
                 <TextFieldStyled
+                  key="fillinblank-tfs-1"
                   type={
                     typeof question.frqCorrect === "number" ? "number" : "text"
                   }
@@ -177,16 +184,24 @@ export default function FillInBlank({ question }) {
                   variants={subtitleVariants}
                 />
                 <FormHelperText
+                  key="fillinblank-fht-1"
                   variant=""
                   sx={{ color: helperColor, fontSize: "1.5rem" }}
                 >
                   {helperText}
                 </FormHelperText>
-                <CheckButton variant="contained" type="submit" component={motion.div}
+                <CheckButton
+                  variant="contained"
+                  type="submit"
+                  component={motion.div}
                   initial="hidden"
                   animate="visible"
-                  variants={buttonVariants}>
-                  <DisplayText variant="h6">Check</DisplayText>
+                  variants={buttonVariants}
+                  key="fillinblank-checkbutton-1"
+                >
+                  <DisplayText variant="h6" key="fillinblank-displtext-1">
+                    Check
+                  </DisplayText>
                 </CheckButton>
               </FormControl>
             </form>

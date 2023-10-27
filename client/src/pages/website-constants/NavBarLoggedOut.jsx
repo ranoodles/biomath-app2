@@ -93,86 +93,105 @@ function NavBar(props) {
 
   return (
     <AppBar
+      key="navout-1"
       position="static"
       sx={{ backgroundColor: "transparent", boxShadow: "none" }}
     >
       <Grid
+        key="navout-2"
         item
         xs={11}
         sx={{ margin: "1.5rem 2rem 1rem 2rem", padding: "0 1rem 0 1rem" }}
       >
-        <Toolbar disableGutters>
-          {/* <BiotechIcon
-            fontSize="large"
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-          />
-          <Typography
-            variant="h4"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "avenir",
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
+        <Toolbar disableGutters key="navout-3">
+          <div
+            key="navout-4"
+            style={{ display: "flex", flexGrow: 1, alignItems: "center" }}
           >
-            BIOMATH
-          </Typography> */}
-          <div style={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
-          {isSmallScreen ? null : ( // Hide the image on extra-small screens
-            <img
-              src={iconImg}
-              alt="Catalyst Logo"
-              style={{
-                width: "4rem",
-                marginRight: "0.2rem", // Default styling
+            {isSmallScreen ? null : ( // Hide the image on extra-small screens
+              <img
+                key="navout-5"
+                src={iconImg}
+                alt="Catalyst Logo"
+                style={{
+                  width: "4rem",
+                  marginRight: "0.2rem", // Default styling
+                }}
+              />
+            )}
+            {/* </Container> */}
+            <Typography
+              key="navout-6"
+              variant="h4"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "avenir",
+                fontWeight: 700,
+                // letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
               }}
-            />
-          )}
-          {/* </Container> */}
-          <Typography
-            variant="h4"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "avenir",
-              fontWeight: 700,
-              // letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            P<span style={{fontSize: "1.5rem", alignSelf: "flex-end", margin: "0rem 0.5rem 0.15rem 0.15rem"}}>ROJECT</span>C<span style={{fontSize: "1.5rem", alignSelf: "flex-end", margin: "0rem 0.5rem 0.15rem 0.15rem"}}>ATALYST</span>
-          </Typography>
+            >
+              P
+              <span
+                key="navout-7"
+                style={{
+                  fontSize: "1.5rem",
+                  alignSelf: "flex-end",
+                  margin: "0rem 0.5rem 0.15rem 0.15rem",
+                }}
+              >
+                ROJECT
+              </span>
+              C
+              <span
+                style={{
+                  fontSize: "1.5rem",
+                  alignSelf: "flex-end",
+                  margin: "0rem 0.5rem 0.15rem 0.15rem",
+                }}
+              >
+                ATALYST
+              </span>
+            </Typography>
           </div>
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: "2rem" }}>
+          <Box
+            key="navout-8"
+            sx={{ display: { xs: "none", md: "flex" }, gap: "2rem" }}
+          >
             <LoginButtonTop
+              key="navout-9"
               variant="contained"
               onClick={() => {
                 navigate("/login");
               }}
             >
-              <GetStartedText variant="h6">Log In</GetStartedText>
+              <GetStartedText variant="h6" key="navout-10">
+                Log In
+              </GetStartedText>
             </LoginButtonTop>
             <SignupButtonTop
+              key="navout-11"
               variant="contained"
               onClick={() => {
                 navigate("/signup");
               }}
             >
-              <GetStartedText variant="h6">Sign Up</GetStartedText>
+              <GetStartedText key="navout-12" variant="h6">
+                Sign Up
+              </GetStartedText>
             </SignupButtonTop>
           </Box>
-          <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
+          <Box
+            key="navout-13"
+            sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}
+          >
             <IconButton
+              key="navout-14"
               size="large"
               aria-controls="menu-appbar"
               aria-haspopup="true"
@@ -182,6 +201,7 @@ function NavBar(props) {
               <MenuIcon />
             </IconButton>
             <Menu
+              key="navout-15"
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -210,27 +230,6 @@ function NavBar(props) {
               ))}
             </Menu>
           </Box>
-
-          {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "white",
-                  display: "flex",
-                  fontWeight: 700,
-                  border: 0,
-                }}
-                size="large"
-                variant="outlined"
-                role={page.replaceAll(" ", "").toLowerCase()}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box> */}
         </Toolbar>
       </Grid>
     </AppBar>

@@ -55,8 +55,8 @@ const VertStack = styled(Stack)`
     padding: 4vw;
     border-radius: 2rem;
     border: 1px solid grey;
-    ${'' /* background: linear-gradient(to right top, #535eab, #8351c2); */}
-    ${'' /* background-color: #2b5bc4; */}
+    ${"" /* background: linear-gradient(to right top, #535eab, #8351c2); */}
+    ${"" /* background-color: #2b5bc4; */}
     disable-align: false;
   }
 `;
@@ -104,10 +104,15 @@ function DisplayInfo({ unit, handleLessonSelect }) {
   }
   return (
     <>
-      <ThemeProvider theme={theme} border="none">
-        <HolderGrid container>
+      <ThemeProvider
+        theme={theme}
+        border="none"
+        key="biotechUnits-themeprovider-1"
+      >
+        <HolderGrid container key="biotechUnits-holdergrid-1">
           <VertStack
             item
+            key="biotechUnits-vstack-1"
             component={motion.div}
             viewport={{ once: true }}
             initial={{ opacity: 0, scale: 0 }}
@@ -123,15 +128,19 @@ function DisplayInfo({ unit, handleLessonSelect }) {
             whileHover={{
               scale: 1.05,
               // background: "linear-gradient(to right top, #354083, #6533A4)",
-              backgroundColor: "#1747b0"
+              backgroundColor: "#1747b0",
             }}
           >
-            <TitleText sx={{ fontSize: { xs: "6vw", md: "4vw" } }}>
+            <TitleText
+              sx={{ fontSize: { xs: "6vw", md: "4vw" } }}
+              key="biotechUnits-titletext-1"
+            >
               {unit.id}. {unit.name}
             </TitleText>
             <DescriptionText
               item
               sx={{ fontSize: { xs: "2.5vw", md: "1.5vw" } }}
+              key="biotechUnits-desctext-1"
             >
               {unit.description}
             </DescriptionText>
@@ -141,6 +150,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
               orientation="vertical"
               color="secondary"
               sx={{ color: "white" }}
+              key="biotechUnits-buttonholdergroup-1"
             >
               {unit.lessons.map((lesson) => (
                 <ListButtons
@@ -153,6 +163,7 @@ function DisplayInfo({ unit, handleLessonSelect }) {
                       fontSize: { xs: "3vw", md: "1.5vw" },
                       fontWeight: "600",
                     }}
+                    key="biotechUnits-typo-2"
                   >
                     {lesson.lesson_name}
                   </Typography>
