@@ -120,7 +120,11 @@ function BiotechnologyPage() {
   React.useEffect(() => {
     const fetchAllUnits = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/appliedmath");
+        const res = await axios.get("http://localhost:8800/appliedmath",
+        {
+          withCredentials: true,
+          credentials: "include",
+        });
         const units = res.data;
         setUnitsList(units);
         setSelectedUnit(units[0]); // Select the first unit by default

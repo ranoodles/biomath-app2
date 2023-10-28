@@ -108,7 +108,11 @@ function BioLearningPath() {
   useEffect(() => {
     const fetchAllLessons = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/mathcards");
+        const res = await axios.get("http://localhost:8800/mathcards",
+        {
+          withCredentials: true,
+          credentials: "include",
+        });
         const lessons = res.data;
         setLessonList(lessons);
       } catch (err) {

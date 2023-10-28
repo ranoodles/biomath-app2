@@ -56,12 +56,13 @@ const OurMissionText = styled(Typography)`
 const BiomathText = styled(Typography)`
   && {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     font-weight: 700;
     ${"" /* margin-bottom: 1rem; */}
     text-align: center;
     color: #5383ec;
+    padding: 3rem 0 0 3rem;
   }
 `;
 
@@ -104,11 +105,7 @@ export default function OurMission() {
               Our Mission
             </BiomathText>
             <OurMissionText variant="h5" key="ourmission-7">
-              Deserunt reprehenderit aute amet Lorem laborum irure. Dolor eu
-              pariatur incididunt dolore aute minim qui est et tempor velit
-              elit. Sint sit duis nulla esse dolor. Id officia do dolore aliqua
-              exercitation in culpa ad voluptate ullamco eu ex cupidatat. Cillum
-              nulla eu labore quis adipisicing mollit ad velit cupidatat.
+              Project Catalyst's mission is to inspire and motivate students across the globe to gain interest in STEM fields such as biotechnology and engineering. Our organization is determined to provide students equitable access to content and lessons so they can be exposed to these fields from an early age and be prepared for their careers.
             </OurMissionText>
           </Stack>
         </OurMissionTextGrid>

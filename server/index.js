@@ -1,42 +1,59 @@
+require('dotenv').config();
+
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const { createConnection } = require("mysql2");
 const cors = require("cors");
-const path = require("path");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const rateLimit = require("express-rate-limit");
 
 const app = express();
 
+// Using environment variables for the database connection
 const db = createConnection({
-  host: "mysql.biomath.dreamhosters.com",
-  user: "biomath",
-  password: "AroraLagu2023",
-  database: "biomath",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
 app.use(cookieParser());
 app.use(express.json());
+
 const corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true,
+  origin: process.env.ALLOWED_ORIGIN || 'http://localhost:3000',
+  credentials: true
 };
 app.use(cors(corsOptions));
 
-access_token_secret =
-  "594c4835eb5397e3068ab9fb451db0f1a7247ecedbe0bd9baabe7baca4961cdf0a51935366aa82bd2ed0a8518e05a858726e98f0fbcfcb6585243d976f52ae72";
-refresh_token_secret =
-  "70e2e02ce3a2c7ee05a883b35317b7a6308db30d14f98aba0f0dac450c86aacd4134ed32f04f61171c105c3e0e3b7b238ba4c62cd2899986483292a6a2d7e62f";
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
-app.get("/test", (req, res) => {
-  const q = "Select * FROM users";
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
+// Rate Limiter
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+});
+app.use(limiter);
+
+function authenticateToken(req, res, next) {
+  const token = req.cookies.jwt;
+  if (token == null) return res.sendStatus(401);
+  jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
   });
+}
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
-app.get("/biotechnology", (req, res) => {
+app.get("/biotechnology", authenticateToken, (req, res) => {
   const q =
     "SELECT units.unit_id, units.unit_name, units.unit_description, lessons.lesson_id, lessons.lesson_name FROM bio_units AS units JOIN bio_lessons AS lessons ON units.unit_id = lessons.unit_id;";
   var unitData = [];
@@ -75,7 +92,7 @@ app.get("/biotechnology", (req, res) => {
   });
 });
 
-app.get("/appliedmath", (req, res) => {
+app.get("/appliedmath", authenticateToken, (req, res) => {
   const q =
     "SELECT units.unit_id, units.unit_name, units.unit_description, lessons.lesson_id, lessons.lesson_name FROM math_units AS units JOIN math_lessons AS lessons ON units.unit_id = lessons.unit_id;";
   var unitData = [];
@@ -114,7 +131,7 @@ app.get("/appliedmath", (req, res) => {
   });
 });
 
-app.get("/biocards", (req, res) => {
+app.get("/biocards", authenticateToken, (req, res) => {
   const q = "SELECT * FROM bio_cards";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -134,7 +151,7 @@ app.get("/biocards", (req, res) => {
   });
 });
 
-app.get("/mathcards", (req, res) => {
+app.get("/mathcards", authenticateToken, (req, res) => {
   const q = "SELECT * FROM math_cards";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -154,7 +171,7 @@ app.get("/mathcards", (req, res) => {
   });
 });
 
-app.get("/biolessons", (req, res) => {
+app.get("/biolessons", authenticateToken, (req, res) => {
   const q = "Select * FROM bio_lessons";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -162,7 +179,7 @@ app.get("/biolessons", (req, res) => {
   });
 });
 
-app.get("/mathlessons", (req, res) => {
+app.get("/mathlessons", authenticateToken, (req, res) => {
   const q = "Select * FROM math_lessons";
   db.query(q, (err, data) => {
     if (err) return res.json(err);

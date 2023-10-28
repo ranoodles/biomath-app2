@@ -43,7 +43,7 @@ export default function BiotechHeader() {
         }}
         key="biotechTitle-titletext-1"
       >
-        Synthetic Biology
+        Biotechnology
       </TitleText>
     </>
   );

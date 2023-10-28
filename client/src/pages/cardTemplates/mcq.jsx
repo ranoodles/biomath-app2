@@ -136,6 +136,7 @@ export default function McqCard({ question }) {
     setRadioColor("default");
     setDisable(false);
   }, [question]);
+  
   const handleRadioChange = (event) => {
     setValue(event.target.value);
     setError(false);

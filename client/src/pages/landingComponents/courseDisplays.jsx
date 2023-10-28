@@ -55,9 +55,9 @@ const SubjectDescriptionGrid = styled(Grid)`
 const CourseDescriptionText = [
   {
     key: "bio",
-    courseName: "Synthetic Biology",
+    courseName: "Biotechnology",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Delve into the intricate workings of biological systems and the incredible technologies used to modify organisms from the molecular level. This course covers an array of topics, ranging from the structure of a living cell to the cutting-edge advancements in gene editing and CRISPR technology.",
     icon: (
       <ScienceIcon
         style={{ fontSize: "5rem" }}
@@ -73,7 +73,7 @@ const CourseDescriptionText = [
     key: "math",
     courseName: "Engineering",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Discover the transformative role math and the physical sciences play to shape the world around us from the construction of enormous bridges to the fabrication of massive machines. This course surfaces a variety of engineering disciplines such as mechanical, structural, chemical, etc. and even explores the field of data science.",
     icon: (
       <CalculateIcon
         style={{ fontSize: "5rem" }}
@@ -206,7 +206,7 @@ export default function CourseDisplay() {
                 />
               ) : (
                 <CalculateIcon
-                  key="coursedisplays-7"
+                  key="coursedisplays-70"
                   style={{ fontSize: "5rem" }}
                   id={CourseCard.key}
                   sx={{

@@ -76,7 +76,10 @@ export default function Conclusion({ lessonIndex, course }) {
     const fetchAllLessons = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/" + course + "lessons"
+          "http://localhost:8800/" + course + "lessons", {
+            withCredentials: true,
+            credentials: "include",
+          }
         );
         const lessons = res.data;
         setLesson(lessons[lessonIndex - 1]);

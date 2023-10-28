@@ -16,6 +16,7 @@ import { FormControl, TextField } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 import axios from "axios";
+import NavBarLogin from "./website-constants/NavBarLoginPage.jsx";
 
 const SplitBoxesGrid = styled(Grid)`
   && {
@@ -176,8 +177,8 @@ function SignUp() {
   };
   return (
     <>
-      {/* <NavBar></NavBar> */}
       <ThemeProvider theme={theme} key="signup-1">
+        <NavBarLogin></NavBarLogin>
         <SplitBoxesGrid
           key="signup-2"
           container

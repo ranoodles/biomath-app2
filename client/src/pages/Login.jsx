@@ -16,6 +16,7 @@ import { FormControl, TextField } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import NavBar from "./website-constants/NavBarLoggedOut.jsx";
 import axios from "axios";
+import NavBarLogin from "./website-constants/NavBarLoginPage.jsx";
 
 const SplitBoxesGrid = styled(Grid)`
   && {
@@ -136,7 +137,7 @@ function Login() {
           window.location.reload();
         } else {
           setError(
-            "Login failed. Please try changing your username or password."
+            "Login failed. Please try a different username or password."
           );
         }
       } else {
@@ -149,8 +150,8 @@ function Login() {
 
   return (
     <>
-      {/* <NavBar></NavBar> */}
       <ThemeProvider theme={theme} key="login-1">
+        <NavBarLogin></NavBarLogin>
         <SplitBoxesGrid
           key="login-2"
           container
@@ -204,7 +205,7 @@ function Login() {
                   />
 
                   {/* SUBMIT BUTTON */}
-                  <LogInButton key="login-11" variant="contained" type="submit">
+                  <LogInButton key="login-11" variant="contained" type="submit" sx={{marginTop: "1rem"}}>
                     <GetStartedText key="login-12" variant="h6">
                       Log In
                     </GetStartedText>

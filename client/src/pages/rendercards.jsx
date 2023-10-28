@@ -3,7 +3,11 @@ import axios from "axios";
 
 const fetchAllLessons = async () => {
   try {
-    const res = await axios.get("http://localhost:8800/cards");
+    const res = await axios.get("http://localhost:8800/cards",
+    {
+      withCredentials: true,
+      credentials: "include",
+    });
     const cardData = res.data;
     const lessons = [];
 

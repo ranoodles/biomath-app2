@@ -138,9 +138,12 @@ function NavBar(props) {
               display: { xs: "none", md: "flex" },
               fontFamily: "avenir",
               fontWeight: 700,
-              // letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
+              cursor: "pointer"
+            }}
+            onClick={() => {
+              navigate("/")
             }}
           >
             P

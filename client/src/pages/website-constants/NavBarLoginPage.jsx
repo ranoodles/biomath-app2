@@ -18,7 +18,7 @@ import iconImg from "./catalystlogo.png";
 
 const pages = ["Log In", "Sign Up"];
 
-function NavBar(props) {
+function NavBarLogin(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
   const isSmallScreen = useMediaQuery("(max-width:900px)");
@@ -42,25 +42,6 @@ function NavBar(props) {
       font-weight: 500;
     }
   `;
-
-  // const SignupButtonTop = styled(Button)`
-  //   && {
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //     background:transparent;
-  //     &:hover, &:focus {
-  //       background: linear-gradient(
-  //         to right,
-  //         #b200ff,
-  //         #a300ea,
-  //         #9500d5,
-  //         #8600c0,
-  //         #7800ac
-  //       );
-  //     }
-  //   }
-  // `;
 
   const SignupButtonTop = styled(Button)`
     && {
@@ -101,7 +82,7 @@ function NavBar(props) {
         key="navout-2"
         item
         xs={11}
-        sx={{ margin: "1.5rem 2rem 1rem 2rem", padding: "0 1rem 0 1rem" }}
+        sx={{ margin: "1rem 2rem 0rem 2rem" }}
       >
         <Toolbar disableGutters key="navout-3">
           <div
@@ -161,80 +142,9 @@ function NavBar(props) {
               </span>
             </Typography>
           </div>
-          <Box
-            key="navout-8"
-            sx={{ display: { xs: "none", md: "flex" }, gap: "2rem" }}
-          >
-            <LoginButtonTop
-              key="navout-9"
-              variant="contained"
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              <GetStartedText variant="h6" key="navout-10">
-                Log In
-              </GetStartedText>
-            </LoginButtonTop>
-            <SignupButtonTop
-              key="navout-11"
-              variant="contained"
-              onClick={() => {
-                navigate("/signup");
-              }}
-            >
-              <GetStartedText key="navout-12" variant="h6">
-                Sign Up
-              </GetStartedText>
-            </SignupButtonTop>
-          </Box>
-          <Box
-            key="navout-13"
-            sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}
-          >
-            <IconButton
-              key="navout-14"
-              size="large"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              key="navout-15"
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  role={page.replaceAll(" ", "").toLowerCase()}
-                >
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
         </Toolbar>
       </Grid>
     </AppBar>
   );
 }
-export default NavBar;
+export default NavBarLogin;
